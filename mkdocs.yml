@@ -45,7 +45,7 @@ plugins:
         - locale: es
           name: Español
 
-markdown_extensions:
+# markdown_extensions:
   # - admonition
   # - pymdownx.details
   # - pymdownx.superfences
@@ -53,15 +53,11 @@ markdown_extensions:
   #     anchor_linenums: true
   # - pymdownx.inlinehilite
   # - pymdownx.snippets
-  - tables
+  # - tables
   # - attr_list
 
 nav:
   - Home: index.md
-  - Architecture:
-      - Introduction: architecture/index.md
-  - Specifications:
-      - Overview: spec/index.md
 
 extra:
   alternate:
