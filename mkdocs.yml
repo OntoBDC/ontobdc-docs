@@ -35,7 +35,7 @@ plugins:
   - search
   - macros
   - i18n:
-      docs_structure: suffix
+      docs_structure: folder
       languages:
         - locale: en
           name: English
@@ -56,8 +56,8 @@ plugins:
   # - tables
   # - attr_list
 
-nav:
-  - Home: index.md
+# nav:
+#   - Home: index.md
 
 extra:
   alternate:
