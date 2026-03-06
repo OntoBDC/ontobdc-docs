@@ -2,14 +2,14 @@
 
 **Ontology-Based Data Capabilities**
 
-OntoBDC is a capability-driven runtime for executing ontology-aware data operations over portable datasets. It bridges the gap between static data storage and dynamic semantic execution.
+O OntoBDC é um runtime orientado a capabilities para execução de operações de dados conscientes de ontologia sobre datasets portáveis. Ele preenche a lacuna entre o armazenamento de dados estático e a execução semântica dinâmica.
 
-## Key Features
+## Principais Recursos
 
-- **Semantic Portability**: Move your projects (Data Package + RO-Crate) anywhere; the system understands them instantly.
-- **Capability Runtime**: Discover and execute modular operations based on data context.
-- **Event Spine**: Track every change in your data lifecycle with a robust event sourcing architecture.
+- **Portabilidade Semântica**: Mova seus projetos (Data Package + RO-Crate) para qualquer lugar; o sistema os entende instantaneamente.
+- **Capability Runtime**: Descubra e execute operações modulares baseadas no contexto dos dados.
+- **Espinha Dorsal de Eventos**: Rastreie cada mudança no ciclo de vida dos seus dados com uma arquitetura robusta de event sourcing.
 
-## Getting Started
+## Começando
 
-Explore the [Architecture](architecture/index.md) to understand how OntoBDC organizes data and execution.
+Explore a [Arquitetura](../architecture/index.md) para entender como o OntoBDC organiza dados e execução.

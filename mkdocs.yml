@@ -4,9 +4,11 @@ site_author: Elias M. P. Junior
 
 repo_url: https://github.com/eliasmpjunior/ontobdc-core
 repo_name: ontobdc-core
+site_url: http://localhost:8000/
 
 theme:
   name: material
+  custom_dir: overrides
   language: en
   logo: images/logo.png
   favicon: images/favicon.png
@@ -39,30 +41,30 @@ plugins:
       languages:
         - locale: en
           name: English
-          default: true
+          default: false
         - locale: pt
           name: Português
         - locale: es
           name: Español
+        - locale: en_US
+          name: Redirect
+          default: true
+          build: true
 
-# markdown_extensions:
-  # - admonition
-  # - pymdownx.details
-  # - pymdownx.superfences
-  # - pymdownx.highlight:
-  #     anchor_linenums: true
-  # - pymdownx.inlinehilite
-  # - pymdownx.snippets
-  # - tables
-  # - attr_list
+markdown_extensions:
+  - tables
 
-# nav:
-#   - Home: index.md
+nav:
+  - Home: index.md
+  - Architecture:
+      - Introduction: architecture/index.md
+  - Specifications:
+      - Overview: spec/index.md
 
 extra:
   alternate:
     - name: English
-      link: /en/ 
+      link: /en/
       lang: en
     - name: Português
       link: /pt/
