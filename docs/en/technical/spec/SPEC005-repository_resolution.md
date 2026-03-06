@@ -1,4 +1,13 @@
-# Repository Resolution Specification
+---
+code: SPEC005
+title: Repository Resolution Specification
+status: Accepted
+author: Elias M. P. Junior
+date: 2026-03-06
+tags: architecture, repository, resolution, cli
+---
+
+# SPEC005: Repository Resolution Specification
 
 ## Context
 The `ontobdc` CLI tool operates on a document repository. The repository root is typically identified by the presence of a `.__ontobdc__` directory containing metadata (e.g., `datapackage.json`).

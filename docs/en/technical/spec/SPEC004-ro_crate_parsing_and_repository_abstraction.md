@@ -1,3 +1,12 @@
+---
+code: SPEC004
+title: RO-Crate Parsing and Repository Abstraction
+status: Accepted
+author: Elias M. P. Junior
+date: 2026-03-06
+tags: architecture, ro-crate, repository, parsing
+---
+
 # SPEC004: RO-Crate Parsing and Repository Abstraction
 
 ## 1. Context

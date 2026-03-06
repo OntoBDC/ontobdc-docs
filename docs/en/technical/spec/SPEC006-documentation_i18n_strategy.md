@@ -1,3 +1,12 @@
+---
+code: SPEC006
+title: Documentation Internationalization Strategy
+status: Accepted
+author: Elias M. P. Junior
+date: 2026-03-06
+tags: architecture, documentation, i18n, mkdocs
+---
+
 # SPEC006: Documentation Internationalization Strategy
 
 ## Context

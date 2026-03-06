@@ -7,7 +7,7 @@ date: 2026-02-25
 tags: architecture, capability, standard
 ---
 
-# Capability Structure Specification
+# SPEC001: Capability Structure Specification
 
 This document defines the standard structure for implementing a **Capability** in the OntoBDC architecture. A Capability represents a discrete, executable unit of business logic that can be invoked via various interfaces (CLI, API, etc.).
 

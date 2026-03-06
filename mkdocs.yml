@@ -54,13 +54,6 @@ plugins:
 markdown_extensions:
   - tables
 
-nav:
-  - Home: index.md
-  - Architecture:
-      - Introduction: architecture/index.md
-  - Specifications:
-      - Overview: spec/index.md
-
 extra:
   alternate:
     - name: English

@@ -7,7 +7,7 @@ date: 2026-02-26
 tags: architecture, cli, adapter, strategy
 ---
 
-# CLI Strategy Structure Specification
+# SPEC002: CLI Strategy Structure Specification
 
 This document defines the standard structure and location for implementing **CLI Strategies** in the OntoBDC architecture. A CLI Strategy acts as an adapter between the Command Line Interface (CLI) and the domain logic (Capabilities/Actions), handling argument parsing, input mapping, and output rendering.
 

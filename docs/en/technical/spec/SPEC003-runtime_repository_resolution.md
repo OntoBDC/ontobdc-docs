@@ -7,7 +7,7 @@ date: 2026-02-26
 tags: architecture, runtime, repository, injection
 ---
 
-# Runtime Repository Resolution Specification
+# SPEC003: Runtime Repository Resolution Specification
 
 This document defines how the OntoBDC runtime (`run.py`) resolves and injects the `Repository` instance into Capabilities and Actions.
 
