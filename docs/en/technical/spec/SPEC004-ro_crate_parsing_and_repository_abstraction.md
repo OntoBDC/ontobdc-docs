@@ -1,80 +1,113 @@
 ---
 code: SPEC004
-title: RO-Crate Parsing and Repository Abstraction
+title: RO-Crate Strategy (Modeling, Parsing, and Repository Abstraction)
 status: Accepted
 author: Elias M. P. Junior
-date: 2026-03-06
-tags: architecture, ro-crate, repository, parsing
+date: 2026-03-08
+tags: architecture, ro-crate, repository, parsing, modeling
 ---
 
-# SPEC004: RO-Crate Parsing and Repository Abstraction
+# SPEC004: RO-Crate Strategy (Modeling, Parsing, and Repository Abstraction)
 
-## 1. Context
+This document defines the unified strategy for **RO-Crate (Research Object Crate)** within the OntoBDC architecture. It covers modeling semantic data, repository abstraction constraints, and implementation details for both creating and consuming crates.
 
-Capabilities often need to inspect metadata (like `ro-crate-metadata.json`) to discover entities, such as WhatsApp accounts, documents, or datasets.
-The `ro-crate` Python library exists and provides convenient object-oriented methods for interacting with RO-Crates, such as `crate.get_entities_by_type(...)`.
-However, the OntoBDC architecture strictly enforces access via `DocumentRepositoryPort` to support distributed and remote data sources, prohibiting direct filesystem access.
+## 1. Context and Goals
 
-## 2. Problem
+OntoBDC uses RO-Crate (JSON-LD) as the **Layer 2 (Semantic)** standard to represent knowledge graphs, relationships, and provenance, independent of the **Layer 1 (Physical)** storage managed by Frictionless Data Packages.
 
-Using the `ro-crate` library typically requires initializing a `ROCrate` object with a local filesystem path (e.g., `ROCrate('/path/to/crate')`).
-This creates a tight coupling to the local filesystem and bypasses the repository abstraction, violating the core architectural constraint:
-"Capabilities MUST NEVER access the filesystem directly. They MUST ALWAYS use a REPOSITORY."
+| Layer | Standard | Responsibility | Entities Managed |
+| :--- | :--- | :--- | :--- |
+| **Layer 1 (Physical)** | Frictionless Data Package | File catalog, validation, types, paths. | `messages.json`, `threads.json`, `datapackage.json` |
+| **Layer 2 (Semantic)** | RO-Crate (JSON-LD) | Knowledge Graph, relationships, provenance. | `Conversation`, `Thread`, `Task`, `Person`, `AIModel` |
 
-Additionally, adding a heavy dependency just for simple read/filter operations (like finding a specific entity type in a JSON-LD graph) introduces unnecessary overhead and complexity.
+## 2. Modeling Strategy (JSON-LD)
 
-## 3. Decision
+Entities are "lifted" from raw data into a Knowledge Graph using Schema.org vocabulary.
 
-1.  **Repository-First Access**: Capabilities MUST use `repository.get_json(path)` (or equivalent repository methods) to retrieve metadata content as a Python dictionary/list.
-2.  **Manual/Lightweight Parsing**: Capabilities MUST parse the JSON content (typically JSON-LD graphs) manually or using lightweight, dependency-free helper functions.
-    *   Iterate over the `@graph` list.
-    *   Check `@type` and other properties directly in the dictionary.
-3.  **Avoid `ro-crate` Library**: Capabilities SHOULD NOT import or use the `ro-crate` library if it requires direct filesystem paths or adds significant dependencies for simple read-only tasks.
+### 2.1 Core Entities
 
-## 4. Rationale
+*   **Root Dataset**: Represents the main object of analysis (e.g., a WhatsApp Chat).
+*   **Thread**: A logical grouping of messages (`CreativeWork` or `Conversation`).
+*   **Task**: Extracted intents or actions (`Action` or `PlanAction`).
+*   **Suggestion**: AI-generated content (`Comment` or `CreativeWork`).
 
-*   **Architecture Compliance**: `DocumentRepositoryPort` is the single source of truth for data access. Direct filesystem access breaks support for remote repositories (e.g., S3, API-based).
-*   **Dependency Management**: Avoids adding a large dependency (`rocrate`) for operations that are trivial to implement with standard Python data structures (dictionaries/lists).
-*   **Performance**: Parsing a dictionary is faster and consumes less memory than initializing a full object graph for simple filtering tasks.
-*   **Simplicity**: Keeps capabilities self-contained and focused on logic rather than library integration complexity.
+### 2.2 Provenance
+Provenance is critical. We explicitly state that an AI agent or specific process created the structure.
 
-## 5. Example Implementation
-
-The pattern for finding entities in an RO-Crate metadata file without the library:
-
-```python
-# GOOD: Using repository and manual parsing
-def execute(self, inputs: Dict[str, Any]) -> Dict[str, Any]:
-    repository: DocumentRepositoryPort = inputs["repository"]
-    crate_path = "path/to/ro-crate-metadata.json"
-    
-    # 1. Retrieve JSON content via repository
-    crate_content = repository.get_json(crate_path)
-    
-    found_entities = []
-    if crate_content and "@graph" in crate_content:
-        # 2. Iterate over the graph manually
-        for node in crate_content["@graph"]:
-            node_type = node.get("@type")
-            
-            # Normalize type to list for checking (JSON-LD can have single string or list)
-            if not isinstance(node_type, list):
-                node_type = [node_type]
-            
-            # 3. Filter by type
-            if "urn:example:MyType" in node_type:
-                found_entities.append(node)
-
-    return {"entities": found_entities}
+```json
+{
+  "@id": "#agent-gemini-pro",
+  "@type": "SoftwareApplication",
+  "name": "Gemini 1.5 Pro",
+  "version": "1.5-pro-preview-0514"
+}
 ```
 
-```python
-# BAD: Using ro-crate library with filesystem path
-from rocrate.rocrate import ROCrate
+## 3. Architecture Constraints: Repository Abstraction
 
-def execute(self, inputs: Dict[str, Any]) -> Dict[str, Any]:
-    # VIOLATION: Direct filesystem access required
-    crate = ROCrate('/absolute/path/to/crate') 
-    entities = crate.get_entities_by_type("urn:example:MyType")
-    return {"entities": entities}
+OntoBDC strictly enforces access via `DocumentRepositoryPort` to support distributed and remote data sources.
+
+### 3.1 The Constraint
+**Capabilities MUST NEVER access the filesystem directly.** They MUST ALWAYS use a REPOSITORY.
+
+### 3.2 Reading RO-Crates (Parsing)
+Using the `ro-crate` library for **reading** often requires direct filesystem paths, which violates the abstraction.
+
+**Decision:**
+1.  **Repository-First Access**: Use `repository.get_json(path)` to retrieve metadata.
+2.  **Manual/Lightweight Parsing**: Parse the JSON-LD graph manually (iterate over `@graph`) for simple filtering tasks.
+3.  **Avoid `ro-crate` Library for Reading**: Do not use the library if it forces filesystem coupling.
+
+### 3.3 Writing RO-Crates (Creation)
+For **creating** complex RO-Crates, we **DO** use the `ro-crate` library, but wrapped within an **Adapter**.
+
+**Decision:**
+1.  **Use `ro-crate` Library**: The library is added as a dependency to handle the complexity of generating valid JSON-LD.
+2.  **Adapter Pattern**: The `RoCrateDatasetAdapter` bridges the internal `DatasetRepositoryPort` and the library.
+
+## 4. Implementation Details
+
+### 4.1 Dependency
+The `rocrate` library is included in `pyproject.toml`.
+
+### 4.2 Metadata Storage Location
+To avoid polluting the root directory of datasets, all OntoBDC-generated metadata files are stored in a hidden subdirectory: `.__ontobdc__/`.
+
+*   **Data Package**: `.__ontobdc__/datapackage.json`
+*   **RO-Crate**: `.__ontobdc__/ro-crate-metadata.json`
+
+### 4.3 RoCrateDatasetAdapter Behavior
+The adapter (`src/ontobdc/module/resource/adapter/crate.py`) implements specific logic to handle the coexistence of RO-Crates and Data Packages:
+
+1.  **Initialization**: Creates a `ROCrate` instance.
+2.  **Atomic Data Packages**: If a directory contains a Data Package (`.__ontobdc__/datapackage.json`), the adapter:
+    *   Indexes **only** the `datapackage.json` file.
+    *   **Excludes** all other files and subdirectories in that folder from the RO-Crate.
+    *   This treats the Data Package as an atomic unit.
+3.  **Standard Indexing**: For directories without a Data Package, it recursively indexes all files.
+4.  **Exclusion**: Always excludes `.__ontobdc__` contents (except the targeted `datapackage.json`) and hidden files to prevent recursion loops.
+
+### 4.4 Code Example (Creation)
+
+```python
+from ontobdc.module.resource.adapter.crate import RoCrateDatasetAdapter
+
+# repo is a DatasetRepositoryPort
+adapter = RoCrateDatasetAdapter(repository=repo)
+# Generates .__ontobdc__/ro-crate-metadata.json
+metadata = adapter.create_ro_crate(output_dir="/path/to/dataset")
+```
+
+### 4.5 Code Example (Reading/Parsing)
+
+```python
+# repo is a DocumentRepositoryPort
+crate_path = "path/to/dataset/.__ontobdc__/ro-crate-metadata.json"
+crate_content = repo.get_json(crate_path)
+
+# Manual parsing compliant with repository abstraction
+if crate_content and "@graph" in crate_content:
+    for node in crate_content["@graph"]:
+        if "urn:example:MyType" in node.get("@type", []):
+            process_entity(node)
 ```
