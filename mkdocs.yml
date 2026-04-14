@@ -7,7 +7,7 @@ repo_name: ontobdc-core
 site_url: http://localhost:8000/
 
 docs_dir: .
-site_dir: site_html
+site_dir: ../site
 
 theme:
   name: material
