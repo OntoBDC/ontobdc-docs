@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "status-option": "urn:enum:task/status#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "tove": "http://ontology.eil.utoronto.ca/tove/activity#",
+    "ct": "https://standards.iso.org/iso/21597/-1/ed-1/en/Container#",
+    "code": "@id",
+    "hasName": "tove:has_name",
+    "hasDescription": "dcterms:description",
+    "startedAtTime": {
+      "@id": "prov:startedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "endedAtTime": {
+      "@id": "prov:endedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "schema:actionStatus",
+      "@type": "@vocab"
+    },
+    "status-option:ACTIVE": "schema:ActiveActionStatus",
+    "status-option:COMPLETED": "schema:CompletedActionStatus",
+    "status-option:FAILED": "schema:FailedActionStatus"
+  }
+}
