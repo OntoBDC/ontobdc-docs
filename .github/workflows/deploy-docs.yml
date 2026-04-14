@@ -7,6 +7,7 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  NO_MKDOCS_2_WARNING: "1"
 
 concurrency:
   group: deploy-docs
