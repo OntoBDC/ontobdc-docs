@@ -6,12 +6,11 @@ repo_url: https://github.com/eliasmpjunior/ontobdc-core
 repo_name: ontobdc-core
 site_url: http://localhost:8000/
 
+docs_dir: .
+
 theme:
   name: material
-  custom_dir: overrides
   language: en
-  logo: images/logo.png
-  favicon: images/favicon.png
   palette:
     - scheme: default
       primary: green
@@ -37,19 +36,15 @@ plugins:
   - search
   - macros
   - i18n:
-      docs_structure: folder
+      docs_structure: suffix
       languages:
         - locale: en
           name: English
-          default: false
+          default: true
         - locale: pt
           name: Português
         - locale: es
           name: Español
-        - locale: en_US
-          name: Redirect
-          default: true
-          build: true
 
 markdown_extensions:
   - tables
@@ -57,7 +52,7 @@ markdown_extensions:
 extra:
   alternate:
     - name: English
-      link: /en/
+      link: /
       lang: en
     - name: Português
       link: /pt/
@@ -65,3 +60,6 @@ extra:
     - name: Español
       link: /es/
       lang: es
+
+nav:
+  - Home: README.md
