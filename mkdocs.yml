@@ -1,0 +1,66 @@
+site_name: OntoBDC Documentation
+site_description: Documentation for OntoBDC - Ontology-Based Data Capabilities
+site_author: Elias M. P. Junior
+
+repo_url: https://github.com/eliasmpjunior/ontobdc-core
+repo_name: ontobdc-core
+site_url: http://localhost:8000/
+
+docs_dir: .
+site_dir: ../site
+
+theme:
+  name: material
+  language: en
+  palette:
+    - scheme: default
+      primary: green
+      accent: light-green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: light-green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+  - macros
+  - i18n:
+      docs_structure: suffix
+      languages:
+        - locale: en
+          name: English
+          default: true
+        - locale: pt
+          name: Português
+        - locale: es
+          name: Español
+
+markdown_extensions:
+  - tables
+
+extra:
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: Português
+      link: /pt/
+      lang: pt
+    - name: Español
+      link: /es/
+      lang: es
+
+nav:
+  - Home: README.md
