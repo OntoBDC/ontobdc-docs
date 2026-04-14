@@ -2,25 +2,25 @@
 
 | Category   | Badges |
 |------------|--------|
-| License    | [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE) |
+| License    | [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/OntoBDC/ontobdc-core/blob/main/LICENSE) |
 | Python     | [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/) |
-| Standards  | [![Frictionless](https://img.shields.io/badge/frictionless-data-black)](https://frictionlessdata.io/) [![RO-Crate](https://img.shields.io/badge/RO--Crate-1.1-green)](https://www.researchobject.org/ro-crate/) |
-| State      | [![Sismic](https://img.shields.io/badge/statecharts-sismic-blue)](https://sismic.readthedocs.io/) |
-| Status     | [![Status](https://img.shields.io/badge/status-active-success)]() |
+| Standards  | [![RO-Crate](https://img.shields.io/badge/RO--Crate-1.1-green)](https://www.researchobject.org/ro-crate/) |
+| Status     | [![Status](https://img.shields.io/badge/status-active-success)](https://github.com/OntoBDC) |
 
-**OntoBDC** (Ontology-Based Data Capabilities) is a capability-driven runtime for executing ontology-aware data operations on portable datasets. It bridges the gap between static data storage and dynamic semantic execution.
+**OntoBDC** (Ontology-Based Data Capabilities) is a domain-driven data architecture and capability runtime for executing ontology-aware data operations on portable datasets. It bridges the gap between static data storage and dynamic semantic execution.
 
 When data is described by **RO-Crate** and **Frictionless Data Packages**, it becomes self-describing. OntoBDC leverages this metadata to automatically discover and execute available **Capabilities** (operations) relevant to the data context.
 
-Use OntoBDC to manage the lifecycle of your data projects. The runtime orchestrates **L1 Capabilities** (Discovery), **L2 Actions** (Transformation), and **L3 Use Cases** (State Transitions) while maintaining a rigorous **Event Sourcing** backbone (System Crate).
+Use OntoBDC to manage the lifecycle of your engineering data projects. The runtime orchestrates **L1 Capabilities** (Discovery), **L2 Actions** (Transformation), and **L3 Use Cases** (State Transitions) to provide reproducible and auditable workflows.
 
 **Table of contents**
 
 - [Project Focus](#project-focus)
 - [Principles](#principles)
 - [Architecture](#architecture)
-- [Getting started](#getting-started)
-- [Installation](#installation)
+- [Capabilities](#capabilities)
+- [Getting Started](#getting-started)
+- [Entity Framework](#entity-framework)
 - [Useful Links](#useful-links)
 - [Open Source](#open-source)
 - [Contributing](#contributing)
@@ -28,28 +28,26 @@ Use OntoBDC to manage the lifecycle of your data projects. The runtime orchestra
 
 ## 🎯 Project Focus
 
-OntoBDC works best with **decentralized, portable data projects**. Unlike monolithic systems that lock data into specific databases, OntoBDC assumes data lives in portable packages (Zip/Folder/WEB/API/FTP) that can be moved between local storage, cloud, and edge devices without losing semantic meaning or operational capability.
+OntoBDC works best with **decentralized, portable data projects**. Unlike monolithic systems that lock data into specific databases, OntoBDC assumes data lives in portable packages (Zip/Folder/Local Storage) that can be moved between local environments, cloud, and edge devices without losing semantic meaning or operational capability.
 
 OntoBDC is commonly used to:
 
 - **Standardize** data exchange between diverse engineering disciplines (BIM, GIS, Documents).
-- **Execute** context-aware operations (e.g., "Extract Entities from PDF", "Validate IFC Model") without hardcoded pipelines.
-- **Track** every modification in a project's history via an immutable event log (System Crate).
+- **Execute** context-aware operations and automated checks without hardcoded pipelines.
+- **Validate** engineering data against defined capabilities and rules ensuring reproducibility.
 
 ## 💡 Principles
 
 - **Semantic**: Data is not just bytes; it has meaning defined by ontologies and metadata (RO-Crate).
 - **Modular**: Capabilities are isolated plugins. You can add new operations without changing the core runtime.
 - **Portable**: The entire runtime and data package are self-contained. Run it on a laptop, a server, or inside a container.
-- **Event-Sourced**: State is derived from a sequence of events, ensuring auditability and time-travel debugging.
 
 ## 🏗️ Architecture
 
-OntoBDC is built on three pillars:
+OntoBDC is built on core semantic layers:
 
 1.  **Physical Layer**: [Frictionless Data Package](https://frictionlessdata.io/) for file organization.
 2.  **Context Layer**: [RO-Crate](https://www.researchobject.org/ro-crate/) for semantic metadata and relationships.
-3.  **System Layer**: **System Crate** for event sourcing and operational memory, implementing a robust **Finite State Machine (FSM)**.
 
 The **Capability Runtime** binds these layers together, dynamically resolving which tools (CLI strategies) apply to the current data state.
 
@@ -65,15 +63,56 @@ Capabilities are the core units of execution in OntoBDC. They are categorized in
 
 This structure allows granular control over what an agent can do, separating "sensing" (L1) from "doing" (L2) and "deciding" (L3).
 
-## 📦 Installation
+## 🚀 Getting Started
 
-OntoBDC is typically deployed via pip. Install it to start using the CLI:
+OntoBDC requires Python 3.11+ and pip. Install it to start using the CLI:
 
 ```bash
 pip install ontobdc
+```
 
-# After installation, you can run the CLI like this:
-ontobdc --help
+After installation, you can initialize a project context:
+
+```bash
+ontobdc init
+```
+
+This creates the local configuration (`.__ontobdc__` directory) automatically detecting the environment (e.g., `venv` or `Google Colab`).
+
+To execute capabilities interactively:
+
+```bash
+ontobdc run
+```
+
+To validate engineering data against defined rules:
+
+```bash
+ontobdc check --repair
+```
+
+## 🧩 Entity Framework
+
+The Entity Framework is a local structure that helps you manage **Entities** (ELOFs) and their ontology façade files under `.__ontobdc__/ontology/entity/`, indexed by `.__ontobdc__/entity.rdf`.
+
+Enable it (also prepares `.__ontobdc__/payload/*` and downloads ISO 21597 container ontologies when needed):
+
+```bash
+ontobdc entity --enable true
+```
+
+Create and list entities:
+
+```bash
+ontobdc entity --create org.example.my_entity
+ontobdc entity --list
+```
+
+Disable and purge all local Entity Framework state:
+
+```bash
+ontobdc entity --enable false
+ontobdc entity --purge
 ```
 
 ## 🔗 Useful Links
@@ -91,7 +130,7 @@ We believe in the power of community-driven development to solve complex data in
 
 ## 🤝 Contributing
 
-OntoBDC is an open initiative. Contributions are welcome!
+We are always on the lookout for contributors to help us fix bugs, create new features, or improve project documentation. If you are interested, feel free to open a PR or issue on GitHub.
 
 ## 🏢 Who uses OntoBDC?
 
