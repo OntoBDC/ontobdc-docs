@@ -2,16 +2,24 @@
   "@context": {
     "schema": "https://schema.org/",
     "prov": "http://www.w3.org/ns/prov#",
+    "shacl": "http://www.w3.org/ns/shacl#",
     "dcterms": "http://purl.org/dc/terms/",
-    "status-option": "urn:enum:task/status#",
     "owl": "http://www.w3.org/2002/07/owl#",
+    "obdc-task": "urn:entity:activity/Task#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "stopt": "urn:enum:activity/Task/status#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "tove": "http://ontology.eil.utoronto.ca/tove/activity#",
     "ct": "https://standards.iso.org/iso/21597/-1/ed-1/en/Container#",
     "code": "@id",
-    "hasName": "tove:has_name",
-    "hasDescription": "dcterms:description",
+    "hasName": {
+      "@id": "tove:has_name",
+      "@type": "xsd:string"
+    },
+    "hasDescription": {
+      "@id": "dcterms:description",
+      "@type": "xsd:string"
+    },
     "startedAtTime": {
       "@id": "prov:startedAtTime",
       "@type": "xsd:dateTime"
@@ -24,8 +32,63 @@
       "@id": "schema:actionStatus",
       "@type": "@vocab"
     },
-    "status-option:ACTIVE": "schema:ActiveActionStatus",
-    "status-option:COMPLETED": "schema:CompletedActionStatus",
-    "status-option:FAILED": "schema:FailedActionStatus"
+    "stopt:ACTIVE": "schema:ActiveActionStatus",
+    "stopt:COMPLETED": "schema:CompletedActionStatus",
+    "stopt:FAILED": "schema:FailedActionStatus"
+  },
+  "@id": "urn:entity:activity/Task",
+  "@type": "ct:Linkset",
+  "dcterms:title": "Task",
+  "dcterms:description": "An Entity Linked-Ontology Façade (ELOF) for Task",
+  "ct:containedInContainer": {
+    "@id": "urn:entity:activity",
+    "dcterms:title": "Activity"
+  },
+  "obdc-task:Shape": {
+    "@id": "obdc-task:Shape",
+    "@type": "shacl:NodeShape",
+    "shacl:targetClass": "tove:Task",
+    "shacl:property": [
+      {
+        "@id": "obdc-task:hasName",
+        "@type": "shacl:PropertyShape",
+        "shacl:path": "tove:has_name",
+        "shacl:datatype": "xsd:string",
+        "shacl:minCount": 1
+      },
+      {
+        "@id": "obdc-task:hasDescription",
+        "@type": "shacl:PropertyShape",
+        "shacl:path": "dcterms:description",
+        "shacl:datatype": "xsd:string"
+      },
+      {
+        "@id": "obdc-task:startedAtTime",
+        "@type": "shacl:PropertyShape",
+        "shacl:datatype": "xsd:dateTime",
+        "shacl:path": "prov:startedAtTime",
+        "shacl:maxCount": 1
+      },
+      {
+        "@id": "obdc-task:endedAtTime",
+        "@type": "shacl:PropertyShape",
+        "shacl:datatype": "xsd:dateTime",
+        "shacl:path": "prov:endedAtTime",
+        "shacl:maxCount": 1
+      },
+      {
+        "@id": "obdc-task:status",
+        "@type": "shacl:PropertyShape",
+        "shacl:path": "schema:actionStatus",
+        "shacl:nodeKind": "shacl:IRI",
+        "shacl:minCount": 1,
+        "shacl:maxCount": 1,
+        "shacl:in": [
+          "stopt:ACTIVE",
+          "stopt:COMPLETED",
+          "stopt:FAILED"
+        ]
+      }
+    ]
   }
 }
