@@ -86,18 +86,28 @@ ontobdc entity --enable true
 Crear y listar:
 
 ```bash
-ontobdc entity --create org.example.my_entity
-ontobdc entity --list
+ontobdc entity create --id my_entity
+ontobdc entity list
 ```
 
-Deshabilitar y limpiar todo:
+Deshabilita y purga todo el estado local del Entity Framework:
 
 ```bash
 ontobdc entity --enable false
 ontobdc entity --purge
 ```
 
-## Enlaces útiles
+## Catálogo de Excepciones
+
+Este catálogo se genera automáticamente desde nuestro Grafo de Conocimiento semántico (RDF):
+
+{% for error in get_rdf_exceptions() %}
+### {{ error.code }}
+- **Tipo**: `{{ error.python_type }}`
+- **Descripción**: {{ error.description }}
+{% endfor %}
+
+## Enlaces Útiles
 
 | Recurso | Link |
 |----------|------|

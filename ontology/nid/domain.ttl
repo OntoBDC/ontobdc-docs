@@ -1,0 +1,13 @@
+@prefix : <http://ontobdc.org/ontology/nid/domain.ttl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@base <http://ontobdc.org/ontology/nid/domain.ttl#> .
+
+<http://ontobdc.org/ontology/nid/domain.ttl> rdf:type owl:Ontology .
+
+:Storage rdf:type owl:Class .
+
+:Capability rdf:type owl:Class .
+
+:Query rdf:type owl:Class .
+

@@ -1,0 +1,8 @@
+@prefix : <http://ontobdc.org/ontology/nid/storage/capability.ttl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ontobdc: <http://ontobdc.org/ontology/nid/domain.ttl#> .
+@base <http://ontobdc.org/ontology/nid/storage/capability.ttl#> .
+
+
+:ExtractTransformRawText rdf:type owl:Class .

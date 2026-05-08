@@ -98,8 +98,8 @@ ontobdc entity --enable true
 Create and list entities:
 
 ```bash
-ontobdc entity --create org.example.my_entity
-ontobdc entity --list
+ontobdc entity create --id my_entity
+ontobdc entity list
 ```
 
 Disable and purge all local Entity Framework state:
@@ -108,6 +108,16 @@ Disable and purge all local Entity Framework state:
 ontobdc entity --enable false
 ontobdc entity --purge
 ```
+
+## Exceptions Catalog
+
+This catalog is generated automatically from our semantic Knowledge Graph (RDF):
+
+{% for error in get_rdf_exceptions() %}
+### {{ error.code }}
+- **Type**: `{{ error.python_type }}`
+- **Description**: {{ error.description }}
+{% endfor %}
 
 ## Useful Links
 

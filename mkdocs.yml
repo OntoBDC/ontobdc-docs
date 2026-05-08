@@ -7,7 +7,13 @@ repo_name: ontobdc-core
 site_url: http://localhost:8000/
 
 docs_dir: .
-site_dir: ../site
+site_dir: site
+
+exclude_docs: |
+  mkdocs.yml
+  requirements.txt
+  main.py
+  ontology/*
 
 theme:
   name: material
@@ -35,7 +41,8 @@ theme:
 
 plugins:
   - search
-  - macros
+  - macros:
+      module_name: main
   - i18n:
       docs_structure: suffix
       languages:
