@@ -1,13 +1,114 @@
 @prefix : <http://ontobdc.org/ontology/nid/domain.ttl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms#> .
+@prefix ontouml: <http://w3id.org/ontouml#> .
+@prefix function: <http://w3id.org/function/ontology#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
 @base <http://ontobdc.org/ontology/nid/domain.ttl#> .
 
 <http://ontobdc.org/ontology/nid/domain.ttl> rdf:type owl:Ontology .
 
-:Storage rdf:type owl:Class .
+#################################################################
+#    Annotation properties
+#################################################################
 
-:Capability rdf:type owl:Class .
 
-:Query rdf:type owl:Class .
+#################################################################
+#    Datatypes
+#################################################################
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+
+#################################################################
+#    Classes
+#################################################################
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#QueryCapability
+:QueryCapability rdf:type owl:Class ;
+ dcterms:description "Executes a query over a declared data or semantic context."@en ;
+                 dcterms:title "Query capability"@en .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#QueryResponse
+:QueryResponse rdf:type owl:Class ;
+               dcterms:description "The result produced by executing the query."@en ;
+               dcterms:title "Query response container"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#CapabilityPackage
+:CapabilityPackage rdf:type owl:NamedIndividual ,
+                            ontouml:Package ;
+                   ontouml:containsModelElement :QueryPackage ;
+                   ontouml:project :OntoBDC ;
+                   dcterms:identifier "capability" ;
+                    skos:notation "capability" ;
+                   ontouml:name "Capability"@en .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#DomainRootPackage
+:DomainRootPackage rdf:type owl:NamedIndividual ,
+                            ontouml:Package ;
+                   ontouml:containsModelElement :StoragePackage ;
+                   ontouml:project :OntoBDC ;
+                   dcterms:identifier "domain" ;
+                    skos:notation "domain" ;
+                   ontouml:name "Domain Root Package"@en .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#OntoBDC
+:OntoBDC rdf:type owl:NamedIndividual ,
+                  ontouml:Project ;
+         ontouml:model :DomainRootPackage ;
+         ontouml:name "OntoBDC Project"@en .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#QueryCapability
+:QueryCapability rdf:type owl:NamedIndividual ,
+                           function:Function ;
+                  function:returns [ ] .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#QueryPackage
+:QueryPackage rdf:type owl:NamedIndividual ,
+                       ontouml:Package ;
+              ontouml:project :OntoBDC ;
+              dcterms:identifier "query" ;
+               skos:notation "query" ;
+              ontouml:name "Query"@en .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#QueryResponseOutput
+:QueryResponseOutput rdf:type owl:NamedIndividual ;
+                      function:type prov:Entity .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#QueryResultOutput
+:QueryResultOutput rdf:type owl:NamedIndividual ,
+                             function:Output .
+
+
+###  http://ontobdc.org/ontology/nid/domain.ttl#StoragePackage
+:StoragePackage rdf:type owl:NamedIndividual ,
+                         ontouml:Package ;
+                ontouml:containsModelElement :CapabilityPackage ;
+                ontouml:project :OntoBDC ;
+                dcterms:identifier "storage" ;
+                 skos:notation "storage" ;
+                dcterms:isPartOf :DomainRootPackage ;
+                ontouml:name "Storage"@en .
 
