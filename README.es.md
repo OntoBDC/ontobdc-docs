@@ -97,6 +97,11 @@ ontobdc entity --enable false
 ontobdc entity --purge
 ```
 
+## Catálogo de Ontologías
+
+### Capacidades de Almacenamiento
+{{ render_ontology('ontology/nid/storage/capability.ttl') }}
+
 ## Catálogo de Excepciones
 
 Este catálogo se genera automáticamente desde nuestro Grafo de Conocimiento semántico (RDF):
