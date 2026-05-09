@@ -7,6 +7,8 @@
 @prefix function: <http://w3id.org/function/ontology#> .
 @prefix ontobdc: <http://ontobdc.org/ontology/nid/domain.ttl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix schema: <http://schema.org/> .
 @base <http://ontobdc.org/ontology/nid/storage/capability.ttl#> .
 
 <http://ontobdc.org/ontology/nid/storage/capability.ttl> rdf:type owl:Ontology .
@@ -16,7 +18,7 @@
 #################################################################
 
 ###  http://ontobdc.org/ontology/nid/domain.ttl#QueryCapability
-ontobdc:QueryCapability rdf:type owl:Class, function:Function .
+ontobdc:QueryCapability rdf:type owl:Class ;rdfs:subClassOf function:Function .
 
 
 #################################################################
@@ -29,47 +31,47 @@ ontobdc:QueryCapability rdf:type owl:Class, function:Function .
                          dcterms:identifier "org.ontobdc.domain.storage.capability.query.extract_transform_raw_text" ;
                          dcterms:title "Extract and Transform Raw Text"@en ;
                          dcterms:description "Extract and transform raw text to knowledge graph."@en ;
-                         dcterms:creator "Elias M. P. Junior" ;
-                         ontobdc:version "0.1.0" ;
-                         ontobdc:tag "resource", "raw text", "knowledge graph" ;
-                         function:expects ( :repositoryParam :rawTextPathParam :guardrailSchemaParam :languageModelExtractorParam ) ;
-                         function:returns ( :dataResourceOutput ) ;
-                         ontobdc:raises :RepositoryNotConfiguredException .
+                         dcterms:creator <http://kb.elias.eng.br/nid/elias.ttl#Elias> ;
+                         owl:versionInfo "0.1.0" ;
+    schema:programmingLanguage "Python" ;
 
-:repositoryParam rdf:type owl:NamedIndividual ,
-                          function:Parameter ;
-                 function:predicate <org.ontobdc.domain.resource.document.repository.incoming> ;
-                 function:required "true"^^xsd:boolean ;
-                 dcterms:description "Repository instance (DocumentRepositoryPort)"@en .
+    schema:runtimePlatform "OntoBDC CLI" ;
+                         dcat:keyword "resource", "raw text", "knowledge graph" ;
+                         function:expects (
+                             [ rdf:type :RepositoryParameter ; function:required "true"^^xsd:boolean ]
+                             [ rdf:type :RawTextPathParameter ; function:required "true"^^xsd:boolean ]
+                             [ rdf:type :GuardrailSchemaParameter ; function:required "true"^^xsd:boolean ]
+                             [ rdf:type :LanguageModelExtractorParameter ; function:required "true"^^xsd:boolean ]
+                         ) ;
+                         function:returns (
+                             [ rdf:type ontobdc:QueryResponse ; dcterms:hasPart [ rdf:type :DataResourceGraph ] ]
+                         ) ;
+                         ontobdc:raises [ rdf:type ontobdc:RepositoryNotConfiguredException] .
 
-:rawTextPathParam rdf:type owl:NamedIndividual ,
-                           function:Parameter ;
-                  function:predicate <org.ontobdc.domain.resource.document.raw_text_path> ;
-                  function:required "true"^^xsd:boolean ;
-                  dcterms:description "Raw text path to extract and transform"@en .
+:RepositoryParameter rdf:type owl:Class ;
+                     rdfs:subClassOf function:Parameter ;
+                     dcterms:identifier "org.ontobdc.domain.resource.document.repository.incoming" ;
+                     dcterms:description "Repository instance (DocumentRepositoryPort)"@en .
 
-:guardrailSchemaParam rdf:type owl:NamedIndividual ,
-                               function:Parameter ;
-                      function:predicate <org.ontobdc.domain.resource.document.guardrail_schema> ;
-                      function:required "true"^^xsd:boolean ;
-                      dcterms:description "Guardrail schema to guide and validate the data extraction process"@en .
+:RawTextPathParameter rdf:type owl:Class ;
+                      rdfs:subClassOf function:Parameter ;
+                      dcterms:identifier "org.ontobdc.domain.resource.document.raw_text_path" ;
+                      dcterms:description "Raw text path to extract and transform"@en .
 
-:languageModelExtractorParam rdf:type owl:NamedIndividual ,
-                                      function:Parameter ;
-                             function:predicate <org.ontobdc.domain.resource.document.language_model_extractor> ;
-                             function:required "true"^^xsd:boolean ;
-                             dcterms:description "Language model data extractor instance (LanguageModelDataExtractorPort)"@en .
+:GuardrailSchemaParameter rdf:type owl:Class ;
+                          rdfs:subClassOf function:Parameter ;
+                          dcterms:identifier "org.ontobdc.domain.resource.document.guardrail_schema" ;
+                          dcterms:description "Guardrail schema to guide and validate the data extraction process"@en .
 
-:dataResourceOutput rdf:type owl:NamedIndividual ,
-                             function:Output ;
-                    function:predicate <org.ontobdc.domain.resource.document.data_resource> ;
+:LanguageModelExtractorParameter rdf:type owl:Class ;
+                                 rdfs:subClassOf function:Parameter ;
+                                 dcterms:identifier "org.ontobdc.domain.resource.document.language_model_extractor" ;
+                                 dcterms:description "Language model data extractor instance (LanguageModelDataExtractorPort)"@en .
+
+:DataResourceGraph rdf:type owl:Class ;
+                    rdfs:subClassOf function:Output ;
+                    dcterms:identifier "org.ontobdc.domain.resource.document.data_resource" ;
                     dcterms:description "Knowledge graph representation of the PDF content"@en .
-
-:RepositoryNotConfiguredException rdf:type owl:NamedIndividual ,
-                                           ontobdc:Exception ;
-                                  ontobdc:errorCode "org.ontobdc.domain.resource.document.exception.repository_not_configured" ;
-                                  dcterms:description "File repository not configured for capability"@en ;
-                                  ontobdc:pythonType "ValueError" .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
