@@ -86,8 +86,8 @@ ontobdc entity --enable true
 Criar e listar:
 
 ```bash
-ontobdc entity --create org.example.my_entity
-ontobdc entity --list
+ontobdc entity create --id my_entity
+ontobdc entity list
 ```
 
 Desabilitar e limpar tudo:
@@ -96,6 +96,21 @@ Desabilitar e limpar tudo:
 ontobdc entity --enable false
 ontobdc entity --purge
 ```
+
+## Catálogo de Ontologias
+
+### Capacidades de Armazenamento
+{{ render_ontology('ontology/nid/storage/capability.ttl') }}
+
+## Catálogo de Exceções
+
+Este catálogo é gerado automaticamente a partir do nosso Grafo de Conhecimento semântico (RDF):
+
+{% for error in get_rdf_exceptions() %}
+### {{ error.code }}
+- **Tipo**: `{{ error.python_type }}`
+- **Descrição**: {{ error.description }}
+{% endfor %}
 
 ## Links úteis
 

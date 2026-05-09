@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:ct="https://standards.iso.org/iso/21597/-1/ed-1/en/Container#" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:dcterms="http://purl.org/dc/terms/" xml:base="urn:ontobdc-org:storage/">
+  <owl:Ontology rdf:about="urn:ontobdc-org:storage/">
+    <owl:imports rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Container"/>
+  </owl:Ontology>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/description">
+    <owl:equivalentClass rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Container#ContainerDescription"/>
+  </rdf:Description>
+  <ct:ContainerDescription rdf:about="4747c899-94e3-403f-8e40-6b14504eca8d">
+    <dcterms:identifier>4747c899-94e3-403f-8e40-6b14504eca8d</dcterms:identifier>
+    <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+    <ct:versionID>1</ct:versionID>
+    <ct:versionDescription xml:lang="en">Initial version</ct:versionDescription>
+    <ct:description xml:lang="en">An ICDD container for urn:ontobdc-org:storage/</ct:description>
+    <ct:creationDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-04-10T21:29:04.601000+00:00</ct:creationDate>
+    <dcterms:title xml:lang="en">The Main Storage Index</dcterms:title>
+    <prov:atLocation rdf:resource="file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack"/>
+    <dcterms:hasPart>
+      <dcterms:Dataset rdf:about="4747c899-94e3-403f-8e40-6b14504eca8d/triage/context">
+        <dcterms:identifier>4747c899-94e3-403f-8e40-6b14504eca8d/triage/context</dcterms:identifier>
+        <dcterms:title xml:lang="en">The storage dataset for triage/context</dcterms:title>
+        <prov:atLocation rdf:resource="triage/context"/>
+        <dcterms:isPartOf rdf:resource="4747c899-94e3-403f-8e40-6b14504eca8d"/>
+      </dcterms:Dataset>
+    </dcterms:hasPart>
+  </ct:ContainerDescription>
+</rdf:RDF>
