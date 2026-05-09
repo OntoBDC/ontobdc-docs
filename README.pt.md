@@ -31,13 +31,16 @@ OntoBDC funciona melhor com **projetos de dados portáteis e descentralizados**.
 - **Modular**: Queries/Actions são plugins isolados. Você pode adicionar novas operações sem mudar o core.
 - **Portátil**: Rode em laptop, servidor ou container.
 
-## Arquitetura
+## Arquitetura & Módulos
 
-OntoBDC é construído sobre uma camada semântica central:
+OntoBDC é construído sobre uma arquitetura modular. Em vez de instalar um pacote monolítico, você pode habilitar apenas os módulos que precisa para o seu contexto específico.
 
-1. **Context Layer**: [RO-Crate](https://www.researchobject.org/ro-crate/) para metadata e relacionamentos.
-
-O **Capability Runtime** conecta essas camadas e resolve dinamicamente quais estratégias de CLI se aplicam ao estado atual.
+- **Core / Run / CLI**: O coração do sistema. Gerencia a engine de execução, o carregamento dinâmico de capacidades e as interações via CLI.
+- **Storage**: Fornece adaptadores e capacidades para manipulação de arquivos físicos, contêineres ICDD e consultas a dados locais.
+- **A3**: Capacidades especializadas para Agent-to-Agent Architecture e extração/transformação de dados via LLM (significa AI Anchor Agent).
+- **Social**: Ferramentas para web scraping e extração de dados semânticos de URLs públicas (ex: geração de grafos a partir de HTML/RDFa).
+- **Plan / Check**: Orquestração de workflows (DAG) e verificações de validação de ambiente.
+- **Dev**: Ferramentas para commits semânticos e gerenciamento de branches.
 
 ## Capacidades
 
