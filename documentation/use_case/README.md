@@ -9,10 +9,8 @@ This directory contains the documentation for all major use cases (System Level 
 3. [UC03 - Run Capability (run)](UC03_run.md)
 4. [UC04 - List Capabilities (list)](UC04_list.md)
 5. [UC05 - Manage Storage (storage)](UC05_storage.md)
-6. [UC06 - Entity Framework Tools (entity)](UC06_entity.md)
-7. [UC07 - Developer Tools (dev)](UC07_dev.md)
-8. [UC08 - Execution Plan (plan)](UC08_plan.md)
-9. [UC09 - A3 Module Watch (a3)](UC09_a3.md)
+6. [UC07 - Developer Tools (dev)](UC07_dev.md)
+7. [UC08 - A3 Module Tools (a3)](UC08_a3.md)
 
 ---
 
@@ -31,6 +29,7 @@ flowchart LR
     UC04["UC04: List Capabilities<br/>(ontobdc list)"]
     UC05["UC05: Manage Storage<br/>(ontobdc storage)"]
     UC07["UC07: Developer Tools<br/>(ontobdc dev commit)"]
+    UC08["UC08: A3 Module Tools<br/>(ontobdc a3)"]
   end
   
   User --> UC01
@@ -39,6 +38,7 @@ flowchart LR
   User --> UC04
   User --> UC05
   User --> UC07
+  User --> UC08
   
   UC03 -. "include" .-> UC02
 ```

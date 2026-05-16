@@ -68,4 +68,5 @@ nav:
           - UC04 - List Capabilities: documentation/use_case/UC04_list.md
           - UC05 - Manage Storage: documentation/use_case/UC05_storage.md
           - UC07 - Developer Tools: documentation/use_case/UC07_dev.md
+          - UC08 - A3 Module Tools: documentation/use_case/UC08_a3.md
   - License: LICENSE
