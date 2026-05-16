@@ -1,124 +1,119 @@
-# 🚀 OntoBDC (Ontology-Based Data Capabilities)
+# OntoBDC
 
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/OntoBDC/ontobdc-core/blob/main/LICENSE) [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/) [![Status](https://img.shields.io/badge/status-active-success)](https://github.com/OntoBDC)
+OntoBDC is a Python CLI and semantic runtime for defining, discovering, validating, and executing capability-based workflows over structured data and semantic context.
 
-**OntoBDC** (Ontology-Based Data Capabilities) is a domain-driven data architecture and capability runtime for executing ontology-aware data operations. It bridges the gap between static data storage and dynamic semantic execution, making your data smart, portable, and actionable.
+It focuses on making workflows more predictable and auditable by combining explicit capability metadata, schema-driven inputs/outputs, and verification steps (e.g., checks, contracts, storage indexing) around execution.
 
-Use OntoBDC to manage the lifecycle of your engineering and data projects. The runtime orchestrates **L1 Queries** (Discovery), **L2 Actions** (Transformation), and **L3 Use Cases** (State Transitions) to provide reproducible and auditable workflows directly from your terminal.
+## Documentation
 
-**Table of contents**
+- Use Cases: [documentation/use_case/README.md](documentation/use_case/README.md)
 
-- [Principles](#principles)
-- [Architecture & Modules](#architecture--modules)
-- [Capabilities](#capabilities)
-- [Getting Started](#getting-started)
-- [Managing Dependencies](#managing-dependencies)
-- [Ontologies Catalog](#ontologies-catalog)
-- [Exceptions Catalog](#exceptions-catalog)
-- [Open Source](#open-source)
+## Quickstart
 
-## Principles
+1. Initialize a project context:
+   - `ontobdc init`
+2. Validate environment and configuration:
+   - `ontobdc check`
+3. Discover what is available:
+   - `ontobdc list`
+4. Execute a capability:
+   - `ontobdc run <capability_id> [args]`
+5. Manage the storage index:
+   - `ontobdc storage`
+   - `ontobdc storage --local [path]`
+   - `ontobdc storage --remove <dataset_id>`
 
-- **Semantic First**: Data is not just bytes; it has meaning defined by ontologies.
-- **Modular by Design**: Capabilities are isolated plugins grouped by domains (Core, Storage, A3, Social, Dev). You can add new operations without changing the core runtime.
-- **Portable**: The entire runtime and data package are self-contained. Run it on a laptop, a server, or inside a Google Colab notebook.
+## What OntoBDC Does
 
-## Architecture & Modules
+- Creates and maintains a per-project configuration in `.__ontobdc__/config.yaml`.
+- Runs pre-flight checks to reduce environment drift before execution.
+- Discovers installed capabilities and exposes them through a consistent CLI.
+- Executes capabilities using declared schemas and runtime strategies.
+- Maintains a storage index (`.__ontobdc__/storage.rdf`) that references dataset locations.
+- Supports workflows in domains that benefit from explicit contracts and auditability (e.g., BIM/openBIM, engineering data, compliance-oriented pipelines).
 
-OntoBDC is built upon a modular architecture. Instead of installing a monolithic package, you can enable only the modules you need for your specific context.
+## Architecture
 
-- **Core / Run / CLI**: The heart of the system. Manages the execution engine, dynamic capability loading, and CLI interactions.
-- **Storage**: Provides adapters and capabilities for physical file manipulation, ICDD containers, and local data querying.
-- **A3**: Specialized capabilities for Agent-to-Agent Architecture and LLM data extraction/transformation (means AI Anchor Agent).
-- **Social**: Tools for web scraping and semantic data extraction from public URLs (e.g., generating Knowledge Graphs from HTML/RDFa).
-- **Plan / Check**: Workflow DAG orchestration and environment validation checks.
-- **Dev**: Tooling for semantic commits and branch management.
+The diagrams below summarize the system context (C1) and the internal CLI containers (C2).
 
-## Capabilities
+### C1 - System Context
 
-Capabilities are the core units of execution in OntoBDC. They are categorized into three levels of power and responsibility, ensuring safety and clarity for autonomous agents:
+```mermaid
+flowchart LR
+  User["User<br/>(Dev / Data Scientist)"]
+  System["OntoBDC CLI<br/>(System)"]
 
-| Level | Name | Scope & Power | Side Effects? | Example |
-| :--- | :--- | :--- | :--- | :--- |
-| **L1** | **Query** | **Read-Only / Discovery.** Pure interface to query the environment. | **NO.** Must be idempotent and safe to retry infinite times. | `list_documents`, `extract_transform_raw_text`. |
-| **L2** | **Action** | **Transformation / Creation.** Takes input data and produces new data/files without changing business state logic. | **Local Only.** Can create/write files but does not advance workflow state. | `unzip_file`, `convert_pdf_to_png`. |
-| **L3** | **Use Case** | **State Transition.** Orchestrates L1 and L2 to move the business process forward. | **YES.** Changes the "truth" of the system. | `process_chat_folder` (Raw -> Processed). |
+  Project["OntoBDC Project<br/>(working directory)"]
+  Config["Project Config<br/>(.__ontobdc__/config.yaml)"]
+  StorageIndex["Storage Index<br/>(.__ontobdc__/storage.rdf)"]
+  Datasets["Local Datasets<br/>(storage paths)"]
+  Python["Python Runtime<br/>(venv/colab/docker)"]
+  Git["Git Repository"]
+  Internet["Internet / External Data Sources"]
 
-## Getting Started
+  User -->|"runs commands"| System
 
-OntoBDC requires Python 3.10+ and pip. Install the base system to start using the CLI:
-
-```bash
-pip install ontobdc
+  System -->|"operates in"| Project
+  System -->|"uses"| Python
+  System -->|"reads/writes"| Config
+  System -->|"reads/writes"| StorageIndex
+  StorageIndex -->|"references"| Datasets
+  System -->|"invokes"| Git
+  System -->|"accesses"| Internet
 ```
 
-After installation, you can initialize a project context and set up the execution engine (e.g., `venv` or `colab`):
+### C2 - Container Diagram
 
-```bash
-ontobdc init
+```mermaid
+flowchart LR
+  User["User"]
+
+  subgraph OntoBDC["OntoBDC CLI (System)"]
+    CLI["CLI Entrypoints<br/>(ontobdc)"]
+    Init["Init Use Case<br/>(init)"]
+    Check["Check Use Case<br/>(check)"]
+    Run["Run Use Case<br/>(run)"]
+    List["List Use Case<br/>(list)"]
+    Storage["Storage Use Case<br/>(storage)"]
+    Dev["Dev Use Case<br/>(dev)"]
+    Runtime["Capability Runtime<br/>(loader + strategies)"]
+  end
+
+  Config[".__ontobdc__/config.yaml"]
+  StorageIndex[".__ontobdc__/storage.rdf"]
+  Datasets["Local Datasets"]
+  Capabilities["Installed Capability Modules<br/>(Python packages)"]
+  Git["Git"]
+  Internet["Internet"]
+
+  User --> CLI
+
+  CLI --> Init
+  CLI --> Check
+  CLI --> Run
+  CLI --> List
+  CLI --> Storage
+  CLI --> Dev
+
+  Init --> Config
+  Check --> Config
+  Run --> Runtime
+  Runtime --> Config
+  Runtime --> Capabilities
+  Runtime --> Internet
+  List --> Capabilities
+  Storage --> StorageIndex
+  StorageIndex --> Datasets
+  Dev --> Git
 ```
 
-To execute capabilities interactively, you can invoke the run command and pass the capability ID. The system will dynamically prompt you for the required parameters or read them from CLI flags:
+## Core Concepts (Mental Model)
 
-```bash
-ontobdc run --id <capability_id>
-```
+- Project Context: the `.__ontobdc__` folder that stores project state and metadata.
+- Capability: an executable unit with explicit metadata, inputs, and outputs.
+- Checks: deterministic validations to ensure the environment and prerequisites are correct before execution.
+- Storage Index: an RDF index that registers dataset locations and enables repeatable references.
 
-To validate the environment, engine, and dependencies:
+## Status
 
-```bash
-ontobdc check --repair
-```
-
-## Managing Dependencies
-
-OntoBDC uses a smart optional dependency system (Extras). Instead of installing heavy packages you don't need, you can enable specific modules. The CLI dynamically checks if the required module is enabled before executing a capability.
-
-To install the full suite of development tools (pytest, coverage):
-```bash
-pip install -e ".[dev]"
-```
-
-To enable specific domain modules (e.g., A3 for LLMs or Storage for file manipulation):
-```bash
-pip install -e ".[a3,storage]"
-```
-
-## Ontologies Catalog
-
-### Storage Capabilities
-{{ render_ontology('ontology/nid/storage/capability.ttl') }}
-
-## Exceptions Catalog
-
-This catalog is generated automatically from our semantic Knowledge Graph (RDF):
-
-{% for error in get_rdf_exceptions() %}
-### {{ error.code }}
-- **Type**: `{{ error.python_type }}`
-- **Description**: {{ error.description }}
-{% endfor %}
-
-## Useful Links
-
-| Resource | Link |
-|----------|------|
-| 📘 Documentation | <a href="https://docs.ontobdc.org" target="_blank">docs.ontobdc.org</a> |
-| 🐙 GitHub | <a href="https://github.com/OntoBDC" target="_blank">github.com/OntoBDC</a> |
-| 📦 PyPI | <a href="https://pypi.org/project/ontobdc" target="_blank">pypi.org/project/ontobdc</a> |
-
-## Open Source
-
-OntoBDC is a free and open-source initiative, licensed under the **Apache License 2.0**.
-We believe in the power of community-driven development to solve complex data interoperability challenges.
-
-## Contributing
-
-We are always on the lookout for contributors to help us fix bugs, create new features, or improve project documentation. If you are interested, feel free to open a PR or issue on GitHub.
-
-## Who uses OntoBDC?
-
-OntoBDC is the core engine behind **InfoBIM**, powering semantic data interoperability for complex engineering projects.
-
----
-<p align="center">Proudly developed in Brazil 🇧🇷</p>
+OntoBDC is under active development. The CLI is usable, but capabilities and workflows evolve quickly as the project expands its domain coverage and validation strategy.

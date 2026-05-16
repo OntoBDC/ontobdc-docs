@@ -43,34 +43,30 @@ plugins:
   - search
   - macros:
       module_name: main
+  - mermaid2
   - i18n:
       docs_structure: suffix
+      fallback_to_default: true
       languages:
         - locale: en
           name: English
           default: true
-        - locale: pt
-          name: Português
-        - locale: es
-          name: Español
 
 markdown_extensions:
   - tables
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
-
-extra:
-  alternate:
-    - name: English
-      link: /
-      lang: en
-    - name: Português
-      link: /pt/
-      lang: pt
-    - name: Español
-      link: /es/
-      lang: es
 
 nav:
   - Home: README.md
+  - Documentation:
+      - Use Cases:
+          - Overview: documentation/use_case/README.md
+          - UC01 - Initialize Configuration: documentation/use_case/UC01_init.md
+          - UC02 - Run Infrastructure Checks: documentation/use_case/UC02_check.md
+          - UC03 - Run Capability: documentation/use_case/UC03_run.md
+          - UC04 - List Capabilities: documentation/use_case/UC04_list.md
+          - UC05 - Manage Storage: documentation/use_case/UC05_storage.md
+          - UC07 - Developer Tools: documentation/use_case/UC07_dev.md
+          - UC08 - A3 Module Tools: documentation/use_case/UC08_a3.md
+  - License: LICENSE
