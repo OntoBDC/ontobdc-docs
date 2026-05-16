@@ -1,5 +1,9 @@
 # OntoBDC
 
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Status](https://img.shields.io/badge/Status-Active-success.svg)
+
 OntoBDC is a Python CLI and semantic runtime for defining, discovering, validating, and executing capability-based workflows over structured data and semantic context.
 
 It focuses on making workflows more predictable and auditable by combining explicit capability metadata, schema-driven inputs/outputs, and verification steps (e.g., checks, contracts, storage indexing) around execution.
