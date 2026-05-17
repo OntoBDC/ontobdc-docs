@@ -69,4 +69,6 @@ nav:
           - UC05 - Manage Storage: documentation/use_case/UC05_storage.md
           - UC07 - Developer Tools: documentation/use_case/UC07_dev.md
           - UC08 - A3 Module Tools: documentation/use_case/UC08_a3.md
+      - Diagrams:
+          - A3 Work Pipeline: documentation/diagrams/a3_work_sequence.md
   - License: LICENSE
