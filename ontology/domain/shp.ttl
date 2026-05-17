@@ -1,32 +1,21 @@
-@prefix : <http://ontobdc.org/ontology/ns/domain.ttl#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix function: <http://w3id.org/function/ontology#> .
-@prefix schema: <http://schema.org/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix err: <http://www.w3.org/2010/02/rdfa/errors#> .
-@prefix ontouml: <http://w3id.org/ontouml#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+@prefix : <http://ontobdc.org/ontology/domain/shp.ttl#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix h: <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
 
-@base <http://ontobdc.org/ontology/ns/domain.ttl#> .
+@base <http://ontobdc.org/ontology/domain/shp.ttl#> .
 
-<http://ontobdc.org/ontology/ns/domain.ttl> rdf:type owl:Ontology .
+<http://ontobdc.org/ontology/domain/shp.ttl> rdf:type owl:Ontology .
 
-#################################################################
-#    Classes
-#################################################################
 
-###  http://ontobdc.org/ontology/nid/domain.ttl#QueryCapability
-:QueryCapability rdf:type owl:Class ;rdfs:subClassOf function:Function, schema:SoftwareSourceCode ;
-                 ontouml:name "Query capability"@en ;
-                 rdfs:comment "Executes a query over a declared data or semantic context."@en .
 
 :QueryCapabilityShape a sh:NodeShape ;
-  sh:targetClass :QueryCapability ;
+  sh:targetClass obdc:QueryCapability ;
   sh:property [
     sh:path dcterms:identifier ;
     sh:datatype xsd:string ;
@@ -155,18 +144,15 @@
     sh:maxCount 1 ;
   ] .
 
+:TransformationResponseShape a sh:NodeShape ;
+  sh:targetClass obdc:TransformationResponse ;
+  sh:property [
+    sh:path dcterms:identifier ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
 
-###  http://ontobdc.org/ontology/nid/domain.ttl#QueryResponse
-:QueryResponse rdf:type owl:Class ;rdfs:subClassOf function:Output ;
-               ontouml:name "Query response"@en ;
-               rdfs:comment "The result produced by executing the query."@en .
 
-:Exception rdf:type owl:Class ;
-          rdfs:subClassOf err:Error ;
-          rdfs:comment "Base exception for all exceptions in the OntoBDC domain."@en .
 
-:RepositoryNotConfiguredException rdf:type owl:Class ;
-                                           rdfs:subClassOf :Exception ;
-                                  dcterms:identifier "org.ontobdc.domain.resource.document.exception.repository_not_configured" ;
-                                  dcterms:description "File repository not configured for capability"@en ;
-                                  :pythonType "ValueError" .
+
