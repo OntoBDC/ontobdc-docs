@@ -1,6 +1,6 @@
 
 @prefix : <http://ontobdc.org/ontology/social/shp.ttl#> .
-@prefix peo: <http://purl.bioontology.org/ontology/PEO/> .
+@prefix peo: <https://w3id.org/peo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix cv: <http://rdfs.org/resume-rdf/cv.rdfs#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -15,7 +15,7 @@
   sh:targetClass cv:JobOffer ;
   sh:closed true ;
   sh:ignoredProperties ( rdf:type ) ;
-  :promptTemplate :JobOfferExtractionPrompt ;
+  peo:hasPrompt :JobOfferExtractionPrompt ;
   sh:property [
     sh:path cv:name ;
     sh:datatype xsd:string ;
@@ -99,14 +99,8 @@
     sh:minCount 1 ;
   ] .
 
-:PromptTemplate a owl:Class .
-
-:promptTemplate a owl:ObjectProperty .
-
-:promptText a owl:DatatypeProperty .
-
-:JobOfferExtractionPrompt a :PromptTemplate, owl:NamedIndividual ;
-  :promptText """Extract REQUIRED job fields from the provided job posting text.
+:JobOfferExtractionPrompt a peo:Prompt, owl:NamedIndividual ;
+  peo:hasInstruction """Extract REQUIRED job fields from the provided job posting text.
 Rules:
 - Output MUST conform to the provided JSON Schema.
 - Do NOT include any extra keys.
