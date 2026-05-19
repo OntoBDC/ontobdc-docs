@@ -12,30 +12,36 @@
 
 :JobOfferShape a sh:NodeShape ;
   sh:targetClass cv:JobOffer ;
+  sh:closed true ;
+  sh:ignoredProperties ( rdf:type ) ;
   sh:property [
-    sh:path cv:title ;
+    sh:path cv:name ;
     sh:datatype xsd:string ;
+    sh:pattern "^[A-Za-z][A-Za-z0-9_]{2,127}$" ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
   ] ;
   sh:property [
-    sh:path cv:description ;
+    sh:path cv:title ;
     sh:or (
       [ sh:datatype xsd:string ]
       [ sh:datatype rdf:langString ]
     ) ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
+    sh:minLength 1 ;
   ] ;
   sh:property [
     sh:path cv:inLanguage ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
+    sh:in ( "pt-br" "en" "es" "fr" ) ;
   ] ;
   sh:property [
     sh:path cv:hiringOrganization ;
-    sh:nodeKind sh:IRI ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
     sh:maxCount 1 ;
   ] ;
   sh:property [
@@ -49,31 +55,47 @@
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
+    sh:in ( "full-time" "contract" "internship" "part-time" "seasonal" "temporary" ) ;
   ] ;
   sh:property [
     sh:path cv:jobLocationType ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
+    sh:in ( "hybrid" "remote" "onsite" "synchronous" "asynchronous" "unknown" ) ;
   ] ;
   sh:property [
     sh:path cv:skills ;
-    sh:items {"type": "string"},
-    "multiLanguage": True,
-    sh:maxCount 1 ;
+    sh:or (
+      [ sh:datatype xsd:string ]
+      [ sh:datatype rdf:langString ]
+    ) ;
+    sh:minCount 1 ;
   ] ;
   sh:property [
     sh:path cv:activities ;
-    sh:items {"type": "string"},
-    "multiLanguage": True,
-    sh:maxCount 1 ;
+    sh:or (
+      [ sh:datatype xsd:string ]
+      [ sh:datatype rdf:langString ]
+    ) ;
+    sh:minCount 1 ;
   ] ;
   sh:property [
     sh:path cv:requirements_indispensable ;
-    sh:items {"type": "string"},
-    "multiLanguage": True,
-    sh:maxCount 1 ;
+    sh:or (
+      [ sh:datatype xsd:string ]
+      [ sh:datatype rdf:langString ]
+    ) ;
+    sh:minCount 1 ;
   ] ;
+  sh:property [
+    sh:path cv:requirements_desirable ;
+    sh:or (
+      [ sh:datatype xsd:string ]
+      [ sh:datatype rdf:langString ]
+    ) ;
+    sh:minCount 1 ;
+  ] .
 
 JOB_SCHEMA: Dict[str, Any] = {
     "type": "object",
