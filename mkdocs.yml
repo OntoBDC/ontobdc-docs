@@ -13,7 +13,6 @@ exclude_docs: |
   mkdocs.yml
   requirements.txt
   main.py
-  ontology/*
 
 theme:
   name: material
