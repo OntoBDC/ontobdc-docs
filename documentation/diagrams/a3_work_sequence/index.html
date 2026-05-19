@@ -7,24 +7,25 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Documentation for OntoBDC - Ontology-Based Data Capabilities" name="description"/>
 <meta content="Elias M. P. Junior" name="author"/>
-<link href="https://ontobdc.org/" rel="canonical"/>
-<link href="documentation/use_case/" rel="next"/>
-<link href="assets/images/favicon.png" rel="icon"/>
+<link href="https://ontobdc.org/documentation/diagrams/a3_work_sequence/" rel="canonical"/>
+<link href="../../use_case/UC08_a3/" rel="prev"/>
+<link href="../../../LICENSE" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>OntoBDC Documentation</title>
-<link href="assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
-<link href="assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<title>A3 Work Pipeline - OntoBDC Documentation</title>
+<link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 </head>
 <body data-md-color-accent="light-green" data-md-color-primary="green" data-md-color-scheme="default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#ontobdc">
+<a class="md-skip" href="#a3-work-pipeline-sequence">
           Skip to content
         </a>
 </div>
@@ -32,7 +33,7 @@
 </div>
 <header class="md-header md-header--shadow" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="OntoBDC Documentation" class="md-header__button md-logo" data-md-component="logo" href="." title="OntoBDC Documentation">
+<a aria-label="OntoBDC Documentation" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="OntoBDC Documentation">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
@@ -48,7 +49,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Home
+              A3 Work Pipeline
             
           </span>
 </div>
@@ -116,7 +117,7 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="OntoBDC Documentation" class="md-nav__button md-logo" data-md-component="logo" href="." title="OntoBDC Documentation">
+<a aria-label="OntoBDC Documentation" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="OntoBDC Documentation">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 </a>
     OntoBDC Documentation
@@ -132,20 +133,8 @@
 </a>
 </div>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href=".">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
 <span class="md-ellipsis">
     
   
@@ -155,93 +144,9 @@
     
   </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#documentation">
-<span class="md-ellipsis">
-      
-        Documentation
-      
-    </span>
-</a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#quickstart">
-<span class="md-ellipsis">
-      
-        Quickstart
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#what-ontobdc-does">
-<span class="md-ellipsis">
-      
-        What OntoBDC Does
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#architecture">
-<span class="md-ellipsis">
-      
-        Architecture
-      
-    </span>
-</a>
-<nav aria-label="Architecture" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#c1-system-context">
-<span class="md-ellipsis">
-      
-        C1 - System Context
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#c2-container-diagram">
-<span class="md-ellipsis">
-      
-        C2 - Container Diagram
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#core-concepts-mental-model">
-<span class="md-ellipsis">
-      
-        Core Concepts (Mental Model)
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#status">
-<span class="md-ellipsis">
-      
-        Status
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
     
@@ -253,7 +158,7 @@
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
             
@@ -287,7 +192,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/">
+<a class="md-nav__link" href="../../use_case/">
 <span class="md-ellipsis">
     
   
@@ -299,7 +204,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/UC01_init/">
+<a class="md-nav__link" href="../../use_case/UC01_init/">
 <span class="md-ellipsis">
     
   
@@ -311,7 +216,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/UC02_check/">
+<a class="md-nav__link" href="../../use_case/UC02_check/">
 <span class="md-ellipsis">
     
   
@@ -323,7 +228,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/UC03_run/">
+<a class="md-nav__link" href="../../use_case/UC03_run/">
 <span class="md-ellipsis">
     
   
@@ -335,7 +240,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/UC04_list/">
+<a class="md-nav__link" href="../../use_case/UC04_list/">
 <span class="md-ellipsis">
     
   
@@ -347,7 +252,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/UC05_storage/">
+<a class="md-nav__link" href="../../use_case/UC05_storage/">
 <span class="md-ellipsis">
     
   
@@ -359,7 +264,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/UC07_dev/">
+<a class="md-nav__link" href="../../use_case/UC07_dev/">
 <span class="md-ellipsis">
     
   
@@ -371,7 +276,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="documentation/use_case/UC08_a3/">
+<a class="md-nav__link" href="../../use_case/UC08_a3/">
 <span class="md-ellipsis">
     
   
@@ -385,8 +290,8 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
 <span class="md-ellipsis">
     
@@ -398,7 +303,7 @@
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<nav aria-expanded="true" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_2">
 <span class="md-nav__icon md-icon"></span>
             
@@ -408,8 +313,9 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="documentation/diagrams/a3_work_sequence/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -427,7 +333,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="LICENSE">
+<a class="md-nav__link" href="../../../LICENSE">
 <span class="md-ellipsis">
     
   
@@ -447,204 +353,86 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#documentation">
-<span class="md-ellipsis">
-      
-        Documentation
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#quickstart">
-<span class="md-ellipsis">
-      
-        Quickstart
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#what-ontobdc-does">
-<span class="md-ellipsis">
-      
-        What OntoBDC Does
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#architecture">
-<span class="md-ellipsis">
-      
-        Architecture
-      
-    </span>
-</a>
-<nav aria-label="Architecture" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#c1-system-context">
-<span class="md-ellipsis">
-      
-        C1 - System Context
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#c2-container-diagram">
-<span class="md-ellipsis">
-      
-        C2 - Container Diagram
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#core-concepts-mental-model">
-<span class="md-ellipsis">
-      
-        Core Concepts (Mental Model)
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#status">
-<span class="md-ellipsis">
-      
-        Status
-      
-    </span>
-</a>
-</li>
-</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="ontobdc">OntoBDC</h1>
-<p><img alt="Python" src="https://img.shields.io/badge/Python-3.11+-blue.svg"/>
-<img alt="License" src="https://img.shields.io/badge/License-MIT-green.svg"/>
-<img alt="Status" src="https://img.shields.io/badge/Status-Active-success.svg"/></p>
-<p>OntoBDC is a Python CLI and semantic runtime for defining, discovering, validating, and executing capability-based workflows over structured data and semantic context.</p>
-<p>It focuses on making workflows more predictable and auditable by combining explicit capability metadata, schema-driven inputs/outputs, and verification steps (e.g., checks, contracts, storage indexing) around execution.</p>
-<h2 id="documentation">Documentation</h2>
-<ul>
-<li>Use Cases: <a href="documentation/use_case/">documentation/use_case/README.md</a></li>
-</ul>
-<h2 id="quickstart">Quickstart</h2>
-<ol>
-<li>Initialize a project context:</li>
-<li><code>ontobdc init</code></li>
-<li>Validate environment and configuration:</li>
-<li><code>ontobdc check</code></li>
-<li>Discover what is available:</li>
-<li><code>ontobdc list</code></li>
-<li>Execute a capability:</li>
-<li><code>ontobdc run &lt;capability_id&gt; [args]</code></li>
-<li>Manage the storage index:</li>
-<li><code>ontobdc storage</code></li>
-<li><code>ontobdc storage --local [path]</code></li>
-<li><code>ontobdc storage --remove &lt;dataset_id&gt;</code></li>
-</ol>
-<h2 id="what-ontobdc-does">What OntoBDC Does</h2>
-<ul>
-<li>Creates and maintains a per-project configuration in <code>.__ontobdc__/config.yaml</code>.</li>
-<li>Runs pre-flight checks to reduce environment drift before execution.</li>
-<li>Discovers installed capabilities and exposes them through a consistent CLI.</li>
-<li>Executes capabilities using declared schemas and runtime strategies.</li>
-<li>Maintains a storage index (<code>.__ontobdc__/storage.rdf</code>) that references dataset locations.</li>
-<li>Supports workflows in domains that benefit from explicit contracts and auditability (e.g., BIM/openBIM, engineering data, compliance-oriented pipelines).</li>
-</ul>
-<h2 id="architecture">Architecture</h2>
-<p>The diagrams below summarize the system context (C1) and the internal CLI containers (C2).</p>
-<h3 id="c1-system-context">C1 - System Context</h3>
-<div class="mermaid">flowchart LR
-  User["User&lt;br/&gt;(Dev / Data Scientist)"]
-  System["OntoBDC CLI&lt;br/&gt;(System)"]
+<h1 id="a3-work-pipeline-sequence">A3 Work Pipeline Sequence</h1>
+<p>This diagram illustrates the sequence of operations when executing the <code>ontobdc a3 --work</code> command. It shows how the concurrent workers, the physical package state evaluator, and the Sismic state machine interact to process each ETL package.</p>
+<div class="mermaid">sequenceDiagram
+    participant CLI as CLI (ontobdc a3 --work)
+    participant Core as work.main()
+    participant Executor as ThreadPoolExecutor
+    participant Worker as StateWorkerAdapter
+    participant Handler as SismicA3TransitionHandlerAdapter
+    participant Evaluator as StandardA3StateEvaluatorAdapter
+    participant Sismic as Sismic Interpreter
+    participant FS as File System (Package)
 
-  Project["OntoBDC Project&lt;br/&gt;(working directory)"]
-  Config["Project Config&lt;br/&gt;(.__ontobdc__/config.yaml)"]
-  StorageIndex["Storage Index&lt;br/&gt;(.__ontobdc__/storage.rdf)"]
-  Datasets["Local Datasets&lt;br/&gt;(storage paths)"]
-  Python["Python Runtime&lt;br/&gt;(venv/colab/docker)"]
-  Git["Git Repository"]
-  Internet["Internet / External Data Sources"]
+    CLI-&gt;&gt;Core: Execute main()
+    Core-&gt;&gt;FS: list_package()
+    FS--&gt;&gt;Core: List of LocalPackages
 
-  User --&gt;|"runs commands"| System
+    loop For each Package
+        Core-&gt;&gt;Worker: Instantiate(package)
+        Worker-&gt;&gt;Handler: Instantiate(package)
+        Handler-&gt;&gt;Evaluator: Instantiate()
+    end
 
-  System --&gt;|"operates in"| Project
-  System --&gt;|"uses"| Python
-  System --&gt;|"reads/writes"| Config
-  System --&gt;|"reads/writes"| StorageIndex
-  StorageIndex --&gt;|"references"| Datasets
-  System --&gt;|"invokes"| Git
-  System --&gt;|"accesses"| Internet
+    Core-&gt;&gt;Executor: Submit workers (concurrently)
+
+    par For each Submitted Worker
+        Executor-&gt;&gt;Worker: work()
+
+        %% Determine initial state
+        Worker-&gt;&gt;Handler: get current_state
+        Handler-&gt;&gt;Evaluator: evaluate(package)
+        Evaluator-&gt;&gt;FS: Check existing files (reverse pipeline order)
+        FS--&gt;&gt;Evaluator: Return most advanced file (e.g. raw.txt)
+        Evaluator--&gt;&gt;Handler: Return A3EtlProcessState (e.g. RECEIVED)
+        Handler--&gt;&gt;Worker: Return A3EtlProcessState
+
+        %% Load and Initialize Machine
+        Worker-&gt;&gt;Worker: Load YAML Statechart
+        Worker-&gt;&gt;Sismic: Instantiate(statechart, context)
+        Note right of Worker: Context injects handler&lt;br/&gt;and EtlProcessStatePort aliases
+        Worker-&gt;&gt;Sismic: Set initial state = current_state
+
+        %% Execution Loop
+        Worker-&gt;&gt;Sismic: execute_once()
+        loop while not Sismic.final
+            Sismic-&gt;&gt;Handler: evaluate guards (can_transit_to)
+            Handler--&gt;&gt;Sismic: True/False
+
+            opt If guard passes
+                Sismic-&gt;&gt;Handler: perform_state_transition(to_state)
+                Note right of Handler: (Future) Execute Use Case
+                Handler-&gt;&gt;FS: Process &amp; write new file (e.g. sanitized.txt)
+                Sismic-&gt;&gt;Handler: validate_state_transition()
+                Handler--&gt;&gt;Sismic: True
+            end
+
+            Worker-&gt;&gt;Sismic: execute_once()
+            Worker-&gt;&gt;Handler: get current_state
+            Handler-&gt;&gt;Evaluator: evaluate(package)
+            Evaluator-&gt;&gt;FS: Check files
+            FS--&gt;&gt;Evaluator: Return new advanced file (e.g. sanitized.txt)
+            Evaluator--&gt;&gt;Handler: Return new state (e.g. SANITIZED)
+            Handler--&gt;&gt;Worker: Return new state
+
+            opt If state did not change
+                Worker--&gt;&gt;Executor: raise RuntimeError("State stuck")
+            end
+        end
+
+        Worker--&gt;&gt;Executor: Return Success Result
+    end
+
+    Executor--&gt;&gt;Core: Return all results
+    Core--&gt;&gt;CLI: message_box(Success)
 </div>
-<h3 id="c2-container-diagram">C2 - Container Diagram</h3>
-<div class="mermaid">flowchart LR
-  User["User"]
-
-  subgraph OntoBDC["OntoBDC CLI (System)"]
-    CLI["CLI Entrypoints&lt;br/&gt;(ontobdc)"]
-    Init["Init Use Case&lt;br/&gt;(init)"]
-    Check["Check Use Case&lt;br/&gt;(check)"]
-    Run["Run Use Case&lt;br/&gt;(run)"]
-    List["List Use Case&lt;br/&gt;(list)"]
-    Storage["Storage Use Case&lt;br/&gt;(storage)"]
-    Dev["Dev Use Case&lt;br/&gt;(dev)"]
-    Runtime["Capability Runtime&lt;br/&gt;(loader + strategies)"]
-  end
-
-  Config[".__ontobdc__/config.yaml"]
-  StorageIndex[".__ontobdc__/storage.rdf"]
-  Datasets["Local Datasets"]
-  Capabilities["Installed Capability Modules&lt;br/&gt;(Python packages)"]
-  Git["Git"]
-  Internet["Internet"]
-
-  User --&gt; CLI
-
-  CLI --&gt; Init
-  CLI --&gt; Check
-  CLI --&gt; Run
-  CLI --&gt; List
-  CLI --&gt; Storage
-  CLI --&gt; Dev
-
-  Init --&gt; Config
-  Check --&gt; Config
-  Run --&gt; Runtime
-  Runtime --&gt; Config
-  Runtime --&gt; Capabilities
-  Runtime --&gt; Internet
-  List --&gt; Capabilities
-  Storage --&gt; StorageIndex
-  StorageIndex --&gt; Datasets
-  Dev --&gt; Git
-</div>
-<h2 id="core-concepts-mental-model">Core Concepts (Mental Model)</h2>
-<ul>
-<li>Project Context: the <code>.__ontobdc__</code> folder that stores project state and metadata.</li>
-<li>Capability: an executable unit with explicit metadata, inputs, and outputs.</li>
-<li>Checks: deterministic validations to ensure the environment and prerequisites are correct before execution.</li>
-<li>Storage Index: an RDF index that registers dataset locations and enables repeatable references.</li>
-</ul>
-<h2 id="status">Status</h2>
-<p>OntoBDC is under active development. The CLI is usable, but capabilities and workflows evolve quickly as the project expands its domain coverage and validation strategy.</p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
@@ -668,8 +456,8 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
-<script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
 <script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
 mermaid.initialize({});</script></body>
 </html>
