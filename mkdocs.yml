@@ -7,7 +7,7 @@ repo_name: ontobdc-core
 site_url: https://ontobdc.org/
 
 docs_dir: .
-site_dir: site
+site_dir: ../site
 
 exclude_docs: |
   mkdocs.yml
