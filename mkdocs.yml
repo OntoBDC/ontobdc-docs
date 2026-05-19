@@ -4,7 +4,7 @@ site_author: Elias M. P. Junior
 
 repo_url: https://github.com/eliasmpjunior/ontobdc-core
 repo_name: ontobdc-core
-site_url: http://localhost:8000/
+site_url: https://ontobdc.org/
 
 docs_dir: .
 site_dir: site
