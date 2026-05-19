@@ -1,0 +1,11 @@
+
+@prefix : <http://ontobdc.org/ontology/social/shp.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix cv: <http://rdfs.org/resume-rdf/cv.rdfs#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@base <http://ontobdc.org/ontology/social/shp.ttl#> .
+
+<http://ontobdc.org/ontology/social/shp.ttl> rdf:type owl:Ontology .
