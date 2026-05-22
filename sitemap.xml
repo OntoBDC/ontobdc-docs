@@ -2,73 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://ontobdc.org/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/diagrams/a3_work_sequence/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/diagrams/a3_work_sequence/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/UC01_init/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/UC01_init/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/UC02_check/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/UC02_check/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/UC03_run/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/UC03_run/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/UC04_list/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/UC04_list/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/UC05_storage/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/UC05_storage/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/UC07_dev/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/UC07_dev/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/documentation/use_case/UC08_a3/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/documentation/use_case/UC08_a3/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/ontology/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/ontology/"/>
     </url>
     <url>
         <loc>https://ontobdc.org/ontology/social/</loc>
-        <lastmod>2026-05-19</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://ontobdc.org/ontology/social/"/>
     </url>

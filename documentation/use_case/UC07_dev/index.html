@@ -657,10 +657,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#flow-of-events" class="md-nav__link">
+  <a href="#supported-commands" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Flow of Events
+        Supported Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Flows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Main Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-a-enable-the-dev-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow A - Enable the Dev Tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-b-create-a-semantic-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow B - Create a Semantic Commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-c-inspect-or-create-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow C - Inspect or Create Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-d-checkout-an-existing-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow D - Checkout an Existing Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-e-persist-repository-ssh-key-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow E - Persist Repository SSH Key Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternative-and-error-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative and Error Flows
       
     </span>
   </a>
@@ -904,10 +987,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#flow-of-events" class="md-nav__link">
+  <a href="#supported-commands" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Flow of Events
+        Supported Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Flows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Main Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-a-enable-the-dev-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow A - Enable the Dev Tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-b-create-a-semantic-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow B - Create a Semantic Commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-c-inspect-or-create-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow C - Inspect or Create Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-d-checkout-an-existing-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow D - Checkout an Existing Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-e-persist-repository-ssh-key-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow E - Persist Repository SSH Key Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternative-and-error-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative and Error Flows
       
     </span>
   </a>
@@ -947,7 +1113,7 @@
 
 <h1 id="uc07-developer-tools-ontobdc-dev">UC07 - Developer Tools (<code>ontobdc dev</code>)</h1>
 <h2 id="description">Description</h2>
-<p>This use case encompasses developer utilities that enforce project conventions, such as standardized semantic commits (<code>ontobdc dev commit</code>) and branch management (<code>ontobdc dev branch</code>).</p>
+<p>This use case covers the developer-oriented command group exposed by <code>ontobdc dev</code>. It centralizes repository workflows such as enabling the dev tool, creating semantic commits, inspecting or creating branches, checking out branches, and persisting repository SSH key settings in the local project configuration.</p>
 <h2 id="actors">Actors</h2>
 <ul>
 <li><strong>User (Contributor/Developer)</strong>: Needs to commit code or manage branches according to project rules.</li>
@@ -956,20 +1122,74 @@
 <h2 id="pre-conditions">Pre-conditions</h2>
 <ul>
 <li>The project is initialized.</li>
-<li>The <code>dev.tool</code> is enabled in <code>.__ontobdc__/config.yaml</code>.</li>
-<li>The user is inside a Git repository.</li>
+<li>The user is inside a Git repository for branch and commit operations.</li>
+<li>The <code>dev.tool</code> flag is required for most developer commands and can be enabled from the CLI.</li>
 </ul>
-<h2 id="flow-of-events">Flow of Events</h2>
+<h2 id="supported-commands">Supported Commands</h2>
+<ul>
+<li><code>ontobdc dev</code></li>
+<li><code>ontobdc dev --help</code></li>
+<li><code>ontobdc dev --enable-dev-tool</code></li>
+<li><code>ontobdc dev commit "&lt;message&gt;"</code></li>
+<li><code>ontobdc dev branch</code></li>
+<li><code>ontobdc dev branch --create &lt;name&gt;</code></li>
+<li><code>ontobdc dev checkout &lt;name&gt;</code></li>
+<li><code>ontobdc dev repo --add-ssh-key &lt;path&gt;</code></li>
+<li><code>ontobdc dev repo --rm-ssh-key</code></li>
+</ul>
+<h2 id="main-flows">Main Flows</h2>
+<h3 id="flow-a-enable-the-dev-tool">Flow A - Enable the Dev Tool</h3>
+<ol>
+<li>The user runs <code>ontobdc dev --enable-dev-tool</code>.</li>
+<li>The system verifies that the flag was passed alone.</li>
+<li>The system writes <code>dev.tool: enabled</code> to <code>.__ontobdc__/config.yaml</code>.</li>
+<li>The system confirms that developer commands are now enabled for the current project.</li>
+</ol>
+<h3 id="flow-b-create-a-semantic-commit">Flow B - Create a Semantic Commit</h3>
 <ol>
 <li>The user runs <code>ontobdc dev commit "&lt;message&gt;"</code>.</li>
-<li>The system verifies if the dev tool is enabled.</li>
-<li>The system validates the commit message against semantic commit rules and language requirements (English).</li>
-<li>If valid, the system executes the underlying <code>git commit</code> command.</li>
-<li>If invalid, the system rejects the commit and provides feedback.</li>
+<li>The system verifies that <code>dev.tool</code> is enabled.</li>
+<li>The system validates the provided commit message according to the project's semantic commit rules.</li>
+<li>If valid, the system delegates the operation to the commit script, which performs the repository commit workflow.</li>
+<li>If invalid, the system rejects the message and shows usage guidance.</li>
+</ol>
+<h3 id="flow-c-inspect-or-create-branches">Flow C - Inspect or Create Branches</h3>
+<ol>
+<li>The user runs <code>ontobdc dev branch</code>.</li>
+<li>The system verifies that <code>dev.tool</code> is enabled.</li>
+<li>The system delegates to the branch management script.</li>
+<li>The script lists repositories/submodules and reports branch-related Git status.</li>
+<li>Optionally, the user runs <code>ontobdc dev branch --create &lt;name&gt;</code>.</li>
+<li>The system creates and pushes the requested branch across the configured repositories.</li>
+</ol>
+<h3 id="flow-d-checkout-an-existing-branch">Flow D - Checkout an Existing Branch</h3>
+<ol>
+<li>The user runs <code>ontobdc dev checkout &lt;name&gt;</code>.</li>
+<li>The system verifies that <code>dev.tool</code> is enabled.</li>
+<li>The system delegates to the branch script using checkout mode.</li>
+<li>The target branch is checked out across the participating repositories.</li>
+</ol>
+<h3 id="flow-e-persist-repository-ssh-key-settings">Flow E - Persist Repository SSH Key Settings</h3>
+<ol>
+<li>The user runs <code>ontobdc dev repo --add-ssh-key &lt;path&gt;</code>.</li>
+<li>The system verifies that <code>dev.tool</code> is enabled.</li>
+<li>The system writes the path to <code>dev.repo.ssh.key_path</code> in <code>.__ontobdc__/config.yaml</code>.</li>
+<li>Optionally, the user runs <code>ontobdc dev repo --rm-ssh-key</code>.</li>
+<li>The system removes the stored SSH key path from the local configuration.</li>
+</ol>
+<h2 id="alternative-and-error-flows">Alternative and Error Flows</h2>
+<ol>
+<li>If <code>dev.tool</code> is not enabled and the user runs a protected dev command, the system aborts and instructs the user to run <code>ontobdc dev --enable-dev-tool</code>.</li>
+<li>If <code>--enable-dev-tool</code> is combined with other arguments, the system rejects the call.</li>
+<li>If <code>commit</code> is called without a message, the system aborts and prints the correct usage.</li>
+<li>If <code>repo</code> is called without a supported option or with invalid arguments, the system aborts and prints the accepted syntax.</li>
+<li>If a branch or commit operation fails in the underlying Git scripts, the system propagates the failure to the user.</li>
 </ol>
 <h2 id="post-conditions">Post-conditions</h2>
 <ul>
-<li>Code is committed to the repository adhering strictly to project standards.</li>
+<li>The local project configuration may be updated with developer settings.</li>
+<li>Commits and branch states may be changed in the target repositories.</li>
+<li>The user receives guided feedback when a developer command is disabled or called incorrectly.</li>
 </ul>
 
 
