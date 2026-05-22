@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://ontobdc.org/ontology/social/ds/country/index.rdf#"
+     xml:base="http://ontobdc.org/ontology/social/ds/country/index.rdf"
+     xmlns:ct="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:dcat="http://www.w3.org/ns/dcat#"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dcterms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="http://ontobdc.org/ontology/social/ds/country/index.rdf">
+        <owl:versionIRI rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf/0.1.0"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/type -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/type"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#containsDocument -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#containsDocument"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#createdBy -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#createdBy"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#creationDate -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#creationDate"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#description -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#description"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#filename -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#filename"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#filetype -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#filetype"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#format -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#format"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#name -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#name"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#publishedBy -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#publishedBy"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#requested -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#requested"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#versionDescription -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#versionDescription"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#versionID -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#versionID"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#downloadURL -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/dcat#downloadURL"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#generatedAtTime -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#generatedAtTime"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasDerivedFrom -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#wasDerivedFrom">
+        <rdfs:subPropertyOf rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#containsDocument"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#ContainerDescription -->
+
+    <owl:Class rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#ContainerDescription"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#InternalDocument -->
+
+    <owl:Class rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#InternalDocument"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Container#Organisation -->
+
+    <owl:Class rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#Organisation"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ontobdc.org/ontology/social/ds/country/index.rdf#OntoBDC -->
+
+    <owl:NamedIndividual rdf:about="http://ontobdc.org/ontology/social/ds/country/index.rdf#OntoBDC">
+        <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#Organisation"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://ontobdc.org/ontology/social/ds/country/index.rdf#country-identifier -->
+
+    <owl:NamedIndividual rdf:about="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-identifier">
+        <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#InternalDocument"/>
+        <ct:createdBy rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#OntoBDC"/>
+        <ct:creationDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-05-21T00:00:00</ct:creationDate>
+        <ct:description>Country identifier document ISO 3166-1-alpha-2-en.</ct:description>
+        <ct:filename>country-identifier-iso3166-1-alpha-2-en.csv</ct:filename>
+        <ct:filetype>csv</ct:filetype>
+        <ct:format>text/csv</ct:format>
+        <ct:name>country-identifier</ct:name>
+        <ct:requested rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ct:requested>
+        <ct:versionDescription>Initial version of the country identifier document.</ct:versionDescription>
+        <ct:versionID>0.1.0</ct:versionID>
+        <prov:generatedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-05-21T00:00:00</prov:generatedAtTime>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://ontobdc.org/ontology/social/ds/country/index.rdf#country-list -->
+
+    <owl:NamedIndividual rdf:about="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-list">
+        <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#InternalDocument"/>
+        <dcterms:type rdf:resource="https://schema.org/Country"/>
+        <ct:createdBy rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#OntoBDC"/>
+        <ct:creationDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-05-21T00:00:00</ct:creationDate>
+        <ct:description>RDF document containing individuals of schema:Country for the country dataset.</ct:description>
+        <ct:filename>nid.rdf</ct:filename>
+        <ct:filetype>rdf</ct:filetype>
+        <ct:format>application/rdf+xml</ct:format>
+        <ct:name>nid</ct:name>
+        <ct:versionDescription>Initial version of the RDF country graph.</ct:versionDescription>
+        <ct:versionID>0.1.0</ct:versionID>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://ontobdc.org/ontology/social/ds/country/index.rdf#87c6b370-5e8c-4d57-9345-380d641bf8dc -->
+
+    <owl:NamedIndividual rdf:about="http://ontobdc.org/ontology/social/ds/country/index.rdf#87c6b370-5e8c-4d57-9345-380d641bf8dc">
+        <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Container#ContainerDescription"/>
+        <ct:containsDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-identifier"/>
+        <ct:containsDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-list"/>
+        <ct:publishedBy rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#OntoBDC"/>
+        <ct:versionDescription>Initial version of the semantic container for the OntoBDC country dataset index.</ct:versionDescription>
+        <ct:versionID>0.1.0</ct:versionID>
+        <dcat:downloadURL rdf:resource="https://datahub.io/core/country-list/_r/-/data.csv"/>
+        <prov:wasDerivedFrom rdf:resource="http://datahub.io/core/country-list"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->

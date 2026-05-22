@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf#"
+     xml:base="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf"
+     xmlns:ls="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:dcterms="http://purl.org/dc/terms/"
+     xmlns:schema="https://schema.org/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+    <owl:Ontology rdf:about="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf">
+        <owl:imports rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset"/>
+    </owl:Ontology>
+
+    <owl:NamedIndividual rdf:about="#BR">
+        <rdf:type rdf:resource="https://schema.org/Country"/>
+        <schema:identifier>BR</schema:identifier>
+        <schema:name xml:lang="en">Brazil</schema:name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#BR-map">
+        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#DirectedBinaryLink"/>
+        <ls:hasFromLinkElement rdf:resource="#BR-rdf"/>
+        <ls:hasToLinkElement rdf:resource="#BR-csv"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#BR-rdf">
+        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement"/>
+        <ls:hasDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-list"/>
+        <ls:hasIdentifier rdf:resource="#BR-uri"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#BR-uri">
+        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#URIBasedIdentifier"/>
+        <ls:uri rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf#BR</ls:uri>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#BR-csv">
+        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement"/>
+        <ls:hasDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-identifier"/>
+        <ls:hasIdentifier rdf:resource="#BR-code"/>
+        <dcterms:conformsTo rdf:resource="file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/ontology/social/ds/country/linkset/resources/datapackage.json"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#BR-code">
+        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#StringBasedIdentifier"/>
+        <ls:identifierField>Code</ls:identifierField>
+        <ls:identifier>BR</ls:identifier>
+    </owl:NamedIndividual>
+</rdf:RDF>
