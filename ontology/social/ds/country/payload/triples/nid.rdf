@@ -1,49 +1,156 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf#"
      xml:base="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf"
-     xmlns:ls="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#"
+     xmlns:ls="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:dcterms="http://purl.org/dc/terms/"
-     xmlns:schema="https://schema.org/"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-    <owl:Ontology rdf:about="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf">
-        <owl:imports rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset"/>
-    </owl:Ontology>
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:schema="http://schema.org/"
+     xmlns:dcterms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf"/>
+    
 
-    <owl:NamedIndividual rdf:about="#BR">
-        <rdf:type rdf:resource="https://schema.org/Country"/>
-        <schema:identifier>BR</schema:identifier>
-        <schema:name xml:lang="en">Brazil</schema:name>
-    </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="#BR-map">
-        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#DirectedBinaryLink"/>
-        <ls:hasFromLinkElement rdf:resource="#BR-rdf"/>
-        <ls:hasToLinkElement rdf:resource="#BR-csv"/>
-    </owl:NamedIndividual>
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <owl:NamedIndividual rdf:about="#BR-rdf">
-        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement"/>
-        <ls:hasDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-list"/>
-        <ls:hasIdentifier rdf:resource="#BR-uri"/>
-    </owl:NamedIndividual>
+    
 
-    <owl:NamedIndividual rdf:about="#BR-uri">
-        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#URIBasedIdentifier"/>
-        <ls:uri rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf#BR</ls:uri>
-    </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="#BR-csv">
-        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement"/>
-        <ls:hasDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-identifier"/>
-        <ls:hasIdentifier rdf:resource="#BR-code"/>
-        <dcterms:conformsTo rdf:resource="file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/ontology/social/ds/country/linkset/resources/datapackage.json"/>
-    </owl:NamedIndividual>
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasDocument -->
 
-    <owl:NamedIndividual rdf:about="#BR-code">
-        <rdf:type rdf:resource="https://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#StringBasedIdentifier"/>
-        <ls:identifierField>Code</ls:identifierField>
-        <ls:identifier>BR</ls:identifier>
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasDocument"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasFromLinkElement -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasFromLinkElement"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasIdentifier -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasIdentifier"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasToLinkElement -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#hasToLinkElement"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#queryExpression -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#queryExpression"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#queryLanguage -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#queryLanguage"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#uri -->
+
+    <owl:AnnotationProperty rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#uri"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://schema.org/Country -->
+
+    <owl:Class rdf:about="http://schema.org/Country"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#Directed1toNLink -->
+
+    <owl:Class rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#Directed1toNLink"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement -->
+
+    <owl:Class rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#QueryBasedIdentifier -->
+
+    <owl:Class rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#QueryBasedIdentifier"/>
+    
+
+
+    <!-- http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#URIBasedIdentifier -->
+
+    <owl:Class rdf:about="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#URIBasedIdentifier"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf#BR -->
+
+    <owl:NamedIndividual rdf:about="http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf#BR">
+        <rdf:type rdf:resource="http://schema.org/Country"/>
+        <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#Directed1toNLink"/>
+        <ls:hasFromLinkElement>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement"/>
+                <ls:hasDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-list"/>
+                <ls:hasIdentifier>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#URIBasedIdentifier"/>
+                        <ls:uri>http://ontobdc.org/ontology/social/ds/country/payload/triples/nid.rdf#BR</ls:uri>
+                    </rdf:Description>
+                </ls:hasIdentifier>
+            </rdf:Description>
+        </ls:hasFromLinkElement>
+        <ls:hasToLinkElement>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#LinkElement"/>
+                <ls:hasDocument rdf:resource="http://ontobdc.org/ontology/social/ds/country/index.rdf#country-identifier"/>
+                <ls:hasIdentifier>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://standards.iso.org/iso/21597/-1/ed-1/en/Linkset#QueryBasedIdentifier"/>
+                        <ls:queryExpression>Code=BR</ls:queryExpression>
+                        <ls:queryLanguage>csv-column-match</ls:queryLanguage>
+                    </rdf:Description>
+                </ls:hasIdentifier>
+            </rdf:Description>
+        </ls:hasToLinkElement>
     </owl:NamedIndividual>
 </rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
