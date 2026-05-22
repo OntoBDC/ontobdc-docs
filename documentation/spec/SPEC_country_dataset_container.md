@@ -33,7 +33,6 @@ The goal is to keep the package layered:
 docs/ontology/social/ds/
   country/
     index.rdf
-    index.properties
     ontology/
       resources/
         Container.rdf
@@ -42,7 +41,6 @@ docs/ontology/social/ds/
       documents/
         country-identifier-iso3166-1-alpha-2-en.csv
       triples/
-        nid.properties
         nid.rdf
     linkset/
       resources/
@@ -124,14 +122,14 @@ For `#BR`, the graph contains:
 - one anonymous `ls:LinkElement` on the RDF side
 - one anonymous `ls:LinkElement` on the CSV side
 - one anonymous `ls:URIBasedIdentifier` for the RDF-side reference
-- one anonymous `ls:QueryBasedIdentifier` for the CSV-side reference
+- one anonymous `ls:StringBasedIdentifier` for the CSV-side reference
 
-The CSV-side query currently uses:
+The CSV-side identifier currently uses:
 
-- `ls:queryLanguage = "csv-column-match"`
-- `ls:queryExpression = "Code=BR"`
+- `ls:identifierField = "Code"`
+- `ls:identifier = "BR"`
 
-This is the current core design decision: the graph points to the source row logically by column/value match, without duplicating `Name` or `Code` inside the semantic node.
+This is the current core design decision: the graph points to the source record through the logical key field, without duplicating `Name` or `Code` inside the semantic node.
 
 ## 5. Why It Was Modeled This Way
 
@@ -156,7 +154,7 @@ That is why the current `nid.rdf` does **not** duplicate:
 - `schema:identifier`
 - CSV field/value pairs such as `Code = BR`
 
-Instead, it links back to the CSV using a logical query expression.
+Instead, it links back to the CSV using a logical field/value identifier.
 
 ### 5.3 Use The Country Node As The Stable Anchor
 
@@ -171,7 +169,8 @@ This avoids scattering the model across extra named helper nodes such as `#BR-ma
 
 The current model uses:
 
-- `Code=BR`
+- `identifierField = Code`
+- `identifier = BR`
 
 instead of:
 
@@ -183,7 +182,7 @@ This is preferable because row numbers are fragile under sorting, filtering, ins
 
 - **Lower redundancy**: semantic RDF does not repeat data that already exists in the CSV.
 - **Clear anchoring**: one IRI per country can act as both domain node and mapping anchor.
-- **Better resilience**: logical matching by `Code` survives tabular reordering.
+- **Better resilience**: logical identification by `Code` survives tabular reordering.
 - **Cleaner layering**: container metadata, source data, semantic graph, and schema remain distinct.
 - **Incremental growth**: the same pattern can be repeated for every country later.
 
@@ -191,7 +190,7 @@ This is preferable because row numbers are fragile under sorting, filtering, ins
 
 - **Heavier semantics per node**: the same resource is both `schema:Country` and `ls:Directed1toNLink`, which is concise but conceptually denser.
 - **Linkset verbosity**: even the minimal Linkset pattern still requires `LinkElement` and identifier structures.
-- **Local query convention**: `csv-column-match` and `Code=BR` are useful, but they are application conventions rather than a standardized CSV query language.
+- **Identifier indirection**: the CSV link still depends on a field/value indirection instead of carrying a direct row address.
 - **Mixed concerns in one RDF file**: `nid.rdf` currently carries both the country node and the cross-document mapping.
 - **Historical path residue**: the path still includes `social/ds`, even though the dataset focus is now `country`.
 
@@ -242,7 +241,7 @@ The current mapping in `nid.rdf` uses:
 - `ls:hasDocument`
 - `ls:hasIdentifier`
 - `ls:URIBasedIdentifier`
-- `ls:QueryBasedIdentifier`
+- `ls:StringBasedIdentifier`
 
 Compliance level:
 
@@ -251,7 +250,7 @@ Compliance level:
 Reason:
 
 - the current graph respects the basic modeling intent of document-to-element linking
-- the query language value `csv-column-match` is an application convention layered on top of the ontology
+- the CSV side now uses the vocabulary in a simpler and more normative way through field/value identification
 
 ### 9.3 Frictionless Data Package
 
@@ -301,7 +300,7 @@ This improves traceability of the package as a whole.
 
 - Only Brazil is currently instantiated in `nid.rdf`.
 - `nid.rdf` still contains OWL-generated declaration noise that could be reduced later.
-- The query language label `csv-column-match` is useful but still local to this project.
+- The mapping currently assumes that `Code` is the stable key of the CSV resource.
 - `datapackage.json` is present as schema metadata, but is not yet explicitly integrated into the RDF mapping.
 
 ## 11. Recommended Next Steps
@@ -324,7 +323,7 @@ The key current modeling choice is this:
 
 - the country node itself is the stable semantic anchor
 - the CSV remains the source of truth for tabular values
-- the semantic mapping points back to the CSV logically through `Code=BR`
+- the semantic mapping points back to the CSV logically through `identifierField = Code` and `identifier = BR`
 
 This produces a result that is:
 
@@ -335,32 +334,32 @@ This produces a result that is:
 
 but still intentionally lightweight and project-specific.
 
-Refence
-Linkset.rdf define a ontologia usada para representar ligações entre documentos e entre elementos dentro desses documentos.
+## Reference
+`Linkset.rdf` defines the ontology used to represent links between documents and between elements within those documents.
 
-Classes
+### Classes
 
-- ls:Link : classe base de uma ligação; agrupa dois ou mais ls:LinkElement .
-- ls:BinaryLink : especialização de ls:Link com exatamente 2 elementos ligados.
-- ls:DirectedLink : link com direção semântica, separando origem e destino.
-- ls:DirectedBinaryLink : link direcionado com exatamente 1 origem e 1 destino.
-- ls:Directed1toNLink : link direcionado com 1 origem e vários destinos.
-- ls:LinkElement : representa o “ponto” que participa do link, normalmente apontando para um documento e, opcionalmente, para um identificador interno.
-- ls:Identifier : classe abstrata para o mecanismo de identificação de um elemento dentro de um documento.
-- ls:StringBasedIdentifier : identificador por string.
-- ls:QueryBasedIdentifier : identificador obtido por expressão de consulta.
-- ls:URIBasedIdentifier : identificador por URI.
-Object Properties
+- `ls:Link`: base link class; groups two or more `ls:LinkElement` instances.
+- `ls:BinaryLink`: specialization of `ls:Link` with exactly 2 linked elements.
+- `ls:DirectedLink`: link with semantic direction, separating source and target.
+- `ls:DirectedBinaryLink`: directed link with exactly 1 source and 1 target.
+- `ls:Directed1toNLink`: directed link with 1 source and multiple targets.
+- `ls:LinkElement`: represents the "point" that participates in the link, usually pointing to a document and, optionally, to an internal identifier.
+- `ls:Identifier`: abstract class for the mechanism used to identify an element within a document.
+- `ls:StringBasedIdentifier`: string-based identifier.
+- `ls:QueryBasedIdentifier`: identifier obtained through a query expression.
+- `ls:URIBasedIdentifier`: URI-based identifier.
+### Object Properties
 
-- ls:hasLinkElement : liga um Link aos seus LinkElement .
-- ls:hasFromLinkElement : subpropriedade de hasLinkElement para indicar origem.
-- ls:hasToLinkElement : subpropriedade de hasLinkElement para indicar destino.
-- ls:hasDocument : liga um LinkElement a um ct:Document da ontologia Container.
-- ls:hasIdentifier : liga um LinkElement a um Identifier .
-Datatype Properties
+- `ls:hasLinkElement`: links a `Link` to its `LinkElement` instances.
+- `ls:hasFromLinkElement`: subproperty of `hasLinkElement` used to indicate source.
+- `ls:hasToLinkElement`: subproperty of `hasLinkElement` used to indicate target.
+- `ls:hasDocument`: links a `LinkElement` to a `ct:Document` from the Container ontology.
+- `ls:hasIdentifier`: links a `LinkElement` to an `Identifier`.
+### Datatype Properties
 
-- ls:identifier : valor textual do identificador em StringBasedIdentifier .
-- ls:identifierField : nome do campo onde esse identificador deve ser procurado.
-- ls:queryLanguage : linguagem usada na consulta de QueryBasedIdentifier .
-- ls:queryExpression : expressão da consulta.
-- ls:uri : URI usada em URIBasedIdentifier .
+- `ls:identifier`: textual value of the identifier in `StringBasedIdentifier`.
+- `ls:identifierField`: name of the field where this identifier should be looked up.
+- `ls:queryLanguage`: language used by `QueryBasedIdentifier`.
+- `ls:queryExpression`: query expression.
+- `ls:uri`: URI used in `URIBasedIdentifier`.
