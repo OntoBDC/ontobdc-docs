@@ -1,6 +1,6 @@
 # Use Cases - OntoBDC Stack
 
-This directory contains the documentation for all major use cases (System Level / L3) of the OntoBDC Stack project, mapped directly to the Command Line Interfaces (CLI) available to the user.
+This directory contains the documentation for the major OntoBDC CLI use cases currently exposed to the user.
 
 ## List of Use Cases
 
@@ -43,8 +43,11 @@ flowchart LR
   UC03 -. "include" .-> UC02
 ```
 
-## Three-Level Agent Architecture
-According to the project's architecture guidelines, the listed CLI commands act as orchestrators (L3 Use Cases) that modify business or environment states, utilizing:
-- **L1 Capabilities**: Discovery/read-only tools (e.g., data extraction via `ontobdc run`).
-- **L2 Actions**: Local transformation tools.
-- **L3 Use Cases**: Commands and flows that change the system state (e.g., `init`, `storage add`, `dev commit`).
+## Capability Vocabulary
+The current code expresses capability concepts through explicit capability interfaces rather than the older three-level hierarchy:
+
+- **`QueryCapabilityPort`**: discovery and read-only inspection capabilities.
+- **`TransformationCapabilityPort`**: capabilities that transform inputs into new or reshaped artifacts.
+- **`ActionCapabilityPort`**: executable action capabilities used by the runtime.
+
+The CLI use cases documented in this directory operate on top of that capability model.
