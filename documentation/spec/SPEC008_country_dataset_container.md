@@ -16,7 +16,7 @@ The package combines:
 
 - a container metadata graph in `index.rdf`
 - a tabular source in CSV
-- a minimal RDF graph in `payload/triples/nid.rdf`
+- an RDF graph in `payload/triples/nid.rdf` populated for all countries currently present in the source CSV
 - a Frictionless Data Package descriptor in `linkset/resources/datapackage.json`
 - local copies of the Container and Linkset ontologies as normative references
 
@@ -222,13 +222,13 @@ The Frictionless descriptor currently declares:
 - `text/csv` media type
 - `utf-8` encoding
 - field schema:
-  - `Name: string`
   - `Code: string`
+  - `Name: string`
 
 The current descriptor also adds semantic typing at field level:
 
-- `Name -> rdfType = http://schema.org/name`
 - `Code -> rdfType = http://schema.org/identifier`
+- `Name -> rdfType = http://schema.org/name`
 
 Its role is currently schema-oriented, not link-oriented.
 
