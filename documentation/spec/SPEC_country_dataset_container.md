@@ -27,6 +27,17 @@ The goal is to keep the package layered:
 - `nid.rdf` carries the semantic country node plus the link back to the CSV
 - `datapackage.json` formalizes the CSV schema
 
+Within this directory, `ds` means **dataset**.
+
+The broader design intent is not limited to one country example. The idea is to build a dataset from living documents and easily manipulable formats that, together, describe an entity as a whole while preserving multiple complementary views of the same subject:
+
+- a semantic view
+- a tabular or raw operational view
+- a package/container view
+- a schema view
+
+In this sense, the package is not just "using" ISO 21597. It is extending the ISO 21597 container and linkset ideas toward a more general dataset-oriented application profile, suitable for datasets composed of heterogeneous but coordinated documents.
+
 ## 2. Physical Structure
 
 ```text
@@ -56,7 +67,7 @@ docs/ontology/social/ds/
   - source table with columns `Name` and `Code`
 - `payload/triples/nid.rdf`
   - current semantic graph
-  - currently contains a single modeled example for Brazil
+  - currently contains modeled individuals for all countries present in the source CSV
 - `linkset/resources/datapackage.json`
   - Frictionless descriptor for the CSV resource and its schema
 - `ontology/resources/Container.rdf`
@@ -99,7 +110,9 @@ The current semantic mapping deliberately uses the logical key `Code`, not the p
 
 ### 4.3 RDF Layer
 
-`nid.rdf` currently contains one example individual:
+`nid.rdf` currently contains one modeled individual for each country present in the CSV source.
+
+Representative example:
 
 - `#BR`
 
@@ -112,6 +125,12 @@ This means the same stable IRI acts as:
 
 - the semantic country node
 - the mini-container that carries the outbound mapping to other resources
+
+The current `nid.rdf` also types this resource as:
+
+- `prov:Entity`
+
+This is conceptually coherent with the idea that the country node is a managed data entity inside the dataset.
 
 ### 4.4 Mapping Layer
 
@@ -192,7 +211,7 @@ This is preferable because row numbers are fragile under sorting, filtering, ins
 - **Linkset verbosity**: even the minimal Linkset pattern still requires `LinkElement` and identifier structures.
 - **Identifier indirection**: the CSV link still depends on a field/value indirection instead of carrying a direct row address.
 - **Mixed concerns in one RDF file**: `nid.rdf` currently carries both the country node and the cross-document mapping.
-- **Historical path residue**: the path still includes `social/ds`, even though the dataset focus is now `country`.
+- **Application-profile choices**: some modeling decisions intentionally generalize ISO 21597 beyond its narrower document-container usage into a broader dataset profile.
 
 ## 8. Current `datapackage.json` Role
 
@@ -206,9 +225,16 @@ The Frictionless descriptor currently declares:
   - `Name: string`
   - `Code: string`
 
+The current descriptor also adds semantic typing at field level:
+
+- `Name -> rdfType = http://schema.org/name`
+- `Code -> rdfType = http://schema.org/identifier`
+
 Its role is currently schema-oriented, not link-oriented.
 
 In the current state of the model, `nid.rdf` does **not** directly point to `datapackage.json`.
+
+An additional improvement worth keeping in scope is explicit language metadata for textual columns, especially the `Name` field, since the current file is effectively an English country label table.
 
 ## 9. Normative Alignment
 
@@ -228,7 +254,7 @@ Compliance level:
 Reason:
 
 - the vocabulary is used consistently for package description
-- the result is a project-specific profile, not a certified exchange package
+- the result is a project-specific profile that expands the container idea toward a broader dataset packaging use
 
 ### 9.2 ISO 21597 Linkset
 
@@ -251,6 +277,7 @@ Reason:
 
 - the current graph respects the basic modeling intent of document-to-element linking
 - the CSV side now uses the vocabulary in a simpler and more normative way through field/value identification
+- the current profile also pushes the linkset idea toward a generalized dataset entity model, where a semantic resource can simultaneously act as the stable anchor of a mini-container
 
 ### 9.3 Frictionless Data Package
 
@@ -261,6 +288,7 @@ Reason:
 - media type
 - encoding
 - field schema
+- field-level `rdfType` annotations
 
 Compliance level:
 
@@ -270,6 +298,7 @@ Reason:
 
 - the descriptor is minimal but useful
 - it currently serves as schema metadata for the CSV rather than a full publication workflow
+- it is also being used as a bridge between tabular structure and semantic interpretation
 
 ### 9.4 Schema.org
 
@@ -298,17 +327,17 @@ This improves traceability of the package as a whole.
 
 ## 10. Current Gaps
 
-- Only Brazil is currently instantiated in `nid.rdf`.
+- `nid.rdf` is now populated for all countries in the current CSV source, but the pattern still depends on the stability of that source table.
 - `nid.rdf` still contains OWL-generated declaration noise that could be reduced later.
 - The mapping currently assumes that `Code` is the stable key of the CSV resource.
 - `datapackage.json` is present as schema metadata, but is not yet explicitly integrated into the RDF mapping.
+- `datapackage.json` semantically types the fields with `rdfType`, but explicit language metadata for textual columns is still missing.
 
 ## 11. Recommended Next Steps
 
-- Replicate the same compact pattern from `#BR` to the remaining countries.
 - Decide whether the OWL-generated declarations in `nid.rdf` should be kept or simplified.
 - Decide whether the long-term design keeps domain data and link mappings in the same RDF file.
-- Revisit whether the root path should continue to include `social/ds` once the structure stabilizes.
+- Add explicit language metadata for the relevant textual fields in `datapackage.json`, especially the `Name` column.
 
 ## 12. Summary
 
@@ -317,13 +346,20 @@ The current result under `docs/ontology/social/ds/country` is a layered dataset 
 - a container metadata graph in `index.rdf`
 - a source CSV document
 - a Frictionless schema descriptor
-- a minimal RDF graph in `nid.rdf`
+- an RDF graph in `nid.rdf` populated for all countries currently present in the source CSV
 
 The key current modeling choice is this:
 
 - the country node itself is the stable semantic anchor
 - the CSV remains the source of truth for tabular values
 - the semantic mapping points back to the CSV logically through `identifierField = Code` and `identifier = BR`
+
+Holistically, the package is meant to work as a dataset made of living documents in easy-to-handle formats, each one contributing a different but coordinated perspective over the same entity:
+
+- the container perspective
+- the semantic perspective
+- the raw/tabular perspective
+- the schema perspective
 
 This produces a result that is:
 
@@ -333,6 +369,8 @@ This produces a result that is:
 - standards-aligned at the vocabulary level
 
 but still intentionally lightweight and project-specific.
+
+More specifically, it can be understood as a generalization of ISO 21597 from a document-container pattern to a broader dataset pattern, where multiple coordinated documents describe a full entity without forcing all meanings into a single serialization.
 
 ## Reference
 `Linkset.rdf` defines the ontology used to represent links between documents and between elements within those documents.
