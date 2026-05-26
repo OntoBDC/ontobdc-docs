@@ -1,54 +1,73 @@
-# TEST 001 - CLI Component Tests
+# TEST 001 - CLI Help Entrypoint Test
 
 ## Purpose
 
-This document lists the automated tests in `test/` that directly exercise the OntoBDC CLI component implemented in:
+This document describes the single automated test in `test/` that currently exercises the OntoBDC CLI help entrypoint:
+
+- `test/src/ontobdc/test_cli_help.sh`
+
+The scope of this document is limited to that file and to the CLI help behavior it validates.
+
+## Targeted Components
+
+The test directly exercises these implementation files:
 
 - `wip/src/ontobdc/cli/__init__.py`
-- `wip/src/ontobdc/cli/init.py`
 - `wip/src/ontobdc/cli/message_box.sh`
-- `wip/src/ontobdc/cli/print_log.sh`
 
-The focus of this document is the CLI entrypoint behavior, not the full behavior of downstream components such as `dev`, `run`, or `storage`.
+It validates the behavior of the CLI help entrypoint and the message-box rendering contract used by the help output.
 
-## Scope
-
-The following tests currently have direct CLI relevance:
-
-- `test/src/ontobdc/test_cli_help.sh`
-- `test/src/ontobdc/test_cli_python.py`
-- `test/src/ontobdc/test_dev.sh`
-
-Important note:
-
-- `test_dev.sh` is mainly a test of the `dev` component.
-- Even so, two checks inside that file call `wip/src/ontobdc/cli/__init__.py` directly, so they also validate part of the CLI entrypoint behavior.
-
-## Test Inventory
-
-### 1. `test_cli_help.sh`
-
-**File**
+## Test File
 
 - `test/src/ontobdc/test_cli_help.sh`
 
-**What it tests**
+## What The Test Covers
 
-- basic execution of the Python CLI entrypoint with `--help`
-- successful exit code for the help path
+- execution of `ontobdc --help`
+- execution of `ontobdc` with no arguments
+- successful exit code for both help entry paths
+- equality between the outputs of `ontobdc --help` and `ontobdc`
 - presence of the main help content rendered by `print_help()`
+- use of the semantic message-box color `INFO`
+- help title metadata:
+  - `OntoBDC`
+  - `CLI Help`
+- rendered help header format:
+  - `>_ OntoBDC CLI Help`
+- rendered header styling:
+  - `OntoBDC` in bold blue
+- rendered usage styling:
+  - `Usage:` in bold white
+  - `<command>` in cyan
 
-**How it works**
+## How The Test Works
 
-1. Resolves the project root.
+1. Resolves the project root from the location of the shell test.
 2. Resolves `wip/src` as the Python import root.
-3. Executes:
+3. Locates the CLI entrypoint at `wip/src/ontobdc/cli/__init__.py`.
+4. Locates the original `wip/src/ontobdc/cli/message_box.sh`.
+5. Creates a temporary backup of `message_box.sh`.
+6. Replaces `message_box.sh` with a small capture script that records:
+   - `COLOR`
+   - `TITLE_TYPE`
+   - `TITLE_TEXT`
+7. Executes the CLI twice:
    - `python3 wip/src/ontobdc/cli/__init__.py --help`
-4. Captures stdout.
-5. Verifies that the command exits with code `0`.
-6. Checks that the output contains the expected help markers.
+   - `python3 wip/src/ontobdc/cli/__init__.py`
+8. Verifies that both invocations exit with code `0`.
+9. Verifies that both outputs contain the expected help markers.
+10. Verifies that both outputs are identical.
+11. Verifies that the captured message-box contract uses:
+   - `COLOR=INFO`
+   - `TITLE_TYPE=OntoBDC`
+   - `TITLE_TEXT=CLI Help`
+12. Independently executes the original backed-up `message_box.sh` with a controlled sample help body.
+13. Verifies the rendered header and styled usage lines in the original message-box output.
+14. Restores the original `message_box.sh` on exit.
 
-**Expected output markers**
+## Expected Output Markers
+
+The test expects the CLI help output to contain at least these text markers:
 
 - `OntoBDC`
 - `CLI Help`
@@ -57,154 +76,36 @@ Important note:
 - `run`
 - `list`
 
-**Expected result**
+It also expects these styled fragments to be present in the help output:
 
-- the CLI should print help successfully
-- the process should exit with code `0`
-- the basic command catalog should be visible
+- `Usage:` in bold white
+- `<command>` in cyan
 
-**What part of the CLI this covers**
+## Expected Result
 
-- `main()` help dispatch
+- `ontobdc --help` must exit with code `0`
+- `ontobdc` with no arguments must exit with code `0`
+- both invocations must produce the same help output
+- the help output must expose the expected command catalog markers
+- the CLI must delegate help rendering to the message box using `INFO`
+- the rendered header must contain `>_ OntoBDC CLI Help`
+- the rendered header must show `OntoBDC` in bold blue
+- the rendered usage block must preserve:
+  - `Usage:` in bold white
+  - `<command>` in cyan
+
+## What Part Of The CLI This Covers
+
+- `main()` dispatch for `--help`
+- `main()` behavior when no command is provided
 - `print_help()`
-- fallback execution of the Python CLI entrypoint without shell wrapper dependency
+- message-box invocation contract for help rendering
+- header rendering in `message_box.sh`
+- styled body rendering in `message_box.sh`
 
-## 2. `test_cli_python.py`
+## What This Test Does Not Cover
 
-**File**
-
-- `test/src/ontobdc/test_cli_python.py`
-
-**What it tests**
-
-- Python-level execution of the CLI entrypoint with `--help`
-- successful subprocess invocation with controlled `PYTHONPATH`
-- presence of key help text in stdout
-
-**How it works**
-
-1. Computes the project root from the test file location.
-2. Builds `wip/src` as the CLI import path.
-3. Resolves `wip/src/ontobdc/cli/__init__.py`.
-4. Executes the CLI in a subprocess using:
-   - `sys.executable`
-   - the CLI file path
-   - `--help`
-5. Captures stdout and stderr.
-6. Asserts exit code `0`.
-7. Validates the presence of help strings in stdout.
-
-**Expected output markers**
-
-- `OntoBDC`
-- `CLI Help`
-- `check`
-- `run`
-- `init`
-
-**Expected result**
-
-- the Python CLI entrypoint must run as a subprocess without crashing
-- help output must be rendered to stdout
-- the command must terminate successfully
-
-**What part of the CLI this covers**
-
-- Python subprocess invocation path
-- `main()` command dispatch for `--help`
-- import/path resolution for the CLI component
-
-**Why it is not redundant with `test_cli_help.sh`**
-
-- `test_cli_help.sh` validates the shell-oriented execution path
-- `test_cli_python.py` validates the same behavior from a Python test harness using `subprocess.run`
-
-Together, they give both shell-level and pytest-level confidence for the help entrypoint.
-
-## 3. CLI-Relevant Assertions Inside `test_dev.sh`
-
-**File**
-
-- `test/src/ontobdc/test_dev.sh`
-
-**Primary purpose of the file**
-
-- validate the `dev` component shell behavior
-
-**CLI-relevant portions**
-
-This file contains two explicit checks against:
-
-- `wip/src/ontobdc/cli/__init__.py`
-
-Those checks matter because they validate that the CLI entrypoint correctly dispatches:
-
-- `ontobdc dev commit ...`
-
-### 3.1 CLI Dispatch Fails When `dev.tool` Is Disabled
-
-**What it tests**
-
-- the Python CLI entrypoint should reject `dev commit` when local configuration does not enable the developer tool
-
-**How it works**
-
-1. Creates an isolated temporary OntoBDC-like project structure.
-2. Writes a minimal `.__ontobdc__/config.yaml` without enabling `dev.tool`.
-3. Executes:
-   - `python3 wip/src/ontobdc/cli/__init__.py dev commit "test python cli"`
-4. Captures exit code and output.
-5. Verifies that the command fails.
-6. Verifies that the output reports:
-   - `dev.tool is not enabled`
-
-**Expected result**
-
-- non-zero exit code
-- error message informing that `dev.tool` is not enabled
-
-**What part of the CLI this covers**
-
-- `main()` command dispatch to `dev`
-- `dev_command()`
-- configuration lookup through `config_data()`
-- gating logic for `dev commit`
-
-### 3.2 CLI Dispatch Succeeds When `dev.tool` Is Enabled
-
-**What it tests**
-
-- the Python CLI entrypoint should correctly route `dev commit` when configuration is valid
-
-**How it works**
-
-1. Creates an isolated temporary OntoBDC-like project structure.
-2. Writes a valid `.__ontobdc__/config.yaml` with:
-   - `dev.tool: enabled`
-3. Executes:
-   - `python3 wip/src/ontobdc/cli/__init__.py dev commit "test python cli"`
-4. Captures exit code and output.
-5. Verifies that the command does not fail.
-6. Verifies that the output contains:
-   - `Starting commit process`
-
-**Expected result**
-
-- exit code `0`
-- delegated execution of `commit.sh`
-- no `Not Initialized` error
-
-**What part of the CLI this covers**
-
-- root/config discovery through `get_root_dir()`
-- valid config loading through `config_data()`
-- successful delegation from `dev_command()` to `commit.sh`
-
-## 4. What Is Currently Not Covered Well
-
-The current CLI-oriented tests cover help rendering and a slice of `dev` dispatch, but they do not cover the full CLI command surface.
-
-Significant gaps remain for:
+This test is intentionally limited to the help entrypoint. It does not validate:
 
 - `ontobdc init`
 - `ontobdc check`
@@ -213,28 +114,25 @@ Significant gaps remain for:
 - `ontobdc plan`
 - `ontobdc storage`
 - `ontobdc a3`
+- `ontobdc --version`
 - unknown command handling
-- `--version`
-- message-box fallback behavior when shell scripts are missing
-- error path when the project is not initialized
+- project initialization side effects
+- downstream command execution beyond help rendering
 
-## 5. Coverage Summary
+## Coverage Summary
 
 ### Covered
 
-- help entrypoint via shell
-- help entrypoint via Python subprocess
-- CLI dispatch to `dev commit` with invalid config
-- CLI dispatch to `dev commit` with valid config
+- CLI help entrypoint via `--help`
+- CLI help entrypoint with no arguments
+- help output contract passed to `message_box.sh`
+- rendered header styling for the help box
+- rendered usage styling inside the help box
 
-### Partially covered
+### Not Covered
 
-- CLI configuration resolution
-- CLI-to-shell delegation for the `dev` command
-
-### Not covered
-
-- end-to-end CLI coverage for the rest of the command groups
-- version command
+- end-to-end execution of non-help CLI commands
+- initialization flow
+- error flows outside the help path
+- version handling
 - unknown command behavior
-- initialization error handling across the full command set
