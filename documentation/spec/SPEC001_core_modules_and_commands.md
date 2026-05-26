@@ -70,7 +70,6 @@ From a user-facing CLI perspective, the currently exposed top-level commands are
 - `ontobdc run`
 - `ontobdc list`
 - `ontobdc storage`
-- `ontobdc plan`
 - `ontobdc dev`
 - `ontobdc a3`
 
@@ -97,12 +96,11 @@ The CLI determines project root primarily from:
 
 | Module | Top-level command | Role | Availability |
 |---|---|---|---|
-| `cli.init` | `ontobdc init` | Initialize engine config or context | always available |
+| `cli.init` | `ontobdc init` | Initialize local project configuration | always available |
 | `check` | `ontobdc check` | Validate operational environment | requires initialized project |
 | `run` | `ontobdc run` | Discover and execute capabilities | requires initialized project |
 | `list` | `ontobdc list` | List available capabilities | requires initialized project |
 | `storage` | `ontobdc storage` | Manage storage index and local datasets | requires initialized project |
-| `run.plan` | `ontobdc plan` | Generate execution plans for capabilities | requires initialized project |
 | `dev` | `ontobdc dev` | Developer workflows across repos | requires initialized project and usually `dev.tool` enabled |
 | `a3` | `ontobdc a3` | A3 ETL and work tools | requires initialized project and A3 enabled |
 
@@ -112,19 +110,13 @@ The CLI determines project root primarily from:
 
 #### Purpose
 
-The `init` command is the initialization entrypoint of OntoBDC. It currently supports two modes:
-
-- engine initialization
-- context initialization
+The `init` command is the initialization entrypoint of OntoBDC for local project configuration.
 
 #### Commands
 
 - `ontobdc init [engine]`
-- `ontobdc init context`
 
 #### Options And Arguments
-
-##### Engine initialization
 
 - positional `engine`
   - accepted values are validated against `check/config.json`
@@ -133,18 +125,12 @@ The `init` command is the initialization entrypoint of OntoBDC. It currently sup
     - `colab` when `/content` exists
     - `venv` when a virtual environment is active
 
-##### Context initialization
-
-- `context`
-  - special mode that creates a local RO-Crate-style context under `.__ontobdc__`
-
 #### Behavior
 
 - creates `.__ontobdc__/config.yaml`
 - writes the selected execution engine
 - attempts to run repair-oriented checks after engine initialization
 - blocks duplicate initialization when config already exists
-- blocks duplicate context creation when `ro-crate-metadata.json` already exists
 
 #### Description
 
@@ -321,38 +307,7 @@ The `storage` module manages registered datasets and storage metadata.
 
 `storage` is the dataset registration and storage-index module of the core.
 
-### 6.6 `run.plan` / `ontobdc plan`
-
-#### Purpose
-
-The `plan` module builds dependency-oriented execution plans for capabilities.
-
-#### Command
-
-- `ontobdc plan <capability_id> [--context key=value ...]`
-
-#### Options
-
-- positional `capability_id`
-  - target capability to plan for
-- `--context <key=value ...>`
-  - initial context values used during dependency resolution
-
-#### Behavior
-
-- loads capability metadata from a local capability repository
-- builds a dependency graph with `networkx`
-- resolves providers for required inputs
-- reports:
-  - missing dependencies
-  - cycles
-  - topological execution order
-
-#### Description
-
-`plan` is the dependency introspection and execution-order planning tool of the core execution model.
-
-### 6.7 `dev` / `ontobdc dev`
+### 6.6 `dev` / `ontobdc dev`
 
 #### Purpose
 
@@ -405,7 +360,7 @@ The `dev` module provides developer-focused multi-repository operations and conf
 
 `dev` is the repository orchestration module for contributors working on multi-repo OntoBDC workspaces.
 
-### 6.8 `a3` / `ontobdc a3`
+### 6.7 `a3` / `ontobdc a3`
 
 #### Purpose
 
@@ -479,7 +434,6 @@ This means the current codebase contains more functionality than the strictly ex
 - `ontobdc run`
 - `ontobdc list`
 - `ontobdc storage`
-- `ontobdc plan`
 - `ontobdc dev`
 - `ontobdc a3`
 
@@ -516,7 +470,6 @@ The OntoBDC core currently exposes a modular CLI centered on:
 - capability execution
 - capability listing
 - storage management
-- execution planning
 - developer workflows
 - A3 workflows
 
@@ -527,7 +480,6 @@ The top-level core commands are:
 - `run`
 - `list`
 - `storage`
-- `plan`
 - `dev`
 - `a3`
 

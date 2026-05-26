@@ -147,7 +147,7 @@ The following suites are explicitly included there.
 - `a3/test_transformation_to_reasoned.py`
 - `a3/test_transformation_to_dispatched.py`
 - `test_capability_structure.py`
-- `run/adapter/test_contex.py`
+- `run/adapter/test_context.py`
 - `run/adapter/test_context_config.py`
 - `run/core/strategy/test_action_only.py`
 - `run/core/strategy/test_capability.py`
@@ -192,7 +192,7 @@ This area focuses on:
 
 Covered by:
 
-- `run/adapter/test_contex.py`
+- `run/adapter/test_context.py`
 - `run/adapter/test_context_config.py`
 - `run/core/strategy/test_action_only.py`
 - `run/core/strategy/test_capability.py`

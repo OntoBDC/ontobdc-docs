@@ -74,12 +74,11 @@ Examples:
 
 | Component | Main persistent artifacts | Main configuration/reference artifacts | Main operational outputs |
 |---|---|---|---|
-| `init` | `.__ontobdc__/config.yaml`, `.__ontobdc__/ro-crate-metadata.json` | `check/config.json`, `message_box.sh`, `print_log.sh` | initialization messages |
+| `init` | `.__ontobdc__/config.yaml` | `check/config.json`, `message_box.sh`, `print_log.sh` | initialization messages |
 | `check` | none by default, except when repair actions modify environment | `check/config.json`, `check/infra/*/init.sh` | check summaries and repair feedback |
 | `run` | no standard persistent artifact by default | capability packages, parameter strategy files, renderers | capability results, rich output, JSON export |
 | `list` | no standard persistent artifact | capability packages and metadata loaders | rich capability catalog or JSON catalog |
 | `storage` | `.__ontobdc__/storage.rdf`, local dataset structure under storage roots | storage adapters and repository abstractions | dataset list, JSON storage view, registration/removal feedback |
-| `plan` | no standard persistent artifact | capability metadata and dependency graph logic | dependency plan, missing dependency report, execution order |
 | `dev` | updates inside `.__ontobdc__/config.yaml`; repository state changes in Git workspaces | `branch.sh`, `commit.sh`, `help.sh` | dev workflow messages, branch/commit feedback |
 | `a3` | lifecycle package artifacts such as `raw.txt`, `parsed.json`, `graph.ttl`, `event.jsonld`, `err.json`; A3 log files | `standard_a3_extraction.yaml`, A3 capability plugins | ETL/work success and failure messages |
 | `shared` | none directly as a primary owner | reusable adapters, repository contracts, logger contracts, ontology utilities | internal support behavior |
@@ -94,9 +93,6 @@ Examples:
 - `.__ontobdc__/config.yaml`
   - local project configuration
   - stores execution engine and component configuration
-- `.__ontobdc__/ro-crate-metadata.json`
-  - created by `ontobdc init context`
-  - acts as local RO-Crate-style context metadata
 
 #### Reference Artifacts
 
@@ -192,11 +188,13 @@ Important nuance:
 
 #### Dataset-Level Artifacts
 
-When local storage is initialized or registered, the system may ensure the presence of dataset-level structure such as:
+The current core `storage` flow does not guarantee creation of a RO-Crate artifact as part of dataset registration.
 
-- `.__icdd__/payload/triples/ro-crate-metadata.json`
+Storage registration is centered on updating:
 
-This reflects the current storage orientation toward structured local datasets.
+- `.__ontobdc__/storage.rdf`
+
+and on validating or resolving dataset roots rather than materializing a RO-Crate structure inside the dataset.
 
 #### Reference Artifacts
 
@@ -213,28 +211,7 @@ This reflects the current storage orientation toward structured local datasets.
 
 The `storage` component is the main owner of persistent repository-level dataset indexing.
 
-### 4.6 `plan` Component Artifacts
-
-#### Reference Artifacts
-
-- capability metadata
-- dependency graph construction logic
-
-#### Persistent Artifacts
-
-- none by default
-
-#### Operational Outputs
-
-- dependency reports
-- cycle detection results
-- execution order plan
-
-#### Role
-
-The `plan` component produces planning artifacts conceptually, but currently exposes them as runtime output rather than repository files.
-
-### 4.7 `dev` Component Artifacts
+### 4.6 `dev` Component Artifacts
 
 #### Primary Persistent Artifacts
 
@@ -269,7 +246,7 @@ These are valid system effects, even though they are not stored in an OntoBDC-sp
 
 The `dev` component owns configuration mutations plus repository state transitions in contributor workflows.
 
-### 4.8 `a3` Component Artifacts
+### 4.7 `a3` Component Artifacts
 
 #### Primary Lifecycle Directory
 
@@ -311,7 +288,7 @@ The current lifecycle sequence uses these file artifacts:
 
 The `a3` component is the richest artifact-producing component in the current core. It externalizes its state almost entirely through physical files.
 
-### 4.9 `shared` Component Artifacts
+### 4.8 `shared` Component Artifacts
 
 #### Primary Role
 
@@ -332,7 +309,7 @@ Its main artifacts are reusable support assets:
 
 `shared` defines common technical artifacts that other components depend on structurally.
 
-### 4.10 `module` Component Artifacts
+### 4.9 `module` Component Artifacts
 
 #### Primary Role
 
@@ -358,7 +335,7 @@ The `module` package contains packaged capabilities and templates that participa
 ### 5.1 Bootstrap Dependency
 
 - `init` creates `config.yaml`
-- `check`, `run`, `storage`, `dev`, `plan`, and `a3` depend on that artifact for normal operation
+- `check`, `run`, `storage`, `dev`, and `a3` depend on that artifact for normal operation
 
 ### 5.2 Dataset Metadata Dependency
 
@@ -368,7 +345,6 @@ The `module` package contains packaged capabilities and templates that participa
 ### 5.3 Capability Metadata Dependency
 
 - `list` and `run` both rely on capability metadata artifacts
-- `plan` also depends on those artifacts to compute dependency order
 
 ### 5.4 File-Driven State Dependency
 
@@ -405,6 +381,6 @@ The most important current artifact owners are:
 - `dev`
   - for local developer configuration and repository state changes
 
-Components such as `run`, `list`, and `plan` are more output-oriented than file-oriented, while `shared` and `module` mostly provide support and reusable reference assets.
+Components such as `run` and `list` are more output-oriented than file-oriented, while `shared` and `module` mostly provide support and reusable reference assets.
 
 Overall, the current artifact design is layered, component-specific, and strongly oriented toward explicit files that remain understandable and manipulable outside the runtime itself.

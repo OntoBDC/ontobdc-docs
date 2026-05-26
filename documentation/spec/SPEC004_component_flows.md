@@ -42,7 +42,6 @@ The current user-facing flow components are:
 - `run`
 - `list`
 - `storage`
-- `plan`
 - `dev`
 - `a3`
 
@@ -98,17 +97,7 @@ Purpose:
 
 - register, list, and remove dataset roots in the local storage index
 
-### 3.6 Dependency Planning Flow
-
-Owned by:
-
-- `plan`
-
-Purpose:
-
-- compute dependency order and missing inputs before execution
-
-### 3.7 Developer Workspace Flow
+### 3.6 Developer Workspace Flow
 
 Owned by:
 
@@ -118,7 +107,7 @@ Purpose:
 
 - coordinate repository-oriented developer actions and local dev configuration
 
-### 3.8 A3 Lifecycle Flow
+### 3.7 A3 Lifecycle Flow
 
 Owned by:
 
@@ -146,16 +135,9 @@ The `init` component creates the local OntoBDC working structure for a project.
 6. The system runs post-initialization checks to verify readiness.
 7. The project becomes available to the remaining components.
 
-#### Alternative Flow
-
-1. The user runs `ontobdc init context`.
-2. The system checks whether a local context already exists.
-3. The system creates a RO-Crate-style context structure under `.__ontobdc__`.
-
 #### Output
 
 - initialized local configuration
-- optional local context metadata
 
 ### 4.2 `check` Component Flow
 
@@ -264,28 +246,7 @@ The `storage` component manages the local dataset registration flow.
 - storage catalog
 - updated dataset registration state
 
-### 4.6 `plan` Component Flow
-
-#### Intent
-
-The `plan` component computes execution dependency order before runtime.
-
-#### Main Flow
-
-1. The user runs `ontobdc plan <capability_id>`.
-2. The system loads the target capability and its declared requirements.
-3. The system resolves potential providers for required inputs.
-4. The system builds a dependency graph.
-5. The system checks for missing providers or dependency cycles.
-6. The system emits a topological execution order when a valid plan exists.
-
-#### Output
-
-- dependency graph interpretation
-- missing dependency report
-- execution order plan
-
-### 4.7 `dev` Component Flow
+### 4.6 `dev` Component Flow
 
 #### Intent
 
@@ -328,7 +289,7 @@ The `dev` component coordinates developer-oriented repository workflows.
 - repository state changes
 - developer workflow feedback
 
-### 4.8 `a3` Component Flow
+### 4.7 `a3` Component Flow
 
 #### Intent
 
@@ -460,7 +421,7 @@ The components are not isolated. Their flows compose into a larger runtime lifec
 ### 5.1 Initialization Before Execution
 
 - `init` establishes the local structure
-- `check`, `run`, `storage`, `dev`, `plan`, and `a3` generally assume that structure exists
+- `check`, `run`, `storage`, `dev`, and `a3` generally assume that structure exists
 
 ### 5.2 Validation As Gate
 
@@ -471,7 +432,6 @@ The components are not isolated. Their flows compose into a larger runtime lifec
 
 - `list` exposes the discoverable capability surface
 - `run` uses the same discovery logic for execution
-- `plan` uses capability metadata to compute dependency order
 
 ### 5.4 Dataset And Package Orientation
 
@@ -490,7 +450,6 @@ Each component owns a distinct operational concern:
 - `run` executes capabilities
 - `list` exposes the capability catalog
 - `storage` manages dataset registration
-- `plan` computes dependency order
 - `dev` coordinates repository workflows
 - `a3` runs lifecycle-based package processing
 

@@ -111,7 +111,6 @@ This test is intentionally limited to the help entrypoint. It does not validate:
 - `ontobdc check`
 - `ontobdc run`
 - `ontobdc list`
-- `ontobdc plan`
 - `ontobdc storage`
 - `ontobdc a3`
 - `ontobdc --version`
