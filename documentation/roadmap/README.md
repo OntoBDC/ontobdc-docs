@@ -43,3 +43,7 @@ Each RFC should describe:
 ## Current Proposals
 
 - [RFC001_cli_help_status_section.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC001_cli_help_status_section.md)
+- [RFC002_pre_parser_grammatical_normalization.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC002_pre_parser_grammatical_normalization.md)
+- [RFC003_transition_success_learning_graph.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC003_transition_success_learning_graph.md)
+- [RFC004_llm_normalization_interface_layer.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC004_llm_normalization_interface_layer.md)
+- [RFC005_olia_inference_and_mapper_completion.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC005_olia_inference_and_mapper_completion.md)
