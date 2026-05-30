@@ -266,42 +266,27 @@ The `storage` module manages registered datasets and storage metadata.
 
 #### Commands
 
-- `ontobdc storage`
-- `ontobdc storage --json`
-- `ontobdc storage --local [path]`
-- `ontobdc storage --remove <dataset_id>`
-- `ontobdc storage --refresh [dataset_id]`
-- `ontobdc storage --resource <file_path> [--schema <schema_path> | --ontology <ontology_path>]`
+- `ontobdc storage --list`
+- `ontobdc storage --enable`
 - `ontobdc storage --help`
 
 #### Options
 
-- `--json`
-  - outputs storage list as JSON
-- `--local [path]`
-  - registers a local storage path
-  - defaults to current directory when omitted
-- `--remove <dataset_id>`
-  - removes a dataset from the storage index
-- `--refresh [dataset_id]`
-  - refreshes storage metadata for all datasets or a selected dataset
-- `--resource <file_path>`
-  - creates resource data from a file
-- `--schema <schema_path>`
-  - schema input for resource creation
-- `--ontology <ontology_path>`
-  - ontology input for resource creation
+- `--list`, `-l`
+  - lists all containers in the storage
+- `--enable`
+  - enables the storage component by installing dependencies and creating the storage index file
 - `--help`, `-h`
   - shows help
 
 #### Behavior
 
-- lists current storage entries when no arguments are provided
-- delegates operations to the corresponding Python entrypoint:
-  - `local.py`
-  - `remove.py`
-  - `refresh.py`
-  - `resource.py`
+- lists current storage entries when `--list` is provided
+- enables storage capabilities and creates `storage.rdf` when `--enable` is provided
+- delegates operations to the corresponding Python command plugins:
+  - `list.py`
+  - `enable.py`
+  - `base.py`
 
 #### Description
 

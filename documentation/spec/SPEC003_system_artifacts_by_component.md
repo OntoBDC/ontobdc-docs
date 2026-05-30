@@ -78,7 +78,7 @@ Examples:
 | `check` | none by default, except when repair actions modify environment | `check/config.json`, `check/infra/*/init.sh` | check summaries and repair feedback |
 | `run` | no standard persistent artifact by default | capability packages, parameter strategy files, renderers | capability results, rich output, JSON export |
 | `list` | no standard persistent artifact | capability packages and metadata loaders | rich capability catalog or JSON catalog |
-| `storage` | `.__ontobdc__/storage.rdf`, local dataset structure under storage roots | storage adapters and repository abstractions | dataset list, JSON storage view, registration/removal feedback |
+| `storage` | `.__ontobdc__/storage.rdf` | storage adapters and repository abstractions | container list, storage enablement feedback |
 | `dev` | updates inside `.__ontobdc__/config.yaml`; repository state changes in Git workspaces | `branch.sh`, `commit.sh`, `help.sh` | dev workflow messages, branch/commit feedback |
 | `a3` | lifecycle package artifacts such as `raw.txt`, `parsed.json`, `graph.ttl`, `event.jsonld`, `err.json`; A3 log files | `standard_a3_extraction.yaml`, A3 capability plugins | ETL/work success and failure messages |
 | `shared` | none directly as a primary owner | reusable adapters, repository contracts, logger contracts, ontology utilities | internal support behavior |
@@ -186,15 +186,9 @@ Important nuance:
   - root storage index
   - stores registered dataset/container information
 
-#### Dataset-Level Artifacts
+#### Container-Level Artifacts
 
-The current core `storage` flow does not guarantee creation of a RO-Crate artifact as part of dataset registration.
-
-Storage registration is centered on updating:
-
-- `.__ontobdc__/storage.rdf`
-
-and on validating or resolving dataset roots rather than materializing a RO-Crate structure inside the dataset.
+The current core `storage` flow focuses on initializing the `storage.rdf` file with a root container metadata representation and maintaining the list of available containers.
 
 #### Reference Artifacts
 
@@ -203,13 +197,12 @@ and on validating or resolving dataset roots rather than materializing a RO-Crat
 
 #### Operational Outputs
 
-- list of registered datasets
-- JSON storage view
-- success and error messages for `--local`, `--remove`, and related operations
+- list of registered containers
+- success and error messages for `--enable` and related operations
 
 #### Role
 
-The `storage` component is the main owner of persistent repository-level dataset indexing.
+The `storage` component is the main owner of persistent storage-level container indexing.
 
 ### 4.6 `dev` Component Artifacts
 

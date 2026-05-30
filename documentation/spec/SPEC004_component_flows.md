@@ -217,29 +217,22 @@ The `list` component exposes the discovery flow without executing capabilities.
 
 #### Intent
 
-The `storage` component manages the local dataset registration flow.
+The `storage` component manages the local dataset registration flow and storage index.
 
-#### Main Flow
+#### Main Flow (List)
 
-1. The user runs `ontobdc storage`.
-2. The system checks whether `.__ontobdc__/storage.rdf` exists.
-3. If no storage index exists, the system warns that storage has not been initialized.
-4. If the storage index exists, the system loads and renders the registered dataset list.
+1. The user runs `ontobdc storage --list` or `ontobdc storage -l`.
+2. The system checks whether the storage extra dependencies are installed and `.__ontobdc__/storage.rdf` exists.
+3. If no storage index exists or dependencies are missing, the system warns that storage has not been enabled.
+4. If the storage index exists, the system parses the RDF graph and lists the registered containers.
 
-#### Registration Flow
+#### Enablement Flow
 
-1. The user runs `ontobdc storage --local [path]`.
-2. The system resolves the provided path against the project root.
-3. The system validates that the path exists and is a directory.
-4. The system creates the storage index when necessary.
-5. The system registers the dataset location in `storage.rdf`.
-6. The system ensures the local dataset structure is initialized.
-
-#### Removal Flow
-
-1. The user runs `ontobdc storage --remove <dataset_id>`.
-2. The system removes the dataset entry from the index.
-3. The updated storage metadata is persisted.
+1. The user runs `ontobdc storage --enable`.
+2. The system installs the required storage dependencies (`ontobdc[storage]`).
+3. The system creates the storage index `.__ontobdc__/storage.rdf` when necessary.
+4. The system initializes the root storage container metadata.
+5. The updated storage metadata is persisted.
 
 #### Output
 
