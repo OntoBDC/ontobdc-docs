@@ -6,11 +6,24 @@
 
 OntoBDC is a Python CLI and semantic runtime for defining, discovering, validating, and executing capability-based workflows over structured data and semantic context.
 
-It focuses on making workflows more predictable and auditable by combining explicit capability metadata, schema-driven inputs/outputs, and verification steps (e.g., checks, contracts, storage indexing) around execution.
+It is designed to make workflow execution predictable and auditable through explicit capability metadata, schema-driven inputs and outputs, and verification steps such as environment checks, contracts, and storage indexing.
+
+In practice, OntoBDC focuses on:
+*   **Context and Configuration Management:** Initializes and manages local project configuration in `.__ontobdc__` and runs pre-flight checks to reduce environment drift before execution.
+*   **Capability Discovery and Execution:** Uses a plugin-based architecture to discover executable capabilities dynamically and expose them through the CLI.
+*   **Storage Indexing:** Maintains a persistent RDF storage index (`storage.rdf`) that records dataset metadata and locations for consistent runtime references.
+*   **State-Machine Orchestration:** Drives processes and transformations through explicit runtime states, with progress materialized in physical artifacts such as `raw.txt`, `parsed.json`, and `graph.ttl`.
+
+Architecturally, OntoBDC is organized as a non-monolithic core with dependency injection across logical components such as `init`, `check`, `run`, `list`, `storage`, `dev`, and `a3`, while remaining extensible through additional features and capabilities.
+
+The project is under active development and is especially suited to domains that require clear contracts, traceability, and high compliance, such as BIM/openBIM and engineering data pipelines.
 
 ## Documentation
 
-- Use Cases: [documentation/use_case/README.md](documentation/use_case/README.md)
+- Specifications: [documentation/spec/](documentation/spec/)
+- Roadmap And RFCs: [documentation/roadmap/README.md](documentation/roadmap/README.md)
+- Tests: [documentation/test/README.md](documentation/test/README.md)
+- Architecture Decisions: [documentation/adr/](documentation/adr/)
 
 ## Quickstart
 
