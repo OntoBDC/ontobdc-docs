@@ -221,7 +221,15 @@ It returns a `HelpCommandResponse` instead of printing directly from the command
 
 ### Component Adoption
 
-The architecture is actively expanding to other core components. For instance, the `storage` component now fully utilizes this plugin-based model through commands like `enable`, `list`, and its own `base` handler (e.g., `wip/src/ontobdc/storage/plugin/command/enable.py`), returning structured `CommandResponse` subclasses.
+The architecture is actively expanding to other core components. For instance, the `storage` component now uses this plugin-based model for command handlers such as:
+
+- `base`
+- `enable`
+- `list`
+- `create`
+- `delete`
+
+These handlers return structured `CommandResponse` subclasses, while lower-level storage consistency logic remains in Python adapters and storage check/hotfix modules below the CLI command surface.
 
 ### Command Argument Exception
 
@@ -240,6 +248,7 @@ The new architecture is active, but not yet fully generalized.
 Known transitional properties include:
 
 - the base CLI command plugin and the `storage` plugins are implemented, but a broader family of legacy CLI commands are still waiting to be migrated
+- the `storage` component already combines plugin-dispatched commands with internal repository and integrity helpers, which shows the intended separation between CLI command surface and component internals
 - `CommandLoader` still scans command plugins across components
 - incomplete command plugins outside `cli` can still surface warnings during discovery
 - the legacy dispatcher remains the operational fallback for most commands

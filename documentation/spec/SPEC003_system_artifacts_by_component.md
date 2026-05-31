@@ -78,7 +78,7 @@ Examples:
 | `check` | none by default, except when repair actions modify environment | `check/config.json`, `check/infra/*/init.sh` | check summaries and repair feedback |
 | `run` | no standard persistent artifact by default | capability packages, parameter strategy files, renderers | capability results, rich output, JSON export |
 | `list` | no standard persistent artifact | capability packages and metadata loaders | rich capability catalog or JSON catalog |
-| `storage` | `.__ontobdc__/storage.rdf` | storage adapters and repository abstractions | container list, storage enablement feedback |
+| `storage` | `.__ontobdc__/storage.rdf`, `<container>/.__ontobdc__/storage.rdf`, `<container>/.__ontobdc__/ro-crate-metadata.json` | storage adapters, repository abstractions, storage check/hotfix plugins | container list, storage enablement feedback, container integrity feedback |
 | `dev` | updates inside `.__ontobdc__/config.yaml`; repository state changes in Git workspaces | `branch.sh`, `commit.sh`, `help.sh` | dev workflow messages, branch/commit feedback |
 | `a3` | lifecycle package artifacts such as `raw.txt`, `parsed.json`, `graph.ttl`, `event.jsonld`, `err.json`; A3 log files | `standard_a3_extraction.yaml`, A3 capability plugins | ETL/work success and failure messages |
 | `shared` | none directly as a primary owner | reusable adapters, repository contracts, logger contracts, ontology utilities | internal support behavior |
@@ -185,24 +185,51 @@ Important nuance:
 - `.__ontobdc__/storage.rdf`
   - root storage index
   - stores registered dataset/container information
+- `<container>/.__ontobdc__/storage.rdf`
+  - container-local RDF projection for one registered container
+  - mirrors the container triples registered in the root storage graph
+- `<container>/.__ontobdc__/ro-crate-metadata.json`
+  - RO-Crate metadata describing the files of a single storage container
+  - refreshed by storage creation and storage health repair flows
 
 #### Container-Level Artifacts
 
-The current core `storage` flow focuses on initializing the `storage.rdf` file with a root container metadata representation and maintaining the list of available containers.
+The current core `storage` flow maintains a layered storage structure:
+
+- one root storage index in `.__ontobdc__/storage.rdf`
+- one local config directory per registered container
+- one container-local `storage.rdf` in each `.__ontobdc__`
+- one `ro-crate-metadata.json` in each container `.__ontobdc__`
+
+The root storage graph is the registry of record.
+
+The container-local artifacts are operational projections used to keep each container self-describing and locally inspectable.
 
 #### Reference Artifacts
 
 - repository adapters under `storage/adapter`
 - source and render helpers
+- check plugins under `storage/plugin/check`
+  - `has_container_config_file`
+  - `is_root_set`
+  - `is_crate_healthy`
 
 #### Operational Outputs
 
 - list of registered containers
-- success and error messages for `--enable` and related operations
+- success and error messages for `--enable`, `--create`, and related operations
+- integrity check and repair feedback for:
+  - root container presence
+  - container configuration files
+  - container RO-Crate metadata
 
 #### Role
 
-The `storage` component is the main owner of persistent storage-level container indexing.
+The `storage` component is the main owner of:
+
+- persistent storage-level container indexing
+- container-local metadata projections
+- container-local RO-Crate health
 
 ### 4.6 `dev` Component Artifacts
 
@@ -333,6 +360,7 @@ The `module` package contains packaged capabilities and templates that participa
 ### 5.2 Dataset Metadata Dependency
 
 - `storage` maintains `storage.rdf`
+- `storage` also maintains container-local `storage.rdf` and `ro-crate-metadata.json`
 - `a3` and dataset-oriented workflows rely on registered dataset structure and repository abstractions built on top of that model
 
 ### 5.3 Capability Metadata Dependency

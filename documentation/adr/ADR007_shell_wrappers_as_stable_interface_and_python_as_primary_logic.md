@@ -212,6 +212,12 @@ The current repository reflects this decision through patterns such as:
   - `storage`
   - `a3`
   - `dev`
+- shell wrappers such as `wip/src/ontobdc/storage/storage.sh` exposing the operational command surface while delegating structured storage behavior to Python
+- Python storage logic handling:
+  - container registration
+  - root and container metadata synchronization
+  - RO-Crate loading and refresh rules
+  - storage-specific integrity checks and hotfixes
 - shared shell presentation scripts such as message box and logging helpers
 - shell tests for entrypoint behavior
 - Python tests for structured runtime behavior
