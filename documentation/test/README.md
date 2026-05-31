@@ -158,7 +158,9 @@ The following suites are explicitly included there.
 - `run/core/strategy/test_json_export.py`
 - `run/core/strategy/test_pagination.py`
 - `run/core/strategy/test_root_path.py`
-- `storage/test_storage.py`
+- `storage/test_checks.py`
+- `storage/test_repository.py`
+- `storage/plugin/command/test_create.py`
 
 ## 7. Current Test Coverage Areas
 
@@ -226,14 +228,16 @@ This area focuses on:
 
 Covered by:
 
-- `storage/test_storage.py`
+- `storage/test_checks.py`
+- `storage/test_repository.py`
+- `storage/plugin/command/test_create.py`
 
 This area focuses on:
 
-- storage listing
-- JSON storage output
-- local registration attempts
-- removal behavior
+- storage-specific check and hotfix behavior
+- container-local RO-Crate behavior
+- `storage --create` container bootstrap behavior
+- root versus child-container metadata responsibilities
 
 ### 7.6 Capability Structure
 
@@ -262,16 +266,25 @@ This allows tests to run without requiring the full external packages in all cas
 
 These stubs reduce test friction for optional dependency scenarios and help isolate core behavior.
 
+The current `rocrate` stub also mirrors the subset of behavior now relied on by `storage`, including:
+
+- loading from `source=...`
+- generating crate dictionaries through `metadata.generate()`
+- directory-based writes to `ro-crate-metadata.json`
+
 ### 8.2 Temporary Workspace Style
 
 Some tests create temporary directories and simulate a minimal OntoBDC workspace by writing:
 
 - `.__ontobdc__/config.yaml`
 - mock RDF storage metadata
+- container-local `.__ontobdc__/storage.rdf`
+- container-local `.__ontobdc__/ro-crate-metadata.json`
 
 This pattern appears especially in:
 
-- `storage/test_storage.py`
+- `storage/test_checks.py`
+- `storage/test_repository.py`
 
 ### 8.3 Subprocess-Based CLI Validation
 
@@ -372,6 +385,12 @@ Its strongest current areas are:
 - A3 transformations and guardrails
 - storage behavior
 - selected CLI behavior
+
+The current storage coverage now includes:
+
+- repository-level RO-Crate load, serialize, and refresh behavior
+- isolated storage check behavior for root, container config, and crate health
+- CLI-adjacent container creation behavior through the storage command plugin
 
 Its main operational gap is clear:
 
