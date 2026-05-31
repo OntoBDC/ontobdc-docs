@@ -47,3 +47,5 @@ Each RFC should describe:
 - [RFC003_transition_success_learning_graph.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC003_transition_success_learning_graph.md)
 - [RFC004_llm_normalization_interface_layer.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC004_llm_normalization_interface_layer.md)
 - [RFC005_olia_inference_and_mapper_completion.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC005_olia_inference_and_mapper_completion.md)
+- [RFC006_container_dataset_identifier_to_physical_name_contract.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC006_container_dataset_identifier_to_physical_name_contract.md)
+- [RFC007_atomic_container_dataset_creation_and_rollback.md](file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/documentation/roadmap/RFC007_atomic_container_dataset_creation_and_rollback.md)
