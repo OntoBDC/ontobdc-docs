@@ -152,3 +152,18 @@ err:Error rdf:type owl:Class .
               ontouml:name "Capability identifier"@en ;
               rdfs:comment "The identifier of the capability selected for the current execution context."@en ;
               :pythonType "capability_id" .
+
+
+:datasetId rdf:type owl:ObjectProperty ;
+                        rdfs:domain :ExecutionContext ;
+                        rdfs:range :IncomingDatasetParameter ;
+                        ontouml:name "Dataset identifier"@en ;
+                        rdfs:comment "The identifier of the dataset repository instance to use for the current execution context."@en .
+
+
+###  http://ontobdc.org/ontology/domain/ns.ttl#IncomingDatasetParameter
+:IncomingDatasetParameter rdf:type owl:Class ;
+                         rdfs:subClassOf function:Parameter ;
+                         dcterms:identifier "org.ontobdc.domain.storage.capability.incoming.dataset" ;
+                         ontouml:name "Incoming Dataset"@en ;
+                         rdfs:comment "Dataset repository instance"@en .
