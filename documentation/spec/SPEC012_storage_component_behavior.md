@@ -31,7 +31,7 @@ The current `storage` component is organized around one root registry plus one l
 
 The root storage index is:
 
-- `.__ontobdc__/storage.rdf`
+- `.__ontobdc__/storage.ttl`
 
 Its role is to:
 
@@ -45,7 +45,7 @@ The root graph is the source of truth for container registration.
 
 Each registered local container has:
 
-- `<container>/.__ontobdc__/storage.rdf`
+- `<container>/.__ontobdc__/storage.ttl`
 - `<container>/.__ontobdc__/ro-crate-metadata.json`
 
 These files are operational projections of the root registration, not independent registries.
@@ -56,12 +56,12 @@ Their role is to make each container self-describing and locally inspectable.
 
 ### 3.1 Root-Level Artifacts
 
-- `.__ontobdc__/storage.rdf`
+- `.__ontobdc__/storage.ttl`
   - canonical container registry
 
 ### 3.2 Container-Level Artifacts
 
-- `<container>/.__ontobdc__/storage.rdf`
+- `<container>/.__ontobdc__/storage.ttl`
   - RDF projection of the container triples registered in the root graph
 - `<container>/.__ontobdc__/ro-crate-metadata.json`
   - RO-Crate metadata file for the container-local directory
@@ -76,7 +76,7 @@ Their role is to make each container self-describing and locally inspectable.
 
 - container subject
 - container config directory
-- container-local `storage.rdf`
+- container-local `storage.ttl`
 
 Important current rule:
 
@@ -98,11 +98,11 @@ The current `ontobdc storage --create <path>` flow behaves as follows:
 
 1. Normalize the target path relative to the project root.
 2. Create the target directory if necessary.
-3. Load the root `.__ontobdc__/storage.rdf`.
+3. Load the root `.__ontobdc__/storage.ttl`.
 4. Create and persist a new local container entry in the root graph.
 5. Create `<path>/.__ontobdc__` if it does not exist.
-6. Create `<path>/.__ontobdc__/storage.rdf` if it does not exist.
-7. Copy the registered container triples from the root graph into the container-local `storage.rdf`.
+6. Create `<path>/.__ontobdc__/storage.ttl` if it does not exist.
+7. Copy the registered container triples from the root graph into the container-local `storage.ttl`.
 8. Create `<path>/.__ontobdc__/ro-crate-metadata.json` if it does not exist.
 9. Refresh the RO-Crate metadata so the crate file is current.
 
@@ -142,14 +142,14 @@ Current exclusions are:
 
 - hidden files
 - `ro-crate-metadata.json`
-- `storage.rdf`
+- `storage.ttl`
 
 This means the crate metadata does not index:
 
 - the crate metadata file itself as a payload file
 - the container-local RDF projection
 
-The current intent is that `storage.rdf` remains an internal storage-control artifact, not container payload.
+The current intent is that `storage.ttl` remains an internal storage-control artifact, not container payload.
 
 ## 7. Integrity Checks
 
@@ -163,10 +163,10 @@ The current storage-specific checks are:
 
 `has_container_config_file/check.py` validates:
 
-- the existence of the root `storage.rdf`
+- the existence of the root `storage.ttl`
 - each child container as a valid `URIRef`
 - the existence of each child container `.__ontobdc__`
-- the existence of each child container `storage.rdf`
+- the existence of each child container `storage.ttl`
 
 It does not use the global `LoadedStorageGraph.is_valid()` gate.
 
@@ -174,7 +174,7 @@ It does not use the global `LoadedStorageGraph.is_valid()` gate.
 
 `is_root_set/check.py` validates:
 
-- the existence of the root `storage.rdf`
+- the existence of the root `storage.ttl`
 - successful loading of the root graph
 - the presence of `::ROOT::` through `get_root_container()`
 
@@ -196,14 +196,14 @@ The current storage hotfixes repair only the scope owned by their check.
 `has_container_config_file/hotfix.py`:
 
 - creates missing container `.__ontobdc__`
-- creates missing container `storage.rdf`
+- creates missing container `storage.ttl`
 - synchronizes registered root triples into the container-local RDF
 
 ### 8.2 Root Hotfix
 
 `is_root_set/hotfix.py`:
 
-- creates the root `storage.rdf` when missing
+- creates the root `storage.ttl` when missing
 - ensures the `::ROOT::` container exists
 
 ### 8.3 RO-Crate Hotfix
@@ -212,7 +212,7 @@ The current storage hotfixes repair only the scope owned by their check.
 
 - creates missing `ro-crate-metadata.json`
 - refreshes the container crate metadata
-- preserves the current exclusion of `storage.rdf`
+- preserves the current exclusion of `storage.ttl`
 
 ## 9. Design Characterization
 
@@ -251,7 +251,7 @@ not as a new architectural decision.
 
 The current `storage` component behaves as a layered metadata system with:
 
-- a root RDF registry in `.__ontobdc__/storage.rdf`
+- a root RDF registry in `.__ontobdc__/storage.ttl`
 - one container-local RDF projection per registered container
 - one container-local `ro-crate-metadata.json` per registered container
 
@@ -260,6 +260,6 @@ Its current integrity rules are:
 - root validation is isolated from child-container validity
 - container-config validation is scoped to config artifacts
 - crate health validation is scoped to crate metadata
-- container RO-Crates exclude `storage.rdf` from payload indexing
+- container RO-Crates exclude `storage.ttl` from payload indexing
 
 This is the current working contract of `src/ontobdc/storage`.
