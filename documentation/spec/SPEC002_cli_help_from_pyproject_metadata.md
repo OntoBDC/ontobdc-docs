@@ -12,5 +12,5 @@ This specification is deprecated as of version 0.9.0. The project is no longer u
 
 ## Related Files
 
-- [pyproject.toml](pyproject.toml)
+- `pyproject.toml`
 - [Legacy Note](../legacy/OLD004_cli_help_from_pyproject_metadata_spec.md)
