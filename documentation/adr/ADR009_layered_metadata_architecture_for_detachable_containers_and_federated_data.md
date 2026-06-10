@@ -67,15 +67,15 @@ Its governance is represented through internal metadata under `.__ontobdc__/`.
 This layer includes:
 
 - `ro-crate-metadata.json` for package-level provenance and transport-oriented metadata
-- `storage.rdf` for OntoBDC control and local container rehydration
+- `storage.ttl` for OntoBDC control and local container rehydration
 
 These two artifacts do not serve the same purpose.
 
 `ro-crate-metadata.json` exists to describe transportable digital assets and external package metadata.
 
-`storage.rdf` exists to represent OntoBDC storage control information, including the local metadata needed for detachability.
+`storage.ttl` exists to represent OntoBDC storage control information, including the local metadata needed for detachability.
 
-The local `storage.rdf` inside a container acts as a controlled projection of the information needed to reconstruct container registration in another OntoBDC instance.
+The local `storage.ttl` inside a container acts as a controlled projection of the information needed to reconstruct container registration in another OntoBDC instance.
 
 This makes the container self-descriptive enough to be detached and later reattached without depending on the original root storage graph as the only source of truth.
 
@@ -122,7 +122,7 @@ Containers must be movable and reusable across environments.
 
 That requirement cannot be satisfied if a container depends exclusively on a central root graph that is external to the container itself.
 
-The local `storage.rdf` exists precisely to preserve enough control metadata for reattachment and operational continuity.
+The local `storage.ttl` exists precisely to preserve enough control metadata for reattachment and operational continuity.
 
 ### Separate Governance From Semantic Meaning
 
@@ -148,9 +148,9 @@ The root storage graph sees the ecosystem of registered containers.
 
 Its role is central orchestration and discovery, not exclusive ownership of all container knowledge.
 
-### Container `storage.rdf`
+### Container `storage.ttl`
 
-The container-local `storage.rdf` sees the container and its internal managed storage metadata.
+The container-local `storage.ttl` sees the container and its internal managed storage metadata.
 
 Its role is detachability, local control projection, and container rehydration in another OntoBDC environment.
 
@@ -228,7 +228,7 @@ Rejected because governance, storage control, tabular validation, and semantic f
 The current implementation direction in OntoBDC reflects this decision through the following principles:
 
 - the root storage graph is used for container discovery and orchestration
-- container-local `storage.rdf` files preserve local storage knowledge needed for detachability
+- container-local `storage.ttl` files preserve local storage knowledge needed for detachability
 - dataset metadata for a container is stored in the container-local storage graph rather than in the root graph
 - automated RO-Crate refresh behavior excludes internal OntoBDC control artifacts and managed dataset paths when those paths belong to internal storage control rather than transport packaging
 - semantic and dataset-related processing should use explicit metadata contracts rather than infer meaning from filesystem structure alone

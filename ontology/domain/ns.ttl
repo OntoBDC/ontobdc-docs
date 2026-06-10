@@ -60,22 +60,31 @@ dcterms:description rdf:type owl:AnnotationProperty .
 
 ###  http://ontobdc.org/ontology/domain/ns.ttl#TransformableDataPackage
 :TransformableDataPackage rdf:type owl:Class ;
+                rdfs:subClassOf function:Parameter ;
                 ontouml:name "Transformable data package"@en ;
                 rdfs:comment "A data package that can be transformed by a TransformationCapability."@en .
 
+###  http://ontobdc.org/ontology/domain/ns.ttl#TransformableDataShape
+:TransformableDataShape rdf:type owl:Class ;
+                rdfs:subClassOf function:Parameter ;
+                ontouml:name "Transformable data shape"@en ;
+                rdfs:comment "A shape URI or shape resource used to constrain or guide a transformation capability."@en .
+
 ###  http://ontobdc.org/ontology/domain/ns.ttl#StateEvaluator
 :StateEvaluator rdf:type owl:Class ;
+                rdfs:subClassOf schema:SoftwareSourceCode ;
                 ontouml:name "State evaluator"@en ;
                 rdfs:comment "A component that evaluates or determines the state used by a transformation."@en .
 
 ###  http://ontobdc.org/ontology/domain/ns.ttl#resultingState
-:resultingState rdf:type owl:ObjectProperty ;
+:hasResultingState rdf:type owl:ObjectProperty ;
                 rdfs:domain :TransformationResponse ;
-                rdfs:range :EtlProcessState ;
+                rdfs:range :ResultingState ;
                 rdfs:comment "The resulting state of a transformation execution."@en .
 
 ###  http://ontobdc.org/ontology/domain/ns.ttl#EtlProcessState
 :EtlProcessState rdf:type owl:Class ;
+                 rdfs:subClassOf :ResultingState ;
                  ontouml:name "ETL process state"@en ;
                  rdfs:comment "An ETL process lifecycle state."@en .
 
@@ -88,7 +97,7 @@ dcterms:description rdf:type owl:AnnotationProperty .
 
 ###  http://ontobdc.org/ontology/domain/ns.ttl#ResultingState
 :ResultingState rdf:type owl:Class ;
-                rdfs:subClassOf schema:actionStatus ;
+                rdfs:subClassOf schema:actionStatus, function:Output ;
                 ontouml:name "Resulting state"@en ;
                 rdfs:comment "The state of the repository after the query execution."@en .
 

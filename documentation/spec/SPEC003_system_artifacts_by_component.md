@@ -38,7 +38,7 @@ These are created or updated during execution and remain on disk.
 Examples:
 
 - `.__ontobdc__/config.yaml`
-- `.__ontobdc__/storage.rdf`
+- `.__ontobdc__/storage.ttl`
 - A3 lifecycle package files such as `raw.txt` and `event.jsonld`
 
 ### 2.2 Configuration Artifacts
@@ -78,7 +78,7 @@ Examples:
 | `check` | none by default, except when repair actions modify environment | `check/config.json`, `check/infra/*/init.sh` | check summaries and repair feedback |
 | `run` | no standard persistent artifact by default | capability packages, parameter strategy files, renderers | capability results, rich output, JSON export |
 | `list` | no standard persistent artifact | capability packages and metadata loaders | rich capability catalog or JSON catalog |
-| `storage` | `.__ontobdc__/storage.rdf`, `<container>/.__ontobdc__/storage.rdf`, `<container>/.__ontobdc__/ro-crate-metadata.json` | storage adapters, repository abstractions, storage check/hotfix plugins | container list, storage enablement feedback, container integrity feedback |
+| `storage` | `.__ontobdc__/storage.ttl`, `<container>/.__ontobdc__/storage.ttl`, `<container>/.__ontobdc__/ro-crate-metadata.json` | storage adapters, repository abstractions, storage check/hotfix plugins | container list, storage enablement feedback, container integrity feedback |
 | `dev` | updates inside `.__ontobdc__/config.yaml`; repository state changes in Git workspaces | `branch.sh`, `commit.sh`, `help.sh` | dev workflow messages, branch/commit feedback |
 | `a3` | lifecycle package artifacts such as `raw.txt`, `parsed.json`, `graph.ttl`, `event.jsonld`, `err.json`; A3 log files | `standard_a3_extraction.yaml`, A3 capability plugins | ETL/work success and failure messages |
 | `shared` | none directly as a primary owner | reusable adapters, repository contracts, logger contracts, ontology utilities | internal support behavior |
@@ -182,10 +182,10 @@ Important nuance:
 
 #### Primary Persistent Artifacts
 
-- `.__ontobdc__/storage.rdf`
+- `.__ontobdc__/storage.ttl`
   - root storage index
   - stores registered dataset/container information
-- `<container>/.__ontobdc__/storage.rdf`
+- `<container>/.__ontobdc__/storage.ttl`
   - container-local RDF projection for one registered container
   - mirrors the container triples registered in the root storage graph
 - `<container>/.__ontobdc__/ro-crate-metadata.json`
@@ -196,9 +196,9 @@ Important nuance:
 
 The current core `storage` flow maintains a layered storage structure:
 
-- one root storage index in `.__ontobdc__/storage.rdf`
+- one root storage index in `.__ontobdc__/storage.ttl`
 - one local config directory per registered container
-- one container-local `storage.rdf` in each `.__ontobdc__`
+- one container-local `storage.ttl` in each `.__ontobdc__`
 - one `ro-crate-metadata.json` in each container `.__ontobdc__`
 
 The root storage graph is the registry of record.
@@ -359,8 +359,8 @@ The `module` package contains packaged capabilities and templates that participa
 
 ### 5.2 Dataset Metadata Dependency
 
-- `storage` maintains `storage.rdf`
-- `storage` also maintains container-local `storage.rdf` and `ro-crate-metadata.json`
+- `storage` maintains `storage.ttl`
+- `storage` also maintains container-local `storage.ttl` and `ro-crate-metadata.json`
 - `a3` and dataset-oriented workflows rely on registered dataset structure and repository abstractions built on top of that model
 
 ### 5.3 Capability Metadata Dependency
@@ -377,7 +377,7 @@ The `module` package contains packaged capabilities and templates that participa
 The current system uses two major artifact styles:
 
 - metadata-oriented artifacts
-  - such as `config.yaml` and `storage.rdf`
+  - such as `config.yaml` and `storage.ttl`
 - lifecycle-oriented artifacts
   - such as `raw.txt`, `parsed.json`, `graph.ttl`, and `event.jsonld`
 

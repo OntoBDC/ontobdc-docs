@@ -20,7 +20,7 @@ The current dataset creation flow already follows the main architectural directi
 
 That means:
 
-- dataset metadata is stored in the container-local `storage.rdf`
+- dataset metadata is stored in the container-local `storage.ttl`
 - the root storage graph is used for container discovery, not as the source of truth for datasets
 - RO-Crate is not part of dataset registration
 
@@ -103,7 +103,7 @@ Likely new or updated tests:
 
 ## Correlation With ADR009
 
-ADR009 defines that datasets are managed locally inside the container and recorded in the container-local `storage.rdf`.
+ADR009 defines that datasets are managed locally inside the container and recorded in the container-local `storage.ttl`.
 
 This RFC refines one operational consequence of that decision:
 

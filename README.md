@@ -11,7 +11,7 @@ It is designed to make workflow execution predictable and auditable through expl
 In practice, OntoBDC focuses on:
 *   **Context and Configuration Management:** Initializes and manages local project configuration in `.__ontobdc__` and runs pre-flight checks to reduce environment drift before execution.
 *   **Capability Discovery and Execution:** Uses a plugin-based architecture to discover executable capabilities dynamically and expose them through the CLI.
-*   **Storage Indexing:** Maintains a persistent RDF storage index (`storage.rdf`) that records dataset metadata and locations for consistent runtime references.
+*   **Storage Indexing:** Maintains a persistent RDF storage index (`storage.ttl`) that records dataset metadata and locations for consistent runtime references.
 *   **State-Machine Orchestration:** Drives processes and transformations through explicit runtime states, with progress materialized in physical artifacts such as `raw.txt`, `parsed.json`, and `graph.ttl`.
 
 Architecturally, OntoBDC is organized as a non-monolithic core with dependency injection across logical components such as `init`, `check`, `run`, `list`, `storage`, `dev`, and `a3`, while remaining extensible through additional features and capabilities.
@@ -46,7 +46,7 @@ The project is under active development and is especially suited to domains that
 - Runs pre-flight checks to reduce environment drift before execution.
 - Discovers installed capabilities and exposes them through a consistent CLI.
 - Executes capabilities using declared schemas and runtime strategies.
-- Maintains a storage index (`.__ontobdc__/storage.rdf`) that references dataset locations.
+- Maintains a storage index (`.__ontobdc__/storage.ttl`) that references dataset locations.
 - Supports workflows in domains that benefit from explicit contracts and auditability (e.g., BIM/openBIM, engineering data, compliance-oriented pipelines).
 
 ## Architecture
@@ -62,7 +62,7 @@ flowchart LR
 
   Project["OntoBDC Project<br/>(working directory)"]
   Config["Project Config<br/>(.__ontobdc__/config.yaml)"]
-  StorageIndex["Storage Index<br/>(.__ontobdc__/storage.rdf)"]
+  StorageIndex["Storage Index<br/>(.__ontobdc__/storage.ttl)"]
   Datasets["Local Datasets<br/>(storage paths)"]
   Python["Python Runtime<br/>(venv/colab/docker)"]
   Git["Git Repository"]
@@ -97,7 +97,7 @@ flowchart LR
   end
 
   Config[".__ontobdc__/config.yaml"]
-  StorageIndex[".__ontobdc__/storage.rdf"]
+  StorageIndex[".__ontobdc__/storage.ttl"]
   Datasets["Local Datasets"]
   Capabilities["Installed Capability Modules<br/>(Python packages)"]
   Git["Git"]
