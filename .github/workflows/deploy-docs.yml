@@ -37,11 +37,12 @@ jobs:
       - name: Prepare MkDocs Source Directory
         run: |
           # MkDocs requires the docs_dir to be a subfolder (it cannot be the root).
-          # We create a temporary folder 'docs_src' and move all documentation files into it.
+          # We create a temporary folder 'docs_src' and sync all repository files into it,
+          # preserving the exact directory structure (like 'documentation/...').
           mkdir docs_src
           
-          # Move everything into docs_src EXCEPT .git, .github, docs_src itself, mkdocs.yml, and requirements
-          find . -mindepth 1 -maxdepth 1 ! -name ".git" ! -name ".github" ! -name "docs_src" ! -name "mkdocs.yml" ! -name "requirements.txt" -exec mv {} docs_src/ \;
+          # Sync everything into docs_src EXCEPT .git, .github, docs_src itself, mkdocs.yml, and requirements
+          rsync -a --exclude='.git' --exclude='.github' --exclude='docs_src' --exclude='mkdocs.yml' --exclude='requirements.txt' ./ docs_src/
 
       - name: Install dependencies
         run: |
