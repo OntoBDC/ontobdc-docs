@@ -34,125 +34,27 @@ jobs:
             requirements.txt
             **/pyproject.toml
 
-      - name: Prepare MkDocs Structure
+      - name: Prepare MkDocs Source Directory
         run: |
-          # 1. We are in the root of the 'ontobdc-docs' repository (which only contains the markdowns).
-          # 2. MkDocs requires the config file to be OUTSIDE the docs_dir.
-          # 3. So we create a parent build folder, move everything inside a 'docs' folder, and write the yaml outside it.
+          # MkDocs requires the docs_dir to be a subfolder (it cannot be the root).
+          # We create a temporary folder 'docs_src' and move all documentation files into it.
+          mkdir docs_src
           
-          mkdir -p .mkdocs_build/docs
-          
-          # Move everything (except .git and our new folder) into the docs folder
-          find . -mindepth 1 -maxdepth 1 ! -name ".mkdocs_build" ! -name ".git" -exec mv {} .mkdocs_build/docs/ \;
-          
-          # Write the exact mkdocs.yml we need
-          cat << 'EOF' > .mkdocs_build/mkdocs.yml
-          docs_dir: docs
-          site_name: OntoBDC Documentation
-          site_description: Documentation for OntoBDC - Ontology-Based Data Capabilities
-          site_author: Elias M. P. Junior
-          site_url: https://ontobdc.org/
-          repo_name: ontobdc-core
-          repo_url: https://github.com/eliasmpjunior/ontobdc-core
-          
-          theme:
-            name: material
-            language: en
-            features:
-              - navigation.sections
-              - navigation.expand
-              - search.suggest
-              - search.highlight
-              - content.code.copy
-            palette:
-              - scheme: default
-                primary: green
-                accent: light-green
-                toggle:
-                  icon: material/brightness-7
-                  name: Switch to dark mode
-              - scheme: slate
-                primary: green
-                accent: light-green
-                toggle:
-                  icon: material/brightness-4
-                  name: Switch to light mode
-                  
-          plugins:
-            - search
-            - mermaid2
-            
-          markdown_extensions:
-            - tables
-            - admonition
-            - pymdownx.details
-            
-          nav:
-            - Home: README.md
-            - License: LICENSE
-            - Documentation:
-              - ontobdc-run-architecture: documentation/paper/white/ontobdc-run-architecture.md
-              - ADR001_dependency_injection_and_components_extras_split: documentation/adr/ADR001_dependency_injection_and_components_extras_split.md
-              - ADR006_a3_state_machine_with_file_materialized_state: documentation/adr/ADR006_a3_state_machine_with_file_materialized_state.md
-              - ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic: documentation/adr/ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic.md
-              - ADR003_plugin_oriented_capabilities_and_parameter_strategies: documentation/adr/ADR003_plugin_oriented_capabilities_and_parameter_strategies.md
-              - ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data: documentation/adr/ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data.md
-              - ADR004_project_local_runtime_extension_via_ontobdc_config: documentation/adr/ADR004_project_local_runtime_extension_via_ontobdc_config.md
-              - ADR005_separate_capability_discovery_from_capability_execution: documentation/adr/ADR005_separate_capability_discovery_from_capability_execution.md
-              - ADR002_cli_help_from_pyproject_metadata: documentation/adr/ADR002_cli_help_from_pyproject_metadata.md
-              - ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses: documentation/adr/ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses.md
-              - test_resolution_to_language_defined: documentation/test/run/test_resolution_to_language_defined.md
-              - test_resolution_to_intended: documentation/test/run/test_resolution_to_intended.md
-              - test_resolution_to_planned: documentation/test/run/test_resolution_to_planned.md
-              - test_resolution_to_filled: documentation/test/run/test_resolution_to_filled.md
-              - test_resolution_to_validated: documentation/test/run/test_resolution_to_validated.md
-              - test_resolution_to_parsed: documentation/test/run/test_resolution_to_parsed.md
-              - test_resolution_to_canonical: documentation/test/run/test_resolution_to_canonical.md
-              - test_resolution_from_low_confidence: documentation/test/run/test_resolution_from_low_confidence.md
-              - RFC003_transition_success_learning_graph: documentation/roadmap/RFC003_transition_success_learning_graph.md
-              - RFC007_atomic_container_dataset_creation_and_rollback: documentation/roadmap/RFC007_atomic_container_dataset_creation_and_rollback.md
-              - RFC008_wrap_context_creation_questions_in_a_panel: documentation/roadmap/RFC008_wrap_context_creation_questions_in_a_panel.md
-              - RFC001_cli_help_status_section: documentation/roadmap/RFC001_cli_help_status_section.md
-              - RFC002_pre_parser_grammatical_normalization: documentation/roadmap/RFC002_pre_parser_grammatical_normalization.md
-              - RFC004_llm_normalization_interface_layer: documentation/roadmap/RFC004_llm_normalization_interface_layer.md
-              - RFC006_container_dataset_identifier_to_physical_name_contract: documentation/roadmap/RFC006_container_dataset_identifier_to_physical_name_contract.md
-              - RFC005_olia_inference_and_mapper_completion: documentation/roadmap/RFC005_olia_inference_and_mapper_completion.md
-              - SPEC009_olia_semantic_intent_typing: documentation/spec/SPEC009_olia_semantic_intent_typing.md
-              - SPEC003_system_artifacts_by_component: documentation/spec/SPEC003_system_artifacts_by_component.md
-              - SPEC010_shared_plugin_loaders: documentation/spec/SPEC010_shared_plugin_loaders.md
-              - SPEC008_country_dataset_container: documentation/spec/SPEC008_country_dataset_container.md
-              - SPEC011_deprecating_adrs_and_specs: documentation/spec/SPEC011_deprecating_adrs_and_specs.md
-              - SPEC007_cli_init_component: documentation/spec/SPEC007_cli_init_component.md
-              - SPEC006_run_cli_context_resolution: documentation/spec/SPEC006_run_cli_context_resolution.md
-              - SPEC001_core_modules_and_commands: documentation/spec/SPEC001_core_modules_and_commands.md
-              - SPEC004_component_flows: documentation/spec/SPEC004_component_flows.md
-              - SPEC002_cli_help_from_pyproject_metadata: documentation/spec/SPEC002_cli_help_from_pyproject_metadata.md
-              - SPEC012_storage_component_behavior: documentation/spec/SPEC012_storage_component_behavior.md
-              - SPEC005_ontobdc_list_component: documentation/spec/SPEC005_ontobdc_list_component.md
-              - OLD003_cli_help_from_pyproject_metadata_adr: documentation/legacy/OLD003_cli_help_from_pyproject_metadata_adr.md
-              - OLD001_init_context_command_flow: documentation/legacy/OLD001_init_context_command_flow.md
-              - OLD004_cli_help_from_pyproject_metadata_spec: documentation/legacy/OLD004_cli_help_from_pyproject_metadata_spec.md
-              - OLD002_plan_command_deprecation: documentation/legacy/OLD002_plan_command_deprecation.md
-              - UC_a3_states_and_transitions: documentation/uc/UC_a3_states_and_transitions.md
-              - UC_a3_cli_first_step: documentation/uc/UC_a3_cli_first_step.md
-              - debug-a3-cli-entry: documentation/debug/debug-a3-cli-entry.md
-          EOF
+          # Move everything into docs_src EXCEPT .git, .github, docs_src itself, mkdocs.yml, and requirements
+          find . -mindepth 1 -maxdepth 1 ! -name ".git" ! -name ".github" ! -name "docs_src" ! -name "mkdocs.yml" ! -name "requirements.txt" -exec mv {} docs_src/ \;
 
       - name: Install dependencies
-        working-directory: .mkdocs_build
         run: |
           python -m pip install --upgrade pip
-          if [ -f "docs/requirements.txt" ]; then
-            python -m pip install -r docs/requirements.txt
+          if [ -f "requirements.txt" ]; then
+            python -m pip install -r requirements.txt
           fi
           
       - name: Build Documentation
-        working-directory: .mkdocs_build
         run: |
           mkdocs build --clean --strict
           
       - name: Deploy to GitHub Pages
-        working-directory: .mkdocs_build
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

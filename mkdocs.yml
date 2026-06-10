@@ -1,0 +1,102 @@
+docs_dir: docs_src
+exclude_docs: 'mkdocs.yml
+
+  requirements.txt
+
+  main.py
+
+  '
+markdown_extensions:
+- tables
+- admonition
+- pymdownx.details
+nav:
+- Home: README.md
+- License: LICENSE
+- Documentation:
+  - ontobdc-run-architecture: documentation/paper/white/ontobdc-run-architecture.md
+  - ADR001_dependency_injection_and_components_extras_split: documentation/adr/ADR001_dependency_injection_and_components_extras_split.md
+  - ADR006_a3_state_machine_with_file_materialized_state: documentation/adr/ADR006_a3_state_machine_with_file_materialized_state.md
+  - ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic: documentation/adr/ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic.md
+  - ADR003_plugin_oriented_capabilities_and_parameter_strategies: documentation/adr/ADR003_plugin_oriented_capabilities_and_parameter_strategies.md
+  - ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data: documentation/adr/ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data.md
+  - ADR004_project_local_runtime_extension_via_ontobdc_config: documentation/adr/ADR004_project_local_runtime_extension_via_ontobdc_config.md
+  - ADR005_separate_capability_discovery_from_capability_execution: documentation/adr/ADR005_separate_capability_discovery_from_capability_execution.md
+  - ADR002_cli_help_from_pyproject_metadata: documentation/adr/ADR002_cli_help_from_pyproject_metadata.md
+  - ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses: documentation/adr/ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses.md
+  - test_resolution_to_language_defined: documentation/test/run/test_resolution_to_language_defined.md
+  - test_resolution_to_intended: documentation/test/run/test_resolution_to_intended.md
+  - test_resolution_to_planned: documentation/test/run/test_resolution_to_planned.md
+  - test_resolution_to_filled: documentation/test/run/test_resolution_to_filled.md
+  - test_resolution_to_validated: documentation/test/run/test_resolution_to_validated.md
+  - test_resolution_to_parsed: documentation/test/run/test_resolution_to_parsed.md
+  - test_resolution_to_canonical: documentation/test/run/test_resolution_to_canonical.md
+  - test_resolution_from_low_confidence: documentation/test/run/test_resolution_from_low_confidence.md
+  - RFC003_transition_success_learning_graph: documentation/roadmap/RFC003_transition_success_learning_graph.md
+  - RFC007_atomic_container_dataset_creation_and_rollback: documentation/roadmap/RFC007_atomic_container_dataset_creation_and_rollback.md
+  - RFC008_wrap_context_creation_questions_in_a_panel: documentation/roadmap/RFC008_wrap_context_creation_questions_in_a_panel.md
+  - RFC001_cli_help_status_section: documentation/roadmap/RFC001_cli_help_status_section.md
+  - RFC002_pre_parser_grammatical_normalization: documentation/roadmap/RFC002_pre_parser_grammatical_normalization.md
+  - RFC004_llm_normalization_interface_layer: documentation/roadmap/RFC004_llm_normalization_interface_layer.md
+  - RFC006_container_dataset_identifier_to_physical_name_contract: documentation/roadmap/RFC006_container_dataset_identifier_to_physical_name_contract.md
+  - RFC005_olia_inference_and_mapper_completion: documentation/roadmap/RFC005_olia_inference_and_mapper_completion.md
+  - SPEC009_olia_semantic_intent_typing: documentation/spec/SPEC009_olia_semantic_intent_typing.md
+  - SPEC003_system_artifacts_by_component: documentation/spec/SPEC003_system_artifacts_by_component.md
+  - SPEC010_shared_plugin_loaders: documentation/spec/SPEC010_shared_plugin_loaders.md
+  - SPEC008_country_dataset_container: documentation/spec/SPEC008_country_dataset_container.md
+  - SPEC011_deprecating_adrs_and_specs: documentation/spec/SPEC011_deprecating_adrs_and_specs.md
+  - SPEC007_cli_init_component: documentation/spec/SPEC007_cli_init_component.md
+  - SPEC006_run_cli_context_resolution: documentation/spec/SPEC006_run_cli_context_resolution.md
+  - SPEC001_core_modules_and_commands: documentation/spec/SPEC001_core_modules_and_commands.md
+  - SPEC004_component_flows: documentation/spec/SPEC004_component_flows.md
+  - SPEC002_cli_help_from_pyproject_metadata: documentation/spec/SPEC002_cli_help_from_pyproject_metadata.md
+  - SPEC012_storage_component_behavior: documentation/spec/SPEC012_storage_component_behavior.md
+  - SPEC005_ontobdc_list_component: documentation/spec/SPEC005_ontobdc_list_component.md
+  - OLD003_cli_help_from_pyproject_metadata_adr: documentation/legacy/OLD003_cli_help_from_pyproject_metadata_adr.md
+  - OLD001_init_context_command_flow: documentation/legacy/OLD001_init_context_command_flow.md
+  - OLD004_cli_help_from_pyproject_metadata_spec: documentation/legacy/OLD004_cli_help_from_pyproject_metadata_spec.md
+  - OLD002_plan_command_deprecation: documentation/legacy/OLD002_plan_command_deprecation.md
+  - UC_a3_states_and_transitions: documentation/uc/UC_a3_states_and_transitions.md
+  - UC_a3_cli_first_step: documentation/uc/UC_a3_cli_first_step.md
+  - debug-a3-cli-entry: documentation/debug/debug-a3-cli-entry.md
+plugins:
+- search
+- macros:
+    module_name: main
+- mermaid2
+- i18n:
+    docs_structure: suffix
+    fallback_to_default: true
+    languages:
+    - default: true
+      locale: en
+      name: English
+repo_name: ontobdc-core
+repo_url: https://github.com/eliasmpjunior/ontobdc-core
+site_author: Elias M. P. Junior
+site_description: Documentation for OntoBDC - Ontology-Based Data Capabilities
+site_dir: site
+site_name: OntoBDC Documentation
+site_url: https://ontobdc.org/
+theme:
+  features:
+  - navigation.sections
+  - navigation.expand
+  - search.suggest
+  - search.highlight
+  - content.code.copy
+  language: en
+  name: material
+  palette:
+  - accent: light-green
+    primary: green
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+  - accent: light-green
+    primary: green
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode
