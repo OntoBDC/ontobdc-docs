@@ -1,0 +1,3612 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for OntoBDC - Ontology-Based Data Capabilities">
+      
+      
+        <meta name="author" content="Elias M. P. Junior">
+      
+      
+        <link rel="canonical" href="https://ontobdc.org/documentation/spec/SPEC001_core_modules_and_commands/">
+      
+      
+        <link rel="prev" href="../SPEC006_run_cli_context_resolution/">
+      
+      
+        <link rel="next" href="../SPEC004_component_flows/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SPEC001_core_modules_and_commands - OntoBDC Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spec-001-ontobdc-core-modules-and-commands" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="OntoBDC Documentation" class="md-header__button md-logo" aria-label="OntoBDC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OntoBDC Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SPEC001_core_modules_and_commands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eliasmpjunior/ontobdc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ontobdc-core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="OntoBDC Documentation" class="md-nav__button md-logo" aria-label="OntoBDC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OntoBDC Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eliasmpjunior/ontobdc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ontobdc-core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../LICENSE" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paper/white/ontobdc-run-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ontobdc-run-architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR001_dependency_injection_and_components_extras_split/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR001_dependency_injection_and_components_extras_split
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR006_a3_state_machine_with_file_materialized_state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR006_a3_state_machine_with_file_materialized_state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR003_plugin_oriented_capabilities_and_parameter_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR003_plugin_oriented_capabilities_and_parameter_strategies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR004_project_local_runtime_extension_via_ontobdc_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR004_project_local_runtime_extension_via_ontobdc_config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR005_separate_capability_discovery_from_capability_execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR005_separate_capability_discovery_from_capability_execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR002_cli_help_from_pyproject_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR002_cli_help_from_pyproject_metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_language_defined/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_language_defined
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_intended/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_intended
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_planned/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_planned
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_filled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_filled
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_validated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_validated
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_parsed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_parsed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_canonical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_canonical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_from_low_confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_from_low_confidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC003_transition_success_learning_graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC003_transition_success_learning_graph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC007_atomic_container_dataset_creation_and_rollback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC007_atomic_container_dataset_creation_and_rollback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC008_wrap_context_creation_questions_in_a_panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC008_wrap_context_creation_questions_in_a_panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC001_cli_help_status_section/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC001_cli_help_status_section
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC002_pre_parser_grammatical_normalization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC002_pre_parser_grammatical_normalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC004_llm_normalization_interface_layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC004_llm_normalization_interface_layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC006_container_dataset_identifier_to_physical_name_contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC006_container_dataset_identifier_to_physical_name_contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC005_olia_inference_and_mapper_completion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC005_olia_inference_and_mapper_completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC009_olia_semantic_intent_typing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC009_olia_semantic_intent_typing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC003_system_artifacts_by_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC003_system_artifacts_by_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC010_shared_plugin_loaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC010_shared_plugin_loaders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC008_country_dataset_container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC008_country_dataset_container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC011_deprecating_adrs_and_specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC011_deprecating_adrs_and_specs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC007_cli_init_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC007_cli_init_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC006_run_cli_context_resolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC006_run_cli_context_resolution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC001_core_modules_and_commands
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC001_core_modules_and_commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-source-of-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Source Of Truth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-component-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Core Component Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-global-command-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Global Command Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-command-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Command Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-module-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Module Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Module Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-cli-ontobdc-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 cli / ontobdc init
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 cli / ontobdc init">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-and-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options And Arguments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-check-ontobdc-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 check / ontobdc check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 check / ontobdc check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-run-ontobdc-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 run / ontobdc run
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 run / ontobdc run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-list-ontobdc-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 list / ontobdc list
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 list / ontobdc list">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-storage-ontobdc-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 storage / ontobdc storage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 storage / ontobdc storage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-dev-ontobdc-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 dev / ontobdc dev
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.6 dev / ontobdc dev">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-and-subcommands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options And Subcommands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67-a3-ontobdc-a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 a3 / ontobdc a3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.7 a3 / ontobdc a3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-family_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-internal-support-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Internal Support Modules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-non-routed-or-partially-exposed-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Non-Routed Or Partially Exposed Elements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-command-availability-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Command Availability Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Command Availability Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#always-available-before-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Always available before init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-after-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available after init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-gating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional gating
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-design-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Design Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC004_component_flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC004_component_flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC002_cli_help_from_pyproject_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC002_cli_help_from_pyproject_metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC012_storage_component_behavior/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC012_storage_component_behavior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC005_ontobdc_list_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC005_ontobdc_list_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD003_cli_help_from_pyproject_metadata_adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD003_cli_help_from_pyproject_metadata_adr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD001_init_context_command_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD001_init_context_command_flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD004_cli_help_from_pyproject_metadata_spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD004_cli_help_from_pyproject_metadata_spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD002_plan_command_deprecation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD002_plan_command_deprecation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uc/UC_a3_states_and_transitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UC_a3_states_and_transitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uc/UC_a3_cli_first_step/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UC_a3_cli_first_step
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../debug/debug-a3-cli-entry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    debug-a3-cli-entry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-source-of-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Source Of Truth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-component-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Core Component Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-global-command-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Global Command Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-command-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Command Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-module-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Module Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Module Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-cli-ontobdc-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 cli / ontobdc init
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 cli / ontobdc init">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-and-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options And Arguments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-check-ontobdc-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 check / ontobdc check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 check / ontobdc check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-run-ontobdc-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 run / ontobdc run
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 run / ontobdc run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-list-ontobdc-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 list / ontobdc list
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 list / ontobdc list">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-storage-ontobdc-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 storage / ontobdc storage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 storage / ontobdc storage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-dev-ontobdc-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 dev / ontobdc dev
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.6 dev / ontobdc dev">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-and-subcommands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options And Subcommands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67-a3-ontobdc-a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 a3 / ontobdc a3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.7 a3 / ontobdc a3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-family_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-internal-support-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Internal Support Modules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-non-routed-or-partially-exposed-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Non-Routed Or Partially Exposed Elements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-command-availability-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Command Availability Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Command Availability Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#always-available-before-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Always available before init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-after-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available after init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-gating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional gating
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-design-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Design Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="spec-001-ontobdc-core-modules-and-commands">SPEC 001 - OntoBDC Core Modules And Commands</h1>
+<h2 id="status">Status</h2>
+<ul>
+<li><strong>Status</strong>: Working specification of the current core CLI surface</li>
+<li><strong>Scope</strong>: <code>wip/src/ontobdc</code></li>
+<li><strong>Audience</strong>: maintainers, contributors, and users of the OntoBDC core distribution</li>
+</ul>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This specification describes the current OntoBDC core modules, their exposed commands, their options, and their operational roles.</p>
+<p>The focus is the command surface currently wired by the main CLI entrypoint and the core modules that support it.</p>
+<p>This document answers:</p>
+<ul>
+<li>which core modules exist</li>
+<li>which of them expose user-facing commands</li>
+<li>which options are currently accepted</li>
+<li>what each command is expected to do</li>
+<li>which commands are conditional or gated by configuration</li>
+</ul>
+<h2 id="2-source-of-truth">2. Source Of Truth</h2>
+<p>This specification is derived from the current code under:</p>
+<ul>
+<li><code>wip/src/ontobdc/cli</code></li>
+<li><code>wip/src/ontobdc/check</code></li>
+<li><code>wip/src/ontobdc/run</code></li>
+<li><code>wip/src/ontobdc/list</code></li>
+<li><code>wip/src/ontobdc/storage</code></li>
+<li><code>wip/src/ontobdc/dev</code></li>
+<li><code>wip/src/ontobdc/a3</code></li>
+<li><code>wip/src/ontobdc/shared</code></li>
+<li><code>wip/src/ontobdc/module</code></li>
+</ul>
+<p>The top-level command routing is defined in:</p>
+<ul>
+<li><code>wip/src/ontobdc/cli/__init__.py</code></li>
+</ul>
+<h2 id="3-core-component-overview">3. Core Component Overview</h2>
+<p>The current core package is organized around these functional modules:</p>
+<ul>
+<li><code>cli</code></li>
+<li>top-level command routing</li>
+<li>initialization helpers</li>
+<li>shared CLI presentation utilities</li>
+<li><code>check</code></li>
+<li>infrastructure and environment validation</li>
+<li><code>run</code></li>
+<li>capability discovery, filtering, selection, and execution</li>
+<li><code>list</code></li>
+<li>capability listing and metadata rendering</li>
+<li><code>storage</code></li>
+<li>dataset registration and storage index management</li>
+<li><code>dev</code></li>
+<li>multi-repository developer workflows</li>
+<li><code>a3</code></li>
+<li>A3-oriented ETL and work execution</li>
+<li><code>shared</code></li>
+<li>shared adapters and ports used across modules</li>
+<li><code>module</code></li>
+<li>built-in capability modules and templates used by the execution layer</li>
+</ul>
+<p>From a user-facing CLI perspective, the currently exposed top-level commands are:</p>
+<ul>
+<li><code>ontobdc init</code></li>
+<li><code>ontobdc check</code></li>
+<li><code>ontobdc run</code></li>
+<li><code>ontobdc list</code></li>
+<li><code>ontobdc storage</code></li>
+<li><code>ontobdc dev</code></li>
+<li><code>ontobdc a3</code></li>
+</ul>
+<p>The CLI also exposes:</p>
+<ul>
+<li><code>ontobdc help</code></li>
+<li><code>ontobdc version</code></li>
+</ul>
+<h2 id="4-global-command-behavior">4. Global Command Behavior</h2>
+<p>The main command behavior is currently:</p>
+<ul>
+<li><code>ontobdc init</code> can run before initialization</li>
+<li>all other routed commands require a valid <code>.__ontobdc__/config.yaml</code></li>
+<li><code>ontobdc dev</code> requires <code>dev.tool: enabled</code> for most operations</li>
+<li><code>ontobdc a3</code> requires the A3 module to be enabled in the current environment</li>
+</ul>
+<p>The CLI determines project root primarily from:</p>
+<ul>
+<li><code>ONTOBDC_PROJECT_ROOT</code></li>
+<li>or upward search for <code>.__ontobdc__/config.yaml</code></li>
+</ul>
+<h2 id="5-command-matrix">5. Command Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Top-level command</th>
+<th>Role</th>
+<th>Availability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cli.init</code></td>
+<td><code>ontobdc init</code></td>
+<td>Initialize local project configuration</td>
+<td>always available</td>
+</tr>
+<tr>
+<td><code>check</code></td>
+<td><code>ontobdc check</code></td>
+<td>Validate operational environment</td>
+<td>requires initialized project</td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td><code>ontobdc run</code></td>
+<td>Discover and execute capabilities</td>
+<td>requires initialized project</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td><code>ontobdc list</code></td>
+<td>List available capabilities</td>
+<td>requires initialized project</td>
+</tr>
+<tr>
+<td><code>storage</code></td>
+<td><code>ontobdc storage</code></td>
+<td>Manage storage index and local datasets</td>
+<td>requires initialized project</td>
+</tr>
+<tr>
+<td><code>dev</code></td>
+<td><code>ontobdc dev</code></td>
+<td>Developer workflows across repos</td>
+<td>requires initialized project and usually <code>dev.tool</code> enabled</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>ontobdc a3</code></td>
+<td>A3 ETL and work tools</td>
+<td>requires initialized project and A3 enabled</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-module-specifications">6. Module Specifications</h2>
+<h3 id="61-cli-ontobdc-init">6.1 <code>cli</code> / <code>ontobdc init</code></h3>
+<h4 id="purpose">Purpose</h4>
+<p>The <code>init</code> command is the initialization entrypoint of OntoBDC for local project configuration.</p>
+<h4 id="commands">Commands</h4>
+<ul>
+<li><code>ontobdc init [engine]</code></li>
+</ul>
+<h4 id="options-and-arguments">Options And Arguments</h4>
+<ul>
+<li>positional <code>engine</code></li>
+<li>accepted values are validated against <code>check/config.json</code></li>
+<li>current intended examples include <code>venv</code> and <code>colab</code></li>
+<li>if omitted, the CLI tries to auto-detect:<ul>
+<li><code>colab</code> when <code>/content</code> exists</li>
+<li><code>venv</code> when a virtual environment is active</li>
+</ul>
+</li>
+</ul>
+<h4 id="behavior">Behavior</h4>
+<ul>
+<li>creates <code>.__ontobdc__/config.yaml</code></li>
+<li>writes the selected execution engine</li>
+<li>attempts to run repair-oriented checks after engine initialization</li>
+<li>blocks duplicate initialization when config already exists</li>
+</ul>
+<h4 id="description">Description</h4>
+<p>This module establishes the minimum local structure required by the rest of the CLI.</p>
+<h3 id="62-check-ontobdc-check">6.2 <code>check</code> / <code>ontobdc check</code></h3>
+<h4 id="purpose_1">Purpose</h4>
+<p>The <code>check</code> module validates whether the current project and environment are operational.</p>
+<h4 id="command">Command</h4>
+<ul>
+<li><code>ontobdc check [options]</code></li>
+</ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><code>--repair</code></li>
+<li>attempts repair actions when available</li>
+<li><code>--scope &lt;name&gt;</code></li>
+<li>restricts checks to a named scope</li>
+<li><code>--only &lt;check&gt;</code></li>
+<li>runs only a single named check</li>
+<li><code>--ignore-warnings</code></li>
+<li>suppresses warning emphasis in summary behavior</li>
+<li><code>-c</code>, <code>--compact</code></li>
+<li>uses compact output</li>
+</ul>
+<h4 id="behavior_1">Behavior</h4>
+<ul>
+<li>resolves engine from <code>.__ontobdc__/config.yaml</code></li>
+<li>loads check configuration from <code>check/config.json</code></li>
+<li>runs base and engine-aware checks</li>
+<li>supports fatal and recoverable checks</li>
+<li>may invoke <code>repair</code> or <code>hotfix</code> functions defined by check scripts</li>
+</ul>
+<h4 id="description_1">Description</h4>
+<p><code>check</code> is the operational gatekeeper of the core system. It is used both directly and as part of initialization and developer workflows.</p>
+<h3 id="63-run-ontobdc-run">6.3 <code>run</code> / <code>ontobdc run</code></h3>
+<h4 id="purpose_2">Purpose</h4>
+<p>The <code>run</code> module is the execution entrypoint for OntoBDC capabilities.</p>
+<p>It performs:</p>
+<ul>
+<li>CLI context resolution</li>
+<li>parameter extraction</li>
+<li>capability discovery</li>
+<li>capability filtering</li>
+<li>interactive selection when needed</li>
+<li>execution and rendering</li>
+</ul>
+<h4 id="command_1">Command</h4>
+<ul>
+<li><code>ontobdc run [options]</code></li>
+</ul>
+<h4 id="core-options">Core Options</h4>
+<ul>
+<li><code>--id &lt;ID&gt;</code></li>
+<li>targets a specific capability by ID</li>
+<li><code>--help</code>, <code>-h</code></li>
+<li>shows help</li>
+<li><code>--root-path &lt;PATH&gt;</code></li>
+<li>sets the root repository path</li>
+<li><code>--repository &lt;PATH&gt;</code></li>
+<li>alias-like input for repository path resolution</li>
+<li><code>--limit &lt;N&gt;</code></li>
+<li>pagination limit</li>
+<li><code>--start &lt;N&gt;</code></li>
+<li>pagination start offset</li>
+<li><code>--file-name &lt;PATTERN&gt;</code></li>
+<li>filters by file name</li>
+<li><code>--file-type &lt;EXT[,EXT...]&gt;</code></li>
+<li>filters by one or more file types</li>
+<li><code>--text-file &lt;PATH&gt;</code></li>
+<li>injects a raw text file path into context</li>
+<li><code>--export &lt;json|rich&gt;</code></li>
+<li>selects renderer output format</li>
+<li><code>--action-only</code></li>
+<li>limits execution intent to action output only</li>
+<li><code>-a</code>, <code>-auc</code>, <code>-uca</code>, <code>--all</code></li>
+<li>sets <code>include_action = true</code></li>
+</ul>
+<h4 id="behavior_2">Behavior</h4>
+<ul>
+<li>resolves built-in parameter strategies from <code>run/plugin/parameter</code></li>
+<li>discovers capabilities through the plugin loader</li>
+<li>executes the targeted capability directly when <code>--id</code> is provided</li>
+<li>otherwise presents an interactive capability selector</li>
+<li>renders output through a capability-specific renderer when present</li>
+</ul>
+<h4 id="description_2">Description</h4>
+<p><code>run</code> is the main programmable interface of the platform. It is intentionally extensible through capability plugins and CLI context strategies.</p>
+<h3 id="64-list-ontobdc-list">6.4 <code>list</code> / <code>ontobdc list</code></h3>
+<h4 id="purpose_3">Purpose</h4>
+<p>The <code>list</code> module exposes the currently discoverable capabilities and their metadata.</p>
+<h4 id="command_2">Command</h4>
+<ul>
+<li><code>ontobdc list [options]</code></li>
+</ul>
+<h4 id="options_1">Options</h4>
+<ul>
+<li><code>--json</code></li>
+<li>outputs capability metadata as JSON</li>
+<li><code>--help</code>, <code>-h</code></li>
+<li>shows help</li>
+</ul>
+<h4 id="behavior_3">Behavior</h4>
+<ul>
+<li>loads capability metadata through the plugin loader</li>
+<li>deduplicates by capability ID</li>
+<li>renders either:</li>
+<li>JSON</li>
+<li>rich capability cards</li>
+</ul>
+<h4 id="description_3">Description</h4>
+<p><code>list</code> is the catalog view of the capability ecosystem loaded by the core.</p>
+<h3 id="65-storage-ontobdc-storage">6.5 <code>storage</code> / <code>ontobdc storage</code></h3>
+<h4 id="purpose_4">Purpose</h4>
+<p>The <code>storage</code> module manages registered datasets and storage metadata.</p>
+<h4 id="commands_1">Commands</h4>
+<ul>
+<li><code>ontobdc storage --list</code></li>
+<li><code>ontobdc storage --enable</code></li>
+<li><code>ontobdc storage --help</code></li>
+</ul>
+<h4 id="options_2">Options</h4>
+<ul>
+<li><code>--list</code>, <code>-l</code></li>
+<li>lists all containers in the storage</li>
+<li><code>--enable</code></li>
+<li>enables the storage component by installing dependencies and creating the storage index file</li>
+<li><code>--help</code>, <code>-h</code></li>
+<li>shows help</li>
+</ul>
+<h4 id="behavior_4">Behavior</h4>
+<ul>
+<li>lists current storage entries when <code>--list</code> is provided</li>
+<li>enables storage capabilities and creates <code>storage.ttl</code> when <code>--enable</code> is provided</li>
+<li>delegates operations to the corresponding Python command plugins:</li>
+<li><code>list.py</code></li>
+<li><code>enable.py</code></li>
+<li><code>base.py</code></li>
+</ul>
+<h4 id="description_4">Description</h4>
+<p><code>storage</code> is the dataset registration and storage-index module of the core.</p>
+<h3 id="66-dev-ontobdc-dev">6.6 <code>dev</code> / <code>ontobdc dev</code></h3>
+<h4 id="purpose_5">Purpose</h4>
+<p>The <code>dev</code> module provides developer-focused multi-repository operations and config helpers.</p>
+<h4 id="command-family">Command Family</h4>
+<ul>
+<li><code>ontobdc dev --help</code></li>
+<li><code>ontobdc dev --enable-dev-tool</code></li>
+<li><code>ontobdc dev commit "&lt;message&gt;"</code></li>
+<li><code>ontobdc dev branch</code></li>
+<li><code>ontobdc dev branch --create &lt;name&gt;</code></li>
+<li><code>ontobdc dev checkout &lt;name&gt;</code></li>
+<li><code>ontobdc dev changelog [target_ref]</code></li>
+<li><code>ontobdc dev repo --add-ssh-key &lt;path&gt;</code></li>
+<li><code>ontobdc dev repo --rm-ssh-key</code></li>
+</ul>
+<h4 id="options-and-subcommands">Options And Subcommands</h4>
+<ul>
+<li><code>--help</code>, <code>-h</code></li>
+<li>shows module help</li>
+<li><code>--enable-dev-tool</code></li>
+<li>enables <code>dev.tool: enabled</code> in <code>.__ontobdc__/config.yaml</code></li>
+<li>must be passed alone</li>
+<li><code>commit &lt;message&gt;</code></li>
+<li>stages, commits, and attempts push across repositories</li>
+<li><code>branch</code></li>
+<li>shows git status across root repo and sub-repos</li>
+<li><code>branch --create &lt;name&gt;</code></li>
+<li>creates and pushes a branch across repositories</li>
+<li><code>branch --checkout &lt;name&gt;</code></li>
+<li>checks out an existing branch across repositories</li>
+<li><code>checkout &lt;name&gt;</code></li>
+<li>alias for <code>branch --checkout &lt;name&gt;</code></li>
+<li><code>changelog [target_ref]</code></li>
+<li>compares the current branch against a base branch or target ref</li>
+<li><code>repo --add-ssh-key &lt;path&gt;</code></li>
+<li>saves SSH key path into config</li>
+<li><code>repo --rm-ssh-key</code></li>
+<li>removes SSH key path from config</li>
+</ul>
+<h4 id="behavior_5">Behavior</h4>
+<ul>
+<li>runs <code>ontobdc check -c</code> before most operations</li>
+<li>requires <code>dev.tool: enabled</code> for normal dev workflow</li>
+<li>traverses root repo plus detected submodules and known sibling repos</li>
+<li>uses stored SSH key path when push requires explicit SSH identity</li>
+</ul>
+<h4 id="description_5">Description</h4>
+<p><code>dev</code> is the repository orchestration module for contributors working on multi-repo OntoBDC workspaces.</p>
+<h3 id="67-a3-ontobdc-a3">6.7 <code>a3</code> / <code>ontobdc a3</code></h3>
+<h4 id="purpose_6">Purpose</h4>
+<p>The <code>a3</code> module exposes A3-specific ETL and work-processing tools.</p>
+<h4 id="command-family_1">Command Family</h4>
+<ul>
+<li><code>ontobdc a3 --etl --source &lt;file|url&gt;</code></li>
+<li><code>ontobdc a3 --work</code></li>
+<li><code>ontobdc a3 --help</code></li>
+</ul>
+<h4 id="options_3">Options</h4>
+<ul>
+<li><code>--etl</code></li>
+<li>executes ETL flow</li>
+<li><code>--source &lt;file|url&gt;</code></li>
+<li>required input for <code>--etl</code></li>
+<li><code>--work</code></li>
+<li>runs concurrent A3 work processing</li>
+<li><code>--help</code>, <code>-h</code></li>
+<li>shows help</li>
+</ul>
+<h4 id="availability">Availability</h4>
+<ul>
+<li>the module checks whether A3 is enabled in the environment</li>
+<li>when disabled, it instructs the user to run:</li>
+<li><code>ontobdc extra --enable a3</code></li>
+</ul>
+<h4 id="description_6">Description</h4>
+<p><code>a3</code> is an optional but core-hosted workflow module for A3 data processing.</p>
+<h2 id="7-internal-support-modules">7. Internal Support Modules</h2>
+<p>These modules are part of the core but are not directly routed as top-level commands:</p>
+<ul>
+<li><code>shared</code></li>
+<li>common adapters and ports for ontology, plugins, repository, and logging concerns</li>
+<li><code>module</code></li>
+<li>packaged capability modules, such as <code>social</code> and <code>template</code></li>
+</ul>
+<p>They support the execution surface indirectly, especially through:</p>
+<ul>
+<li>capability loading</li>
+<li>adapter reuse</li>
+<li>domain-port contracts</li>
+</ul>
+<h2 id="8-non-routed-or-partially-exposed-elements">8. Non-Routed Or Partially Exposed Elements</h2>
+<p>Some code exists in the core tree without being fully routed as first-class top-level commands.</p>
+<p>Current examples:</p>
+<ul>
+<li><code>cli/extra.py</code></li>
+<li>exists in the tree</li>
+<li>not currently routed by <code>cli/__init__.py</code></li>
+</ul>
+<p>This means the current codebase contains more functionality than the strictly exposed top-level command list.</p>
+<h2 id="9-command-availability-summary">9. Command Availability Summary</h2>
+<h3 id="always-available-before-init">Always available before init</h3>
+<ul>
+<li><code>ontobdc init</code></li>
+<li><code>ontobdc help</code></li>
+<li><code>ontobdc version</code></li>
+</ul>
+<h3 id="available-after-init">Available after init</h3>
+<ul>
+<li><code>ontobdc check</code></li>
+<li><code>ontobdc run</code></li>
+<li><code>ontobdc list</code></li>
+<li><code>ontobdc storage</code></li>
+<li><code>ontobdc dev</code></li>
+<li><code>ontobdc a3</code></li>
+</ul>
+<h3 id="additional-gating">Additional gating</h3>
+<ul>
+<li><code>ontobdc dev</code></li>
+<li>usually requires <code>dev.tool: enabled</code></li>
+<li><code>ontobdc a3</code></li>
+<li>requires A3 enablement in the environment</li>
+</ul>
+<h2 id="10-design-notes">10. Design Notes</h2>
+<p>The current OntoBDC core design shows a few consistent patterns:</p>
+<ul>
+<li>command routing is centralized in <code>cli/__init__.py</code></li>
+<li>shell scripts are used as stable command wrappers</li>
+<li>Python modules hold most business logic</li>
+<li>execution is capability-oriented rather than command-hardcoded</li>
+<li>several commands are profile-aware and configuration-aware</li>
+</ul>
+<p>This makes the core simultaneously:</p>
+<ul>
+<li>CLI-oriented</li>
+<li>plugin-oriented</li>
+<li>repository-oriented</li>
+<li>environment-sensitive</li>
+</ul>
+<h2 id="11-summary">11. Summary</h2>
+<p>The OntoBDC core currently exposes a modular CLI centered on:</p>
+<ul>
+<li>initialization</li>
+<li>validation</li>
+<li>capability execution</li>
+<li>capability listing</li>
+<li>storage management</li>
+<li>developer workflows</li>
+<li>A3 workflows</li>
+</ul>
+<p>The top-level core commands are:</p>
+<ul>
+<li><code>init</code></li>
+<li><code>check</code></li>
+<li><code>run</code></li>
+<li><code>list</code></li>
+<li><code>storage</code></li>
+<li><code>dev</code></li>
+<li><code>a3</code></li>
+</ul>
+<p>Together, these modules define the current operational surface of the OntoBDC core distribution.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -6,12 +6,13 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
 
 @base <http://ontobdc.org/ontology/social/shp.ttl#> .
 
 <http://ontobdc.org/ontology/social/shp.ttl> rdf:type owl:Ontology .
 
-:JobOfferShape a sh:NodeShape ;
+:JobOfferShape a sh:NodeShape, obdc:TransformableDataShape ;
   sh:targetClass cv:JobOffer ;
   sh:closed true ;
   sh:ignoredProperties ( rdf:type ) ;
@@ -111,83 +112,3 @@ Rules:
 - jobLocationType: on-site, hybrid, remote, or unknown.
 - skills: short, de-duplicated list, preserve product names (e.g., Navisworks)."""@en .
 
-# JOB_SCHEMA: Dict[str, Any] = {
-#     "type": "object",
-#     "properties": {
-#         "name": {
-#             "type": "string",
-#             "pattern": "^[A-Za-z][A-Za-z0-9_]{2,127}$",
-#             "semantic": {
-#                 "type": "datatype",
-#                 "uri": SCHEMA["name"],
-#             },
-#         },
-#         "title": {
-#             "type": "string",
-#             "minLength": 1,
-#             "multiLanguage": True,
-#             "semantic": {"type": "datatype", "uri": SCHEMA["title"]},
-#         },
-#         "inLanguage": {
-#             "type": "string",
-#             "enum": ["pt-br", "en", "es", "fr"],
-#             "semantic": {"type": "datatype", "uri": SCHEMA["inLanguage"]},
-#         },
-#         "hiringOrganization": {
-#             "type": "string",
-#             "semantic": {"type": "organization_node", "uri": SCHEMA["hiringOrganization"]},
-#         },
-#         "location": {
-#             "type": "string",
-#             "semantic": {"type": "datatype", "uri": SCHEMA["jobLocation"]},
-#         },
-#         "employmentType": {
-#             "type": "string",
-#             "enum": ["full-time", "contract", "internship", "part-time", "seasonal", "temporary"],
-#             "semantic": {"type": "datatype", "uri": SCHEMA["employmentType"]},
-#         },
-#         "jobLocationType": {
-#             "type": "string",
-#             "enum": ["hybrid", "remote", "onsite", "synchronous", "asynchronous", "unknown"],
-#             "semantic": {"type": "datatype", "uri": SCHEMA["jobLocationType"]},
-#         },
-#         "skills": {
-#             "type": "array",
-#             "items": {"type": "string"},
-#             "multiLanguage": True,
-#             "semantic": {"type": "datatype", "uri": SCHEMA["skills"]},
-#         },
-#         "activities": {
-#             "type": "array",
-#             "items": {"type": "string"},
-#             "multiLanguage": True,
-#             "semantic": {"type": "datatype", "uri": SCHEMA["responsibilities"]},
-#         },
-#         "requirements_indispensable": {
-#             "type": "array",
-#             "items": {"type": "string"},
-#             "multiLanguage": True,
-#             "semantic": {"type": "datatype", "uri": BDC_JOB["MandatoryRequirement"]},
-#         },
-#         "requirements_desirable": {
-#             "type": "array",
-#             "items": {"type": "string"},
-#             "multiLanguage": True,
-#             "semantic": {"type": "datatype", "uri": BDC_JOB["DesirableRequirement"]},
-#         },
-#     },
-#     "required": [
-#         "name",
-#         "title",
-#         "inLanguage",
-#         "hiringOrganization",
-#         "location",
-#         "employmentType",
-#         "jobLocationType",
-#         "skills",
-#         "activities",
-#         "requirements_indispensable",
-#         "requirements_desirable",
-#     ],
-#     "additionalProperties": False,
-# }

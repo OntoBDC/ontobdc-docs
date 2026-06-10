@@ -1,0 +1,2122 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for OntoBDC - Ontology-Based Data Capabilities">
+      
+      
+        <meta name="author" content="Elias M. P. Junior">
+      
+      
+        <link rel="canonical" href="https://ontobdc.org/documentation/legacy/OLD004_cli_help_from_pyproject_metadata_spec/">
+      
+      
+        <link rel="prev" href="../OLD001_init_context_command_flow/">
+      
+      
+        <link rel="next" href="../OLD002_plan_command_deprecation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>OLD004_cli_help_from_pyproject_metadata_spec - OntoBDC Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#old-004-legacy-note-cli-help-from-pyprojecttoml-metadata" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="OntoBDC Documentation" class="md-header__button md-logo" aria-label="OntoBDC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OntoBDC Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OLD004_cli_help_from_pyproject_metadata_spec
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eliasmpjunior/ontobdc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ontobdc-core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="OntoBDC Documentation" class="md-nav__button md-logo" aria-label="OntoBDC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OntoBDC Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eliasmpjunior/ontobdc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ontobdc-core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../LICENSE" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paper/white/ontobdc-run-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ontobdc-run-architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR001_dependency_injection_and_components_extras_split/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR001_dependency_injection_and_components_extras_split
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR006_a3_state_machine_with_file_materialized_state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR006_a3_state_machine_with_file_materialized_state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR003_plugin_oriented_capabilities_and_parameter_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR003_plugin_oriented_capabilities_and_parameter_strategies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR004_project_local_runtime_extension_via_ontobdc_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR004_project_local_runtime_extension_via_ontobdc_config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR005_separate_capability_discovery_from_capability_execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR005_separate_capability_discovery_from_capability_execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR002_cli_help_from_pyproject_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR002_cli_help_from_pyproject_metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_language_defined/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_language_defined
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_intended/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_intended
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_planned/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_planned
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_filled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_filled
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_validated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_validated
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_parsed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_parsed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_canonical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_canonical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_from_low_confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_from_low_confidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC003_transition_success_learning_graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC003_transition_success_learning_graph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC007_atomic_container_dataset_creation_and_rollback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC007_atomic_container_dataset_creation_and_rollback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC008_wrap_context_creation_questions_in_a_panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC008_wrap_context_creation_questions_in_a_panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC001_cli_help_status_section/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC001_cli_help_status_section
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC002_pre_parser_grammatical_normalization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC002_pre_parser_grammatical_normalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC004_llm_normalization_interface_layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC004_llm_normalization_interface_layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC006_container_dataset_identifier_to_physical_name_contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC006_container_dataset_identifier_to_physical_name_contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC005_olia_inference_and_mapper_completion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC005_olia_inference_and_mapper_completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC009_olia_semantic_intent_typing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC009_olia_semantic_intent_typing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC003_system_artifacts_by_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC003_system_artifacts_by_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC010_shared_plugin_loaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC010_shared_plugin_loaders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC008_country_dataset_container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC008_country_dataset_container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC011_deprecating_adrs_and_specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC011_deprecating_adrs_and_specs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC007_cli_init_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC007_cli_init_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC006_run_cli_context_resolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC006_run_cli_context_resolution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC001_core_modules_and_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC001_core_modules_and_commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC004_component_flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC004_component_flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC002_cli_help_from_pyproject_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC002_cli_help_from_pyproject_metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC012_storage_component_behavior/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC012_storage_component_behavior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spec/SPEC005_ontobdc_list_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC005_ontobdc_list_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OLD003_cli_help_from_pyproject_metadata_adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD003_cli_help_from_pyproject_metadata_adr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OLD001_init_context_command_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD001_init_context_command_flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD004_cli_help_from_pyproject_metadata_spec
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD004_cli_help_from_pyproject_metadata_spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#removal-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removal Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-it-was-removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why It Was Removed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-spec-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical SPEC Content
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OLD002_plan_command_deprecation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD002_plan_command_deprecation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uc/UC_a3_states_and_transitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UC_a3_states_and_transitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uc/UC_a3_cli_first_step/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UC_a3_cli_first_step
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../debug/debug-a3-cli-entry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    debug-a3-cli-entry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#removal-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removal Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-it-was-removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why It Was Removed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-spec-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical SPEC Content
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="old-004-legacy-note-cli-help-from-pyprojecttoml-metadata">OLD 004 - Legacy Note - CLI Help From <code>pyproject.toml</code> Metadata</h1>
+<h2 id="purpose">Purpose</h2>
+<p>This note summarizes the specification for building CLI help from <code>pyproject.toml</code> metadata.</p>
+<h2 id="removal-status">Removal Status</h2>
+<ul>
+<li><strong>Status</strong>: removed from the active documentation</li>
+<li><strong>Removed in version</strong>: <code>0.9.0</code></li>
+</ul>
+<h2 id="why-it-was-removed">Why It Was Removed</h2>
+<p>The project is no longer using <code>pyproject.toml</code> to document CLI commands.</p>
+<h2 id="historical-spec-content">Historical SPEC Content</h2>
+<hr />
+<h1 id="spec-002-cli-help-from-pyprojecttoml-metadata">SPEC 002 - CLI Help From <code>pyproject.toml</code> Metadata</h1>
+<h2 id="status">Status</h2>
+<ul>
+<li><strong>Status</strong>: Working specification of the current metadata-driven CLI help model</li>
+<li><strong>Scope</strong>: <code>src/ontobdc/cli</code> and <code>pyproject.toml</code></li>
+<li><strong>Audience</strong>: maintainers and contributors of the OntoBDC core CLI</li>
+</ul>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This specification describes how the OntoBDC CLI help is built from metadata stored in <code>pyproject.toml</code> instead of being hardcoded directly in Python.</p>
+<p>This document explains:</p>
+<ul>
+<li>what the metadata-driven help model is</li>
+<li>where the command metadata lives</li>
+<li>how the CLI reads and renders that metadata</li>
+<li>which fields are currently used</li>
+<li>how to add a new command to the metadata safely</li>
+<li>what metadata changes do not automatically make a command executable</li>
+</ul>
+<h2 id="2-decision-context">2. Decision Context</h2>
+<p>The CLI help used to embed the command catalog directly in <code>src/ontobdc/cli/__init__.py</code>.</p>
+<p>That created duplication between:</p>
+<ul>
+<li>runtime help text</li>
+<li>specs and ADRs</li>
+<li>product decisions about which commands are current, gated, deprecated, or legacy</li>
+</ul>
+<p>The current model moves the command catalog into the custom <code>tool.ontobdc.commands.*</code> section of <code>pyproject.toml</code> and makes the CLI read it through <code>ontobdc_data()</code>.</p>
+<p>The architectural rationale for this decision is recorded in <a href="../../adr/ADR002_cli_help_from_pyproject_metadata/">ADR002_cli_help_from_pyproject_metadata.md</a>.</p>
+<h2 id="3-source-of-truth">3. Source Of Truth</h2>
+<p>The metadata source of truth is:</p>
+<ul>
+<li><code>pyproject.toml</code></li>
+</ul>
+<p>The runtime readers are:</p>
+<ul>
+<li><code>src/ontobdc/cli/__init__.py</code></li>
+<li><code>src/ontobdc/cli/init.py</code></li>
+</ul>
+<p>The primary metadata section is:</p>
+<pre><code class="language-toml">[tool.ontobdc.commands.&lt;command_name&gt;]
+</code></pre>
+<p>Examples currently present include:</p>
+<ul>
+<li><code>cli</code></li>
+<li><code>init</code></li>
+<li><code>check</code></li>
+<li><code>run</code></li>
+<li><code>list</code></li>
+<li><code>storage</code></li>
+<li><code>dev</code></li>
+<li><code>a3</code></li>
+</ul>
+<h2 id="4-runtime-model">4. Runtime Model</h2>
+<h3 id="41-metadata-loading">4.1 Metadata Loading</h3>
+<p><code>ontobdc_data()</code> reads <code>pyproject.toml</code>, parses the TOML content, and exposes it as a JSON-compatible dictionary.</p>
+<p>Its role is:</p>
+<ul>
+<li>locate <code>pyproject.toml</code></li>
+<li>parse TOML</li>
+<li>normalize the result into JSON-safe Python data</li>
+<li>return <code>{}</code> on failure</li>
+</ul>
+<p>This keeps the rest of the CLI logic independent from TOML parsing details.</p>
+<h3 id="42-top-level-help-rendering">4.2 Top-Level Help Rendering</h3>
+<p><code>print_help()</code> reads:</p>
+<ul>
+<li><code>tool.ontobdc.commands.cli</code></li>
+<li>the command entries under <code>tool.ontobdc.commands.*</code></li>
+</ul>
+<p>It uses that metadata to build:</p>
+<ul>
+<li>the executable name used in the <code>Usage:</code> line</li>
+<li>the visible command catalog</li>
+<li>the short command descriptions shown in the help body</li>
+</ul>
+<p>The top-level help is still rendered through the standard message box flow:</p>
+<ul>
+<li>color: <code>INFO</code></li>
+<li>title type: <code>OntoBDC</code></li>
+<li>title text: <code>CLI Help</code></li>
+</ul>
+<h3 id="43-subcommand-help-rendering">4.3 Subcommand Help Rendering</h3>
+<p>The same metadata model can also be used by subcommands.</p>
+<p>The first implemented example is <code>ontobdc init -h</code> and <code>ontobdc init --help</code>, which now render through:</p>
+<ul>
+<li>color: <code>INFO</code></li>
+<li>title type: <code>OntoBDC</code></li>
+<li>title text: <code>Init Help</code></li>
+</ul>
+<p>using metadata read from:</p>
+<ul>
+<li><code>tool.ontobdc.commands.init</code></li>
+</ul>
+<h2 id="5-metadata-schema">5. Metadata Schema</h2>
+<p>The metadata schema is project-specific and currently informal but stable enough for operational use.</p>
+<p>The following fields are currently used or expected:</p>
+<h3 id="51-component">5.1 <code>component</code></h3>
+<p>Functional ownership label for the command.</p>
+<p>Example:</p>
+<pre><code class="language-toml">component = &quot;core&quot;
+</code></pre>
+<h3 id="52-source">5.2 <code>source</code></h3>
+<p>Internal source or implementation area associated with the command.</p>
+<p>Example:</p>
+<pre><code class="language-toml">source = &quot;cli.init&quot;
+</code></pre>
+<h3 id="53-availability">5.3 <code>availability</code></h3>
+<p>Human-readable visibility or gating note.</p>
+<p>Examples:</p>
+<pre><code class="language-toml">availability = &quot;always available&quot;
+availability = &quot;requires initialized project&quot;
+availability = &quot;requires initialized project and usually dev.tool enabled&quot;
+</code></pre>
+<p>This field is descriptive, but some phrases are also used by the CLI as simple visibility gates in help rendering.</p>
+<p>Current examples:</p>
+<ul>
+<li>commands mentioning <code>dev.tool enabled</code></li>
+<li>commands mentioning <code>A3 enabled</code></li>
+</ul>
+<h3 id="54-usage">5.4 <code>usage</code></h3>
+<p>List of usage examples for the command.</p>
+<p>Example:</p>
+<pre><code class="language-toml">usage = [
+    &quot;ontobdc init &lt;engine&gt;&quot;,
+    &quot;ontobdc init&quot;,
+    &quot;ontobdc init -h | --help&quot;,
+]
+</code></pre>
+<h3 id="55-description">5.5 <code>description</code></h3>
+<p>Single-line command description shown in help output.</p>
+<p>Example:</p>
+<pre><code class="language-toml">description = &quot;Initialize the local OntoBDC project configuration.&quot;
+</code></pre>
+<h3 id="56-options">5.6 <code>options</code></h3>
+<p>Human-readable list of options, arguments, or subcommand forms.</p>
+<p>Example:</p>
+<pre><code class="language-toml">options = [
+    &quot;engine: explicit execution engine such as venv or colab&quot;,
+]
+</code></pre>
+<h3 id="57-notes">5.7 <code>notes</code></h3>
+<p>Optional explanatory list for additional behavioral context.</p>
+<p>Example:</p>
+<pre><code class="language-toml">notes = [
+    &quot;If the engine is omitted, OntoBDC tries to auto-detect colab or an active virtual environment.&quot;,
+]
+</code></pre>
+<h2 id="6-how-to-add-a-new-command">6. How To Add A New Command</h2>
+<p>Adding a command to metadata is a documentation and help-surface step, not the full implementation step.</p>
+<p>Use the following procedure.</p>
+<h3 id="61-add-the-metadata-entry">6.1 Add The Metadata Entry</h3>
+<p>Create a new block in <code>pyproject.toml</code>:</p>
+<pre><code class="language-toml">[tool.ontobdc.commands.example]
+component = &quot;example&quot;
+source = &quot;example&quot;
+availability = &quot;requires initialized project&quot;
+usage = [
+    &quot;ontobdc example&quot;,
+    &quot;ontobdc example --help&quot;,
+]
+description = &quot;Describe what the command does.&quot;
+options = [
+    &quot;--help: show example help&quot;,
+]
+notes = [
+    &quot;Optional extra notes if needed.&quot;,
+]
+</code></pre>
+<h3 id="62-keep-the-entry-user-facing">6.2 Keep The Entry User-Facing</h3>
+<p>Write the metadata as user-facing help text:</p>
+<ul>
+<li>short command names</li>
+<li>short descriptions</li>
+<li>readable examples</li>
+<li>readable option descriptions</li>
+</ul>
+<p>Avoid implementation-only wording when the field is intended for the CLI help surface.</p>
+<h3 id="63-wire-the-runtime-command">6.3 Wire The Runtime Command</h3>
+<p>Adding metadata alone does <strong>not</strong> make the command executable.</p>
+<p>You must still:</p>
+<ul>
+<li>add routing in <code>src/ontobdc/cli/__init__.py</code></li>
+<li>implement the command module or shell script</li>
+<li>decide whether the command is always available or gated</li>
+<li>add or update tests</li>
+</ul>
+<p>If the runtime routing is missing, the help may show the command while execution still fails.</p>
+<h3 id="64-add-command-specific-help-if-needed">6.4 Add Command-Specific Help If Needed</h3>
+<p>If the command also has a dedicated subcommand help path, that implementation should read the same metadata instead of duplicating the content manually.</p>
+<h3 id="65-add-tests">6.5 Add Tests</h3>
+<p>At minimum, consider:</p>
+<ul>
+<li>top-level help visibility</li>
+<li>subcommand <code>-h</code> / <code>--help</code></li>
+<li>gating behavior when the command is conditional</li>
+<li>expected message box color/title contract</li>
+</ul>
+<h2 id="7-current-limitations">7. Current Limitations</h2>
+<p>The current implementation intentionally stays lightweight.</p>
+<p>Known limitations include:</p>
+<ul>
+<li>the schema is not formally validated</li>
+<li>help rendering uses simple conventions rather than a strict metadata model</li>
+<li>some availability logic depends on matching phrases inside <code>availability</code></li>
+<li>metadata can describe commands that are not yet fully wired</li>
+<li>malformed TOML or malformed command entries can degrade help quality</li>
+</ul>
+<h2 id="8-practical-guidance">8. Practical Guidance</h2>
+<p>When changing command metadata:</p>
+<ul>
+<li>update <code>pyproject.toml</code> first</li>
+<li>verify top-level help output</li>
+<li>verify any dedicated subcommand help output</li>
+<li>verify the command still matches current product decisions</li>
+<li>remove deprecated commands from both metadata and routing when they leave the active surface</li>
+</ul>
+<p>When deprecating a command:</p>
+<ul>
+<li>remove it from <code>tool.ontobdc.commands</code></li>
+<li>remove or disable the CLI routing path</li>
+<li>update specs and tests</li>
+<li>record the reason in an ADR or legacy note when appropriate</li>
+</ul>
+<h2 id="arquivos-afetados">Arquivos Afetados</h2>
+<ul>
+<li><code>pyproject.toml</code>: Fonte da verdade.</li>
+<li><code>src/ontobdc/cli/__init__.py</code>: (Opcional) Expõe a versão programaticamente.</li>
+<li><code>src/ontobdc/cli/init.py</code> (e demais comandos): Consomem a versão e metadados.</li>
+</ul>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="../../adr/ADR002_cli_help_from_pyproject_metadata/">ADR002</a></li>
+</ul>
+<h2 id="testes">Testes</h2>
+<ul>
+<li>Script de teste: <code>test/src/ontobdc/test_cli_help.sh</code></li>
+<li>Script de teste (subcomando): <code>test/src/ontobdc/test_cli_init_help.sh</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

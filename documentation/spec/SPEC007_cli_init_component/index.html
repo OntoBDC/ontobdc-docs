@@ -1,0 +1,3157 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for OntoBDC - Ontology-Based Data Capabilities">
+      
+      
+        <meta name="author" content="Elias M. P. Junior">
+      
+      
+        <link rel="canonical" href="https://ontobdc.org/documentation/spec/SPEC007_cli_init_component/">
+      
+      
+        <link rel="prev" href="../SPEC011_deprecating_adrs_and_specs/">
+      
+      
+        <link rel="next" href="../SPEC006_run_cli_context_resolution/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SPEC007_cli_init_component - OntoBDC Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spec-007-ontobdc-init-component" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="OntoBDC Documentation" class="md-header__button md-logo" aria-label="OntoBDC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OntoBDC Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SPEC007_cli_init_component
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eliasmpjunior/ontobdc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ontobdc-core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="OntoBDC Documentation" class="md-nav__button md-logo" aria-label="OntoBDC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OntoBDC Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eliasmpjunior/ontobdc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ontobdc-core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../LICENSE" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paper/white/ontobdc-run-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ontobdc-run-architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR001_dependency_injection_and_components_extras_split/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR001_dependency_injection_and_components_extras_split
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR006_a3_state_machine_with_file_materialized_state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR006_a3_state_machine_with_file_materialized_state
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR003_plugin_oriented_capabilities_and_parameter_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR003_plugin_oriented_capabilities_and_parameter_strategies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR004_project_local_runtime_extension_via_ontobdc_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR004_project_local_runtime_extension_via_ontobdc_config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR005_separate_capability_discovery_from_capability_execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR005_separate_capability_discovery_from_capability_execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR002_cli_help_from_pyproject_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR002_cli_help_from_pyproject_metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_language_defined/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_language_defined
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_intended/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_intended
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_planned/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_planned
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_filled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_filled
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_validated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_validated
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_parsed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_parsed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_to_canonical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_to_canonical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/run/test_resolution_from_low_confidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_resolution_from_low_confidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC003_transition_success_learning_graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC003_transition_success_learning_graph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC007_atomic_container_dataset_creation_and_rollback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC007_atomic_container_dataset_creation_and_rollback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC008_wrap_context_creation_questions_in_a_panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC008_wrap_context_creation_questions_in_a_panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC001_cli_help_status_section/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC001_cli_help_status_section
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC002_pre_parser_grammatical_normalization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC002_pre_parser_grammatical_normalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC004_llm_normalization_interface_layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC004_llm_normalization_interface_layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC006_container_dataset_identifier_to_physical_name_contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC006_container_dataset_identifier_to_physical_name_contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/RFC005_olia_inference_and_mapper_completion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC005_olia_inference_and_mapper_completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC009_olia_semantic_intent_typing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC009_olia_semantic_intent_typing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC003_system_artifacts_by_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC003_system_artifacts_by_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC010_shared_plugin_loaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC010_shared_plugin_loaders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC008_country_dataset_container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC008_country_dataset_container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC011_deprecating_adrs_and_specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC011_deprecating_adrs_and_specs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC007_cli_init_component
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC007_cli_init_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-source-of-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Source Of Truth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-component-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Component Role
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-command-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Command Surface
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-runtime-entry-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Runtime Entry Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-functional-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Functional Breakdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Functional Breakdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-dependency-extra-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Dependency Extra Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-logging-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Logging Wrapper
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-message-box-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Message Box Wrapper
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-metadata-driven-help-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Metadata-Driven Help Construction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-initialization-orchestration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Initialization Orchestration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-initialization-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Initialization Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-engine-resolution-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Engine Resolution Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Engine Resolution Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-explicit-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Explicit Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-auto-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Auto-Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-validation-against-checkconfigjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Validation Against check/config.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-configuration-persistence-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Configuration Persistence Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Configuration Persistence Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-target-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Target Location
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-minimum-persisted-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Minimum Persisted Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-file-creation-semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 File Creation Semantics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-output-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Output Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Output Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-help-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Help Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-already-initialized-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Already Initialized Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-error-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Error Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-post-initialization-check-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Post-Initialization Check Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-state-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. State Transitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. State Transitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-uninitialized-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Uninitialized Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-already-initialized-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Already Initialized Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-invalid-initialization-attempt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Invalid Initialization Attempt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-dependencies-and-collaborators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Dependencies And Collaborators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-architectural-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Architectural Characteristics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-current-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Current Limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Current Limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-mixed-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Mixed Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-strong-sysargv-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Strong sys.argv Coupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-limited-auto-detection-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Limited Auto-Detection Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-non-idempotent-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Non-Idempotent Initialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#155-unreachable-update-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 Unreachable Update Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#156-best-effort-post-init-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.6 Best-Effort Post-Init Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-operational-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Operational Guidance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-related-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Related Specifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC006_run_cli_context_resolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC006_run_cli_context_resolution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC001_core_modules_and_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC001_core_modules_and_commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC004_component_flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC004_component_flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC002_cli_help_from_pyproject_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC002_cli_help_from_pyproject_metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC012_storage_component_behavior/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC012_storage_component_behavior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPEC005_ontobdc_list_component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC005_ontobdc_list_component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD003_cli_help_from_pyproject_metadata_adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD003_cli_help_from_pyproject_metadata_adr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD001_init_context_command_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD001_init_context_command_flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD004_cli_help_from_pyproject_metadata_spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD004_cli_help_from_pyproject_metadata_spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legacy/OLD002_plan_command_deprecation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OLD002_plan_command_deprecation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uc/UC_a3_states_and_transitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UC_a3_states_and_transitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uc/UC_a3_cli_first_step/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UC_a3_cli_first_step
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../debug/debug-a3-cli-entry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    debug-a3-cli-entry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-source-of-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Source Of Truth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-component-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Component Role
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-command-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Command Surface
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-runtime-entry-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Runtime Entry Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-functional-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Functional Breakdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Functional Breakdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-dependency-extra-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Dependency Extra Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-logging-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Logging Wrapper
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-message-box-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Message Box Wrapper
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-metadata-driven-help-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Metadata-Driven Help Construction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-initialization-orchestration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Initialization Orchestration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-initialization-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Initialization Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-engine-resolution-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Engine Resolution Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Engine Resolution Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-explicit-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Explicit Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-auto-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Auto-Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-validation-against-checkconfigjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Validation Against check/config.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-configuration-persistence-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Configuration Persistence Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Configuration Persistence Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-target-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Target Location
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-minimum-persisted-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Minimum Persisted Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-file-creation-semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 File Creation Semantics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-output-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Output Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Output Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-help-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Help Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-already-initialized-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Already Initialized Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-error-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Error Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-post-initialization-check-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Post-Initialization Check Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-state-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. State Transitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. State Transitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-uninitialized-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Uninitialized Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-already-initialized-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Already Initialized Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-invalid-initialization-attempt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Invalid Initialization Attempt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-dependencies-and-collaborators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Dependencies And Collaborators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-architectural-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Architectural Characteristics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-current-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Current Limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Current Limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-mixed-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Mixed Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-strong-sysargv-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Strong sys.argv Coupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-limited-auto-detection-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Limited Auto-Detection Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-non-idempotent-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Non-Idempotent Initialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#155-unreachable-update-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 Unreachable Update Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#156-best-effort-post-init-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.6 Best-Effort Post-Init Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-operational-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Operational Guidance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-related-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Related Specifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="spec-007-ontobdc-init-component">SPEC 007 - OntoBDC Init Component</h1>
+<h2 id="status">Status</h2>
+<ul>
+<li><strong>Status</strong>: Working specification of the current <code>ontobdc init</code> component</li>
+<li><strong>Scope</strong>: <code>src/ontobdc/cli/init.py</code></li>
+<li><strong>Audience</strong>: maintainers and contributors working on project bootstrap, CLI initialization, and local environment setup</li>
+</ul>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This specification describes the current behavior of the <code>ontobdc init</code> component implemented in <code>src/ontobdc/cli/init.py</code>.</p>
+<p>The component exists to:</p>
+<ul>
+<li>initialize a local OntoBDC project</li>
+<li>create the base <code>.__ontobdc__</code> configuration directory</li>
+<li>persist the selected execution engine into <code>config.yaml</code></li>
+<li>render command help and user feedback through the CLI presentation contract</li>
+<li>trigger an initial environment verification and repair flow after bootstrap</li>
+</ul>
+<p>This document explains:</p>
+<ul>
+<li>the runtime role of <code>ontobdc init</code></li>
+<li>the inputs and outputs of the component</li>
+<li>how engine detection and validation currently work</li>
+<li>how project configuration is written</li>
+<li>how the component integrates with shared CLI metadata and <code>check</code></li>
+<li>current limitations and operational implications</li>
+</ul>
+<h2 id="2-source-of-truth">2. Source Of Truth</h2>
+<p>This specification is derived from the current implementation under:</p>
+<ul>
+<li><code>src/ontobdc/cli/init.py</code></li>
+<li><code>src/ontobdc/cli/__init__.py</code></li>
+<li><code>src/ontobdc/check/config.json</code></li>
+<li><code>pyproject.toml</code></li>
+</ul>
+<p>Related behavior is also influenced by:</p>
+<ul>
+<li>metadata loaded through <code>ontobdc_data()</code></li>
+<li>shared CLI routing in <code>ontobdc.cli</code></li>
+<li>shell helper scripts such as <code>message_box.sh</code> and <code>print_log.sh</code></li>
+</ul>
+<h2 id="3-component-role">3. Component Role</h2>
+<p><code>ontobdc init</code> is the bootstrap command of the current OntoBDC CLI.</p>
+<p>Its responsibility is not to execute domain capabilities or inspect project data.</p>
+<p>Its role is to establish the minimum local project state required by the rest of the CLI, including:</p>
+<ul>
+<li>a recognized project marker directory</li>
+<li>a persisted engine selection</li>
+<li>an absolute root path in the project config</li>
+<li>a follow-up environment check flow</li>
+</ul>
+<p>In practice, this makes <code>init</code> the transition point between:</p>
+<ul>
+<li>a plain directory</li>
+<li>an initialized OntoBDC project directory</li>
+</ul>
+<h2 id="4-command-surface">4. Command Surface</h2>
+<p>According to the current implementation and metadata-driven help model, the command supports:</p>
+<ul>
+<li><code>ontobdc init &lt;engine&gt;</code></li>
+<li><code>ontobdc init</code></li>
+<li><code>ontobdc init -h</code></li>
+<li><code>ontobdc init --help</code></li>
+</ul>
+<p>The engine argument is currently positional and optional.</p>
+<p>If the engine is omitted, the component attempts runtime auto-detection.</p>
+<h2 id="5-runtime-entry-model">5. Runtime Entry Model</h2>
+<p>The public entrypoint in this module is:</p>
+<ul>
+<li><code>init_main()</code></li>
+</ul>
+<p>Its current behavior is minimal:</p>
+<ul>
+<li>delegate directly to <code>init_engine_main()</code></li>
+</ul>
+<p>The effective initialization flow is therefore concentrated in:</p>
+<ul>
+<li><code>init_engine_main()</code></li>
+</ul>
+<h2 id="6-functional-breakdown">6. Functional Breakdown</h2>
+<p>The module currently contains five functional areas:</p>
+<h3 id="61-dependency-extra-detection">6.1 Dependency Extra Detection</h3>
+<p><code>is_extra_enabled(extra_name)</code> checks whether all dependencies listed under a named extra in <code>pyproject.toml</code> are installed in the current environment.</p>
+<p>It currently:</p>
+<ul>
+<li>locates <code>pyproject.toml</code></li>
+<li>searches the target extra block with regex</li>
+<li>extracts quoted dependency strings</li>
+<li>strips version operators before lookup</li>
+<li>checks installation using <code>importlib.metadata.version</code></li>
+</ul>
+<p>Current characteristics:</p>
+<ul>
+<li>returns <code>False</code> if the file is missing</li>
+<li>returns <code>False</code> if parsing fails</li>
+<li>returns <code>False</code> if any dependency is missing</li>
+<li>returns <code>False</code> if no dependencies are found</li>
+<li>returns <code>True</code> only when all dependencies are present</li>
+</ul>
+<p>This function is a general CLI utility but is not part of the active <code>init</code> execution path today.</p>
+<h3 id="62-logging-wrapper">6.2 Logging Wrapper</h3>
+<p><code>log(level, message, *args)</code> is a presentation adapter around <code>print_log.sh</code>.</p>
+<p>Its behavior is:</p>
+<ul>
+<li>locate the shell script relative to <code>init.py</code></li>
+<li>invoke it through <code>subprocess.run(..., check=False)</code> if present</li>
+<li>fall back to <code>print()</code> when the script is unavailable</li>
+</ul>
+<p>This keeps the module compatible with both richer shell-driven CLI output and simpler fallback execution environments.</p>
+<h3 id="63-message-box-wrapper">6.3 Message Box Wrapper</h3>
+<p><code>message_box(color, title_type, title_text, message)</code> is a presentation adapter around <code>message_box.sh</code>.</p>
+<p>Its behavior is:</p>
+<ul>
+<li>locate the shell script relative to <code>init.py</code></li>
+<li>invoke it through <code>subprocess.run(..., check=False)</code> if present</li>
+<li>fall back to <code>print()</code> when the script is unavailable</li>
+</ul>
+<p>This is the main user-facing output channel for:</p>
+<ul>
+<li>help</li>
+<li>warnings</li>
+<li>initialization state feedback</li>
+</ul>
+<h3 id="64-metadata-driven-help-construction">6.4 Metadata-Driven Help Construction</h3>
+<p><code>init_help_message()</code> builds the help message for <code>ontobdc init</code>.</p>
+<p>It tries to load command metadata from:</p>
+<ul>
+<li><code>tool.ontobdc.commands.init</code> in <code>pyproject.toml</code></li>
+</ul>
+<p>through:</p>
+<ul>
+<li><code>ontobdc_data()</code></li>
+</ul>
+<p>If metadata loading fails, it falls back to hardcoded defaults.</p>
+<p>The help payload currently includes:</p>
+<ul>
+<li>usage entries</li>
+<li>a description</li>
+<li>options</li>
+<li>notes</li>
+</ul>
+<p>The function returns a formatted string containing ANSI styling, which is then passed to <code>message_box()</code> when help is requested.</p>
+<h3 id="65-initialization-orchestration">6.5 Initialization Orchestration</h3>
+<p><code>init_engine_main()</code> is the core orchestration function of the component.</p>
+<p>It is responsible for:</p>
+<ul>
+<li>parsing <code>sys.argv</code></li>
+<li>rendering help when requested</li>
+<li>resolving the target engine</li>
+<li>validating the engine against <code>check/config.json</code></li>
+<li>creating <code>.__ontobdc__</code></li>
+<li>writing <code>config.yaml</code></li>
+<li>triggering <code>check_main(repair=True)</code></li>
+</ul>
+<h2 id="7-initialization-flow">7. Initialization Flow</h2>
+<p>The current initialization flow is:</p>
+<ol>
+<li>Inspect <code>sys.argv[2:]</code> for <code>-h</code> or <code>--help</code>.</li>
+<li>If help is requested, render a message box with <code>init_help_message()</code> and return.</li>
+<li>Parse the optional positional <code>engine</code> with <code>argparse</code>.</li>
+<li>If no engine is provided, try to auto-detect one.</li>
+<li>Validate the resolved engine against <code>src/ontobdc/check/config.json</code> if that file exists.</li>
+<li>Resolve the current working directory as the project root to initialize.</li>
+<li>Build:</li>
+<li><code>.__ontobdc__/</code></li>
+<li><code>.__ontobdc__/config.yaml</code></li>
+<li>If <code>config.yaml</code> already exists, emit a warning and stop.</li>
+<li>Create the marker directory if needed.</li>
+<li>Build the configuration payload.</li>
+<li>Write the YAML file.</li>
+<li>Invoke <code>check_main()</code> with a lightweight object whose <code>repair</code> attribute is <code>True</code>.</li>
+<li>Swallow <code>SystemExit</code> from the check phase so that initialization is not treated as a full failure.</li>
+</ol>
+<h2 id="8-engine-resolution-model">8. Engine Resolution Model</h2>
+<h3 id="81-explicit-engine">8.1 Explicit Engine</h3>
+<p>When the user provides a positional engine value, that value is used directly.</p>
+<p>Example:</p>
+<ul>
+<li><code>ontobdc init venv</code></li>
+</ul>
+<h3 id="82-auto-detection">8.2 Auto-Detection</h3>
+<p>If the engine is omitted, the component performs automatic detection.</p>
+<p>Current detection order:</p>
+<ol>
+<li>If <code>/content</code> exists, choose <code>colab</code></li>
+<li>Else if <code>sys.prefix != sys.base_prefix</code>, choose <code>venv</code></li>
+<li>Else fail and request an explicit engine</li>
+</ol>
+<p>This means the current implementation assumes:</p>
+<ul>
+<li>Google Colab environments expose <code>/content</code></li>
+<li>active virtual environments can be detected through Python prefix divergence</li>
+</ul>
+<h3 id="83-validation-against-checkconfigjson">8.3 Validation Against <code>check/config.json</code></h3>
+<p>After resolution, the engine may be validated against:</p>
+<ul>
+<li><code>src/ontobdc/check/config.json</code></li>
+</ul>
+<p>Current validation behavior:</p>
+<ul>
+<li>if the file is missing, validation is effectively skipped</li>
+<li>if the file exists but cannot be parsed, a warning is logged</li>
+<li>if a <code>config.engine</code> list is found, the resolved engine must be in that list</li>
+<li>otherwise the command exits with an error</li>
+</ul>
+<h2 id="9-configuration-persistence-model">9. Configuration Persistence Model</h2>
+<h3 id="91-target-location">9.1 Target Location</h3>
+<p>The initialized project structure is currently:</p>
+<pre><code class="language-text">&lt;cwd&gt;/
+  .__ontobdc__/
+    config.yaml
+</code></pre>
+<p>The current working directory at invocation time is treated as the project root.</p>
+<h3 id="92-minimum-persisted-data">9.2 Minimum Persisted Data</h3>
+<p>The YAML payload currently includes at least:</p>
+<pre><code class="language-yaml">engine: venv
+directory:
+  root:
+    absolute_path: /absolute/project/path
+</code></pre>
+<p>The exact engine value varies with explicit input or auto-detection.</p>
+<h3 id="93-file-creation-semantics">9.3 File Creation Semantics</h3>
+<p>Current behavior:</p>
+<ul>
+<li>create <code>.__ontobdc__</code> if it does not exist</li>
+<li>stop early if <code>config.yaml</code> already exists</li>
+<li>write YAML using <code>yaml.dump(..., default_flow_style=False)</code></li>
+</ul>
+<p>Although the code contains a branch that reads an existing config file into <code>config_data</code>, that branch is currently unreachable in normal execution because the function returns early when <code>config.yaml</code> already exists.</p>
+<h2 id="10-output-contract">10. Output Contract</h2>
+<p>The component currently emits output through a mix of:</p>
+<ul>
+<li><code>message_box()</code></li>
+<li><code>log()</code></li>
+<li>plain <code>print()</code></li>
+<li><code>sys.exit()</code></li>
+</ul>
+<h3 id="101-help-output">10.1 Help Output</h3>
+<p>Help is rendered through:</p>
+<ul>
+<li>color: <code>INFO</code></li>
+<li>title type: <code>OntoBDC</code></li>
+<li>title text: <code>Init Help</code></li>
+</ul>
+<h3 id="102-already-initialized-output">10.2 Already Initialized Output</h3>
+<p>If the project already has <code>.__ontobdc__/config.yaml</code>, the component emits:</p>
+<ul>
+<li>color: <code>YELLOW</code></li>
+<li>title type: <code>Warning</code></li>
+<li>title text: <code>Already Initialized</code></li>
+</ul>
+<p>and returns without modifying the existing configuration.</p>
+<h3 id="103-error-output">10.3 Error Output</h3>
+<p>Errors may be surfaced through:</p>
+<ul>
+<li><code>log("ERROR", ...)</code></li>
+<li>plain <code>print()</code></li>
+<li><code>sys.exit(1)</code></li>
+</ul>
+<p>The exact presentation depends on which branch fails and whether helper shell scripts are available.</p>
+<h2 id="11-post-initialization-check-integration">11. Post-Initialization Check Integration</h2>
+<p>After writing <code>config.yaml</code>, the component imports and executes:</p>
+<ul>
+<li><code>check_main</code></li>
+</ul>
+<p>It constructs a local lightweight argument object:</p>
+<pre><code class="language-python">class CheckArgs:
+    repair = True
+</code></pre>
+<p>and invokes:</p>
+<ul>
+<li><code>check_main(CheckArgs(), cwd)</code></li>
+</ul>
+<p>This implies the <code>init</code> component expects <code>check_main</code> to accept:</p>
+<ul>
+<li>an object exposing a <code>repair</code> attribute</li>
+<li>a project root path argument</li>
+</ul>
+<p>If <code>check_main</code> exits the process through <code>SystemExit</code>, <code>init_engine_main()</code> catches it and suppresses it.</p>
+<p>This means:</p>
+<ul>
+<li>initialization success is primarily tied to config creation</li>
+<li>post-init repair is treated as best-effort follow-up work</li>
+</ul>
+<h2 id="12-state-transitions">12. State Transitions</h2>
+<p>The component currently models three practical states.</p>
+<h3 id="121-uninitialized-directory">12.1 Uninitialized Directory</h3>
+<p>Characteristics:</p>
+<ul>
+<li>no <code>.__ontobdc__/config.yaml</code></li>
+</ul>
+<p>Behavior:</p>
+<ul>
+<li>create the directory structure</li>
+<li>write config</li>
+<li>run check</li>
+</ul>
+<h3 id="122-already-initialized-directory">12.2 Already Initialized Directory</h3>
+<p>Characteristics:</p>
+<ul>
+<li><code>.__ontobdc__/config.yaml</code> already exists</li>
+</ul>
+<p>Behavior:</p>
+<ul>
+<li>show warning</li>
+<li>do not rewrite config</li>
+<li>do not rerun initialization persistence</li>
+</ul>
+<h3 id="123-invalid-initialization-attempt">12.3 Invalid Initialization Attempt</h3>
+<p>Examples:</p>
+<ul>
+<li>engine could not be auto-detected</li>
+<li>engine is not in the allowed engine list</li>
+<li>YAML file cannot be written</li>
+</ul>
+<p>Behavior:</p>
+<ul>
+<li>emit error-oriented output</li>
+<li>exit non-zero</li>
+</ul>
+<h2 id="13-dependencies-and-collaborators">13. Dependencies And Collaborators</h2>
+<p>The module depends on:</p>
+<ul>
+<li>Python standard library</li>
+<li><code>os</code></li>
+<li><code>re</code></li>
+<li><code>sys</code></li>
+<li><code>argparse</code></li>
+<li><code>json</code></li>
+<li><code>subprocess</code></li>
+<li>third-party package</li>
+<li><code>yaml</code></li>
+<li>packaging metadata APIs</li>
+<li><code>importlib.metadata.version</code></li>
+<li><code>importlib.metadata.PackageNotFoundError</code></li>
+</ul>
+<p>It collaborates with:</p>
+<ul>
+<li><code>ontobdc.cli.ontobdc_data</code></li>
+<li><code>ontobdc.cli.check_main</code></li>
+<li><code>src/ontobdc/check/config.json</code></li>
+<li><code>pyproject.toml</code></li>
+<li><code>message_box.sh</code></li>
+<li><code>print_log.sh</code></li>
+</ul>
+<h2 id="14-architectural-characteristics">14. Architectural Characteristics</h2>
+<p>The current component is operationally effective but architecturally mixed.</p>
+<p>It currently combines:</p>
+<ul>
+<li>CLI parsing</li>
+<li>metadata-driven help rendering</li>
+<li>environment detection</li>
+<li>configuration persistence</li>
+<li>subprocess-backed presentation</li>
+<li>post-bootstrap orchestration</li>
+</ul>
+<p>This means the module behaves as a full command adapter and application service at the same time.</p>
+<h2 id="15-current-limitations">15. Current Limitations</h2>
+<p>The current implementation has several important limitations.</p>
+<h3 id="151-mixed-responsibilities">15.1 Mixed Responsibilities</h3>
+<p>The module combines presentation, parsing, persistence, validation, and orchestration in one file.</p>
+<h3 id="152-strong-sysargv-coupling">15.2 Strong <code>sys.argv</code> Coupling</h3>
+<p>The logic reads <code>sys.argv[2:]</code> directly, making reuse outside the main CLI entrypoint harder.</p>
+<h3 id="153-limited-auto-detection-model">15.3 Limited Auto-Detection Model</h3>
+<p>Engine detection only recognizes:</p>
+<ul>
+<li><code>colab</code></li>
+<li>an already active virtual environment</li>
+</ul>
+<p>It does not inspect project configuration, local tooling preferences, or other execution contexts.</p>
+<h3 id="154-non-idempotent-initialization">15.4 Non-Idempotent Initialization</h3>
+<p>If <code>config.yaml</code> already exists, the command returns early instead of validating or reconciling the existing configuration.</p>
+<h3 id="155-unreachable-update-branch">15.5 Unreachable Update Branch</h3>
+<p>The code includes logic intended to read and update an existing config file, but that branch is effectively bypassed because the command returns before reaching it.</p>
+<h3 id="156-best-effort-post-init-check">15.6 Best-Effort Post-Init Check</h3>
+<p>The post-init check is not treated as a strict part of initialization success because <code>SystemExit</code> is swallowed.</p>
+<h2 id="16-operational-guidance">16. Operational Guidance</h2>
+<p>When modifying <code>ontobdc init</code>, contributors should preserve the following behavioral contracts unless intentionally changing them:</p>
+<ul>
+<li>help should remain metadata-driven when possible</li>
+<li>the initialized project root should be the current working directory</li>
+<li>the config file should store an absolute root path</li>
+<li>engine validation should remain consistent with <code>check/config.json</code></li>
+<li>bootstrap should still work when shell helper scripts are missing</li>
+</ul>
+<p>When refactoring this component, the most natural separation points are:</p>
+<ul>
+<li>help rendering</li>
+<li>engine resolution</li>
+<li>config repository or config writer logic</li>
+<li>post-init check orchestration</li>
+<li>CLI argument parsing</li>
+</ul>
+<h2 id="17-related-specifications">17. Related Specifications</h2>
+<ul>
+<li><code>docs/documentation/spec/SPEC002_cli_help_from_pyproject_metadata.md</code></li>
+<li><code>docs/documentation/spec/SPEC003_system_artifacts_by_component.md</code></li>
+<li><code>docs/documentation/spec/SPEC004_component_flows.md</code></li>
+<li><code>docs/documentation/spec/SPEC006_run_cli_context_resolution.md</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
