@@ -50,7 +50,7 @@ That created duplication between:
 
 The current model moves the command catalog into the custom `tool.ontobdc.commands.*` section of `pyproject.toml` and makes the CLI read it through `ontobdc_data()`.
 
-The architectural rationale for this decision is recorded in [ADR002_cli_help_from_pyproject_metadata.md](docs/documentation/legacy/OLD003_cli_help_from_pyproject_metadata_adr.md).
+The architectural rationale for this decision is recorded in [ADR002_cli_help_from_pyproject_metadata.md](../adr/ADR002_cli_help_from_pyproject_metadata.md).
 
 ## 3. Source Of Truth
 
@@ -315,11 +315,14 @@ When deprecating a command:
 - update specs and tests
 - record the reason in an ADR or legacy note when appropriate
 
-## 9. Related Files
+## Arquivos Afetados
+- `pyproject.toml`: Fonte da verdade.
+- `src/ontobdc/cli/__init__.py`: (Opcional) Expõe a versão programaticamente.
+- `src/ontobdc/cli/init.py` (e demais comandos): Consomem a versão e metadados.
 
-- [pyproject.toml](pyproject.toml)
-- [__init__.py](src/ontobdc/cli/__init__.py)
-- [init.py](src/ontobdc/cli/init.py)
-- [ADR002_cli_help_from_pyproject_metadata.md](docs/documentation/legacy/OLD003_cli_help_from_pyproject_metadata_adr.md)
-- [test_cli_help.sh](test/src/ontobdc/test_cli_help.sh)
-- [test_cli_init_help.sh](test/src/ontobdc/test_cli_init_help.sh)
+## Referências
+- [ADR002](../adr/ADR002_cli_help_from_pyproject_metadata.md)
+
+## Testes
+- Script de teste: `test/src/ontobdc/test_cli_help.sh`
+- Script de teste (subcomando): `test/src/ontobdc/test_cli_init_help.sh`

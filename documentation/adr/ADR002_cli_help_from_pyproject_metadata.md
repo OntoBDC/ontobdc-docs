@@ -10,5 +10,5 @@ This ADR is deprecated as of version 0.9.0. The project is no longer using `pypr
 
 ## Related Files
 
-- [pyproject.toml](pyproject.toml)
+- `pyproject.toml`
 - [Legacy Note](../legacy/OLD003_cli_help_from_pyproject_metadata_adr.md)
