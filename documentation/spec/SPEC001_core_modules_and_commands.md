@@ -282,7 +282,7 @@ The `storage` module manages registered datasets and storage metadata.
 #### Behavior
 
 - lists current storage entries when `--list` is provided
-- enables storage capabilities and creates `storage.rdf` when `--enable` is provided
+- enables storage capabilities and creates `storage.ttl` when `--enable` is provided
 - delegates operations to the corresponding Python command plugins:
   - `list.py`
   - `enable.py`

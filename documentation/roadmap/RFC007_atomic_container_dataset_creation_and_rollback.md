@@ -10,7 +10,7 @@
 
 This RFC proposes that dataset creation inside a storage container should become atomic from the user point of view.
 
-The goal is to prevent partial success scenarios in which the filesystem is mutated but the container-local `storage.rdf` fails to persist the corresponding dataset metadata.
+The goal is to prevent partial success scenarios in which the filesystem is mutated but the container-local `storage.ttl` fails to persist the corresponding dataset metadata.
 
 ## Context
 
@@ -21,7 +21,7 @@ The current command flow already aligns with the main storage architecture defin
 Today, dataset creation already:
 
 - resolves the target container through the root storage graph
-- loads the container-local `storage.rdf`
+- loads the container-local `storage.ttl`
 - creates the dataset directory inside the container
 - writes `hasPart`, `isPartOf`, and `prov:atLocation` in the container-local graph
 - avoids RO-Crate synchronization during dataset creation
@@ -38,7 +38,7 @@ This leaves behind a physical dataset directory that is not represented in the c
 
 ## Motivation
 
-ADR009 treats the container-local `storage.rdf` as the operational source of truth for managed dataset registration inside a container.
+ADR009 treats the container-local `storage.ttl` as the operational source of truth for managed dataset registration inside a container.
 
 That means the command should not leave managed storage artifacts in a state where:
 
@@ -76,7 +76,7 @@ A focused rollback rule is enough if it guarantees that a failed command does no
 
 The final behavior should:
 
-- preserve the container-local `storage.rdf` as the authoritative registration record
+- preserve the container-local `storage.ttl` as the authoritative registration record
 - avoid orphan physical dataset directories created by failed commands
 - keep error behavior deterministic and testable
 - avoid reintroducing root-graph persistence for dataset state
@@ -95,13 +95,13 @@ If implemented, this RFC would likely affect:
 
 Likely new or updated tests:
 
-- forced failure during `storage.rdf` serialization
+- forced failure during `storage.ttl` serialization
 - assertion that the dataset directory does not remain after failure
 - assertion that no dataset triples are left behind in the container graph after rollback
 
 ## Correlation With ADR009
 
-ADR009 defines the container-local `storage.rdf` as the local governance artifact for managed dataset state.
+ADR009 defines the container-local `storage.ttl` as the local governance artifact for managed dataset state.
 
 This RFC refines the operational consequence of that rule:
 

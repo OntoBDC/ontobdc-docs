@@ -278,7 +278,7 @@ Some tests create temporary directories and simulate a minimal OntoBDC workspace
 
 - `.__ontobdc__/config.yaml`
 - mock RDF storage metadata
-- container-local `.__ontobdc__/storage.rdf`
+- container-local `.__ontobdc__/storage.ttl`
 - container-local `.__ontobdc__/ro-crate-metadata.json`
 
 This pattern appears especially in:

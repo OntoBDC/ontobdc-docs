@@ -222,7 +222,7 @@ The `storage` component manages the local dataset registration flow, the root st
 #### Main Flow (List)
 
 1. The user runs `ontobdc storage --list` or `ontobdc storage -l`.
-2. The system checks whether the storage extra dependencies are installed and `.__ontobdc__/storage.rdf` exists.
+2. The system checks whether the storage extra dependencies are installed and `.__ontobdc__/storage.ttl` exists.
 3. If no storage index exists or dependencies are missing, the system warns that storage has not been enabled.
 4. If the storage index exists, the system parses the RDF graph and lists the registered containers.
 
@@ -230,7 +230,7 @@ The `storage` component manages the local dataset registration flow, the root st
 
 1. The user runs `ontobdc storage --enable`.
 2. The system installs the required storage dependencies (`ontobdc[storage]`).
-3. The system creates the storage index `.__ontobdc__/storage.rdf` when necessary.
+3. The system creates the storage index `.__ontobdc__/storage.ttl` when necessary.
 4. The system initializes the root storage container metadata.
 5. The updated storage metadata is persisted.
 
@@ -238,10 +238,10 @@ The `storage` component manages the local dataset registration flow, the root st
 
 1. The user runs `ontobdc storage --create <path>`.
 2. The system normalizes the target path relative to the project root.
-3. The system loads the root `.__ontobdc__/storage.rdf`.
+3. The system loads the root `.__ontobdc__/storage.ttl`.
 4. The system creates and persists a new container description in the root graph.
-5. The system creates `<path>/.__ontobdc__/storage.rdf` when necessary.
-6. The system copies the registered container triples from the root graph into the container-local `storage.rdf`.
+5. The system creates `<path>/.__ontobdc__/storage.ttl` when necessary.
+6. The system copies the registered container triples from the root graph into the container-local `storage.ttl`.
 7. The system creates `<path>/.__ontobdc__/ro-crate-metadata.json` when necessary.
 8. The system refreshes the container RO-Crate metadata so that the local metadata file is up to date.
 
@@ -250,7 +250,7 @@ The `storage` component manages the local dataset registration flow, the root st
 The current storage-specific checks are owned by `storage/plugin/check`.
 
 1. `has_container_config_file/check.py`
-   - validates that each registered container has its local `.__ontobdc__` directory and `storage.rdf`
+   - validates that each registered container has its local `.__ontobdc__` directory and `storage.ttl`
 2. `is_root_set/check.py`
    - validates that the root storage graph contains the `::ROOT::` container
 3. `is_crate_healthy/check.py`
@@ -266,15 +266,15 @@ These checks are intentionally scoped:
 
 1. When a storage check exposes `hotfix.py`, repair recreates only the missing or stale artifact of that check.
 2. `has_container_config_file/hotfix.py`
-   - recreates missing container config directories and container `storage.rdf`
-   - synchronizes root graph triples into container-local `storage.rdf`
+   - recreates missing container config directories and container `storage.ttl`
+   - synchronizes root graph triples into container-local `storage.ttl`
 3. `is_root_set/hotfix.py`
-   - recreates the root `storage.rdf` if missing
+   - recreates the root `storage.ttl` if missing
    - ensures the `::ROOT::` container exists
 4. `is_crate_healthy/hotfix.py`
    - recreates missing `ro-crate-metadata.json`
    - refreshes the crate metadata using the container directory as write target
-   - excludes internal metadata files such as `storage.rdf` from the crate file listing
+   - excludes internal metadata files such as `storage.ttl` from the crate file listing
 
 #### Output
 
