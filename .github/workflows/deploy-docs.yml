@@ -38,51 +38,9 @@ jobs:
       - name: Resolve docs paths
         shell: bash
         run: |
-          # Detect if we are in repo root or in docs/ directory
-          if [ -d ".git" ]; then
-            echo "Running from repo root"
-            # Check from repo root
-            if [ -f "docs/requirements.txt" ]; then
-              echo "REQUIREMENTS_FILE=docs/requirements.txt" >> "$GITHUB_ENV"
-            elif [ -f "requirements.txt" ]; then
-              echo "REQUIREMENTS_FILE=requirements.txt" >> "$GITHUB_ENV"
-            else
-              echo "Unable to locate requirements.txt" >&2
-              exit 1
-            fi
-
-            if [ -f "mkdocs.yml" ]; then
-              echo "MKDOCS_CONFIG=mkdocs.yml" >> "$GITHUB_ENV"
-            elif [ -f "docs/mkdocs.yml" ]; then
-              echo "MKDOCS_CONFIG=docs/mkdocs.yml" >> "$GITHUB_ENV"
-            else
-              echo "Unable to locate mkdocs.yml" >&2
-              exit 1
-            fi
-          elif [ -d "../.git" ]; then
-            echo "Running from docs/ directory"
-            # Check from docs/ directory (one level up)
-            if [ -f "requirements.txt" ]; then
-              echo "REQUIREMENTS_FILE=requirements.txt" >> "$GITHUB_ENV"
-            elif [ -f "../requirements.txt" ]; then
-              echo "REQUIREMENTS_FILE=../requirements.txt" >> "$GITHUB_ENV"
-            else
-              echo "Unable to locate requirements.txt" >&2
-              exit 1
-            fi
-
-            if [ -f "../mkdocs.yml" ]; then
-              echo "MKDOCS_CONFIG=../mkdocs.yml" >> "$GITHUB_ENV"
-            elif [ -f "mkdocs.yml" ]; then
-              echo "MKDOCS_CONFIG=mkdocs.yml" >> "$GITHUB_ENV"
-            else
-              echo "Unable to locate mkdocs.yml" >&2
-              exit 1
-            fi
-          else
-            echo "Unable to determine working directory (no .git found in cwd or parent)" >&2
-            exit 1
-          fi
+          # The checkout action puts us at the root of the repository
+          echo "REQUIREMENTS_FILE=requirements.txt" >> "$GITHUB_ENV"
+          echo "MKDOCS_CONFIG=mkdocs.yml" >> "$GITHUB_ENV"
 
       - name: Install dependencies
         run: |
