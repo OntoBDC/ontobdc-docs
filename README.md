@@ -49,87 +49,157 @@ The project is under active development and is especially suited to domains that
 - Maintains a storage index (`.__ontobdc__/storage.ttl`) that references dataset locations.
 - Supports workflows in domains that benefit from explicit contracts and auditability (e.g., BIM/openBIM, engineering data, compliance-oriented pipelines).
 
-## Architecture
+---
 
-The diagrams below summarize the system context (C1) and the internal CLI containers (C2).
+# Architecture: Execution and Orchestration (OntoBDC Run)
 
-### C1 - System Context
+## 1. Introduction to OntoBDC Run
 
-```mermaid
-flowchart LR
-  User["User<br/>(Dev / Data Scientist)"]
-  System["OntoBDC CLI<br/>(System)"]
+**OntoBDC** is a modular framework focused on data processing, ontology building, and complex routine orchestration (ETL, federation, validations, among others) supported by semantic bases.
 
-  Project["OntoBDC Project<br/>(working directory)"]
-  Config["Project Config<br/>(.__ontobdc__/config.yaml)"]
-  StorageIndex["Storage Index<br/>(.__ontobdc__/storage.ttl)"]
-  Datasets["Local Datasets<br/>(storage paths)"]
-  Python["Python Runtime<br/>(venv/colab/docker)"]
-  Git["Git Repository"]
-  Internet["Internet / External Data Sources"]
+The main premise of its architecture is extensibility. OntoBDC is not just a set of scripts, but an *execution engine* that allows plugging in independent business rules, rigorously validating data inputs, and orchestrating workflows that connect to form an autonomous processing mesh.
 
-  User -->|"runs commands"| System
+This section focuses exclusively on the operational heart of the system: the **`ontobdc run`** module.
 
-  System -->|"operates in"| Project
-  System -->|"uses"| Python
-  System -->|"reads/writes"| Config
-  System -->|"reads/writes"| StorageIndex
-  StorageIndex -->|"references"| Datasets
-  System -->|"invokes"| Git
-  System -->|"accesses"| Internet
-```
+---
 
-### C2 - Container Diagram
+## 2. The Execution Engine (`ontobdc run`)
+
+The `ontobdc run` subcommand is the orchestrating brain of the framework. Its responsibility is not to know the problem domain (be it BIM data storage, infrastructure, or semantic validation), but rather to **manage the processing lifecycle**.
+
+When the `run` command is invoked, the engine performs the following steps:
+1. **Discovery**: Scans the system for available plugins/modules.
+2. **Loading**: Instantiates the active *Capabilities*.
+3. **Resolution**: Reads the *Parameters* passed by the user via CLI or configuration file.
+4. **Orchestration**: Builds a *DAG* (Directed Acyclic Graph) to define the execution order based on input and output dependencies.
+5. **Execution**: Feeds the *Context* and triggers the *Capabilities* in the correct topological order.
 
 ```mermaid
-flowchart LR
-  User["User"]
-
-  subgraph OntoBDC["OntoBDC CLI (System)"]
-    CLI["CLI Entrypoints<br/>(ontobdc)"]
-    Init["Init Use Case<br/>(init)"]
-    Check["Check Use Case<br/>(check)"]
-    Run["Run Use Case<br/>(run)"]
-    List["List Use Case<br/>(list)"]
-    Storage["Storage Use Case<br/>(storage)"]
-    Dev["Dev Use Case<br/>(dev)"]
-    Runtime["Capability Runtime<br/>(loader + strategies)"]
-  end
-
-  Config[".__ontobdc__/config.yaml"]
-  StorageIndex[".__ontobdc__/storage.ttl"]
-  Datasets["Local Datasets"]
-  Capabilities["Installed Capability Modules<br/>(Python packages)"]
-  Git["Git"]
-  Internet["Internet"]
-
-  User --> CLI
-
-  CLI --> Init
-  CLI --> Check
-  CLI --> Run
-  CLI --> List
-  CLI --> Storage
-  CLI --> Dev
-
-  Init --> Config
-  Check --> Config
-  Run --> Runtime
-  Runtime --> Config
-  Runtime --> Capabilities
-  Runtime --> Internet
-  List --> Capabilities
-  Storage --> StorageIndex
-  StorageIndex --> Datasets
-  Dev --> Git
+graph TD
+    A[User / CLI] -->|ontobdc run| B(Execution Engine)
+    B --> C{Plugin Discovery}
+    C -->|Loads| D[Capability Registry]
+    C -->|Parses| E[Parameter Injection]
+    D --> F[DAG Builder]
+    E --> F
+    F --> G((Ordered Execution))
+    
+    style B fill:#2b3a42,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#4caf50,stroke:#333,stroke-width:2px,color:#fff
 ```
 
-## Core Concepts (Mental Model)
+---
 
-- Project Context: the `.__ontobdc__` folder that stores project state and metadata.
-- Capability: an executable unit with explicit metadata, inputs, and outputs.
-- Checks: deterministic validations to ensure the environment and prerequisites are correct before execution.
-- Storage Index: an RDF index that registers dataset locations and enables repeatable references.
+## 3. Capabilities: The Atomic Processing Unit
+
+In OntoBDC, any action that transforms, extracts, or validates data is encapsulated in a **Capability**.
+
+A Capability is an isolated and independent class. For the execution engine to understand what the Capability does, it must expose a rigid contract composed of two parts: the **Metadata** and the **Execution** method.
+
+### 3.1 Metadata (`CapabilityMetadata`)
+The metadata is the "ID card" of the Capability. It defines:
+* `id`: The globally unique identifier (e.g., `org.ontobdc.transform.clean`).
+* `description` and `tags`: For documentation and search.
+* `input_schema`: A contract (usually based on JSON Schema or Python types) that dictates *exactly* what data the Capability requires to function.
+* `output_schema`: The promise of what the Capability will generate after running.
+
+### 3.2 Execution Contract
+The Capability must implement the `execute(context: CliContextPort)` method. It is within this isolated scope that the business rule happens, consuming resources from the context and returning a resulting state.
+
+```mermaid
+classDiagram
+    class CapabilityPort {
+        <<interface>>
+        +METADATA: CapabilityMetadata
+        +execute(context: CliContextPort) Dict
+    }
+    
+    class CapabilityMetadata {
+        +String id
+        +String version
+        +Dict input_schema
+        +Dict output_schema
+    }
+    
+    CapabilityPort *-- CapabilityMetadata : Defines Contract
+    
+    class ConcreteCapability {
+        +execute(context)
+    }
+    
+    CapabilityPort <|.. ConcreteCapability : Implements
+```
+
+---
+
+## 4. The Execution Context (`Context`)
+
+The `Context` (or `CliContextPort`) acts as the pipeline's "short-term memory" (state container).
+
+Since Capabilities are isolated and do not communicate directly with each other, the Context serves as the secure bridge:
+1. It stores the necessary global instances (like database connections or repositories).
+2. It retains the input **Parameters** injected by the user.
+3. It stores the **Output** of Capabilities that have already run, allowing subsequent Capabilities to request this data.
+
+A Capability never asks "Where is the previous Capability?". It asks the Context: *"Give me the value of parameter X"*. Whether parameter X was generated by another Capability or injected via CLI is transparent to the consumer.
+
+---
+
+## 5. Parameters and Validation (`Parameters`)
+
+OntoBDC treats Parameters as first-class entities. A parameter is not just a CLI string; it has strong typing.
+
+Before any Capability is executed, the Execution Engine checks the existing parameters in the *Context* against the Capability's `input_schema`.
+* If a required parameter does not exist, the flow fails at the planning stage (Fail Fast).
+* If the parameter is of an incompatible type (e.g., a `Path` was expected but an `int` arrived), schema validation raises an exception before execution begins.
+
+---
+
+## 6. The Directed Acyclic Graph (DAG)
+
+The magic of `ontobdc run` orchestration happens in the formation of the **DAG**.
+
+In conventional ETL routines, the developer writes an imperative script: `step1()`, `step2()`, `step3()`. In OntoBDC, orchestration is **declarative and resolved at runtime**.
+
+The Engine analyzes the registered Capabilities and cross-references the `input_schema` of one with the `output_schema` of another.
+* If *Capability B* needs data `X`.
+* And *Capability A* promises to generate data `X` in its output.
+* The engine infers that **A must run before B**.
+
+By doing this for all Capabilities activated for the execution, OntoBDC builds a dependency tree. Since there can be no cycles (A depends on B which depends on A), the structure forms a Directed Acyclic Graph (DAG).
+
+```mermaid
+graph LR
+    subgraph Automatic Orchestration via DAG
+        direction LR
+        
+        P1((Param: FilePath)) --> C1[Capability: Loader]
+        
+        C1 -->|Generates: RawData| Context[(Central Context)]
+        
+        Context -->|Requires: RawData| C2[Capability: Parser]
+        Context -->|Requires: RawData| C3[Capability: Validator]
+        
+        C2 -->|Generates: CleanData| Context
+        
+        Context -->|Requires: CleanData| C4[Capability: Transformer]
+    end
+    
+    style Context fill:#f9a825,stroke:#333,stroke-width:2px
+    style C1 fill:#bbdefb,stroke:#333
+    style C2 fill:#bbdefb,stroke:#333
+    style C3 fill:#ffcdd2,stroke:#333
+    style C4 fill:#c8e6c9,stroke:#333
+```
+
+### 6.1 Topological Execution
+With the DAG formed, the engine applies a Topological Sort. It starts execution with the Capabilities that have no pending dependencies (their inputs have already been satisfied by the CLI). As each one finishes, its results feed back into the Context, unlocking and triggering the next Capabilities in the queue, until the entire flow is completed.
+
+---
+
+## 7. Conclusion
+
+The architecture of `ontobdc run` was designed for **Decentralization**. The engine is unaware of business logic, Capabilities are unaware of the exact origin of their data, and the execution order is mathematically guaranteed by schema promises (DAG). This ensures that the OntoBDC ecosystem scales infinitely, simply by adding new plugins and declaring their needs in the Metadata.
 
 ## Status
 
