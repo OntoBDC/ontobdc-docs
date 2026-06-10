@@ -39,7 +39,8 @@ jobs:
           # MkDocs requires the docs_dir to be a subfolder (it cannot be the root).
           # We create a temporary folder 'docs_src' and sync all repository files into it,
           # preserving the exact directory structure (like 'documentation/...').
-          mkdir docs_src
+          rm -rf docs_src
+          mkdir -p docs_src
           
           # Sync everything into docs_src EXCEPT .git, .github, docs_src itself, mkdocs.yml, and requirements
           rsync -a --exclude='.git' --exclude='.github' --exclude='docs_src' --exclude='mkdocs.yml' --exclude='requirements.txt' ./ docs_src/
