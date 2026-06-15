@@ -32,35 +32,32 @@ jobs:
           cache: pip
           cache-dependency-path: |
             requirements.txt
-            docs/requirements.txt
             **/pyproject.toml
 
-      - name: Resolve docs paths
-        shell: bash
+      - name: Prepare MkDocs Source Directory
         run: |
-          if [ -f "docs/requirements.txt" ]; then
-            echo "REQUIREMENTS_FILE=docs/requirements.txt" >> "$GITHUB_ENV"
-          else
-            echo "REQUIREMENTS_FILE=requirements.txt" >> "$GITHUB_ENV"
-          fi
-
-          if [ -f "docs/mkdocs.yml" ]; then
-            echo "MKDOCS_CONFIG=docs/mkdocs.yml" >> "$GITHUB_ENV"
-          else
-            echo "MKDOCS_CONFIG=mkdocs.yml" >> "$GITHUB_ENV"
-          fi
+          # MkDocs requires the docs_dir to be a subfolder (it cannot be the root).
+          # We create a temporary folder 'docs_src' and sync all repository files into it,
+          # preserving the exact directory structure (like 'documentation/...').
+          rm -rf docs_src
+          mkdir -p docs_src
           
+          # Sync everything into docs_src EXCEPT .git, .github, docs_src itself, mkdocs.yml, and requirements
+          rsync -a --exclude='.git' --exclude='.github' --exclude='docs_src' --exclude='mkdocs.yml' --exclude='requirements.txt' ./ docs_src/
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r "${REQUIREMENTS_FILE}"
+          if [ -f "requirements.txt" ]; then
+            python -m pip install -r requirements.txt
+          fi
           
       - name: Build Documentation
         run: |
-          mkdocs build --clean --strict --config-file "${MKDOCS_CONFIG}"
+          mkdocs build --clean --strict
           
       - name: Deploy to GitHub Pages
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          mkdocs gh-deploy --force --config-file "${MKDOCS_CONFIG}"
+          mkdocs gh-deploy --force
