@@ -176,3 +176,15 @@ err:Error rdf:type owl:Class .
                          dcterms:identifier "org.ontobdc.domain.storage.capability.incoming.dataset" ;
                          ontouml:name "Incoming Dataset"@en ;
                          rdfs:comment "Dataset repository instance"@en .
+
+:outputSchema rdf:type owl:Class ;
+               rdfs:subClassOf function:Output ;
+               dcterms:identifier "ooutput_schema" ;
+               ontouml:name "Output schema"@en ;
+               rdfs:comment "The schema of the output data produced by the query execution."@en .
+
+:outputContains rdf:type owl:ObjectProperty ;
+               rdfs:domain :QueryCapability ;
+               rdfs:range :outputSchema ;
+               ontouml:name "Output contains"@en ;
+               rdfs:comment "The output schema contains the specified field."@en .

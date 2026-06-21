@@ -1,0 +1,39 @@
+<style>
+.ob-logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--md-default-fg-color); /* Matches the main text color */
+  display: flex;
+  align-items: center;
+  text-decoration: none !important;
+  gap: 0.5rem;
+}
+html[data-md-color-scheme="slate"] .ob-logo,
+body[data-md-color-scheme="slate"] .ob-logo {
+  color: var(--md-default-fg-color); /* Matches the main text color in dark theme too */
+}
+.ob-logo .work {
+  color: #00bcd4; /* cyan for accent */
+}
+.md-nav__title .ob-logo .work {
+  color: #ffffff !important;
+}
+.md-header__button.md-logo {
+  padding: 0.2rem !important;
+}
+.ob-logo-img {
+  height: 60px !important;
+  max-height: 60px !important;
+  width: auto !important;
+}
+.ob-logo-text {
+  display: inline-flex;
+  align-items: center;
+}
+</style>
+<div class="ob-logo">
+  <img src="{{ 'assets/images/ontobdc-logo.png' | url }}" alt="OntoBDC Logo" class="ob-logo-img">
+  <span class="ob-logo-text">Onto<span class="work">BDC</span>
+</div>

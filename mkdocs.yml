@@ -1,111 +1,89 @@
-docs_dir: docs_src
-exclude_docs: 'mkdocs.yml
-
-  requirements.txt
-
-  main.py
-
-  '
-markdown_extensions:
-- tables
-- admonition
-- pymdownx.details
-nav:
-- Home: README.md
-- License: LICENSE
-- Whitepapers:
-  - OntoBDC Run Architecture: documentation/paper/white/ontobdc-run-architecture.md
-- ADRs:
-  - ADR001 Dependency Injection And Components Extras Split: documentation/adr/ADR001_dependency_injection_and_components_extras_split.md
-  - ADR002 CLI Help From Pyproject Metadata: documentation/adr/ADR002_cli_help_from_pyproject_metadata.md
-  - ADR003 Plugin Oriented Capabilities And Parameter Strategies: documentation/adr/ADR003_plugin_oriented_capabilities_and_parameter_strategies.md
-  - ADR004 Project Local Runtime Extension Via Ontobdc Config: documentation/adr/ADR004_project_local_runtime_extension_via_ontobdc_config.md
-  - ADR005 Separate Capability Discovery From Capability Execution: documentation/adr/ADR005_separate_capability_discovery_from_capability_execution.md
-  - ADR006 A3 State Machine With File Materialized State: documentation/adr/ADR006_a3_state_machine_with_file_materialized_state.md
-  - ADR007 Shell Wrappers As Stable Interface And Python As Primary Logic: documentation/adr/ADR007_shell_wrappers_as_stable_interface_and_python_as_primary_logic.md
-  - ADR008 Plugin Based CLI Pre Dispatch And Structured Command Responses: documentation/adr/ADR008_plugin_based_cli_pre_dispatch_and_structured_command_responses.md
-  - ADR009 Layered Metadata Architecture For Detachable Containers And Federated Data: documentation/adr/ADR009_layered_metadata_architecture_for_detachable_containers_and_federated_data.md
-- Specifications:
-  - SPEC001 Core Modules And Commands: documentation/spec/SPEC001_core_modules_and_commands.md
-  - SPEC002 CLI Help From Pyproject Metadata: documentation/spec/SPEC002_cli_help_from_pyproject_metadata.md
-  - SPEC003 System Artifacts By Component: documentation/spec/SPEC003_system_artifacts_by_component.md
-  - SPEC004 Component Flows: documentation/spec/SPEC004_component_flows.md
-  - SPEC005 Ontobdc List Component: documentation/spec/SPEC005_ontobdc_list_component.md
-  - SPEC006 Run CLI Context Resolution: documentation/spec/SPEC006_run_cli_context_resolution.md
-  - SPEC007 CLI Init Component: documentation/spec/SPEC007_cli_init_component.md
-  - SPEC008 Country Dataset Container: documentation/spec/SPEC008_country_dataset_container.md
-  - SPEC009 OLIA Semantic Intent Typing: documentation/spec/SPEC009_olia_semantic_intent_typing.md
-  - SPEC010 Shared Plugin Loaders: documentation/spec/SPEC010_shared_plugin_loaders.md
-  - SPEC011 Deprecating ADRs And Specs: documentation/spec/SPEC011_deprecating_adrs_and_specs.md
-  - SPEC012 Storage Component Behavior: documentation/spec/SPEC012_storage_component_behavior.md
-- Roadmap:
-  - Overview: documentation/roadmap/README.md
-  - RFC001 CLI Help Status Section: documentation/roadmap/RFC001_cli_help_status_section.md
-  - RFC002 Pre Parser Grammatical Normalization: documentation/roadmap/RFC002_pre_parser_grammatical_normalization.md
-  - RFC003 Transition Success Learning Graph: documentation/roadmap/RFC003_transition_success_learning_graph.md
-  - RFC004 LLM Normalization Interface Layer: documentation/roadmap/RFC004_llm_normalization_interface_layer.md
-  - RFC005 OLIA Inference And Mapper Completion: documentation/roadmap/RFC005_olia_inference_and_mapper_completion.md
-  - RFC006 Container Dataset Identifier To Physical Name Contract: documentation/roadmap/RFC006_container_dataset_identifier_to_physical_name_contract.md
-  - RFC007 Atomic Container Dataset Creation And Rollback: documentation/roadmap/RFC007_atomic_container_dataset_creation_and_rollback.md
-  - RFC008 Wrap Context Creation Questions In A Panel: documentation/roadmap/RFC008_wrap_context_creation_questions_in_a_panel.md
-- Tests:
-  - Overview: documentation/test/README.md
-  - Run Resolution To Language Defined: documentation/test/run/test_resolution_to_language_defined.md
-  - Run Resolution To Intended: documentation/test/run/test_resolution_to_intended.md
-  - Run Resolution To Planned: documentation/test/run/test_resolution_to_planned.md
-  - Run Resolution To Filled: documentation/test/run/test_resolution_to_filled.md
-  - Run Resolution To Validated: documentation/test/run/test_resolution_to_validated.md
-  - Run Resolution To Parsed: documentation/test/run/test_resolution_to_parsed.md
-  - Run Resolution To Canonical: documentation/test/run/test_resolution_to_canonical.md
-  - Run Resolution From Low Confidence: documentation/test/run/test_resolution_from_low_confidence.md
-- Use Cases:
-  - UC A3 CLI First Step: documentation/uc/UC_a3_cli_first_step.md
-  - UC A3 States And Transitions: documentation/uc/UC_a3_states_and_transitions.md
-- Debug:
-  - Debug A3 CLI Entry: documentation/debug/debug-a3-cli-entry.md
-- Legacy:
-  - OLD001 Init Context Command Flow: documentation/legacy/OLD001_init_context_command_flow.md
-  - OLD002 Plan Command Deprecation: documentation/legacy/OLD002_plan_command_deprecation.md
-  - OLD003 CLI Help From Pyproject Metadata ADR: documentation/legacy/OLD003_cli_help_from_pyproject_metadata_adr.md
-  - OLD004 CLI Help From Pyproject Metadata SPEC: documentation/legacy/OLD004_cli_help_from_pyproject_metadata_spec.md
-plugins:
-- search
-- macros:
-    module_name: main
-- mermaid2
-- i18n:
-    docs_structure: suffix
-    fallback_to_default: true
-    languages:
-    - default: true
-      locale: en
-      name: English
-repo_name: ontobdc-core
-repo_url: https://github.com/eliasmpjunior/ontobdc-core
+site_name: OntoBDC - Ontology-Based Datasets & Containers
+site_description: Ontology-Based Datasets & Containers
 site_author: Elias M. P. Junior
-site_description: Documentation for OntoBDC - Ontology-Based Data Capabilities
-site_dir: site
-site_name: OntoBDC Documentation
 site_url: https://ontobdc.org/
+
+docs_dir: content
+site_dir: ../site
+
 theme:
-  features:
-  - navigation.sections
-  - navigation.expand
-  - search.suggest
-  - search.highlight
-  - content.code.copy
-  language: en
   name: material
+  language: en
+  custom_dir: overrides
+  logo: assets/images/ontobdc-logo.png
+  favicon: assets/images/ontobdc-logo.png
+  icon:
+    alternate: material/web
+  font:
+    text: Poppins
+    code: Roboto Mono
   palette:
-  - accent: light-green
-    primary: green
-    scheme: default
-    toggle:
-      icon: material/brightness-7
-      name: Switch to dark mode
-  - accent: light-green
-    primary: green
-    scheme: slate
-    toggle:
-      icon: material/brightness-4
-      name: Switch to light mode
+    - scheme: default
+      primary: cyan
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: cyan
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    - navigation.top
+
+plugins:
+  - macros
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: pt
+          name: Português
+          build: true
+          nav_translations:
+            Home: Início
+        - locale: es
+          name: Español
+          build: true
+          nav_translations:
+            Home: Inicio
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - tables
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji
+
+extra_css:
+  - assets/stylesheets/extra.css?v=20
+
+extra:
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: Português
+      link: /pt/
+      lang: pt
+    - name: Español
+      link: /es/
+      lang: es
+
+nav:
+  - Home: index.md

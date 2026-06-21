@@ -1,0 +1,70 @@
+{#-
+  This file was automatically generated - do not edit
+-#}
+{% import "partials/nav-item.html" as item with context %}
+{% set class = "md-nav md-nav--primary" %}
+{% if "navigation.tabs" in features %}
+  {% set class = class ~ " md-nav--lifted" %}
+{% endif %}
+{% if "toc.integrate" in features %}
+  {% set class = class ~ " md-nav--integrated" %}
+{% endif %}
+<nav class="{{ class }}" aria-label="{{ lang.t('nav') }}" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-nav__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+      {% include "partials/logo.html" %}
+    </a>
+  </label>
+  {% if config.repo_url %}
+    <div class="md-nav__source">
+      {% include "partials/source.html" %}
+    </div>
+  {% endif %}
+  <ul class="md-nav__list" data-md-scrollfix>
+    <li class="md-nav__item md-nav__item--active" style="margin-top: 1rem;">
+      <a href="#" class="md-nav__link md-nav__link--active">About</a>
+    </li>
+    <li class="md-nav__item">
+      <a href="#" class="md-nav__link">Blog</a>
+    </li>
+    <li class="md-nav__item">
+      <a href="#" class="md-nav__link">Get Started</a>
+    </li>
+    <li class="md-nav__item">
+      <a href="#" class="md-nav__link">Documentation</a>
+    </li>
+    
+    {% for nav_item in nav.items %}
+      {% if nav_item.title not in ["Home", "Início", "Inicio"] %}
+        {% set path = "__nav_" ~ loop.index %}
+        {{ item.render(nav_item, path, 1) }}
+      {% endif %}
+    {% endfor %}
+
+    <!-- Try Online (mobile) - movido para o final do menu lateral -->
+    <li class="md-nav__item md-nav__item--mobile-extra" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest);">
+      <a href="#" style="display: block; width: calc(100% - 2rem); margin: 0 1rem; box-sizing: border-box; text-align: center; background-color: #00bcd4; color: #fff; padding: 0.6rem 0; border-radius: 999px; font-weight: 700; text-decoration: none;">Try Online</a>
+    </li>
+
+    <!-- Mobile-only language & theme selectors -->
+    <li class="md-nav__item md-nav__item--mobile-extra" style="margin-top: 1rem;">
+      <div style="display: flex; gap: 1rem; align-items: center; padding: 0 1rem;">
+        {% if config.theme.palette %}
+          {% if not config.theme.palette is mapping %}
+            {% include "partials/palette.html" %}
+          {% endif %}
+        {% endif %}
+        {% if config.extra.alternate %}
+          {% include "partials/alternate.html" %}
+        {% endif %}
+      </div>
+    </li>
+    <style>
+      @media screen and (min-width: 76.25em) {
+        .md-nav__item--mobile-extra {
+          display: none !important;
+        }
+      }
+    </style>
+  </ul>
+</nav>
