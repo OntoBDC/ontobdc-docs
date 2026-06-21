@@ -1,0 +1,248 @@
+{#-
+  Custom language dropdown - partials/alternate.html override.
+  Renders a Material-style <select> populated from config.extra.alternate.
+  Selecting an option triggers the OBi18n client-side translation engine.
+-#}
+{% set alternate = config.extra.alternate or [] %}
+{% set current = config.theme.language | default("en") %}
+
+<div class="md-header__option md-select ob-lang-dropdown">
+  <button class="ob-lang-btn" data-md-component="language" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Change language">
+    <span class="ob-lang-btn__flag" data-ob-lang-label>{% if current == "pt" %}🇧🇷{% elif current == "es" %}🇪🇸{% else %}🇺🇸{% endif %}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="ob-lang-caret"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+  </button>
+  <ul class="ob-lang-menu" role="listbox">
+    {% for alt in alternate %}
+      <li role="option" data-md-value="{{ alt.lang }}" class="ob-lang-item{% if alt.lang == current %} ob-lang-item--selected{% endif %}">
+        <a href="{{ alt.link }}" class="ob-lang-link" data-ob-lang-option="{{ alt.lang }}">
+          <span class="ob-lang-link__flag">{% if alt.lang == "pt" %}🇧🇷{% elif alt.lang == "es" %}🇪🇸{% else %}🇺🇸{% endif %}</span>
+          <span>{{ alt.name }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<style>
+  .ob-lang-dropdown { position: relative; display: inline-flex !important; align-items: center; }
+  .ob-lang-dropdown > .ob-lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .ob-lang-btn__flag {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .ob-lang-caret { width: 16px; height: 16px; transition: transform 0.15s; }
+  .ob-lang-dropdown[data-open="true"] .ob-lang-caret { transform: rotate(180deg); }
+  .ob-lang-menu {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: -0.75rem;
+    min-width: 10rem;
+    margin: 0;
+    padding: 0.35rem 0;
+    list-style: none;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .ob-lang-dropdown[data-open="true"] .ob-lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .ob-lang-menu .ob-lang-item { margin: 0; }
+  .ob-lang-menu .ob-lang-link {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.4rem 0.9rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .ob-lang-link__flag {
+    font-size: 1rem;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+  .ob-lang-menu .ob-lang-link:hover { color: #00bcd4; }
+  .ob-lang-menu .ob-lang-item--selected .ob-lang-link { color: #00bcd4; font-weight: 600; }
+</style>
+
+<script>
+  (function() {
+    // #region debug-point A:reporter
+    function debugReport(hypothesisId, msg, data) {
+      fetch("http://127.0.0.1:7777/event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: "language-dropdown-click",
+          runId: "pre-fix",
+          hypothesisId: hypothesisId,
+          location: "overrides/partials/alternate.html",
+          msg: "[DEBUG] " + msg,
+          data: data || {},
+          ts: Date.now()
+        })
+      }).catch(function() {});
+    }
+    // #endregion
+
+    function closeAll() {
+      document.querySelectorAll(".ob-lang-dropdown[data-open='true']").forEach(function(dd) {
+        dd.removeAttribute("data-open");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+        // #region debug-point C:close-all
+        debugReport("C", "closeAll executed", {
+          hasOpenState: dd.getAttribute("data-open") === "true",
+          expanded: btn ? btn.getAttribute("aria-expanded") : null
+        });
+        // #endregion
+      });
+    }
+    function toggle(dd) {
+      var open = dd.getAttribute("data-open") === "true";
+      // #region debug-point B:toggle-before
+      var menu = dd.querySelector(".ob-lang-menu");
+      debugReport("B", "toggle before closeAll", {
+        open: open,
+        menuVisibility: menu ? getComputedStyle(menu).visibility : null,
+        menuOpacity: menu ? getComputedStyle(menu).opacity : null,
+        menuTransform: menu ? getComputedStyle(menu).transform : null
+      });
+      // #endregion
+      closeAll();
+      if (!open) {
+        dd.setAttribute("data-open", "true");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) btn.setAttribute("aria-expanded", "true");
+        // #region debug-point B:toggle-after
+        debugReport("B", "toggle opened dropdown", {
+          openAttr: dd.getAttribute("data-open"),
+          expanded: btn ? btn.getAttribute("aria-expanded") : null,
+          menuVisibility: menu ? getComputedStyle(menu).visibility : null,
+          menuOpacity: menu ? getComputedStyle(menu).opacity : null,
+          menuTransform: menu ? getComputedStyle(menu).transform : null
+        });
+        // #endregion
+      }
+    }
+    function labelsFor(lang) {
+      var map = { en: "🇺🇸", pt: "🇧🇷", es: "🇪🇸" };
+      return map[lang] || lang.toUpperCase();
+    }
+    function applyLabel(lang) {
+      document.querySelectorAll("[data-ob-lang-label]").forEach(function(el) {
+        el.textContent = labelsFor(lang);
+      });
+      document.querySelectorAll(".ob-lang-menu .ob-lang-item").forEach(function(li) {
+        var optLang = li.getAttribute("data-md-value");
+        if (optLang === lang) li.classList.add("ob-lang-item--selected");
+        else li.classList.remove("ob-lang-item--selected");
+      });
+    }
+
+    function init() {
+      // #region debug-point E:init
+      debugReport("E", "init called", {
+        dropdowns: document.querySelectorAll(".ob-lang-dropdown").length,
+        currentLang: (window.OBi18n && window.OBi18n.getCurrent && window.OBi18n.getCurrent()) || null,
+        hasOBi18nSet: !!(window.OBi18n && window.OBi18n.set)
+      });
+      // #endregion
+      document.querySelectorAll(".ob-lang-dropdown").forEach(function(dd) {
+        if (dd.getAttribute("data-ob-lang-bound") === "true") {
+          return;
+        }
+        dd.setAttribute("data-ob-lang-bound", "true");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) {
+          btn.addEventListener("click", function(e) {
+            // #region debug-point A:button-click
+            debugReport("A", "button click received", {
+              tag: e.target && e.target.tagName,
+              currentTargetTag: e.currentTarget && e.currentTarget.tagName,
+              openAttrBefore: dd.getAttribute("data-open"),
+              expandedBefore: btn.getAttribute("aria-expanded")
+            });
+            // #endregion
+            e.preventDefault();
+            e.stopPropagation();
+            toggle(dd);
+          });
+        }
+        dd.querySelectorAll("[data-ob-lang-option]").forEach(function(a) {
+          if (a.getAttribute("data-ob-lang-bound") === "true") {
+            return;
+          }
+          a.setAttribute("data-ob-lang-bound", "true");
+          a.addEventListener("click", function(e) {
+            e.preventDefault();
+            var lang = a.getAttribute("data-ob-lang-option");
+            // #region debug-point D:option-click
+            debugReport("D", "option click received", {
+              lang: lang,
+              hasOBi18n: !!window.OBi18n,
+              hasOBi18nSet: !!(window.OBi18n && window.OBi18n.set)
+            });
+            // #endregion
+            if (window.OBi18n) window.OBi18n.set(lang);
+            applyLabel(lang);
+            closeAll();
+          });
+        });
+      });
+
+      if (!window.__obLangDocumentBound) {
+        window.__obLangDocumentBound = true;
+        document.addEventListener("click", function(e) {
+          if (!e.target.closest(".ob-lang-dropdown")) {
+            // #region debug-point C:document-click
+            debugReport("C", "document click outside dropdown", {
+              tag: e.target && e.target.tagName
+            });
+            // #endregion
+            closeAll();
+          }
+        });
+      }
+
+      var initial = (window.OBi18n && window.OBi18n.getCurrent()) || "{{ current }}";
+      applyLabel(initial);
+
+      if (!window.__obLangChangedBound) {
+        window.__obLangChangedBound = true;
+        window.addEventListener("ob:lang-changed", function(e) {
+          if (e.detail && e.detail.lang) applyLabel(e.detail.lang);
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+</script>

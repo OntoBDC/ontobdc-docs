@@ -22,16 +22,16 @@
   {% endif %}
   <ul class="md-nav__list" data-md-scrollfix>
     <li class="md-nav__item md-nav__item--active" style="margin-top: 1rem;">
-      <a href="#" class="md-nav__link md-nav__link--active">About</a>
+      <a href="#" class="md-nav__link md-nav__link--active" data-i18n="header.nav_about">About</a>
     </li>
     <li class="md-nav__item">
-      <a href="#" class="md-nav__link">Blog</a>
+      <a href="#" class="md-nav__link" data-i18n="header.nav_blog">Blog</a>
     </li>
     <li class="md-nav__item">
-      <a href="#" class="md-nav__link">Get Started</a>
+      <a href="#get_started" class="md-nav__link" data-i18n="header.nav_get_started">Get Started</a>
     </li>
     <li class="md-nav__item">
-      <a href="#" class="md-nav__link">Documentation</a>
+      <a href="#" class="md-nav__link" data-i18n="header.nav_documentation">Documentation</a>
     </li>
     
     {% for nav_item in nav.items %}
@@ -43,15 +43,16 @@
 
     <!-- Try Online (mobile) - movido para o final do menu lateral -->
     <li class="md-nav__item md-nav__item--mobile-extra" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest);">
-      <a href="#" style="display: block; width: calc(100% - 2rem); margin: 0 1rem; box-sizing: border-box; text-align: center; background-color: #00bcd4; color: #fff; padding: 0.6rem 0; border-radius: 999px; font-weight: 700; text-decoration: none;">Try Online</a>
+      <a href="#" data-i18n="header.try_online" style="display: block; width: calc(100% - 2rem); margin: 0 1rem; box-sizing: border-box; text-align: center; background-color: #00bcd4; color: #fff; padding: 0.6rem 0; border-radius: 999px; font-weight: 700; text-decoration: none;">Try Online</a>
     </li>
 
     <!-- Mobile-only language & theme selectors -->
     <li class="md-nav__item md-nav__item--mobile-extra" style="margin-top: 1rem;">
-      <div style="display: flex; gap: 1rem; align-items: center; padding: 0 1rem;">
+      <div class="bd-mobile-actions" style="display: flex; gap: 1rem; align-items: center; padding: 0 1rem;">
         {% if config.theme.palette %}
           {% if not config.theme.palette is mapping %}
             {% include "partials/palette.html" %}
+            {% include "partials/javascripts/palette.html" %}
           {% endif %}
         {% endif %}
         {% if config.extra.alternate %}
@@ -60,6 +61,10 @@
       </div>
     </li>
     <style>
+      .bd-mobile-actions .md-header__option {
+        display: inline-flex !important;
+        align-items: center;
+      }
       @media screen and (min-width: 76.25em) {
         .md-nav__item--mobile-extra {
           display: none !important;
