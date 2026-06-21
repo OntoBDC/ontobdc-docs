@@ -1,0 +1,215 @@
+{
+  "en": {
+    "site": {
+      "name": "OntoBDC - Ontology-Based Datasets & Containers",
+      "description": "Ontology-Based Datasets & Containers. A unified standard to define, distribute, and orchestrate open data datasets through code.",
+      "logo_alt": "OntoBDC Logo"
+    },
+    "header": {
+      "nav_about": "About",
+      "nav_blog": "Blog",
+      "nav_get_started": "Get Started",
+      "nav_documentation": "Documentation",
+      "try_online": "Try Online",
+      "login": "Login"
+    },
+    "hero": {
+      "title_accent": "BDC",
+      "strong_subtitle": "Ontology-Based Datasets & Containers",
+      "soft_subtitle": "A unified standard to define, distribute, and orchestrate open data datasets through code."
+    },
+    "features": {
+      "open_source_title": "OPEN SOURCE",
+      "open_source_sub": "Built for the community",
+      "free_title": "IT'S FREE",
+      "free_sub": "No proprietary licenses",
+      "empower_title": "EMPOWER",
+      "empower_sub": "Your engineering teams"
+    },
+    "capabilities": {
+      "title": "Do everything with capabilities",
+      "description": "These are small executable scripts embedded directly within the \"digital briefcase\" (the .obdc pointer) that teach any computer or system on the network how to read, transform, or validate that specific dataset.",
+      "card1_title": "🛡️ Data Sovereignty",
+      "card1_desc": "Validate engineering projects locally (Edge Execution). Eliminate costly proprietary licenses and orchestrate sensitive data without transferring it to third-party infrastructures.",
+      "card2_title": "⏳ Future-Proof",
+      "card2_desc": "Project data must last decades. OntoBDC ensures your data and inspection tools can be reproduced identically 20 years from now, immunizing your organization against software obsolescence.",
+      "card3_title": "🤖 AI-Ready",
+      "card3_desc": "Using the container manifest as a structured guide, LLMs can autonomously trigger capabilities with less hallucinations, enabling advanced auditing without sending IP to Big Tech clouds."
+    },
+    "ownership": {
+      "title": "Your data is your data",
+      "description": "OntoBDC embraces true open data principles. You retain full ownership, control, and accessibility of your engineering data without being tied to proprietary formats or vendor lock-in.",
+      "card1_title": "🎯 Single Source of Truth",
+      "card1_desc": "You define the ultimate reference. Consolidate your engineering data into a single, reliable semantic model that governs all project rules and information.",
+      "card2_title": "🔄 Seamless Synchronization",
+      "card2_desc": "Keep data flowing perfectly. Automatically synchronize information across multiple .obdc containers and integrate effortlessly with third-party systems.",
+      "card3_title": "🔌 Offline Local Execution",
+      "card3_desc": "Work without limits. Process, validate, and query your complex data entirely offline, right on your machine, with zero dependency on internet connections."
+    },
+    "get_started": {
+      "title": "Get Started!",
+      "description": "Choose the best way to experience and implement OntoBDC for your workflow.",
+      "card1_title": "🌐 Online Demo",
+      "card1_desc": "Try OntoBDC directly in your browser without installing anything. Explore capabilities and see it in action.",
+      "card1_btn": "Try Online",
+      "card2_title": "💻 Local CLI",
+      "card2_desc": "Install via pip and initialize your first digital briefcase in seconds directly from your terminal.",
+      "card2_btn": "Documentation",
+      "card3_title": "☁️ Google Colab",
+      "card3_desc": "Run OntoBDC in the cloud using Google Colab. Mount your Google Drive to seamlessly process and orchestrate your remote engineering data.",
+      "card3_btn": "Google Colab"
+    },
+    "footer": {
+      "terms": "Terms of Use",
+      "privacy": "Privacy Policy",
+      "copyright": "© OntoBDC Foundation · 2026",
+      "maintained_prefix": "OntoBDC is proudly created and maintained by"
+    },
+    "seo": {
+      "description": "OntoBDC: Ontology-Based Data Capabilities. A unified standard to define, distribute, and orchestrate open data datasets through code.",
+      "og_description": "OntoBDC: Ontology-Based Data Capabilities."
+    }
+  },
+  "pt": {
+    "site": {
+      "name": "OntoBDC - Ontology-Based Datasets & Containers",
+      "description": "Conjuntos de Dados e Containers Baseados em Ontologia. Um padrão unificado para definir, distribuir e orquestrar conjuntos de dados abertos através de código.",
+      "logo_alt": "Logo OntoBDC"
+    },
+    "header": {
+      "nav_about": "Sobre",
+      "nav_blog": "Blog",
+      "nav_get_started": "Começar",
+      "nav_documentation": "Documentação",
+      "try_online": "Testar Online",
+      "login": "Entrar"
+    },
+    "hero": {
+      "title_accent": "BDC",
+      "strong_subtitle": "Conjuntos de Dados e Containers Baseados em Ontologia",
+      "soft_subtitle": "Um padrão unificado para definir, distribuir e orquestrar conjuntos de dados abertos através de código."
+    },
+    "features": {
+      "open_source_title": "OPEN SOURCE",
+      "open_source_sub": "Feito para a comunidade",
+      "free_title": "GRATUITO",
+      "free_sub": "Sem licenças proprietárias",
+      "empower_title": "PODER",
+      "empower_sub": "Para suas equipes de engenharia"
+    },
+    "capabilities": {
+      "title": "Faça tudo com capabilities",
+      "description": "São pequenos scripts executáveis embarcados diretamente dentro da \"mala digital\" (o ponteiro .obdc) que ensinam qualquer computador ou sistema na rede a ler, transformar ou validar aquele conjunto específico de informações.",
+      "card1_title": "🛡️ Soberania de Dados",
+      "card1_desc": "Valide projetos de engenharia localmente (Edge Execution). Elimine licenças proprietárias caras e orquestre dados sensíveis sem transferi-los para infraestruturas de terceiros.",
+      "card2_title": "⏳ À Prova de Futuro",
+      "card2_desc": "Dados de projetos precisam durar décadas. O OntoBDC garante que seus dados e ferramentas de inspeção podem ser reproduzidos de forma idêntica daqui a 20 anos, vacinando sua organização contra a obsolescência.",
+      "card3_title": "🤖 Pronto para IA",
+      "card3_desc": "Ao usar o manifesto do contêiner como um guia estruturado, LLMs podem acionar capabilities autonomamente com menos alucinações, permitindo auditoria avançada sem enviar propriedade intelectual para nuvens de Big Techs."
+    },
+    "ownership": {
+      "title": "Seus dados são seus dados",
+      "description": "O OntoBDC abraça os verdadeiros princípios de dados abertos. Você mantém total propriedade, controle e acessibilidade dos seus dados de engenharia, sem ficar preso a formatos proprietários ou vendor lock-in.",
+      "card1_title": "🎯 Fonte Única da Verdade",
+      "card1_desc": "Você define a referência final. Consolide seus dados de engenharia em um único modelo semântico confiável que governa todas as regras e informações do projeto.",
+      "card2_title": "🔄 Sincronização Perfeita",
+      "card2_desc": "Mantenha os dados fluindo perfeitamente. Sincronize automaticamente informações entre múltiplos containers .obdc e integre sem esforço com sistemas de terceiros.",
+      "card3_title": "🔌 Execução Local Offline",
+      "card3_desc": "Trabalhe sem limites. Processe, valide e consulte seus dados complexos inteiramente offline, direto na sua máquina, com zero dependência de conexão com a internet."
+    },
+    "get_started": {
+      "title": "Comece Agora!",
+      "description": "Escolha a melhor forma de experimentar e implementar o OntoBDC no seu fluxo de trabalho.",
+      "card1_title": "🌐 Demo Online",
+      "card1_desc": "Teste o OntoBDC diretamente no seu navegador, sem instalar nada. Explore as capabilities e veja em ação.",
+      "card1_btn": "Testar Online",
+      "card2_title": "💻 CLI Local",
+      "card2_desc": "Instale via pip e inicialize sua primeira mala digital em segundos, direto do seu terminal.",
+      "card2_btn": "Documentação",
+      "card3_title": "☁️ Google Colab",
+      "card3_desc": "Execute o OntoBDC na nuvem usando o Google Colab. Monte seu Google Drive para processar e orquestrar seus dados remotos de engenharia.",
+      "card3_btn": "Abrir no Colab"
+    },
+    "footer": {
+      "terms": "Termos de Uso",
+      "privacy": "Privacidade",
+      "copyright": "© OntoBDC Foundation · 2026",
+      "maintained_prefix": "O OntoBDC é orgulhosamente criado e mantido pela"
+    },
+    "seo": {
+      "description": "OntoBDC: Capacidades de Dados Baseadas em Ontologia. Um padrão unificado para definir, distribuir e orquestrar conjuntos de dados abertos através de código.",
+      "og_description": "OntoBDC: Capacidades de Dados Baseadas em Ontologia."
+    }
+  },
+  "es": {
+    "site": {
+      "name": "OntoBDC - Ontology-Based Datasets & Containers",
+      "description": "Conjuntos de Datos y Contenedores Basados en Ontología. Un estándar unificado para definir, distribuir y orquestrar conjuntos de datos abiertos a través de código.",
+      "logo_alt": "Logo OntoBDC"
+    },
+    "header": {
+      "nav_about": "Acerca de",
+      "nav_blog": "Blog",
+      "nav_get_started": "Empezar",
+      "nav_documentation": "Documentación",
+      "try_online": "Probar Online",
+      "login": "Iniciar Sesión"
+    },
+    "hero": {
+      "title_accent": "BDC",
+      "strong_subtitle": "Conjuntos de Datos y Contenedores Basados en Ontología",
+      "soft_subtitle": "Un estándar unificado para definir, distribuir y orquestrar conjuntos de datos abiertos a través de código."
+    },
+    "features": {
+      "open_source_title": "OPEN SOURCE",
+      "open_source_sub": "Hecho para la comunidad",
+      "free_title": "ES GRATIS",
+      "free_sub": "Sin licencias propietarias",
+      "empower_title": "PODER",
+      "empower_sub": "Para tus equipos de ingeniería"
+    },
+    "capabilities": {
+      "title": "Haz todo con capabilities",
+      "description": "Son pequeños scripts ejecutables incrustados directamente dentro del \"maletín digital\" (el puntero .obdc) que enseñan a cualquier computadora o sistema de la red a leer, transformar o validar ese conjunto específico de información.",
+      "card1_title": "🛡️ Soberanía de Datos",
+      "card1_desc": "Valida proyectos de ingeniería localmente (Edge Execution). Elimina licencias propietarias costosas y orquesta datos sensibles sin transferirlos a infraestructuras de terceros.",
+      "card2_title": "⏳ A Prueba de Futuro",
+      "card2_desc": "Los datos de proyectos deben durar décadas. OntoBDC garantiza que tus datos y herramientas de inspección se puedan reproducir de forma idéntica dentro de 20 años, inmunizando a tu organización contra la obsolescencia.",
+      "card3_title": "🤖 Listo para IA",
+      "card3_desc": "Usando el manifiesto del contenedor como guía estructurada, los LLMs pueden activar capabilities de forma autónoma con menos alucinaciones, lo que permite una auditoría avanzada sin enviar propiedad intelectual a las nubes de las Big Techs."
+    },
+    "ownership": {
+      "title": "Tus datos son tus datos",
+      "description": "OntoBDC abraza los verdaderos principios de datos abiertos. Mantienes la total propiedad, control y accesibilidad de tus datos de ingeniería, sin estar atado a formatos propietarios o al bloqueo de proveedores.",
+      "card1_title": "🎯 Fuente Única de Verdad",
+      "card1_desc": "Tú defines la referencia final. Consolida tus datos de ingeniería en un único modelo semántico confiable que gobierna todas las reglas e información del proyecto.",
+      "card2_title": "🔄 Sincronización Perfecta",
+      "card2_desc": "Mantén los datos fluyendo perfectamente. Sincroniza automáticamente la información entre múltiples contenedores .obdc e intégrate sin esfuerzo con sistemas de terceros.",
+      "card3_title": "🔌 Ejecución Local sin Conexión",
+      "card3_desc": "Trabaja sin límites. Procesa, valida y consulta tus datos complejos completamente sin conexión, directamente en tu máquina, sin depender de internet."
+    },
+    "get_started": {
+      "title": "¡Empieza Ahora!",
+      "description": "Elige la mejor forma de experimentar e implementar OntoBDC en tu flujo de trabajo.",
+      "card1_title": "🌐 Demo Online",
+      "card1_desc": "Prueba OntoBDC directamente en tu navegador, sin instalar nada. Explora las capabilities y mira en acción.",
+      "card1_btn": "Probar Online",
+      "card2_title": "💻 CLI Local",
+      "card2_desc": "Instala vía pip e inicializa tu primer maletín digital en segundos, directamente desde tu terminal.",
+      "card2_btn": "Documentación",
+      "card3_title": "☁️ Google Colab",
+      "card3_desc": "Ejecuta OntoBDC en la nube usando Google Colab. Monta tu Google Drive para procesar y orquestrar tus datos de ingeniería remotos sin problemas.",
+      "card3_btn": "Abrir en Colab"
+    },
+    "footer": {
+      "terms": "Términos de Uso",
+      "privacy": "Privacidad",
+      "copyright": "© OntoBDC Foundation · 2026",
+      "maintained_prefix": "OntoBDC es orgullosamente creado y mantenido por"
+    },
+    "seo": {
+      "description": "OntoBDC: Capacidades de Datos Basadas en Ontología. Un estándar unificado para definir, distribuir y orquestrar conjuntos de datos abiertos a través de código.",
+      "og_description": "OntoBDC: Capacidades de Datos Basadas en Ontología."
+    }
+  }
+}

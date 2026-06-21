@@ -20,9 +20,9 @@
         
           <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="/pt/" hreflang="pt">
+          <link rel="alternate" href="/" hreflang="pt">
         
-          <link rel="alternate" href="/es/" hreflang="es">
+          <link rel="alternate" href="/" hreflang="es">
         
       
       
@@ -177,11 +177,22 @@ body[data-md-color-scheme="slate"] .ob-logo {
         align-items: center;
         height: 100%;
       }
+      .bd-header-actions {
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+        height: 100%;
+      }
+      .bd-header-actions .md-header__option {
+        display: inline-flex !important;
+        align-items: center;
+      }
       .bd-header-cta--primary {
         display: none; /* Esconde no mobile por padrão */
       }
       .bd-header-icon-btn {
-        display: none; /* Esconde no mobile por padrão */
+        /* display: none; /* Esconde no mobile por padrão */
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         width: 40px;
@@ -230,21 +241,23 @@ body[data-md-color-scheme="slate"] .ob-logo {
     </style>
 
     <div class="bd-header-links">
-      <a href="#">About</a>
-      <a href="#">Blog</a>
-      <a href="#get_started">Get Started</a>
-      <a href="#">Documentation</a>
+      <a href="#" data-i18n="header.nav_about">About</a>
+      <a href="#" data-i18n="header.nav_blog">Blog</a>
+      <a href="#get_started" data-i18n="header.nav_get_started">Get Started</a>
+      <a href="#" data-i18n="header.nav_documentation">Documentation</a>
     </div>
 
     <!-- Try Online (apenas desktop, movido para o final da barra, dentro das ações) -->
 
-    <div class="bd-header-actions" aria-label="Header actions" style="display: none; align-items: center; gap: 0.5rem; height: 100%;">
+    <div class="bd-header-actions" aria-label="Header actions">
       <script>
         // Bloco Try Online removido do cabeçalho (movido para a gaveta lateral)
       </script>
 
       <!-- Tema (botão de alternância) -->
-      <form class="md-header__option" data-md-component="palette">
+      
+        
+          <form class="md-header__option" data-md-component="palette">
   
     
     
@@ -267,44 +280,273 @@ body[data-md-color-scheme="slate"] .ob-logo {
     
   
 </form>
+          <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+        
+      
 
       <!-- Idioma (seletor) -->
       
-        <div class="md-header__option">
-  <div class="md-select">
+        
+
+
+<div class="md-header__option md-select ob-lang-dropdown">
+  <button class="ob-lang-btn" data-md-component="language" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Change language">
+    <span class="ob-lang-btn__flag" data-ob-lang-label>🇺🇸</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="ob-lang-caret"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+  </button>
+  <ul class="ob-lang-menu" role="listbox">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
-    </button>
-    <div class="md-select__inner">
-      <ul class="md-select__list">
-        
-          <li class="md-select__item">
-            <a href="/" hreflang="en" class="md-select__link">
-              English
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="/pt/" hreflang="pt" class="md-select__link">
-              Português
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="/es/" hreflang="es" class="md-select__link">
-              Español
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+      <li role="option" data-md-value="en" class="ob-lang-item ob-lang-item--selected">
+        <a href="/" class="ob-lang-link" data-ob-lang-option="en">
+          <span class="ob-lang-link__flag">🇺🇸</span>
+          <span>English</span>
+        </a>
+      </li>
+    
+      <li role="option" data-md-value="pt" class="ob-lang-item">
+        <a href="/" class="ob-lang-link" data-ob-lang-option="pt">
+          <span class="ob-lang-link__flag">🇧🇷</span>
+          <span>Português</span>
+        </a>
+      </li>
+    
+      <li role="option" data-md-value="es" class="ob-lang-item">
+        <a href="/" class="ob-lang-link" data-ob-lang-option="es">
+          <span class="ob-lang-link__flag">🇪🇸</span>
+          <span>Español</span>
+        </a>
+      </li>
+    
+  </ul>
 </div>
+
+<style>
+  .ob-lang-dropdown { position: relative; display: inline-flex !important; align-items: center; }
+  .ob-lang-dropdown > .ob-lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .ob-lang-btn__flag {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .ob-lang-caret { width: 16px; height: 16px; transition: transform 0.15s; }
+  .ob-lang-dropdown[data-open="true"] .ob-lang-caret { transform: rotate(180deg); }
+  .ob-lang-menu {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: -0.75rem;
+    min-width: 10rem;
+    margin: 0;
+    padding: 0.35rem 0;
+    list-style: none;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .ob-lang-dropdown[data-open="true"] .ob-lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .ob-lang-menu .ob-lang-item { margin: 0; }
+  .ob-lang-menu .ob-lang-link {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.4rem 0.9rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .ob-lang-link__flag {
+    font-size: 1rem;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+  .ob-lang-menu .ob-lang-link:hover { color: #00bcd4; }
+  .ob-lang-menu .ob-lang-item--selected .ob-lang-link { color: #00bcd4; font-weight: 600; }
+</style>
+
+<script>
+  (function() {
+    // #region debug-point A:reporter
+    function debugReport(hypothesisId, msg, data) {
+      fetch("http://127.0.0.1:7777/event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: "language-dropdown-click",
+          runId: "pre-fix",
+          hypothesisId: hypothesisId,
+          location: "overrides/partials/alternate.html",
+          msg: "[DEBUG] " + msg,
+          data: data || {},
+          ts: Date.now()
+        })
+      }).catch(function() {});
+    }
+    // #endregion
+
+    function closeAll() {
+      document.querySelectorAll(".ob-lang-dropdown[data-open='true']").forEach(function(dd) {
+        dd.removeAttribute("data-open");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+        // #region debug-point C:close-all
+        debugReport("C", "closeAll executed", {
+          hasOpenState: dd.getAttribute("data-open") === "true",
+          expanded: btn ? btn.getAttribute("aria-expanded") : null
+        });
+        // #endregion
+      });
+    }
+    function toggle(dd) {
+      var open = dd.getAttribute("data-open") === "true";
+      // #region debug-point B:toggle-before
+      var menu = dd.querySelector(".ob-lang-menu");
+      debugReport("B", "toggle before closeAll", {
+        open: open,
+        menuVisibility: menu ? getComputedStyle(menu).visibility : null,
+        menuOpacity: menu ? getComputedStyle(menu).opacity : null,
+        menuTransform: menu ? getComputedStyle(menu).transform : null
+      });
+      // #endregion
+      closeAll();
+      if (!open) {
+        dd.setAttribute("data-open", "true");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) btn.setAttribute("aria-expanded", "true");
+        // #region debug-point B:toggle-after
+        debugReport("B", "toggle opened dropdown", {
+          openAttr: dd.getAttribute("data-open"),
+          expanded: btn ? btn.getAttribute("aria-expanded") : null,
+          menuVisibility: menu ? getComputedStyle(menu).visibility : null,
+          menuOpacity: menu ? getComputedStyle(menu).opacity : null,
+          menuTransform: menu ? getComputedStyle(menu).transform : null
+        });
+        // #endregion
+      }
+    }
+    function labelsFor(lang) {
+      var map = { en: "🇺🇸", pt: "🇧🇷", es: "🇪🇸" };
+      return map[lang] || lang.toUpperCase();
+    }
+    function applyLabel(lang) {
+      document.querySelectorAll("[data-ob-lang-label]").forEach(function(el) {
+        el.textContent = labelsFor(lang);
+      });
+      document.querySelectorAll(".ob-lang-menu .ob-lang-item").forEach(function(li) {
+        var optLang = li.getAttribute("data-md-value");
+        if (optLang === lang) li.classList.add("ob-lang-item--selected");
+        else li.classList.remove("ob-lang-item--selected");
+      });
+    }
+
+    function init() {
+      // #region debug-point E:init
+      debugReport("E", "init called", {
+        dropdowns: document.querySelectorAll(".ob-lang-dropdown").length,
+        currentLang: (window.OBi18n && window.OBi18n.getCurrent && window.OBi18n.getCurrent()) || null,
+        hasOBi18nSet: !!(window.OBi18n && window.OBi18n.set)
+      });
+      // #endregion
+      document.querySelectorAll(".ob-lang-dropdown").forEach(function(dd) {
+        if (dd.getAttribute("data-ob-lang-bound") === "true") {
+          return;
+        }
+        dd.setAttribute("data-ob-lang-bound", "true");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) {
+          btn.addEventListener("click", function(e) {
+            // #region debug-point A:button-click
+            debugReport("A", "button click received", {
+              tag: e.target && e.target.tagName,
+              currentTargetTag: e.currentTarget && e.currentTarget.tagName,
+              openAttrBefore: dd.getAttribute("data-open"),
+              expandedBefore: btn.getAttribute("aria-expanded")
+            });
+            // #endregion
+            e.preventDefault();
+            e.stopPropagation();
+            toggle(dd);
+          });
+        }
+        dd.querySelectorAll("[data-ob-lang-option]").forEach(function(a) {
+          if (a.getAttribute("data-ob-lang-bound") === "true") {
+            return;
+          }
+          a.setAttribute("data-ob-lang-bound", "true");
+          a.addEventListener("click", function(e) {
+            e.preventDefault();
+            var lang = a.getAttribute("data-ob-lang-option");
+            // #region debug-point D:option-click
+            debugReport("D", "option click received", {
+              lang: lang,
+              hasOBi18n: !!window.OBi18n,
+              hasOBi18nSet: !!(window.OBi18n && window.OBi18n.set)
+            });
+            // #endregion
+            if (window.OBi18n) window.OBi18n.set(lang);
+            applyLabel(lang);
+            closeAll();
+          });
+        });
+      });
+
+      if (!window.__obLangDocumentBound) {
+        window.__obLangDocumentBound = true;
+        document.addEventListener("click", function(e) {
+          if (!e.target.closest(".ob-lang-dropdown")) {
+            // #region debug-point C:document-click
+            debugReport("C", "document click outside dropdown", {
+              tag: e.target && e.target.tagName
+            });
+            // #endregion
+            closeAll();
+          }
+        });
+      }
+
+      var initial = (window.OBi18n && window.OBi18n.getCurrent()) || "en";
+      applyLabel(initial);
+
+      if (!window.__obLangChangedBound) {
+        window.__obLangChangedBound = true;
+        window.addEventListener("ob:lang-changed", function(e) {
+          if (e.detail && e.detail.lang) applyLabel(e.detail.lang);
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+</script>
       
 
       <!-- Login (apenas desktop, ícone circular à direita do idioma) -->
-      <a href="#" class="bd-header-icon-btn" aria-label="Login" style="margin-left: 0.5rem;">
+      <a href="#" class="bd-header-icon-btn" aria-label="Login" data-i18n="header.login" data-i18n-attr="aria-label" style="margin-left: 0.5rem;">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5l-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/></svg>
       </a>
     </div>
@@ -383,16 +625,16 @@ body[data-md-color-scheme="slate"] .ob-logo {
   
   <ul class="md-nav__list" data-md-scrollfix>
     <li class="md-nav__item md-nav__item--active" style="margin-top: 1rem;">
-      <a href="#" class="md-nav__link md-nav__link--active">About</a>
+      <a href="#" class="md-nav__link md-nav__link--active" data-i18n="header.nav_about">About</a>
     </li>
     <li class="md-nav__item">
-      <a href="#" class="md-nav__link">Blog</a>
+      <a href="#" class="md-nav__link" data-i18n="header.nav_blog">Blog</a>
     </li>
     <li class="md-nav__item">
-      <a href="#" class="md-nav__link">Get Started</a>
+      <a href="#get_started" class="md-nav__link" data-i18n="header.nav_get_started">Get Started</a>
     </li>
     <li class="md-nav__item">
-      <a href="#" class="md-nav__link">Documentation</a>
+      <a href="#" class="md-nav__link" data-i18n="header.nav_documentation">Documentation</a>
     </li>
     
     
@@ -401,12 +643,12 @@ body[data-md-color-scheme="slate"] .ob-logo {
 
     <!-- Try Online (mobile) - movido para o final do menu lateral -->
     <li class="md-nav__item md-nav__item--mobile-extra" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest);">
-      <a href="#" style="display: block; width: calc(100% - 2rem); margin: 0 1rem; box-sizing: border-box; text-align: center; background-color: #00bcd4; color: #fff; padding: 0.6rem 0; border-radius: 999px; font-weight: 700; text-decoration: none;">Try Online</a>
+      <a href="#" data-i18n="header.try_online" style="display: block; width: calc(100% - 2rem); margin: 0 1rem; box-sizing: border-box; text-align: center; background-color: #00bcd4; color: #fff; padding: 0.6rem 0; border-radius: 999px; font-weight: 700; text-decoration: none;">Try Online</a>
     </li>
 
     <!-- Mobile-only language & theme selectors -->
     <li class="md-nav__item md-nav__item--mobile-extra" style="margin-top: 1rem;">
-      <div style="display: flex; gap: 1rem; align-items: center; padding: 0 1rem;">
+      <div class="bd-mobile-actions" style="display: flex; gap: 1rem; align-items: center; padding: 0 1rem;">
         
           
             <form class="md-header__option" data-md-component="palette">
@@ -432,44 +674,275 @@ body[data-md-color-scheme="slate"] .ob-logo {
     
   
 </form>
+            <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
           
         
         
-          <div class="md-header__option">
-  <div class="md-select">
+          
+
+
+<div class="md-header__option md-select ob-lang-dropdown">
+  <button class="ob-lang-btn" data-md-component="language" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Change language">
+    <span class="ob-lang-btn__flag" data-ob-lang-label>🇺🇸</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="ob-lang-caret"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+  </button>
+  <ul class="ob-lang-menu" role="listbox">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
-    </button>
-    <div class="md-select__inner">
-      <ul class="md-select__list">
-        
-          <li class="md-select__item">
-            <a href="/" hreflang="en" class="md-select__link">
-              English
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="/pt/" hreflang="pt" class="md-select__link">
-              Português
-            </a>
-          </li>
-        
-          <li class="md-select__item">
-            <a href="/es/" hreflang="es" class="md-select__link">
-              Español
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+      <li role="option" data-md-value="en" class="ob-lang-item ob-lang-item--selected">
+        <a href="/" class="ob-lang-link" data-ob-lang-option="en">
+          <span class="ob-lang-link__flag">🇺🇸</span>
+          <span>English</span>
+        </a>
+      </li>
+    
+      <li role="option" data-md-value="pt" class="ob-lang-item">
+        <a href="/" class="ob-lang-link" data-ob-lang-option="pt">
+          <span class="ob-lang-link__flag">🇧🇷</span>
+          <span>Português</span>
+        </a>
+      </li>
+    
+      <li role="option" data-md-value="es" class="ob-lang-item">
+        <a href="/" class="ob-lang-link" data-ob-lang-option="es">
+          <span class="ob-lang-link__flag">🇪🇸</span>
+          <span>Español</span>
+        </a>
+      </li>
+    
+  </ul>
 </div>
+
+<style>
+  .ob-lang-dropdown { position: relative; display: inline-flex !important; align-items: center; }
+  .ob-lang-dropdown > .ob-lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .ob-lang-btn__flag {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .ob-lang-caret { width: 16px; height: 16px; transition: transform 0.15s; }
+  .ob-lang-dropdown[data-open="true"] .ob-lang-caret { transform: rotate(180deg); }
+  .ob-lang-menu {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: -0.75rem;
+    min-width: 10rem;
+    margin: 0;
+    padding: 0.35rem 0;
+    list-style: none;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .ob-lang-dropdown[data-open="true"] .ob-lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .ob-lang-menu .ob-lang-item { margin: 0; }
+  .ob-lang-menu .ob-lang-link {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.4rem 0.9rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .ob-lang-link__flag {
+    font-size: 1rem;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+  .ob-lang-menu .ob-lang-link:hover { color: #00bcd4; }
+  .ob-lang-menu .ob-lang-item--selected .ob-lang-link { color: #00bcd4; font-weight: 600; }
+</style>
+
+<script>
+  (function() {
+    // #region debug-point A:reporter
+    function debugReport(hypothesisId, msg, data) {
+      fetch("http://127.0.0.1:7777/event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: "language-dropdown-click",
+          runId: "pre-fix",
+          hypothesisId: hypothesisId,
+          location: "overrides/partials/alternate.html",
+          msg: "[DEBUG] " + msg,
+          data: data || {},
+          ts: Date.now()
+        })
+      }).catch(function() {});
+    }
+    // #endregion
+
+    function closeAll() {
+      document.querySelectorAll(".ob-lang-dropdown[data-open='true']").forEach(function(dd) {
+        dd.removeAttribute("data-open");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+        // #region debug-point C:close-all
+        debugReport("C", "closeAll executed", {
+          hasOpenState: dd.getAttribute("data-open") === "true",
+          expanded: btn ? btn.getAttribute("aria-expanded") : null
+        });
+        // #endregion
+      });
+    }
+    function toggle(dd) {
+      var open = dd.getAttribute("data-open") === "true";
+      // #region debug-point B:toggle-before
+      var menu = dd.querySelector(".ob-lang-menu");
+      debugReport("B", "toggle before closeAll", {
+        open: open,
+        menuVisibility: menu ? getComputedStyle(menu).visibility : null,
+        menuOpacity: menu ? getComputedStyle(menu).opacity : null,
+        menuTransform: menu ? getComputedStyle(menu).transform : null
+      });
+      // #endregion
+      closeAll();
+      if (!open) {
+        dd.setAttribute("data-open", "true");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) btn.setAttribute("aria-expanded", "true");
+        // #region debug-point B:toggle-after
+        debugReport("B", "toggle opened dropdown", {
+          openAttr: dd.getAttribute("data-open"),
+          expanded: btn ? btn.getAttribute("aria-expanded") : null,
+          menuVisibility: menu ? getComputedStyle(menu).visibility : null,
+          menuOpacity: menu ? getComputedStyle(menu).opacity : null,
+          menuTransform: menu ? getComputedStyle(menu).transform : null
+        });
+        // #endregion
+      }
+    }
+    function labelsFor(lang) {
+      var map = { en: "🇺🇸", pt: "🇧🇷", es: "🇪🇸" };
+      return map[lang] || lang.toUpperCase();
+    }
+    function applyLabel(lang) {
+      document.querySelectorAll("[data-ob-lang-label]").forEach(function(el) {
+        el.textContent = labelsFor(lang);
+      });
+      document.querySelectorAll(".ob-lang-menu .ob-lang-item").forEach(function(li) {
+        var optLang = li.getAttribute("data-md-value");
+        if (optLang === lang) li.classList.add("ob-lang-item--selected");
+        else li.classList.remove("ob-lang-item--selected");
+      });
+    }
+
+    function init() {
+      // #region debug-point E:init
+      debugReport("E", "init called", {
+        dropdowns: document.querySelectorAll(".ob-lang-dropdown").length,
+        currentLang: (window.OBi18n && window.OBi18n.getCurrent && window.OBi18n.getCurrent()) || null,
+        hasOBi18nSet: !!(window.OBi18n && window.OBi18n.set)
+      });
+      // #endregion
+      document.querySelectorAll(".ob-lang-dropdown").forEach(function(dd) {
+        if (dd.getAttribute("data-ob-lang-bound") === "true") {
+          return;
+        }
+        dd.setAttribute("data-ob-lang-bound", "true");
+        var btn = dd.querySelector(".ob-lang-btn");
+        if (btn) {
+          btn.addEventListener("click", function(e) {
+            // #region debug-point A:button-click
+            debugReport("A", "button click received", {
+              tag: e.target && e.target.tagName,
+              currentTargetTag: e.currentTarget && e.currentTarget.tagName,
+              openAttrBefore: dd.getAttribute("data-open"),
+              expandedBefore: btn.getAttribute("aria-expanded")
+            });
+            // #endregion
+            e.preventDefault();
+            e.stopPropagation();
+            toggle(dd);
+          });
+        }
+        dd.querySelectorAll("[data-ob-lang-option]").forEach(function(a) {
+          if (a.getAttribute("data-ob-lang-bound") === "true") {
+            return;
+          }
+          a.setAttribute("data-ob-lang-bound", "true");
+          a.addEventListener("click", function(e) {
+            e.preventDefault();
+            var lang = a.getAttribute("data-ob-lang-option");
+            // #region debug-point D:option-click
+            debugReport("D", "option click received", {
+              lang: lang,
+              hasOBi18n: !!window.OBi18n,
+              hasOBi18nSet: !!(window.OBi18n && window.OBi18n.set)
+            });
+            // #endregion
+            if (window.OBi18n) window.OBi18n.set(lang);
+            applyLabel(lang);
+            closeAll();
+          });
+        });
+      });
+
+      if (!window.__obLangDocumentBound) {
+        window.__obLangDocumentBound = true;
+        document.addEventListener("click", function(e) {
+          if (!e.target.closest(".ob-lang-dropdown")) {
+            // #region debug-point C:document-click
+            debugReport("C", "document click outside dropdown", {
+              tag: e.target && e.target.tagName
+            });
+            // #endregion
+            closeAll();
+          }
+        });
+      }
+
+      var initial = (window.OBi18n && window.OBi18n.getCurrent()) || "en";
+      applyLabel(initial);
+
+      if (!window.__obLangChangedBound) {
+        window.__obLangChangedBound = true;
+        window.addEventListener("ob:lang-changed", function(e) {
+          if (e.detail && e.detail.lang) applyLabel(e.detail.lang);
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+</script>
         
       </div>
     </li>
     <style>
+      .bd-mobile-actions .md-header__option {
+        display: inline-flex !important;
+        align-items: center;
+      }
       @media screen and (min-width: 76.25em) {
         .md-nav__item--mobile-extra {
           display: none !important;
@@ -728,11 +1201,11 @@ html[data-md-color-scheme="slate"] .full-width-card {
 
 <div class="main-wrapper" style="flex-wrap: wrap;">
   <div class="hero-container">
-    <img src="assets/images/ontobdc-logo.png" alt="OntoBDC Logo" style="max-height: 120px; margin-bottom: 1rem;">
-    <h1>Onto<span class="bd-accent">BDC</span></h1>
+    <img src="assets/images/ontobdc-logo.png" data-i18n="site.logo_alt" data-i18n-attr="alt" alt="OntoBDC Logo" style="max-height: 120px; margin-bottom: 1rem;">
+    <h1>Onto<span class="bd-accent" data-i18n="hero.title_accent">BDC</span></h1>
     <p class="subtitle">
-      <strong style="color: var(--md-default-fg-color);">Ontology-Based Datasets & Containers</strong><br />
-      <span style="display: block; margin-top: 0.5rem;">A unified standard to define, distribute, and orchestrate open data datasets through code.</span>
+      <strong style="color: var(--md-default-fg-color);" data-i18n="hero.strong_subtitle">Ontology-Based Datasets & Containers</strong><br />
+      <span style="display: block; margin-top: 0.5rem;" data-i18n="hero.soft_subtitle">A unified standard to define, distribute, and orchestrate open data datasets through code.</span>
     </p>
   </div>
 
@@ -742,8 +1215,8 @@ html[data-md-color-scheme="slate"] .full-width-card {
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
       </div>
       <div class="feature-content">
-        <h3>OPEN SOURCE</h3>
-        <p>Built for the community</p>
+        <h3 data-i18n="features.open_source_title">OPEN SOURCE</h3>
+        <p data-i18n="features.open_source_sub">Built for the community</p>
       </div>
     </div>
 
@@ -752,8 +1225,8 @@ html[data-md-color-scheme="slate"] .full-width-card {
         <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
       </div>
       <div class="feature-content">
-        <h3>IT'S FREE</h3>
-        <p>No proprietary licenses</p>
+        <h3 data-i18n="features.free_title">IT'S FREE</h3>
+        <p data-i18n="features.free_sub">No proprietary licenses</p>
       </div>
     </div>
 
@@ -762,82 +1235,76 @@ html[data-md-color-scheme="slate"] .full-width-card {
         <svg viewBox="0 0 24 24"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.2 3-3.3 3-5.7 0-3.9-3.1-7-7-7z"/></svg>
       </div>
       <div class="feature-content">
-        <h3>EMPOWER</h3>
-        <p>Your engineering teams</p>
+        <h3 data-i18n="features.empower_title">EMPOWER</h3>
+        <p data-i18n="features.empower_sub">Your engineering teams</p>
       </div>
     </div>
   </div>
 
   <div class="full-width-card">
-    <h2>Do everything with capabilities</h2>
-    <p>These are small executable scripts embedded directly within the "digital briefcase" (the .obdc pointer) that teach any computer or system on the network how to read, transform, or validate that specific dataset.</p>
+    <h2 data-i18n="capabilities.title">Do everything with capabilities</h2>
+    <p data-i18n="capabilities.description">These are small executable scripts embedded directly within the "digital briefcase" (the .obdc pointer) that teach any computer or system on the network how to read, transform, or validate that specific dataset.</p>
 
     <div class="mini-cards-grid">
       <div class="mini-card">
-        <h3>🛡️ Data Sovereignty</h3>
-        <p>Validate engineering projects locally (Edge Execution). Eliminate costly proprietary licenses and orchestrate sensitive data without transferring it to third-party infrastructures.</p>
+        <h3 data-i18n="capabilities.card1_title">🛡️ Data Sovereignty</h3>
+        <p data-i18n="capabilities.card1_desc">Validate engineering projects locally (Edge Execution). Eliminate costly proprietary licenses and orchestrate sensitive data without transferring it to third-party infrastructures.</p>
       </div>
       <div class="mini-card">
-        <h3>⏳ Future-Proof</h3>
-        <p>Project data must last decades. OntoBDC ensures your data and inspection tools can be reproduced identically 20 years from now, immunizing your organization against software obsolescence.</p>
+        <h3 data-i18n="capabilities.card2_title">⏳ Future-Proof</h3>
+        <p data-i18n="capabilities.card2_desc">Project data must last decades. OntoBDC ensures your data and inspection tools can be reproduced identically 20 years from now, immunizing your organization against software obsolescence.</p>
       </div>
       <div class="mini-card">
-        <h3>🤖 AI-Ready</h3>
-        <p>Using the container manifest as a structured guide, LLMs can autonomously trigger capabilities with less hallucinations, enabling advanced auditing without sending IP to Big Tech clouds.</p>
+        <h3 data-i18n="capabilities.card3_title">🤖 AI-Ready</h3>
+        <p data-i18n="capabilities.card3_desc">Using the container manifest as a structured guide, LLMs can autonomously trigger capabilities with less hallucinations, enabling advanced auditing without sending IP to Big Tech clouds.</p>
       </div>
-      <!--
-      <div class="mini-card">
-        <h3>🔗 Complex Workflows</h3>
-        <p>Chain capabilities via built-in DAGs and Finite State Machines. Manage decentralized workflows directly within the data itself, bypassing centralized cloud orchestrators.</p>
-      </div>
-      -->
     </div>
   </div>
 
   <div class="full-width-card" style="margin-top: 1.5rem; background: var(--md-code-bg-color); border: none;">
-    <h2>Your data is your data</h2>
-    <p>OntoBDC embraces true open data principles. You retain full ownership, control, and accessibility of your engineering data without being tied to proprietary formats or vendor lock-in.</p>
+    <h2 data-i18n="ownership.title">Your data is your data</h2>
+    <p data-i18n="ownership.description">OntoBDC embraces true open data principles. You retain full ownership, control, and accessibility of your engineering data without being tied to proprietary formats or vendor lock-in.</p>
 
     <div class="mini-cards-grid">
       <div class="mini-card">
-        <h3>🎯 Single Source of Truth</h3>
-        <p>You define the ultimate reference. Consolidate your engineering data into a single, reliable semantic model that governs all project rules and information.</p>
+        <h3 data-i18n="ownership.card1_title">🎯 Single Source of Truth</h3>
+        <p data-i18n="ownership.card1_desc">You define the ultimate reference. Consolidate your engineering data into a single, reliable semantic model that governs all project rules and information.</p>
       </div>
       <div class="mini-card">
-        <h3>🔄 Seamless Synchronization</h3>
-        <p>Keep data flowing perfectly. Automatically synchronize information across multiple .obdc containers and integrate effortlessly with third-party systems.</p>
+        <h3 data-i18n="ownership.card2_title">🔄 Seamless Synchronization</h3>
+        <p data-i18n="ownership.card2_desc">Keep data flowing perfectly. Automatically synchronize information across multiple .obdc containers and integrate effortlessly with third-party systems.</p>
       </div>
       <div class="mini-card">
-        <h3>🔌 Offline Local Execution</h3>
-        <p>Work without limits. Process, validate, and query your complex data entirely offline, right on your machine, with zero dependency on internet connections.</p>
+        <h3 data-i18n="ownership.card3_title">🔌 Offline Local Execution</h3>
+        <p data-i18n="ownership.card3_desc">Work without limits. Process, validate, and query your complex data entirely offline, right on your machine, with zero dependency on internet connections.</p>
       </div>
     </div>
   </div>
 
   <div class="full-width-card" style="margin-top: 1.5rem;">
-    <h2 id="get_started">Get Started!</h2>
-    <p>Choose the best way to experience and implement OntoBDC for your workflow.</p>
+    <h2 id="get_started" data-i18n="get_started.title">Get Started!</h2>
+    <p data-i18n="get_started.description">Choose the best way to experience and implement OntoBDC for your workflow.</p>
 
     <div class="mini-cards-grid">
       <div class="mini-card">
-        <h3>🌐 Online Demo</h3>
-        <p>Try OntoBDC directly in your browser without installing anything. Explore capabilities and see it in action.</p>
-        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;">Try Online</a>
+        <h3 data-i18n="get_started.card1_title">🌐 Online Demo</h3>
+        <p data-i18n="get_started.card1_desc">Try OntoBDC directly in your browser without installing anything. Explore capabilities and see it in action.</p>
+        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;" data-i18n="get_started.card1_btn">Try Online</a>
       </div>
       <div class="mini-card">
-        <h3>💻 Local CLI</h3>
-        <p>Install via pip and initialize your first digital briefcase in seconds directly from your terminal.</p>
+        <h3 data-i18n="get_started.card2_title">💻 Local CLI</h3>
+        <p data-i18n="get_started.card2_desc">Install via pip and initialize your first digital briefcase in seconds directly from your terminal.</p>
         <div style="background: #1a1b26; padding: 0.75rem; border-radius: 0.5rem; font-family: monospace; font-size: clamp(8px, 4.5cqi, 14px); color: #a9b1d6; margin-top: 1.0rem; border: 1px solid rgba(255,255,255,0.1); text-align: left; line-height: 1.4; white-space: nowrap; overflow: hidden;">
-          <span style="color: #bb9af7;">>_ pip install</span> ontobdc<br>
-          <span style="color: #7dcfff;">>_ ontobdc</span> --version<br>
-          <span style="color: #7dcfff;">>_ ontobdc</span> init
+          <span style="color: #bb9af7;">&gt;_ pip install</span> ontobdc<br>
+          <span style="color: #7dcfff;">&gt;_ ontobdc</span> --version<br>
+          <span style="color: #7dcfff;">&gt;_ ontobdc</span> init
         </div>
-        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;">Documentation</a>
+        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;" data-i18n="get_started.card2_btn">Documentation</a>
       </div>
       <div class="mini-card">
-        <h3>☁️ Google Colab</h3>
-        <p>Run OntoBDC in the cloud using Google Colab. Mount your Google Drive to seamlessly process and orchestrate your remote engineering data.</p>
-        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;">Google Colab</a>
+        <h3 data-i18n="get_started.card3_title">☁️ Google Colab</h3>
+        <p data-i18n="get_started.card3_desc">Run OntoBDC in the cloud using Google Colab. Mount your Google Drive to seamlessly process and orchestrate your remote engineering data.</p>
+        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;" data-i18n="get_started.card3_btn">Google Colab</a>
       </div>
     </div>
   </div>
@@ -875,12 +1342,6 @@ html[data-md-color-scheme="slate"] .full-width-card {
         
       </main>
       
-
-
-  
-  
-
-
 <div class="bd-section bd-footer" id="empresa" style="margin-top: 4rem;">
 <div class="bd-footer__inner">
 <div class="bd-footer__top" style="border-bottom: none; padding-bottom: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
@@ -919,14 +1380,14 @@ html[data-md-color-scheme="slate"] .full-width-card {
 </style>
 <div class="bd-footer__meta bd-footer-mobile-wrap" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; text-align: right; word-break: break-word;">
 <div>
-  <a href="#" class="bd-footer__link">Terms of Use</a>
+  <a href="#" class="bd-footer__link" data-i18n="footer.terms">Terms of Use</a>
   <span class="bd-footer__sep">|</span>
-  <a href="#" class="bd-footer__link">Privacy Policy</a>
+  <a href="#" class="bd-footer__link" data-i18n="footer.privacy">Privacy Policy</a>
   <span class="bd-footer__sep">|</span>
-  <span class="bd-footer__copyright">© OntoBDC Foundation · 2026</span>
+  <span class="bd-footer__copyright" data-i18n="footer.copyright">© OntoBDC Foundation · 2026</span>
 </div>
 <div style="font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; justify-content: flex-end;">
-  <span>OntoBDC is proudly created and maintained by</span>
+  <span data-i18n="footer.maintained_prefix">OntoBDC is proudly created and maintained by</span>
   <a href="https://brasidata.com" target="_blank" rel="noopener" style="color: #ccc; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
     <img src="assets/images/brasidata-logo.png" alt="Brasidata Logo" style="height: 1.2em; width: auto; margin-right: 0; padding-right: 0;">
     <strong style="color: #ccc; margin-left: 0; padding-left: 0;">BrasiDATA</strong>
@@ -952,6 +1413,8 @@ html[data-md-color-scheme="slate"] .full-width-card {
     
     
       <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="assets/javascripts/i18n-helpers.js"></script>
       
     
   </body>
