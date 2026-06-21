@@ -36,25 +36,6 @@ theme:
 
 plugins:
   - macros
-  - i18n:
-      docs_structure: folder
-      fallback_to_default: true
-      reconfigure_material: true
-      languages:
-        - locale: en
-          name: English
-          default: true
-          build: true
-        - locale: pt
-          name: Português
-          build: true
-          nav_translations:
-            Home: Início
-        - locale: es
-          name: Español
-          build: true
-          nav_translations:
-            Home: Inicio
 
 markdown_extensions:
   - admonition
@@ -79,11 +60,14 @@ extra:
       link: /
       lang: en
     - name: Português
-      link: /pt/
+      link: /
       lang: pt
     - name: Español
-      link: /es/
+      link: /
       lang: es
+
+extra_javascript:
+  - assets/javascripts/i18n-helpers.js
 
 nav:
   - Home: index.md

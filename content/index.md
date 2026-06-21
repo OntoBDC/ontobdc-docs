@@ -218,11 +218,11 @@ html[data-md-color-scheme="slate"] .full-width-card {
 
 <div class="main-wrapper" style="flex-wrap: wrap;">
   <div class="hero-container">
-    <img src="assets/images/ontobdc-logo.png" alt="OntoBDC Logo" style="max-height: 120px; margin-bottom: 1rem;">
-    <h1>Onto<span class="bd-accent">BDC</span></h1>
+    <img src="assets/images/ontobdc-logo.png" data-i18n="site.logo_alt" data-i18n-attr="alt" alt="OntoBDC Logo" style="max-height: 120px; margin-bottom: 1rem;">
+    <h1>Onto<span class="bd-accent" data-i18n="hero.title_accent">BDC</span></h1>
     <p class="subtitle">
-      <strong style="color: var(--md-default-fg-color);">Ontology-Based Datasets & Containers</strong><br />
-      <span style="display: block; margin-top: 0.5rem;">A unified standard to define, distribute, and orchestrate open data datasets through code.</span>
+      <strong style="color: var(--md-default-fg-color);" data-i18n="hero.strong_subtitle">Ontology-Based Datasets & Containers</strong><br />
+      <span style="display: block; margin-top: 0.5rem;" data-i18n="hero.soft_subtitle">A unified standard to define, distribute, and orchestrate open data datasets through code.</span>
     </p>
   </div>
   
@@ -232,8 +232,8 @@ html[data-md-color-scheme="slate"] .full-width-card {
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
       </div>
       <div class="feature-content">
-        <h3>OPEN SOURCE</h3>
-        <p>Built for the community</p>
+        <h3 data-i18n="features.open_source_title">OPEN SOURCE</h3>
+        <p data-i18n="features.open_source_sub">Built for the community</p>
       </div>
     </div>
     
@@ -242,8 +242,8 @@ html[data-md-color-scheme="slate"] .full-width-card {
         <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
       </div>
       <div class="feature-content">
-        <h3>IT'S FREE</h3>
-        <p>No proprietary licenses</p>
+        <h3 data-i18n="features.free_title">IT'S FREE</h3>
+        <p data-i18n="features.free_sub">No proprietary licenses</p>
       </div>
     </div>
 
@@ -252,82 +252,76 @@ html[data-md-color-scheme="slate"] .full-width-card {
         <svg viewBox="0 0 24 24"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.2 3-3.3 3-5.7 0-3.9-3.1-7-7-7z"/></svg>
       </div>
       <div class="feature-content">
-        <h3>EMPOWER</h3>
-        <p>Your engineering teams</p>
+        <h3 data-i18n="features.empower_title">EMPOWER</h3>
+        <p data-i18n="features.empower_sub">Your engineering teams</p>
       </div>
     </div>
   </div>
 
   <div class="full-width-card">
-    <h2>Do everything with capabilities</h2>
-    <p>These are small executable scripts embedded directly within the "digital briefcase" (the .obdc pointer) that teach any computer or system on the network how to read, transform, or validate that specific dataset.</p>
+    <h2 data-i18n="capabilities.title">Do everything with capabilities</h2>
+    <p data-i18n="capabilities.description">These are small executable scripts embedded directly within the "digital briefcase" (the .obdc pointer) that teach any computer or system on the network how to read, transform, or validate that specific dataset.</p>
 
     <div class="mini-cards-grid">
       <div class="mini-card">
-        <h3>🛡️ Data Sovereignty</h3>
-        <p>Validate engineering projects locally (Edge Execution). Eliminate costly proprietary licenses and orchestrate sensitive data without transferring it to third-party infrastructures.</p>
+        <h3 data-i18n="capabilities.card1_title">🛡️ Data Sovereignty</h3>
+        <p data-i18n="capabilities.card1_desc">Validate engineering projects locally (Edge Execution). Eliminate costly proprietary licenses and orchestrate sensitive data without transferring it to third-party infrastructures.</p>
       </div>
       <div class="mini-card">
-        <h3>⏳ Future-Proof</h3>
-        <p>Project data must last decades. OntoBDC ensures your data and inspection tools can be reproduced identically 20 years from now, immunizing your organization against software obsolescence.</p>
+        <h3 data-i18n="capabilities.card2_title">⏳ Future-Proof</h3>
+        <p data-i18n="capabilities.card2_desc">Project data must last decades. OntoBDC ensures your data and inspection tools can be reproduced identically 20 years from now, immunizing your organization against software obsolescence.</p>
       </div>
       <div class="mini-card">
-        <h3>🤖 AI-Ready</h3>
-        <p>Using the container manifest as a structured guide, LLMs can autonomously trigger capabilities with less hallucinations, enabling advanced auditing without sending IP to Big Tech clouds.</p>
+        <h3 data-i18n="capabilities.card3_title">🤖 AI-Ready</h3>
+        <p data-i18n="capabilities.card3_desc">Using the container manifest as a structured guide, LLMs can autonomously trigger capabilities with less hallucinations, enabling advanced auditing without sending IP to Big Tech clouds.</p>
       </div>
-      <!--
-      <div class="mini-card">
-        <h3>🔗 Complex Workflows</h3>
-        <p>Chain capabilities via built-in DAGs and Finite State Machines. Manage decentralized workflows directly within the data itself, bypassing centralized cloud orchestrators.</p>
-      </div>
-      -->
     </div>
   </div>
 
   <div class="full-width-card" style="margin-top: 1.5rem; background: var(--md-code-bg-color); border: none;">
-    <h2>Your data is your data</h2>
-    <p>OntoBDC embraces true open data principles. You retain full ownership, control, and accessibility of your engineering data without being tied to proprietary formats or vendor lock-in.</p>
+    <h2 data-i18n="ownership.title">Your data is your data</h2>
+    <p data-i18n="ownership.description">OntoBDC embraces true open data principles. You retain full ownership, control, and accessibility of your engineering data without being tied to proprietary formats or vendor lock-in.</p>
 
     <div class="mini-cards-grid">
       <div class="mini-card">
-        <h3>🎯 Single Source of Truth</h3>
-        <p>You define the ultimate reference. Consolidate your engineering data into a single, reliable semantic model that governs all project rules and information.</p>
+        <h3 data-i18n="ownership.card1_title">🎯 Single Source of Truth</h3>
+        <p data-i18n="ownership.card1_desc">You define the ultimate reference. Consolidate your engineering data into a single, reliable semantic model that governs all project rules and information.</p>
       </div>
       <div class="mini-card">
-        <h3>🔄 Seamless Synchronization</h3>
-        <p>Keep data flowing perfectly. Automatically synchronize information across multiple .obdc containers and integrate effortlessly with third-party systems.</p>
+        <h3 data-i18n="ownership.card2_title">🔄 Seamless Synchronization</h3>
+        <p data-i18n="ownership.card2_desc">Keep data flowing perfectly. Automatically synchronize information across multiple .obdc containers and integrate effortlessly with third-party systems.</p>
       </div>
       <div class="mini-card">
-        <h3>🔌 Offline Local Execution</h3>
-        <p>Work without limits. Process, validate, and query your complex data entirely offline, right on your machine, with zero dependency on internet connections.</p>
+        <h3 data-i18n="ownership.card3_title">🔌 Offline Local Execution</h3>
+        <p data-i18n="ownership.card3_desc">Work without limits. Process, validate, and query your complex data entirely offline, right on your machine, with zero dependency on internet connections.</p>
       </div>
     </div>
   </div>
 
   <div class="full-width-card" style="margin-top: 1.5rem;">
-    <h2 id="get_started">Get Started!</h2>
-    <p>Choose the best way to experience and implement OntoBDC for your workflow.</p>
+    <h2 id="get_started" data-i18n="get_started.title">Get Started!</h2>
+    <p data-i18n="get_started.description">Choose the best way to experience and implement OntoBDC for your workflow.</p>
 
     <div class="mini-cards-grid">
       <div class="mini-card">
-        <h3>🌐 Online Demo</h3>
-        <p>Try OntoBDC directly in your browser without installing anything. Explore capabilities and see it in action.</p>
-        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;">Try Online</a>
+        <h3 data-i18n="get_started.card1_title">🌐 Online Demo</h3>
+        <p data-i18n="get_started.card1_desc">Try OntoBDC directly in your browser without installing anything. Explore capabilities and see it in action.</p>
+        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;" data-i18n="get_started.card1_btn">Try Online</a>
       </div>
       <div class="mini-card">
-        <h3>💻 Local CLI</h3>
-        <p>Install via pip and initialize your first digital briefcase in seconds directly from your terminal.</p>
+        <h3 data-i18n="get_started.card2_title">💻 Local CLI</h3>
+        <p data-i18n="get_started.card2_desc">Install via pip and initialize your first digital briefcase in seconds directly from your terminal.</p>
         <div style="background: #1a1b26; padding: 0.75rem; border-radius: 0.5rem; font-family: monospace; font-size: clamp(8px, 4.5cqi, 14px); color: #a9b1d6; margin-top: 1.0rem; border: 1px solid rgba(255,255,255,0.1); text-align: left; line-height: 1.4; white-space: nowrap; overflow: hidden;">
-          <span style="color: #bb9af7;">>_ pip install</span> ontobdc<br>
-          <span style="color: #7dcfff;">>_ ontobdc</span> --version<br>
-          <span style="color: #7dcfff;">>_ ontobdc</span> init
+          <span style="color: #bb9af7;">&gt;_ pip install</span> ontobdc<br>
+          <span style="color: #7dcfff;">&gt;_ ontobdc</span> --version<br>
+          <span style="color: #7dcfff;">&gt;_ ontobdc</span> init
         </div>
-        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;">Documentation</a>
+        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;" data-i18n="get_started.card2_btn">Documentation</a>
       </div>
       <div class="mini-card">
-        <h3>☁️ Google Colab</h3>
-        <p>Run OntoBDC in the cloud using Google Colab. Mount your Google Drive to seamlessly process and orchestrate your remote engineering data.</p>
-        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;">Google Colab</a>
+        <h3 data-i18n="get_started.card3_title">☁️ Google Colab</h3>
+        <p data-i18n="get_started.card3_desc">Run OntoBDC in the cloud using Google Colab. Mount your Google Drive to seamlessly process and orchestrate your remote engineering data.</p>
+        <a href="#" class="btn-primary" style="margin-top: 1.2rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center; align-self: center;" data-i18n="get_started.card3_btn">Google Colab</a>
       </div>
     </div>
   </div>

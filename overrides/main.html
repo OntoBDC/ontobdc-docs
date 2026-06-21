@@ -1,18 +1,6 @@
 {% extends "base.html" %}
 
 {% block footer %}
-{% set locale = (config.theme.language or "en") | lower %}
-{% if locale.startswith("pt") %}
-  {% set terms_text = "Termos de Uso" %}
-  {% set privacy_text = "Privacidade" %}
-{% elif locale.startswith("es") %}
-  {% set terms_text = "Términos de Uso" %}
-  {% set privacy_text = "Privacidad" %}
-{% else %}
-  {% set terms_text = "Terms of Use" %}
-  {% set privacy_text = "Privacy Policy" %}
-{% endif %}
-
 <div class="bd-section bd-footer" id="empresa" style="margin-top: 4rem;">
 <div class="bd-footer__inner">
 <div class="bd-footer__top" style="border-bottom: none; padding-bottom: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
@@ -51,14 +39,14 @@
 </style>
 <div class="bd-footer__meta bd-footer-mobile-wrap" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; text-align: right; word-break: break-word;">
 <div>
-  <a href="#" class="bd-footer__link">{{ terms_text }}</a>
+  <a href="#" class="bd-footer__link" data-i18n="footer.terms">Terms of Use</a>
   <span class="bd-footer__sep">|</span>
-  <a href="#" class="bd-footer__link">{{ privacy_text }}</a>
+  <a href="#" class="bd-footer__link" data-i18n="footer.privacy">Privacy Policy</a>
   <span class="bd-footer__sep">|</span>
-  <span class="bd-footer__copyright">© OntoBDC Foundation · 2026</span>
+  <span class="bd-footer__copyright" data-i18n="footer.copyright">© OntoBDC Foundation · 2026</span>
 </div>
 <div style="font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; justify-content: flex-end;">
-  <span>OntoBDC is proudly created and maintained by</span>
+  <span data-i18n="footer.maintained_prefix">OntoBDC is proudly created and maintained by</span>
   <a href="https://brasidata.com" target="_blank" rel="noopener" style="color: #ccc; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
     <img src="{{ 'assets/images/brasidata-logo.png' | url }}" alt="Brasidata Logo" style="height: 1.2em; width: auto; margin-right: 0; padding-right: 0;">
     <strong style="color: #ccc; margin-left: 0; padding-left: 0;">BrasiDATA</strong>
