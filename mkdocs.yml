@@ -6,6 +6,14 @@ site_url: https://ontobdc.org/
 docs_dir: content
 site_dir: ../site
 
+# Sobrescreve a regra padrão de exclusão do MkDocs para permitir a pasta .__ontobdc__
+# O MkDocs usa gitignore spec. Para liberar uma pasta oculta, precisamos ignorar os outros '.' explicitamente
+# ou usar a configuração de 'not' (!) corretamente.
+exclude_docs: |
+  .*
+  !.__ontobdc__
+  !.__ontobdc__/**
+
 theme:
   name: material
   language: en
@@ -70,4 +78,4 @@ extra_javascript:
   - assets/javascripts/i18n-helpers.js
 
 nav:
-  - Home: index.md
+  - "Ontology-Based Datasets & Containers": index.md

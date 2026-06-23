@@ -1,8 +1,10 @@
+
+import js
 import sys
 import json
-import js
-import pyodide_http
 import requests
+import pyodide_http
+
 
 # Habilita o requests para funcionar no navegador
 pyodide_http.patch_all()
