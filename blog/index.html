@@ -292,33 +292,13 @@
         </div>
       </section>
 
-      <section class="grid" aria-label="Blog Highlights">
-        <article class="card">
-          <div class="card__meta">Post 01</div>
-          <h2>Why a static blog entry point?</h2>
-          <p>
-            It gives you a fast, reliable page that can evolve later into a richer blog without changing the deployment model.
-          </p>
-        </article>
-        <article class="card">
-          <div class="card__meta">Post 02</div>
-          <h2>Shared hosting path</h2>
-          <p>
-            The page is published under the same custom domain and GitHub Pages workflow already used by the OntoBDC website.
-          </p>
-        </article>
-        <article class="card">
-          <div class="card__meta">Post 03</div>
-          <h2>Ready for future expansion</h2>
-          <p>
-            You can later replace this file with a richer static site, a generated blog, or a more complete content pipeline.
-          </p>
-        </article>
+      <section class="grid" id="blog-posts-grid" aria-label="Blog Highlights">
+        <!-- Posts will be injected here dynamically via Pyodide -->
       </section>
 
       <section style="padding: 2rem 0; margin-bottom: 2rem;">
-        <h2 style="margin-top: 0; font-size: 1.5rem; margin-bottom: 1rem;">Processamento do Script</h2>
-        <pre id="pyodide-output" style="background: var(--panel); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; overflow-x: auto; white-space: pre-wrap; color: var(--fg); font-size: 0.9rem; line-height: 1.5; min-height: 4rem; box-shadow: var(--shadow);">Aguardando inicialização do ambiente Pyodide...</pre>
+        <h2 style="margin-top: 0; font-size: 1.5rem; margin-bottom: 1rem;">Log de Execução (Pyodide)</h2>
+        <pre id="pyodide-output" style="background: var(--panel); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; overflow-x: auto; white-space: pre-wrap; color: var(--fg); font-size: 0.9rem; line-height: 1.5; min-height: 4rem; box-shadow: var(--shadow);">Inicializando ambiente Pyodide e lendo o contêiner do blog...</pre>
       </section>
     </main>
     <footer class="bd-footer">
@@ -368,251 +348,77 @@
       function updateOutput(msg) {
         const el = document.getElementById("pyodide-output");
         if (el) {
-          if (el.innerText === "Aguardando inicialização do ambiente Pyodide...") {
+          if (el.innerText.includes("Inicializando ambiente")) {
             el.innerText = "";
           }
           el.innerText += msg + "\\n";
+          el.scrollTop = el.scrollHeight;
         }
       }
 
-      async function runPythonScript() {
-        updateOutput("Loading Pyodide...");
-        const pyodide = await loadPyodide();
-        
-        updateOutput("Loading micropip...");
-        await pyodide.loadPackage("micropip");
-        const micropip = pyodide.pyimport("micropip");
-        
-        updateOutput("Installing pyodide-http, requests, rdflib and pyyaml...");
-        await micropip.install(['pyodide-http', 'requests', 'rdflib', 'pyyaml', 'networkx']);
+      // Função que será chamada pelo Python para injetar os posts no HTML
+      function renderBlogPosts(postsJson) {
+        try {
+            const posts = JSON.parse(postsJson);
+            const grid = document.getElementById('blog-posts-grid');
+            grid.innerHTML = ''; // Limpa o grid
 
-        updateOutput("Setting up dynamic file fetcher and running script...");
-        await pyodide.runPythonAsync(`
-import sys
-import os
-import importlib.abc
-import importlib.machinery
-import pyodide_http
-import js
+            if (posts.length === 0) {
+                grid.innerHTML = '<p>Nenhum post encontrado no contêiner.</p>';
+                return;
+            }
 
-pyodide_http.patch_all()
-
-# Capture stdout and stderr
-class DOMOutput:
-    def __init__(self, is_stderr=False):
-        self.is_stderr = is_stderr
-    def write(self, txt):
-        if txt:
-            js.updateOutput(txt.rstrip("\\n"))
-    def flush(self):
-        pass
-
-sys.stdout = DOMOutput()
-sys.stderr = DOMOutput(is_stderr=True)
-
-# Set up project root to avoid FileNotFoundError
-os.environ["ONTOBDC_PROJECT_ROOT"] = "/tmp/ontobdc_project"
-os.makedirs("/tmp/ontobdc_project/.__ontobdc__", exist_ok=True)
-with open("/tmp/ontobdc_project/.__ontobdc__/config.yaml", "w") as f:
-    f.write("context:\\n  obdc:\\n    contextLanguage: en\\n")
-
-class DummyModule:
-    def __init__(self, name):
-        self.__name__ = name
-    def __getattr__(self, item):
-        return DummyModule(f"{self.__name__}.{item}")
-    def __call__(self, *args, **kwargs):
-        return DummyModule("call")
-
-# Mock modules that are hard to install or not needed
-for mod in ['frictionless', 'rocrate', 'sismic', 'spacy', 'lxml', 'pyspellchecker', 'datapackage', 'tableschema', 'numpy']:
-    sys.modules[mod] = DummyModule(mod)
-    sys.modules[mod + '.model'] = DummyModule(mod + '.model')
-    sys.modules[mod + '.rocrate'] = DummyModule(mod + '.rocrate')
-
-def fetch_sync(url):
-    xhr = js.XMLHttpRequest.new()
-    xhr.open("GET", url, False)
-    xhr.send(None)
-    if xhr.status == 200:
-        return xhr.responseText
-    raise Exception(f"Failed to fetch {url}: {xhr.status}")
-
-class FetchImporter(importlib.abc.MetaPathFinder):
-    def find_spec(self, fullname, path, target=None):
-        if not fullname.startswith("ontobdc"):
-            return None
-        
-        parts = fullname.split(".")
-        # Relative path from docs/content/blog/index.html to wip/src/
-        base_url = "../../../wip/src/" + "/".join(parts)
-        
-        try:
-            url = base_url + "/__init__.py"
-            source = fetch_sync(url)
-            is_package = True
-        except Exception:
-            try:
-                url = base_url + ".py"
-                source = fetch_sync(url)
-                is_package = False
-            except Exception:
-                try:
-                    # Let's check if it's the core dataset plugin command
-                    if fullname == "ontobdc.context.plugin.command.dataset":
-                        url = "../../../brasidatacenter/domain/social/ds/country/core/py/context/plugin/command/dataset.py"
-                        source = fetch_sync(url)
-                        is_package = False
-                    else:
-                        raise Exception("Not found")
-                except Exception:
-                    # Let's check if it's ontobdc.cli.adapter.command or similar that's failing
-                    if fullname.startswith("ontobdc.cli"):
-                        url = "../../../wip/src/" + "/".join(fullname.split(".")) + ".py"
-                        try:
-                            source = fetch_sync(url)
-                            is_package = False
-                        except Exception:
-                            # It might be a namespace package (no __init__.py)
-                            spec = importlib.machinery.ModuleSpec(fullname, None, is_package=True)
-                            spec.submodule_search_locations = [base_url]
-                            return spec
-                    else:
-                        # It might be a namespace package (no __init__.py)
-                        spec = importlib.machinery.ModuleSpec(fullname, None, is_package=True)
-                        spec.submodule_search_locations = [base_url]
-                        return spec
+            posts.forEach(post => {
+                const article = document.createElement('article');
+                article.className = 'card';
+                // Removemos o uso de template literals com crases (`) inline 
+                // para evitar conflitos de linter e escapar caracteres desnecessários.
+                let htmlContent = '<div class="card__meta">' + (post.date || 'Post') + '</div>';
+                htmlContent += '<h2>' + post.title + '</h2>';
+                htmlContent += '<p>' + post.excerpt + '</p>';
+                htmlContent += '<a href="' + post.url + '" class="btn btn--primary" style="margin-top: 1rem; min-height: 2rem; font-size: 0.85rem;">Ler Artigo</a>';
                 
-        spec = importlib.machinery.ModuleSpec(fullname, FetchLoader(source, is_package, url))
-        if is_package:
-            spec.submodule_search_locations = [base_url]
-        return spec
+                article.innerHTML = htmlContent;
+                grid.appendChild(article);
+            });
+        } catch(e) {
+            console.error("Erro ao renderizar posts:", e);
+            updateOutput("❌ Erro ao renderizar posts no HTML.");
+        }
+      }
 
-class FetchLoader(importlib.abc.Loader):
-    def __init__(self, source, is_package, url):
-        self.source = source
-        self.is_package = is_package
-        self.url = url
-        
-    def create_module(self, spec):
-        return None
-        
-    def exec_module(self, module):
-        module.__file__ = self.url
-        if self.is_package:
-            module.__path__ = [self.url.rsplit("/", 1)[0]]
-        exec(self.source, module.__dict__)
+      // Expor a função para o Python
+      window.renderBlogPosts = renderBlogPosts;
 
-sys.meta_path.append(FetchImporter())
+      async function runPythonScript() {
+        try {
+            updateOutput("Baixando Pyodide...");
+            const pyodide = await loadPyodide();
+            
+            updateOutput("Instalando dependências base...");
+            await pyodide.loadPackage("micropip");
+            const micropip = pyodide.pyimport("micropip");
+            
+            // Usando requests nativo do pyodide via pyodide-http
+            await micropip.install(['pyodide-http', 'requests']);
 
-# Recreate the dataset environment locally in the Pyodide file system
-print("Setting up local dataset environment...")
+            updateOutput("Baixando script Python leitor...");
+            const response = await fetch('./blog_reader.py');
+            if (!response.ok) {
+                throw new Error("Não foi possível carregar blog_reader.py");
+            }
+            const pythonScript = await response.text();
 
-# Mock ontobdc.storage.adapter.resource
-try:
-    import ontobdc.storage.adapter.resource
-except Exception:
-    pass
-
-import requests
-from urllib.parse import urlparse
-import json
-
-# Setup dataset files
-base_dataset_dir = "/tmp/ontobdc_project/brasidatacenter/domain/social/ds/country"
-os.makedirs(base_dataset_dir, exist_ok=True)
-os.makedirs(f"{base_dataset_dir}/capability", exist_ok=True)
-os.makedirs(f"{base_dataset_dir}/linkset", exist_ok=True)
-os.makedirs(f"{base_dataset_dir}/payload/documents", exist_ok=True)
-os.makedirs(f"{base_dataset_dir}/payload/triples", exist_ok=True)
-os.makedirs(f"{base_dataset_dir}/core/py/context/plugin/command", exist_ok=True)
-os.makedirs(f"{base_dataset_dir}/ontology", exist_ok=True)
-
-print("Fetching dataset files...")
-dataset_ttl = fetch_sync("../../../brasidatacenter/domain/social/ds/country/dataset.ttl")
-with open(f"{base_dataset_dir}/dataset.ttl", "w") as f:
-    f.write(dataset_ttl)
-
-print("Fetching linkset/datapackage.json...")
-datapackage_json = fetch_sync("../../../brasidatacenter/domain/social/ds/country/linkset/datapackage.json")
-with open(f"{base_dataset_dir}/linkset/datapackage.json", "w") as f:
-    f.write(datapackage_json)
-
-print("Fetching capability/country-list.py...")
-country_list_py = fetch_sync("../../../brasidatacenter/domain/social/ds/country/capability/country-list.py")
-with open(f"{base_dataset_dir}/capability/country-list.py", "w") as f:
-    f.write(country_list_py)
-
-print("Fetching ontology files...")
-try:
-    container_rdf = fetch_sync("../../../brasidatacenter/domain/social/ds/country/ontology/Container.rdf")
-    with open(f"{base_dataset_dir}/ontology/Container.rdf", "w") as f:
-        f.write(container_rdf)
-except Exception:
-    pass
-
-try:
-    linkset_rdf = fetch_sync("../../../brasidatacenter/domain/social/ds/country/ontology/Linkset.rdf")
-    with open(f"{base_dataset_dir}/ontology/Linkset.rdf", "w") as f:
-        f.write(linkset_rdf)
-except Exception:
-    pass
-
-print("Fetching payload files...")
-try:
-    country_csv = fetch_sync("../../../brasidatacenter/domain/social/ds/country/payload/documents/country-identifier-iso3166-1-alpha-2-en.csv")
-    with open(f"{base_dataset_dir}/payload/documents/country-identifier-iso3166-1-alpha-2-en.csv", "w") as f:
-        f.write(country_csv)
-except Exception:
-    pass
-
-try:
-    nid_ttl = fetch_sync("../../../brasidatacenter/domain/social/ds/country/payload/triples/nid.ttl")
-    with open(f"{base_dataset_dir}/payload/triples/nid.ttl", "w") as f:
-        f.write(nid_ttl)
-except Exception:
-    pass
-
-# Now fetch the copied dataset.py command
-print("Fetching core/py/context/plugin/command/dataset.py...")
-try:
-    dataset_cmd_py = fetch_sync("../../../brasidatacenter/domain/social/ds/country/core/py/context/plugin/command/dataset.py")
-    with open(f"{base_dataset_dir}/core/py/context/plugin/command/dataset.py", "w") as f:
-        f.write(dataset_cmd_py)
-    print("Found custom dataset.py inside the container!")
-    script_url = "../../../brasidatacenter/domain/social/ds/country/core/py/context/plugin/command/dataset.py"
-except Exception as e:
-    print(f"Could not find custom dataset.py in container: {e}. Falling back to default.")
-    script_url = "../../../wip/src/ontobdc/context/plugin/command/dataset.py"
-
-print("Local dataset environment ready.")
-
-# Now run the dataset command script
-print(f"Fetching main script from {script_url}...")
-source = fetch_sync(script_url)
-
-# Replace the remote dataset URL in the script with our local one
-source = source.replace(
-    'https://raw.githubusercontent.com/Brasidata/brasidatacenter/091b6ce50c9d0fffd8ab15d252aabc79a5d2daed/domain/social/ds/country/dataset.ttl',
-    f'file://{base_dataset_dir}/dataset.ttl'
-)
-
-# Replace print(capability.run()) to output JSON
-source = source.replace(
-    'print(capability.run())',
-    'import json\\n        res = capability.run()\\n        try:\\n            if hasattr(res, "content") and "response" in res.content:\\n                print(json.dumps(res.content["response"], indent=2))\\n            elif hasattr(res, "content"):\\n                print(json.dumps(res.content, indent=2))\\n            else:\\n                print(res)\\n        except:\\n            print(res)'
-)
-
-exec(source, {"__name__": "__main__"})
-        `);
+            updateOutput("Lendo contêiner na mesma pasta do arquivo...");
+            await pyodide.runPythonAsync(pythonScript);
+        } catch(err) {
+            updateOutput("❌ Erro fatal: " + err);
+            console.error(err);
+        }
       }
       
-      runPythonScript().then(() => {
-        updateOutput("Python script executed successfully.");
-      }).catch((err) => {
-        updateOutput("Python execution error: " + err);
-        console.error("Python execution error:", err);
-      });
+      // Inicia automaticamente
+      runPythonScript();
     </script>
   </body>
 </html>
