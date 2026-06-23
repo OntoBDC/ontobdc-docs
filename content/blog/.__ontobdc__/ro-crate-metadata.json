@@ -15,13 +15,6 @@
             "conformsTo": {
                 "@id": "https://w3id.org/ro/crate/1.1"
             }
-        },
-        {
-            "@id": "standalone-execution.md",
-            "@type": "Article",
-            "name": "The Power of Standalone Execution",
-            "description": "How Pyodide enables offline semantic containers",
-            "datePublished": "2026-06-22"
         }
     ]
 }

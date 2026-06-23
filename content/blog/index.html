@@ -297,8 +297,8 @@
       </section>
 
       <section style="padding: 2rem 0; margin-bottom: 2rem;">
-        <h2 style="margin-top: 0; font-size: 1.5rem; margin-bottom: 1rem;">Log de Execução (Pyodide)</h2>
-        <pre id="pyodide-output" style="background: var(--panel); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; overflow-x: auto; white-space: pre-wrap; color: var(--fg); font-size: 0.9rem; line-height: 1.5; min-height: 4rem; box-shadow: var(--shadow);">Inicializando ambiente Pyodide e lendo o contêiner do blog...</pre>
+        <h2 style="margin-top: 0; font-size: 1.5rem; margin-bottom: 1rem;">Execution Log (Pyodide)</h2>
+        <pre id="pyodide-output" style="background: var(--panel); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; overflow-x: auto; white-space: pre-wrap; color: var(--fg); font-size: 0.9rem; line-height: 1.5; min-height: 4rem; box-shadow: var(--shadow);">Initializing Pyodide environment and reading blog container...</pre>
       </section>
     </main>
     <footer class="bd-footer">
@@ -348,76 +348,76 @@
       function updateOutput(msg) {
         const el = document.getElementById("pyodide-output");
         if (el) {
-          if (el.innerText.includes("Inicializando ambiente")) {
+          if (el.innerText.includes("Initializing Pyodide environment")) {
             el.innerText = "";
           }
-          el.innerText += msg + "\n\n";
+          el.innerText += msg + "\n";
           el.scrollTop = el.scrollHeight;
         }
       }
 
-      // Função que será chamada pelo Python para injetar os posts no HTML
+      // Function that will be called by Python to inject posts into the HTML
       function renderBlogPosts(postsJson) {
         try {
             const posts = JSON.parse(postsJson);
             const grid = document.getElementById('blog-posts-grid');
-            grid.innerHTML = ''; // Limpa o grid
+            grid.innerHTML = ''; // Clear grid
 
             if (posts.length === 0) {
-                grid.innerHTML = '<p>Nenhum post encontrado no contêiner.</p>';
+                grid.innerHTML = '<p>No posts found in the container.</p>';
                 return;
             }
 
             posts.forEach(post => {
                 const article = document.createElement('article');
                 article.className = 'card';
-                // Removemos o uso de template literals com crases (`) inline 
-                // para evitar conflitos de linter e escapar caracteres desnecessários.
+                // Removed the use of inline template literals (`)
+                // to avoid linter conflicts and unnecessary character escaping.
                 let htmlContent = '<div class="card__meta">' + (post.date || 'Post') + '</div>';
                 htmlContent += '<h2>' + post.title + '</h2>';
                 htmlContent += '<p>' + post.excerpt + '</p>';
-                htmlContent += '<a href="' + post.url + '" class="btn btn--primary" style="margin-top: 1rem; min-height: 2rem; font-size: 0.85rem;">Ler Artigo</a>';
+                htmlContent += '<a href="' + post.url + '" class="btn btn--primary" style="margin-top: 1rem; min-height: 2rem; font-size: 0.85rem;">Read Article</a>';
                 
                 article.innerHTML = htmlContent;
                 grid.appendChild(article);
             });
         } catch(e) {
-            console.error("Erro ao renderizar posts:", e);
-            updateOutput("❌ Erro ao renderizar posts no HTML.");
+            console.error("Error rendering posts:", e);
+            updateOutput("❌ Error rendering posts in HTML.");
         }
       }
 
-      // Expor a função para o Python
+      // Expose the function to Python
       window.renderBlogPosts = renderBlogPosts;
 
       async function runPythonScript() {
         try {
-            updateOutput("Baixando Pyodide...");
+            updateOutput("Downloading Pyodide...");
             const pyodide = await loadPyodide();
             
-            updateOutput("Instalando dependências base...");
+            updateOutput("Installing base dependencies...");
             await pyodide.loadPackage("micropip");
             const micropip = pyodide.pyimport("micropip");
             
-            // Usando requests nativo do pyodide via pyodide-http
+            // Using native pyodide requests via pyodide-http
             await micropip.install(['pyodide-http', 'requests']);
 
-            updateOutput("Baixando script Python leitor...");
+            updateOutput("Downloading reader Python script...");
             const response = await fetch('./blog_reader.py');
             if (!response.ok) {
-                throw new Error("Não foi possível carregar blog_reader.py");
+                throw new Error("Could not load blog_reader.py");
             }
             const pythonScript = await response.text();
 
-            updateOutput("Lendo contêiner na mesma pasta do arquivo...");
+            updateOutput("Reading container in the same folder as the file...");
             await pyodide.runPythonAsync(pythonScript);
         } catch(err) {
-            updateOutput("❌ Erro fatal: " + err);
+            updateOutput("❌ Fatal error: " + err);
             console.error(err);
         }
       }
       
-      // Inicia automaticamente
+      // Auto-start
       runPythonScript();
     </script>
   </body>
