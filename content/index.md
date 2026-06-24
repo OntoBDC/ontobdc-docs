@@ -222,35 +222,15 @@ html[data-md-color-scheme="slate"] .full-width-card {
       <img src="https://img.youtube.com/vi/98zhTFi2I14/maxresdefault.jpg" alt="OntoBDC Video" style="width: 100%; height: auto; display: block;">
     </a>
   </div>
-  
+
   <div class="side-card">
-    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--md-default-fg-color--lightest);">
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem;">
       <img src="assets/images/ontobdc-logo.png" data-i18n="site.logo_alt" data-i18n-attr="alt" alt="OntoBDC Logo" style="max-height: 64px; margin-bottom: 0.75rem;">
       <h2 style="margin: 0; font-size: 1.5rem;">Onto<span class="bd-accent" data-i18n="hero.title_accent">BDC</span></h2>
       <p style="font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.4;">
-        <strong style="color: var(--md-default-fg-color);" data-i18n="hero.strong_subtitle">Ontology-Based Datasets & Containers</strong><br />
+        <strong style="color: var(--md-default-fg-color);" data-i18n="hero.strong_subtitle">Ontology-Based Datasets & Containers</strong><br /><br />
         <span style="display: block; margin-top: 0.25rem; color: var(--md-default-fg-color--light);" data-i18n="hero.soft_subtitle">A unified standard to define, distribute, and orchestrate open data datasets through code.</span>
       </p>
-    </div>
-    
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
-      </div>
-      <div class="feature-content">
-        <h3 data-i18n="features.free_title">IT'S FREE</h3>
-        <p data-i18n="features.free_sub">No proprietary licenses</p>
-      </div>
-    </div>
-
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.2 3-3.3 3-5.7 0-3.9-3.1-7-7-7z"/></svg>
-      </div>
-      <div class="feature-content">
-        <h3 data-i18n="features.empower_title">EMPOWER</h3>
-        <p data-i18n="features.empower_sub">Your engineering teams</p>
-      </div>
     </div>
   </div>
 

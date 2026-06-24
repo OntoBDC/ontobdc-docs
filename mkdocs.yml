@@ -6,6 +6,14 @@ site_url: https://ontobdc.org/
 docs_dir: content
 site_dir: ../site
 
+# Override MkDocs default exclusion rules to allow the .__ontobdc__ folder
+# MkDocs uses gitignore specs. To expose a hidden folder while keeping others blocked,
+# we explicitly ignore all '.' and then use the 'not' (!) operator for our container.
+exclude_docs: |
+  .*
+  !.__ontobdc__
+  !.__ontobdc__/**
+
 theme:
   name: material
   language: en
@@ -70,4 +78,4 @@ extra_javascript:
   - assets/javascripts/i18n-helpers.js
 
 nav:
-  - Home: index.md
+  - "Ontology-Based Datasets & Containers": index.md
