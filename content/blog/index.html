@@ -400,7 +400,10 @@
             const micropip = pyodide.pyimport("micropip");
             
             // Using native pyodide requests via pyodide-http
-            await micropip.install(['pyodide-http', 'requests']);
+            // We use the lightweight version of the stack to prevent downloading unnecessary dependencies.
+            // Since it is not yet on PyPI, we fetch the locally built wheel.
+            const origin = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+            await micropip.install(['pyodide-http', 'requests', `${origin}/.__ontobdc__/ontobdc_lt-0.11.0-py3-none-any.whl`]);
 
             updateOutput("Downloading reader Python script...");
             const response = await fetch('./blog_reader.py');
