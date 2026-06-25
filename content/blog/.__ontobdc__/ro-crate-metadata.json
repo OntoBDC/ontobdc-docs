@@ -14,6 +14,9 @@
                 },
                 {
                     "@id": "../post/dataset.ttl"
+                },
+                {
+                    "@id": "../post/linkset/datapackage.json"
                 }
             ]
         },
@@ -37,6 +40,10 @@
         },
         {
             "@id": "../post/dataset.ttl",
+            "@type": "File"
+        },
+        {
+            "@id": "../post/linkset/datapackage.json",
             "@type": "File"
         }
     ]
