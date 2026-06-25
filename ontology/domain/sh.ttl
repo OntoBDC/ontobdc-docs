@@ -7,6 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
+@prefix ct: <http://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 @base <http://ontobdc.org/ontology/domain/shp.ttl#> .
 
@@ -151,6 +153,39 @@
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
+  ] .
+
+:DataContainerShape a sh:NodeShape ;
+  sh:targetClass obdc:DataContainer ;
+  sh:property [
+    sh:path dcterms:identifier ;
+    sh:minCount 1 ;
+    sh:message "Container configuration file is missing dcterms:identifier." ;
+    sh:severity sh:Violation ;
+  ] ;
+  sh:property [
+    sh:path prov:atLocation ;
+    sh:minCount 1 ;
+    sh:message "Container configuration file is missing prov:atLocation." ;
+    sh:severity sh:Violation ;
+  ] ;
+  sh:property [
+    sh:path dcterms:title ;
+    sh:minCount 1 ;
+    sh:message "Container configuration file is missing dcterms:title." ;
+    sh:severity sh:Warning ;
+  ] ;
+  sh:property [
+    sh:path dcterms:description ;
+    sh:minCount 1 ;
+    sh:message "Container configuration file is missing dcterms:description." ;
+    sh:severity sh:Warning ;
+  ] ;
+  sh:property [
+    sh:path ct:creationDate ;
+    sh:minCount 1 ;
+    sh:message "Container configuration file is missing ct:creationDate." ;
+    sh:severity sh:Warning ;
   ] .
 
 

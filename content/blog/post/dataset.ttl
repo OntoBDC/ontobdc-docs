@@ -2,10 +2,9 @@
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
 
-<urn:ontobdc:storage/dataset/docs/content/blog/post> a ct:ContainerDescription,
-        ct:Folder,
-        dcat:Dataset ;
-    dcterms:isPartOf <urn:ontobdc:storage/local/docs/content/blog> ;
+<urn:ontobdc:storage/dataset/docs/content/blog/post> a obdc:entityDataset ;
+    obdc:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
     prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post> .
 

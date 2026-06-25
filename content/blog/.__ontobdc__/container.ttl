@@ -1,13 +1,16 @@
 @prefix ct: <http://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
+@prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:ontobdc:storage/local/docs/content/blog> a dcterms:Location,
-        ct:ContainerDescription ;
+<urn:ontobdc:storage/local/docs/content/blog> a obdc:DataContainer ;
     dcterms:identifier "urn:ontobdc:storage/local/docs/content/blog" ;
     dcterms:title "Storage Container: blog"@en ;
     ct:creationDate "2026-06-21T06:12:42.304579+00:00"^^xsd:dateTime ;
     ct:description "Local storage container at Storage Container: blog"@en ;
-    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog> .
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog> ;
+    ns1:creationDate "2026-06-21T06:12:42.304579+00:00"^^xsd:dateTime ;
+    ns1:description "Local storage container at Storage Container: blog"@en .
 

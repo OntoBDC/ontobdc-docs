@@ -4,12 +4,7 @@
         {
             "@id": "./",
             "@type": "Dataset",
-            "datePublished": "2026-06-21T06:12:42+00:00",
-            "hasPart": [
-                {
-                    "@id": "ontobdc_lt-0.11.0-py3-none-any.whl"
-                }
-            ]
+            "datePublished": "2026-06-21T06:12:42+00:00"
         },
         {
             "@id": "ro-crate-metadata.json",
@@ -20,10 +15,6 @@
             "conformsTo": {
                 "@id": "https://w3id.org/ro/crate/1.1"
             }
-        },
-        {
-            "@id": "ontobdc_lt-0.11.0-py3-none-any.whl",
-            "@type": "File"
         }
     ]
 }
