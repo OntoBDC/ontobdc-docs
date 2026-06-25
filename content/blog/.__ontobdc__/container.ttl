@@ -6,6 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:ontobdc:storage/local/docs/content/blog> a obdc:DataContainer ;
+    obdc:hasEntityDataset <urn:ontobdc:storage/dataset/docs/content/blog/post> ;
     dcterms:identifier "urn:ontobdc:storage/local/docs/content/blog" ;
     dcterms:title "Storage Container: blog"@en ;
     ct:creationDate "2026-06-21T06:12:42.304579+00:00"^^xsd:dateTime ;

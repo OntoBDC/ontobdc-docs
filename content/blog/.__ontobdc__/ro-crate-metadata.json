@@ -4,7 +4,18 @@
         {
             "@id": "./",
             "@type": "Dataset",
-            "datePublished": "2026-06-21T06:12:42+00:00"
+            "datePublished": "2026-06-21T06:12:42+00:00",
+            "hasPart": [
+                {
+                    "@id": "../index.html"
+                },
+                {
+                    "@id": "../blog_reader.py"
+                },
+                {
+                    "@id": "../post/dataset.ttl"
+                }
+            ]
         },
         {
             "@id": "ro-crate-metadata.json",
@@ -15,6 +26,18 @@
             "conformsTo": {
                 "@id": "https://w3id.org/ro/crate/1.1"
             }
+        },
+        {
+            "@id": "../index.html",
+            "@type": "File"
+        },
+        {
+            "@id": "../blog_reader.py",
+            "@type": "File"
+        },
+        {
+            "@id": "../post/dataset.ttl",
+            "@type": "File"
         }
     ]
 }
