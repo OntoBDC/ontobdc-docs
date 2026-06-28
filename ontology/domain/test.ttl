@@ -152,7 +152,7 @@
 :TestCliCommandPortContractOntobdcVersion rdf:type owl:NamedIndividual ,
                                      obdc_code:UnitTest ;
                             schema:name "test_cli_command_port_contract" ;
-                            schema:description "Valida se as implementações do CliCommandPort respeitam o contrato das três assinaturas."@en ;
+                            schema:description "Valida se as implementações do CliCommandPort respeitam o contrato das três assinaturas."@pt-br ;
                             schema:instrument :sysargsOntobdcVersion ;
                             schema:object :OntoBDCCoreCliMainInvokesMakeOntobdcVersion ;
                             schema:result :OntobdcVersionOutput .
@@ -162,7 +162,7 @@
 :TestOntobdcVersionE2E rdf:type owl:NamedIndividual ,
                                 obdc_code:E2ETestCase ;
                        schema:name "test_ontobdc_version_e2e" ;
-                       schema:description "Valida o fluxo ponta a ponta do comando de versão do CLI."@en ;
+                       schema:description "Valida o fluxo ponta a ponta do comando de versão do CLI."@pt-br ;
                        schema:instrument :sysargsOntobdcVersion ;
                        schema:result :OntobdcVersionOutput ;
                        schema:step (
