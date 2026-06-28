@@ -4,6 +4,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<urn:ontobdc:storage/dataset/docs/content/blog/post> obdc:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/docs/content/blog/post> .
+
 <urn:ontobdc:storage/local/docs/content/blog> a obdc:DataContainer ;
     obdc:hasEntityDataset <urn:ontobdc:storage/dataset/docs/content/blog/post> ;
     dcterms:identifier "urn:ontobdc:storage/local/docs/content/blog" ;
