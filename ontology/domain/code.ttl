@@ -1,0 +1,262 @@
+@prefix : <http://ontobdc.org/ontology/domain/code.ttl#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sdo: <https://w3id.org/okn/o/sd#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix ontouml: <https://w3id.org/ontouml#> .
+@base <http://ontobdc.org/ontology/domain/code.ttl#> .
+
+<http://ontobdc.org/ontology/domain/code.ttl> rdf:type owl:Ontology ;
+                                               owl:versionIRI <http://ontobdc.org/ontology/domain/code.ttl/1.0.0> ;
+                                               rdfs:comment "Ontology describing the OntoBDC application start actions and CLI entry points."@en ;
+                                               rdfs:label "OntoBDC Code Ontology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  https://schema.org/alternativeHeadline
+schema:alternativeHeadline rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/description
+schema:description rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/name
+schema:name rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#hasStartAction
+:hasStartAction rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf schema:potentialAction ;
+                rdfs:domain :OntoBDCApplication ;
+                rdfs:range :CliStartAction ;
+                rdfs:comment "Links an OntoBDC application instance to its CLI start action."@en ;
+                rdfs:label "has start action"@en .
+
+
+:requiresParameter rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf fno:expects ;
+                   rdfs:domain :SystemAction ;
+                   rdfs:comment "Links a system action to the ordered list of parameters it expects."@en ;
+                   rdfs:label "requires parameter"@en .
+
+
+###  https://schema.org/potentialAction
+schema:potentialAction rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#definedInFile
+:definedInFile rdf:type owl:DatatypeProperty ;
+               rdfs:comment "Stores the file URI where a code element is defined."@en ;
+               rdfs:label "defined in file"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#CliStartAction
+:CliStartAction rdf:type owl:Class ;
+                rdfs:subClassOf schema:Action ;
+                rdfs:comment "An action that represents starting OntoBDC from the command line."@en ;
+                rdfs:label "CLI Start Action"@en .
+
+:SystemAction rdf:type owl:Class ;
+                rdfs:subClassOf schema:Action, sdo:SoftwareConfiguration, fno:Function ;
+                rdfs:comment "An action that represents starting OntoBDC from the command line."@en ;
+                rdfs:label "System Action"@en .
+
+:ActionInvocationRelation rdf:type owl:Class ;
+                rdfs:subClassOf ontouml:BinaryRelation ;
+                rdfs:comment "A binary relation representing that one action invokes another action."@en ;
+                rdfs:label "Action Invocation Relation"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#E2ETestCase
+:E2ETestCase rdf:type owl:Class ;
+             rdfs:subClassOf schema:CheckAction ;
+             rdfs:label "E2E Test Case"@en ;
+             rdfs:comment "An End-to-End test case that validates an action invocation flow."@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UnitTest
+:UnitTest rdf:type owl:Class ;
+          rdfs:subClassOf schema:CheckAction ;
+          rdfs:label "Unit Test"@en ;
+          rdfs:comment "A unit test that validates a specific component or method."@en .
+
+:SystemActionParameter rdf:type owl:Class ;
+                rdfs:subClassOf schema:Parameter, sdo:Parameter, sdo:SampleResource, fno:Parameter ;
+                rdfs:comment "A parameter for the action."@en ;
+                rdfs:label "System Action Parameter"@en .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#OntoBDCApplication
+:OntoBDCApplication rdf:type owl:Class ;
+                    rdfs:subClassOf schema:SoftwareApplication ,
+                                    sdo:Software .
+
+
+###  https://schema.org/Action
+schema:Action rdf:type owl:Class .
+
+
+###  https://schema.org/SoftwareApplication
+schema:SoftwareApplication rdf:type owl:Class .
+
+
+###  https://w3id.org/okn/o/sd#Software
+sdo:Software rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#CliMain
+:CliMain rdf:type :CliStartAction ;
+         :definedInFile "file://__init__.py"^^xsd:anyURI ;
+         schema:description "Main CLI entrypoint for OntoBDC."@en ;
+         schema:name "main" ;
+         sdo:hasParameter :cliArgv .
+
+:PythonLibrary rdf:type owl:Class ;
+                rdfs:subClassOf sdo:SampleCollection, ontouml:Package ;
+         schema:name "Python Library" .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#OntoBDC
+:OntoBDC rdf:type :OntoBDCApplication ;
+         :hasStartAction :CliMain ;
+         schema:alternativeHeadline "Ontology-Based Containers & Datasets" ;
+         schema:name "OntoBDC" .
+
+:sys rdf:type :PythonLibrary ;
+         schema:name "sys" ;
+         :hasPart :cliArgv .
+
+:hasPart rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf schema:hasPart, sdo:hasPart ;
+                rdfs:domain :PythonLibrary ;
+                rdfs:range :SystemActionParameter ;
+                rdfs:comment "Links a part to its container."@en ;
+                rdfs:label "has part"@en .
+
+
+:isPartOf rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf schema:isPartOf ;
+                rdfs:domain :SystemActionParameter ;
+                rdfs:range :PythonLibrary ;
+                rdfs:inverseOf :hasPart ;
+                rdfs:comment "Links a part to its container."@en ;
+                rdfs:label "is part of"@en .
+
+
+:cliArgv rdf:type :SystemActionParameter ;
+         schema:name "argv" ;
+         :isPartOf :sys .
+
+:PythonClass rdf:type owl:Class ;
+             rdfs:subClassOf sdo:SoftwareConfiguration, ontouml:Class ;
+             rdfs:comment "A Python class symbol."@en ;
+             rdfs:label "Python Class"@en .
+
+:SystemPort rdf:type owl:Class ;
+            rdfs:subClassOf :PythonClass ;
+            ontouml:isAbstract "true"^^xsd:boolean ;
+            rdfs:comment "An abstract port contract represented as a Python class."@en ;
+            rdfs:label "System Port"@en .
+
+:PythonMethod rdf:type owl:Class ;
+              rdfs:subClassOf :SystemAction ;
+              rdfs:comment "A Python method or function symbol."@en ;
+              rdfs:label "Python Method"@en .
+
+:hasPythonMethod rdf:type owl:ObjectProperty ;
+                 rdfs:domain :PythonClass ;
+                 rdfs:range :PythonMethod ;
+                 rdfs:comment "Links a Python class to one of its methods."@en ;
+                 rdfs:label "has method"@en .
+
+:CliCommandRunAdapter rdf:type :PythonClass ;
+                      schema:name "CliCommandRunAdapter" ;
+                      :definedInFile "file://cli/adapter/command.py"^^xsd:anyURI ;
+                      :hasPythonMethod :CliCommandRunAdapter_make .
+
+:CliCommandRunAdapter_make rdf:type :PythonMethod ;
+                           schema:name "make" ;
+                           schema:description "Resolve a CLI command instance from raw argv by scanning plugin commands, filtering with accepts(args), and selecting a single command whose check() passes."@en ;
+                           :definedInFile "file://cli/adapter/command.py"^^xsd:anyURI ;
+                           :requiresParameter ( :cliArgv :print_log ) .
+
+:CliCommandPort rdf:type owl:Class ;
+                rdfs:subClassOf :SystemPort ;
+                ontouml:isAbstract "true"^^xsd:boolean ;
+                schema:name "CliCommandPort" ;
+                :definedInFile "file://cli/domain/port/command.py"^^xsd:anyURI .
+
+:CliBaseCommand rdf:type owl:Class ;
+                rdfs:subClassOf :CliCommandPort ;
+                schema:name "CliBaseCommand" ;
+                :definedInFile "file://cli/plugin/command/base.py"^^xsd:anyURI ;
+                schema:result :HelpCommandResponse .
+
+:CliVersionCommand rdf:type owl:Class ;
+                   rdfs:subClassOf :CliCommandPort ;
+                   schema:name "CliVersionCommand" ;
+                   :definedInFile "file://cli/plugin/command/version.py"^^xsd:anyURI .
+
+:StorageBaseCommand rdf:type owl:Class ;
+                    rdfs:subClassOf :CliCommandPort ;
+                    schema:name "StorageBaseCommand" ;
+                    :definedInFile "file://storage/plugin/command/base.py"^^xsd:anyURI ;
+                    schema:result :ListCommandResponse .
+
+:StorageListCommand rdf:type owl:Class ;
+                    rdfs:subClassOf :CliCommandPort ;
+                    schema:name "StorageListCommand" ;
+                    :definedInFile "file://storage/plugin/command/help.py"^^xsd:anyURI ;
+                    schema:result :HelpCommandResponse .
+
+:CommandResponse rdf:type owl:Class ;
+                 rdfs:subClassOf :PythonClass ;
+                 schema:name "CommandResponse" ;
+                 :definedInFile "file://cli/domain/resource/command.py"^^xsd:anyURI .
+
+:HelpCommandResponse rdf:type owl:Class ;
+                     rdfs:subClassOf :CommandResponse ;
+                     schema:name "HelpCommandResponse" ;
+                     :definedInFile "file://cli/domain/resource/command.py"^^xsd:anyURI .
+
+:ListCommandResponse rdf:type owl:Class ;
+                     rdfs:subClassOf :CommandResponse ;
+                     schema:name "ListCommandResponse" ;
+                     :definedInFile "file://cli/domain/resource/command.py"^^xsd:anyURI .
+
+:CliMainInvokesCliCommandRunAdapterMake rdf:type :ActionInvocationRelation ;
+                                        ontouml:sourceEnd :CliMain ;
+                                        ontouml:targetEnd :CliCommandRunAdapter_make ;
+                                        sdo:hasParameter :cliArgv ;
+                                        schema:result :CliCommandPort .
+
+:CliMainInvokesCliCommandRunAdapterMakeWithPrintLog rdf:type :ActionInvocationRelation ;
+                                        ontouml:sourceEnd :CliMain ;
+                                        ontouml:targetEnd :CliCommandRunAdapter_make ;
+                                        sdo:hasParameter :cliArgv, :print_log ;
+                                        schema:result :CliCommandPort .
+
+:print_log rdf:type :SystemActionParameter ;
+           schema:name "print_log"@en .
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
