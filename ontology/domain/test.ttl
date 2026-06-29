@@ -1,12 +1,13 @@
 @prefix : <http://ontobdc.org/ontology/domain/test.ttl#> .
-@prefix obdc_code: <http://ontobdc.org/ontology/domain/code.ttl#> .
-@prefix ontouml: <https://w3id.org/ontouml#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sdo: <https://w3id.org/okn/o/sd#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <https://schema.org/> .
-@prefix sdo: <https://w3id.org/okn/o/sd#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ontouml: <https://w3id.org/ontouml#> .
+@prefix obdc_code: <http://ontobdc.org/ontology/domain/code.ttl#> .
 @base <http://ontobdc.org/ontology/domain/test.ttl#> .
 
 <http://ontobdc.org/ontology/domain/test.ttl> rdf:type owl:Ontology ;
@@ -14,158 +15,153 @@
                                                rdfs:comment "Test ontology for instances that reuse the OntoBDC code ontology."@en ;
                                                rdfs:label "OntoBDC Test Ontology"@en .
 
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#hasStartAction
+obdc_code:hasStartAction rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#value
+rdf:value rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/codeRepository
+schema:codeRepository rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/description
+schema:description rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/instrument
+schema:instrument rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/name
+schema:name rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/result
+schema:result rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/okn/o/sd#hasParameter
+sdo:hasParameter rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#CliMainInvokesMake
+obdc_code:CliMainInvokesMake rdf:type owl:Class .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#CliStartAction
+obdc_code:CliStartAction rdf:type owl:Class .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#OntoBDCApplication
+obdc_code:OntoBDCApplication rdf:type owl:Class .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UnitTest
+obdc_code:UnitTest rdf:type owl:Class .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#cliArgv
+obdc_code:cliArgv rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeForHelp
+:CliMainInvokesMakeForHelp rdf:type owl:NamedIndividual ,
+                                    obdc_code:CliMainInvokesMake ;
+                           sdo:hasParameter :sysargsHelp .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeForNone
+:CliMainInvokesMakeForNone rdf:type owl:NamedIndividual ,
+                                    obdc_code:CliMainInvokesMake ;
+                           sdo:hasParameter :sysargsNone .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeForVersion
+:CliMainInvokesMakeForVersion rdf:type owl:NamedIndividual ,
+                                       obdc_code:CliMainInvokesMake ;
+                              sdo:hasParameter :sysargsVersion .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeOntobdcStorage
+:CliMainInvokesMakeOntobdcStorage rdf:type owl:NamedIndividual ,
+                                           obdc_code:CliMainInvokesMake ;
+                                  sdo:hasParameter :sysargsStorage .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeOntobdcStorageHelp
+:CliMainInvokesMakeOntobdcStorageHelp rdf:type owl:NamedIndividual ,
+                                               obdc_code:CliMainInvokesMake ;
+                                      sdo:hasParameter :sysargsStorageHelp .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#OntoBDCCore
 :OntoBDCCore rdf:type owl:NamedIndividual ,
                       obdc_code:OntoBDCApplication ;
              obdc_code:hasStartAction :OntoBDCCoreCliMain ;
-             schema:name "Core" ;
+             schema:codeRepository <https://github.com/OntoBDC/ontobdc-core> ;
              schema:description "OntoBDC Core application."@en ;
-             schema:codeRepository <https://github.com/OntoBDC/ontobdc-core> .
+             schema:name "Core" .
 
+
+###  http://ontobdc.org/ontology/domain/test.ttl#OntoBDCCoreCliMain
 :OntoBDCCoreCliMain rdf:type owl:NamedIndividual ,
                              obdc_code:CliStartAction ;
-                    schema:name "main" ;
-                    schema:description "Main CLI entrypoint for OntoBDC Core."@en .
+                    schema:description "Main CLI entrypoint for OntoBDC Core."@en ;
+                    schema:name "main" .
 
-:sysargsOntobdc rdf:type owl:NamedIndividual ,
-                         obdc_code:SystemActionParameter ;
-                schema:name "argv" ;
-                rdf:value "ontobdc" .
 
-:sysargsOntobdcVersion rdf:type owl:NamedIndividual ,
-                                obdc_code:SystemActionParameter ;
-                       schema:name "argv" ;
-                       rdf:value "ontobdc --version" .
-
-:sysargsOntobdcHelp rdf:type owl:NamedIndividual ,
-                             obdc_code:SystemActionParameter ;
-                    schema:name "argv" ;
-                    rdf:value "ontobdc --help" .
-
-:sysargsOntobdcStorage rdf:type owl:NamedIndividual ,
-                                obdc_code:SystemActionParameter ;
-                       schema:name "argv" ;
-                       rdf:value "ontobdc storage" .
-
-:sysargsOntobdcStorageHelp rdf:type owl:NamedIndividual ,
-                                    obdc_code:SystemActionParameter ;
-                           schema:name "argv" ;
-                           rdf:value "ontobdc storage --help" .
-
-:OntobdcBaseCommandSelection rdf:type owl:NamedIndividual ,
-                                      obdc_code:CliBaseCommand ;
-                             schema:name "CliBaseCommand selection for ontobdc" ;
-                             schema:result :OntobdcHelpOutput .
-
-:OntobdcVersionCommandSelection rdf:type owl:NamedIndividual ,
-                                         obdc_code:CliVersionCommand ;
-                                schema:name "CliVersionCommand selection for ontobdc --version" ;
-                                schema:result :OntobdcVersionOutput .
-
-:OntobdcHelpCommandSelection rdf:type owl:NamedIndividual ,
-                                      obdc_code:CliBaseCommand ;
-                             schema:name "CliBaseCommand selection for ontobdc --help" ;
-                             schema:result :OntobdcExplicitHelpOutput .
-
-:OntobdcStorageBaseCommandSelection rdf:type owl:NamedIndividual ,
-                                             obdc_code:StorageBaseCommand ;
-                                    schema:name "StorageBaseCommand selection for ontobdc storage" ;
-                                    schema:result :OntobdcStorageListOutput .
-
-:OntobdcStorageHelpCommandSelection rdf:type owl:NamedIndividual ,
-                                             obdc_code:StorageListCommand ;
-                                    schema:name "StorageListCommand selection for ontobdc storage --help" ;
-                                    schema:result :OntobdcStorageHelpOutput .
-
-:OntobdcHelpOutput rdf:type owl:NamedIndividual ,
-                            obdc_code:HelpCommandResponse ;
-                   schema:name "CLI Help" ;
-                   schema:description "Display help information for the CLI."@en ;
-                   rdf:value "ontobdc <command> [flags/parameters]" .
-
-:OntobdcVersionOutput rdf:type owl:NamedIndividual ,
-                               obdc_code:CommandResponse ;
-                      schema:name "OntoBDC Version" ;
-                      schema:description "Display the package version."@en ;
-                      rdf:value (
-                          [
-                              schema:name "version" ;
-                              schema:value "^[0-9]+(\\.[0-9]+)+|^unknown$" ;
-                              schema:propertyID "Regex" ;
-                              schema:valueReference xsd:string
-                          ]
-                      ) .
-
-:OntobdcExplicitHelpOutput rdf:type owl:NamedIndividual ,
-                                    obdc_code:HelpCommandResponse ;
-                           schema:name "CLI Help" ;
-                           schema:description "Display help information for the CLI."@en ;
-                           rdf:value "ontobdc <command> [flags/parameters]" .
-
-:OntobdcStorageListOutput rdf:type owl:NamedIndividual ,
-                                   obdc_code:ListCommandResponse ;
-                          schema:name "Storage Containers" ;
-                          schema:description "Found container entries in the storage."@en ;
-                          rdf:value "containers" .
-
-:OntobdcStorageHelpOutput rdf:type owl:NamedIndividual ,
-                                   obdc_code:HelpCommandResponse ;
-                          schema:name "Storage CLI Help" ;
-                          schema:description "Display help information for the storage component."@en ;
-                          rdf:value "ontobdc storage <argument> [flags/parameters]" .
-
-:OntoBDCCoreCliMainInvokesMakeOntobdc rdf:type owl:NamedIndividual ,
-                                               obdc_code:ActionInvocationRelation ;
-                                      ontouml:sourceEnd :OntoBDCCoreCliMain ;
-                                      ontouml:targetEnd obdc_code:CliCommandRunAdapter_make ;
-                                      sdo:hasParameter :sysargsOntobdc ;
-                                      schema:result :OntobdcBaseCommandSelection .
-
-:OntoBDCCoreCliMainInvokesMakeOntobdcVersion rdf:type owl:NamedIndividual ,
-                                                      obdc_code:ActionInvocationRelation ;
-                                             ontouml:sourceEnd :OntoBDCCoreCliMain ;
-                                             ontouml:targetEnd obdc_code:CliCommandRunAdapter_make ;
-                                             sdo:hasParameter :sysargsOntobdcVersion ;
-                                             schema:result :OntobdcVersionCommandSelection .
-
-:OntoBDCCoreCliMainInvokesMakeOntobdcHelp rdf:type owl:NamedIndividual ,
-                                                   obdc_code:ActionInvocationRelation ;
-                                          ontouml:sourceEnd :OntoBDCCoreCliMain ;
-                                          ontouml:targetEnd obdc_code:CliCommandRunAdapter_make ;
-                                          sdo:hasParameter :sysargsOntobdcHelp ;
-                                          schema:result :OntobdcHelpCommandSelection .
-
-:OntoBDCCoreCliMainInvokesMakeOntobdcStorage rdf:type owl:NamedIndividual ,
-                                                      obdc_code:ActionInvocationRelation ;
-                                             ontouml:sourceEnd :OntoBDCCoreCliMain ;
-                                             ontouml:targetEnd obdc_code:CliCommandRunAdapter_make ;
-                                             sdo:hasParameter :sysargsOntobdcStorage ;
-                                             schema:result :OntobdcStorageBaseCommandSelection .
-
-:OntoBDCCoreCliMainInvokesMakeOntobdcStorageHelp rdf:type owl:NamedIndividual ,
-                                                          obdc_code:ActionInvocationRelation ;
-                                                 ontouml:sourceEnd :OntoBDCCoreCliMain ;
-                                                 ontouml:targetEnd obdc_code:CliCommandRunAdapter_make ;
-                                                 sdo:hasParameter :sysargsOntobdcStorageHelp ;
-                                                 schema:result :OntobdcStorageHelpCommandSelection .
-
-### http://ontobdc.org/ontology/domain/test.ttl#TestCliCommandPortContractOntobdcVersion
+###  http://ontobdc.org/ontology/domain/test.ttl#TestCliCommandPortContractOntobdcVersion
 :TestCliCommandPortContractOntobdcVersion rdf:type owl:NamedIndividual ,
-                                     obdc_code:UnitTest ;
-                            schema:name "test_cli_command_port_contract" ;
-                            schema:description "Valida se as implementações do CliCommandPort respeitam o contrato das três assinaturas."@pt-br ;
-                            schema:instrument :sysargsOntobdcVersion ;
-                            schema:object :OntoBDCCoreCliMainInvokesMakeOntobdcVersion ;
-                            schema:result :OntobdcVersionOutput .
+                                                   obdc_code:UnitTest ;
+                                          schema:description "Valida se as implementações do CliCommandPort respeitam o contrato das três assinaturas."@pt-br ;
+                                          schema:instrument :CliMainInvokesMakeForVersion ;
+                                          schema:name "test_cli_command_port_contract" ;
+                                          schema:result :CliVersionCommand .
 
-### http://ontobdc.org/ontology/domain/test.ttl#TestOntobdcVersionE2E
-### schema:result :OntobdcVersionOutput ;
-:TestOntobdcVersionE2E rdf:type owl:NamedIndividual ,
-                                obdc_code:E2ETestCase ;
-                       schema:name "test_ontobdc_version_e2e" ;
-                       schema:description "Valida o fluxo ponta a ponta do comando de versão do CLI."@pt-br ;
-                       schema:instrument :sysargsOntobdcVersion ;
-                       schema:result :OntobdcVersionOutput ;
-                       schema:step (
-                           :OntoBDCCoreCliMainInvokesMakeOntobdcVersion
-                       ) .
 
+###  http://ontobdc.org/ontology/domain/test.ttl#sysargsHelp
+:sysargsHelp rdf:type owl:NamedIndividual ,
+                      obdc_code:cliArgv ;
+             rdf:value "ontobdc --help" .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#sysargsNone
+:sysargsNone rdf:type owl:NamedIndividual ,
+                      obdc_code:cliArgv ;
+             rdf:value "ontobdc" .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#sysargsStorage
+:sysargsStorage rdf:type owl:NamedIndividual ,
+                         obdc_code:cliArgv ;
+                rdf:value "ontobdc storage" .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#sysargsStorageHelp
+:sysargsStorageHelp rdf:type owl:NamedIndividual ,
+                             obdc_code:cliArgv ;
+                    rdf:value "ontobdc storage --help" .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#sysargsVersion
+:sysargsVersion rdf:type owl:NamedIndividual ,
+                         obdc_code:cliArgv ;
+                rdf:value "ontobdc --version" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
