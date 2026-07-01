@@ -43,6 +43,10 @@ schema:instrument rdf:type owl:AnnotationProperty .
 schema:name rdf:type owl:AnnotationProperty .
 
 
+###  https://schema.org/object
+schema:object rdf:type owl:AnnotationProperty .
+
+
 ###  https://schema.org/result
 schema:result rdf:type owl:AnnotationProperty .
 
@@ -82,31 +86,36 @@ obdc_code:cliArgv rdf:type owl:Class .
 ###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeForHelp
 :CliMainInvokesMakeForHelp rdf:type owl:NamedIndividual ,
                                     obdc_code:CliMainInvokesMake ;
-                           sdo:hasParameter :sysargsHelp .
+                           sdo:hasParameter :sysargsHelp ;
+                           ontouml:targetEnd obdc_code:CliCommandRunAdapter_make .
 
 
 ###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeForNone
 :CliMainInvokesMakeForNone rdf:type owl:NamedIndividual ,
                                     obdc_code:CliMainInvokesMake ;
-                           sdo:hasParameter :sysargsNone .
+                           sdo:hasParameter :sysargsNone ;
+                           ontouml:targetEnd obdc_code:CliCommandRunAdapter_make .
 
 
 ###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeForVersion
 :CliMainInvokesMakeForVersion rdf:type owl:NamedIndividual ,
                                        obdc_code:CliMainInvokesMake ;
-                              sdo:hasParameter :sysargsVersion .
+                              sdo:hasParameter :sysargsVersion ;
+                              ontouml:targetEnd obdc_code:CliCommandRunAdapter_make .
 
 
 ###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeOntobdcStorage
 :CliMainInvokesMakeOntobdcStorage rdf:type owl:NamedIndividual ,
                                            obdc_code:CliMainInvokesMake ;
-                                  sdo:hasParameter :sysargsStorage .
+                                  sdo:hasParameter :sysargsStorage ;
+                                  ontouml:targetEnd obdc_code:CliCommandRunAdapter_make .
 
 
 ###  http://ontobdc.org/ontology/domain/test.ttl#CliMainInvokesMakeOntobdcStorageHelp
 :CliMainInvokesMakeOntobdcStorageHelp rdf:type owl:NamedIndividual ,
                                                obdc_code:CliMainInvokesMake ;
-                                      sdo:hasParameter :sysargsStorageHelp .
+                                      sdo:hasParameter :sysargsStorageHelp ;
+                                      ontouml:targetEnd obdc_code:CliCommandRunAdapter_make .
 
 
 ###  http://ontobdc.org/ontology/domain/test.ttl#OntoBDCCore
@@ -125,13 +134,38 @@ obdc_code:cliArgv rdf:type owl:Class .
                     schema:name "main" .
 
 
+###  http://ontobdc.org/ontology/domain/test.ttl#OntobdcCliHelpResponse
+:OntobdcCliHelpResponse rdf:type owl:NamedIndividual ,
+                                 obdc_code:HelpCommandResponse ;
+                        schema:description "Display help information for the CLI."@en ;
+                        schema:name "CLI Help" .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#OntobdcVersionResponse
+:OntobdcVersionResponse rdf:type owl:NamedIndividual ,
+                                 obdc_code:CommandResponse ;
+                        schema:description "Display the package version." ;
+                        schema:name "OntoBDC Version" .
+
+
 ###  http://ontobdc.org/ontology/domain/test.ttl#TestCliCommandPortContractOntobdcVersion
 :TestCliCommandPortContractOntobdcVersion rdf:type owl:NamedIndividual ,
                                                    obdc_code:UnitTest ;
                                           schema:description "Valida se as implementações do CliCommandPort respeitam o contrato das três assinaturas."@pt-br ;
                                           schema:instrument :CliMainInvokesMakeForVersion ;
+                                          schema:object :CliMainInvokesMakeForVersion ;
                                           schema:name "test_cli_command_port_contract" ;
-                                          schema:result :CliVersionCommand .
+                                          schema:result :OntobdcVersionResponse .
+
+
+###  http://ontobdc.org/ontology/domain/test.ttl#TestOntobdcReturnsCliHelpWithoutWarnings
+:TestOntobdcReturnsCliHelpWithoutWarnings rdf:type owl:NamedIndividual ,
+                                                  obdc_code:UnitTest ;
+                                         schema:description "Valida se o comando ontobdc retorna a ajuda da CLI sem warnings de carregamento de plugins."@pt-br ;
+                                         schema:instrument :CliMainInvokesMakeForNone ;
+                                         schema:name "test_ontobdc_returns_cli_help_without_warnings" ;
+                                         schema:object :CliMainInvokesMakeForNone ;
+                                         schema:result :OntobdcCliHelpResponse .
 
 
 ###  http://ontobdc.org/ontology/domain/test.ttl#sysargsHelp

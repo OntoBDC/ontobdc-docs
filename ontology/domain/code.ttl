@@ -327,6 +327,12 @@ sdo:hasPart rdf:type owl:ObjectProperty .
                     rdfs:subClassOf :CliCommandPort .
 
 
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand
+:StorageCreateCommand rdf:type owl:Class ;
+                      rdfs:subClassOf :CliCommandPort ;
+                      :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI .
+
+
 ###  http://ontobdc.org/ontology/domain/code.ttl#StorageListCommand
 :StorageListCommand rdf:type owl:Class ;
                     rdfs:subClassOf :CliCommandPort .
@@ -336,6 +342,14 @@ sdo:hasPart rdf:type owl:ObjectProperty .
 :StorageResourceCommand rdf:type owl:Class ;
                         rdfs:subClassOf :CliCommandPort ;
                         :definedInFile "file://storage/plugin/command/resource.py"^^xsd:anyURI .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageGraphModel
+:StorageGraphModel rdf:type owl:Class ;
+                   rdfs:subClassOf :PythonClass ;
+                   rdfs:comment "Domain model responsible for storage graph rules and RDF triple manipulation."@en ;
+                   rdfs:label "Storage Graph Model"@en ;
+                   :definedInFile "file://storage/domain/model/graph.py"^^xsd:anyURI .
 
 
 ###  http://ontobdc.org/ontology/domain/code.ttl#SystemAction
@@ -510,6 +524,119 @@ schema:name "make" .
                     :definedInFile "file://storage/plugin/command/base.py"^^xsd:anyURI .
 
 
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand
+:StorageCreateCommand rdf:type owl:NamedIndividual ,
+                               :PythonClass ;
+                      :hasPythonMethod :StorageCreateCommand_accepts ,
+                                       :StorageCreateCommand_check ,
+                                       :StorageCreateCommand_run ,
+                                       :StorageCreateCommand__container_set_finish ,
+                                       :StorageCreateCommand__ensure_container_storage_file ,
+                                       :StorageCreateCommand__sync_container_storage_graph ;
+                      :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand_accepts
+:StorageCreateCommand_accepts rdf:type owl:NamedIndividual ,
+                                       :PythonMethod ;
+                              :requiresParameter [ ] ;
+                              :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI ;
+                              schema:description "Check whether the storage create command accepts the provided arguments."@en ;
+                              schema:name "accepts" .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand_check
+:StorageCreateCommand_check rdf:type owl:NamedIndividual ,
+                                     :PythonMethod ;
+                            :requiresParameter [ ] ;
+                            :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI ;
+                            schema:description "Validate whether storage creation can run in the current project context."@en ;
+                            schema:name "check" .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand_run
+:StorageCreateCommand_run rdf:type owl:NamedIndividual ,
+                                   :PythonMethod ;
+                          :requiresParameter [ ] ;
+                          :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI ;
+                          schema:description "Create a local storage container by registering it in the root storage.ttl, synchronizing the container.ttl file under .__ontobdc__, and guaranteeing an up-to-date ro-crate-metadata.json file."@en ;
+                          schema:name "run" ;
+                          schema:result :CommandResponse .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand__container_set_finish
+:StorageCreateCommand__container_set_finish rdf:type owl:NamedIndividual ,
+                                                     :PythonMethod ;
+                                            :requiresParameter [ ] ;
+                                            :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI ;
+                                            schema:description "Finalize local container configuration by ensuring the .__ontobdc__ directory, synchronizing container.ttl, and refreshing ro-crate-metadata.json."@en ;
+                                            schema:name "_container_set_finish" .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand__ensure_container_storage_file
+:StorageCreateCommand__ensure_container_storage_file rdf:type owl:NamedIndividual ,
+                                                              :PythonMethod ;
+                                                     :requiresParameter [ ] ;
+                                                     :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI ;
+                                                     schema:description "Ensure that the container.ttl file exists inside the container's .__ontobdc__ directory."@en ;
+                                                     schema:name "_ensure_container_storage_file" .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommand__sync_container_storage_graph
+:StorageCreateCommand__sync_container_storage_graph rdf:type owl:NamedIndividual ,
+                                                             :PythonMethod ;
+                                                    :requiresParameter [ ] ;
+                                                    :definedInFile "file://storage/plugin/command/create.py"^^xsd:anyURI ;
+                                                    schema:description "Synchronize the local container.ttl graph with the registered container triples from the root storage graph model."@en ;
+                                                    schema:name "_sync_container_storage_graph" .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageGraphModel
+:StorageGraphModel rdf:type owl:NamedIndividual ,
+                            :PythonClass ;
+                   :hasPythonMethod :StorageGraphModel_add_subject_predicate_objects ,
+                                    :StorageGraphModel_subject_predicate_objects ;
+                   :definedInFile "file://storage/domain/model/graph.py"^^xsd:anyURI .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageGraphModel_subject_predicate_objects
+:StorageGraphModel_subject_predicate_objects rdf:type owl:NamedIndividual ,
+                                                      :PythonMethod ;
+                                             :requiresParameter [ ] ;
+                                             :definedInFile "file://storage/domain/model/graph.py"^^xsd:anyURI ;
+                                             schema:description "Collect all predicate-object pairs associated with a storage graph subject."@en ;
+                                             schema:name "subject_predicate_objects" .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageGraphModel_add_subject_predicate_objects
+:StorageGraphModel_add_subject_predicate_objects rdf:type owl:NamedIndividual ,
+                                                          :PythonMethod ;
+                                                 :requiresParameter [ ] ;
+                                                 :definedInFile "file://storage/domain/model/graph.py"^^xsd:anyURI ;
+                                                 schema:description "Add predicate-object pairs to a subject in the storage graph."@en ;
+                                                 schema:name "add_subject_predicate_objects" .
+
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommandRunInstantiatesLoadedStorageGraph
+:StorageCreateCommandRunInstantiatesLoadedStorageGraph rdf:type owl:NamedIndividual ,
+                                                                :ActionInvocationRelation ;
+                                                       schema:result :LoadedStorageGraphPort ;
+                                                       ontouml:sourceEnd :StorageCreateCommand_run ;
+                                                       ontouml:targetEnd :LoadedStorageGraph .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommandRunInvokesContainerSetFinish
+:StorageCreateCommandRunInvokesContainerSetFinish rdf:type owl:NamedIndividual ,
+                                                           :ActionInvocationRelation ;
+                                                  ontouml:sourceEnd :StorageCreateCommand_run ;
+                                                  ontouml:targetEnd :StorageCreateCommand__container_set_finish .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommandContainerSetFinishInvokesEnsureContainerStorageFile
+:StorageCreateCommandContainerSetFinishInvokesEnsureContainerStorageFile rdf:type owl:NamedIndividual ,
+                                                                                  :ActionInvocationRelation ;
+                                                                         ontouml:sourceEnd :StorageCreateCommand__container_set_finish ;
+                                                                         ontouml:targetEnd :StorageCreateCommand__ensure_container_storage_file .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#StorageCreateCommandContainerSetFinishInvokesSyncContainerStorageGraph
+:StorageCreateCommandContainerSetFinishInvokesSyncContainerStorageGraph rdf:type owl:NamedIndividual ,
+                                                                                 :ActionInvocationRelation ;
+                                                                        schema:result :StorageGraphModel ;
+                                                                        ontouml:sourceEnd :StorageCreateCommand__container_set_finish ;
+                                                                        ontouml:targetEnd :StorageCreateCommand__sync_container_storage_graph .
+
+
 ###  http://ontobdc.org/ontology/domain/code.ttl#StorageListCommand
 :StorageListCommand rdf:type owl:NamedIndividual ;
                     :definedInFile "file://storage/plugin/command/help.py"^^xsd:anyURI .
@@ -609,6 +736,10 @@ schema:name "make" .
 
 :StorageBaseCommand schema:name "StorageBaseCommand" ;
                     schema:result :ListCommandResponse .
+
+
+:StorageCreateCommand schema:name "StorageCreateCommand" ;
+                      schema:result :CommandResponse .
 
 
 :StorageListCommand schema:name "StorageListCommand" ;
