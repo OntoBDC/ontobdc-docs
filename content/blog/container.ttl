@@ -5,7 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:ontobdc:storage/dataset/docs/content/blog/post> obdc:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
-    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/docs/content/blog/post> .
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post> .
 
 <urn:ontobdc:storage/local/docs/content/blog> a obdc:DataContainer ;
     obdc:hasEntityDataset <urn:ontobdc:storage/dataset/docs/content/blog/post> ;
@@ -14,4 +14,3 @@
     ct:creationDate "2026-06-21T06:12:42.304579+00:00"^^xsd:dateTime ;
     ct:description "Local storage container at Storage Container: blog"@en ;
     prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog> .
-
