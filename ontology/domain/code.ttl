@@ -734,6 +734,14 @@ schema:name "make" .
 :ListCommandResponse schema:name "ListCommandResponse" .
 
 
+:inspect_resource_loader rdf:type owl:NamedIndividual ,
+                                  :PythonMethod ;
+                         :requiresParameter [ ] ;
+                         :definedInFile "file://dev/plugin/command/test/resource_loader.py"^^xsd:anyURI ;
+                         schema:description "Validate resource strategy order and file mapping."@en ;
+                         schema:name "inspect_resource_loader" .
+
+
 :StorageBaseCommand schema:name "StorageBaseCommand" ;
                     schema:result :ListCommandResponse .
 
