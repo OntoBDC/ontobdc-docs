@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ontobdc.org/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <lastmod>2026-07-09</lastmod>
+    </url>
+    <url>
+         <loc>https://ontobdc.org/blog/post/.__ontobdc__/etl/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3/__extracted__/</loc>
+         <lastmod>2026-07-09</lastmod>
     </url>
 </urlset>
