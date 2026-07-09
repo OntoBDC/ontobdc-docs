@@ -10,6 +10,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ontouml: <http://w3id.org/ontouml#> .
 @prefix function: <http://w3id.org/function/ontology#> .
+@prefix ct: <http://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @base <http://ontobdc.org/ontology/domain/ns.ttl#> .
 
 <http://ontobdc.org/ontology/domain/ns.ttl> rdf:type owl:Ontology .
@@ -40,14 +42,14 @@ dcterms:description rdf:type owl:AnnotationProperty .
 
 ###  http://ontobdc.org/ontology/domain/ns.ttl#QueryCapability
 :QueryCapability rdf:type owl:Class ;
-                 rdfs:subClassOf schema:SoftwareSourceCode ,
+                 rdfs:subClassOf schema:SoftwareApplication ,
                                  function:Function ;
                  ontouml:name "Query capability"@en ;
                  rdfs:comment "Executes a query over a declared data or semantic context."@en ;
                  function:returns :QueryResponse .
 
 :TransformationCapability rdf:type owl:Class ;
-                 rdfs:subClassOf schema:SoftwareSourceCode ,
+                 rdfs:subClassOf schema:SoftwareApplication ,
                                  function:Function ;
                  ontouml:name "Transformation capability"@en ;
                  rdfs:comment "Executes a transformation over a declared data or semantic context."@en ;
@@ -72,7 +74,7 @@ dcterms:description rdf:type owl:AnnotationProperty .
 
 ###  http://ontobdc.org/ontology/domain/ns.ttl#StateEvaluator
 :StateEvaluator rdf:type owl:Class ;
-                rdfs:subClassOf schema:SoftwareSourceCode ;
+                rdfs:subClassOf schema:SoftwareApplication ;
                 ontouml:name "State evaluator"@en ;
                 rdfs:comment "A component that evaluates or determines the state used by a transformation."@en .
 
@@ -177,7 +179,7 @@ err:Error rdf:type owl:Class .
                          ontouml:name "Incoming Dataset"@en ;
                          rdfs:comment "Dataset repository instance"@en .
 
-:outputSchema rdf:type owl:Class ;
+:OutputSchema rdf:type owl:Class ;
                rdfs:subClassOf function:Output ;
                dcterms:identifier "ooutput_schema" ;
                ontouml:name "Output schema"@en ;
@@ -188,3 +190,52 @@ err:Error rdf:type owl:Class .
                rdfs:range :outputSchema ;
                ontouml:name "Output contains"@en ;
                rdfs:comment "The output schema contains the specified field."@en .
+
+:DataStorage rdf:type owl:Class ;
+               rdfs:subClassOf dcat:DataService , function:Function ;
+               ontouml:name "Data storage"@en ;
+               rdfs:comment "The data storage capability that manages data containers and semantic storage."@en .
+
+:hasDataContainer rdf:type owl:ObjectProperty ;
+               rdfs:domain :dataStorage ;
+               rdfs:range :dataContainer ;
+               ontouml:name "Has data container"@en ;
+               rdfs:comment "The data storage capability has the specified data container."@en .
+
+:DataContainer rdf:type owl:Class ;
+               rdfs:subClassOf ct:ContainerDescription, dcat:Catalog ;
+               ontouml:name "Data container"@en ;
+               rdfs:comment "A catalog or container that groups and organizes entity datasets."@en .
+
+:hasEntityDataset rdf:type owl:ObjectProperty ;
+                 rdfs:inverseProperty :belongsToDataContainer ;
+                 rdfs:subPropertyOf dcterms:hasPart ;
+               rdfs:domain :dataContainer ;
+               rdfs:range :entityDataset ;
+               ontouml:name "Has entity dataset"@en ;
+               rdfs:comment "The data container has the specified entity dataset."@en .
+
+:belongsToDataContainer rdf:type owl:ObjectProperty ;
+                 rdfs:inverseProperty :hasEntityDataset ;
+                 rdfs:subPropertyOf dcterms:isPartOf ;
+               rdfs:domain :entityDataset ;
+               rdfs:range :dataContainer ;
+               ontouml:name "Belongs to data container"@en ;
+               rdfs:comment "The entity dataset belongs to the specified data container."@en .
+
+:hasDataEntity rdf:type owl:ObjectProperty ;
+               rdfs:domain :entityDataset ;
+               rdfs:range :dataEntity ;
+               rdfs:subPropertyOf prov:hadMember ;
+               ontouml:name "Has data entity"@en ;
+               rdfs:comment "The dataset contains the specific data entity."@en .
+
+:EntityDataset rdf:type owl:Class ;
+               rdfs:subClassOf dcat:Dataset, ct:Folder ;
+               ontouml:name "Entity dataset"@en ;
+               rdfs:comment "A dataset representing a collection of related data entities."@en .
+
+:DataEntity rdf:type owl:Class ;
+               rdfs:subClassOf prov:Entity ;
+               ontouml:name "Data entity"@en ;
+               rdfs:comment "An individual data entity or resource."@en .
