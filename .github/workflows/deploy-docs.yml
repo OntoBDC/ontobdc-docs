@@ -59,6 +59,8 @@ jobs:
         run: |
           if [ -f "docs/CNAME" ] && [ -d "docs/content" ]; then
             cp "docs/CNAME" "docs/content/CNAME"
+          else
+            echo "ontobdc.org" > content/CNAME
           fi
           
       - name: Build Documentation
