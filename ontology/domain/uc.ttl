@@ -1,0 +1,81 @@
+@prefix : <http://ontobdc.org/ontology/domain/uc.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ontouml: <https://w3id.org/ontouml#> .
+@prefix obdc_code: <http://ontobdc.org/ontology/domain/code.ttl#> .
+@base <http://ontobdc.org/ontology/domain/uc.ttl#> .
+
+<http://ontobdc.org/ontology/domain/uc.ttl> rdf:type owl:Ontology ;
+                                             owl:imports <http://ontobdc.org/ontology/domain/code.ttl> ;
+                                             dcterms:description "Use case specifications for the OntoBDC system."@en ;
+                                             dcterms:title "OntoBDC Use Cases"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+dcterms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+dcterms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/description
+schema:description rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/identifier
+schema:identifier rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/name
+schema:name rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/ontouml#name
+ontouml:name rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCase
+obdc_code:UseCase rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://ontobdc.org/ontology/domain/uc.ttl#UC02PhysicalInventory
+:UC002PhysicalInventory rdf:type owl:NamedIndividual ,
+                                obdc_code:UseCase ;
+                       dcterms:description "The system performs a physical inventory of a file repository, focusing on directory contents rather than document classification."@en ;
+                       dcterms:title "Physical inventory"@en ;
+                       rdfs:comment "This use case is independent from document classification. It only describes the directory contents."@en ;
+                       rdfs:label "UC-002 - Physical inventory"@en ;
+                       skos:prefLabel "UC-002 - Physical inventory"@en ;
+                       schema:identifier "UC-002" ;
+                       ontouml:name "UC002PhysicalInventory"@en .
+
+
+

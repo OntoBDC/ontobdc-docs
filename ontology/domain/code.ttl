@@ -8,6 +8,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ontouml: <https://w3id.org/ontouml#> .
 @base <http://ontobdc.org/ontology/domain/code.ttl#> .
 
@@ -138,6 +139,15 @@ sdo:hasPart rdf:type owl:ObjectProperty .
 #################################################################
 #    Classes
 #################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCase
+:UseCase rdf:type owl:Class ;
+         rdfs:subClassOf schema:CreativeWork ,
+                         prov:Plan ,
+                         skos:Concept ;
+         ontouml:name "Use case"@en ;
+         rdfs:comment "A system use case specification, represented as a plan and a creative work, organized as a concept."@en ;
+         rdfs:label "Use Case"@en .
 
 ###  http://ontobdc.org/ontology/domain/code.ttl#ActionInvocationRelation
 :ActionInvocationRelation rdf:type owl:Class ;
