@@ -1,10 +1,21 @@
 @prefix ct: <http://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
 
-<urn:ontobdc:storage/dataset/docs/content/blog/post> a obdc:entityDataset ;
+<file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/dataset.ttl> a owl:Ontology .
+
+<urn:ontobdc:storage/dataset/docs/content/blog/post> a obdc:EntityDataset ;
     obdc:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
+    obdc:hasDataEntity <urn:ontobdc:storage/dataset/docs/content/blog/post/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> ;
+    ct:creationDate "2026-05-21T00:00:00"^^xsd:dateTime ;
     prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post> .
 
+<urn:ontobdc:storage/dataset/docs/content/blog/post/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> a obdc:DataEntity ,
+        ct:InternalDocument ;
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/contrato.pdf> ;
+    schema:additionalType <http://ontobdc.org/ontology/domain/document/type-vectors.ttl#contract> ;
+    schema:identifier "de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3" ;
+    ct:creationDate "2026-05-21T00:00:00"^^xsd:dateTime ;
+    schema:name "contrato.pdf" .
