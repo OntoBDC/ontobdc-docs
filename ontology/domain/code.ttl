@@ -85,6 +85,16 @@ ontouml:targetEnd rdf:type owl:AnnotationProperty .
                 rdfs:comment "Links an OntoBDC application instance to its CLI start action."@en ;
                 rdfs:label "has start action"@en .
 
+###  http://ontobdc.org/ontology/domain/code.ttl#hasPrimaryActor
+:hasPrimaryActor rdf:type owl:ObjectProperty ;
+                 rdfs:domain :UseCase ;
+                 rdfs:range prov:Agent .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#hasSupportingActor
+:hasSupportingActor rdf:type owl:ObjectProperty ;
+                    rdfs:domain :UseCase ;
+                    rdfs:range prov:Agent .
+
 
 ###  http://ontobdc.org/ontology/domain/code.ttl#isPartOf
 :isPartOf rdf:type owl:ObjectProperty ;
@@ -148,6 +158,23 @@ sdo:hasPart rdf:type owl:ObjectProperty .
          ontouml:name "Use case"@en ;
          rdfs:comment "A system use case specification, represented as a plan and a creative work, organized as a concept."@en ;
          rdfs:label "Use Case"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseHumanActor
+:UseCaseHumanActor rdf:type owl:Class ;
+                   rdfs:subClassOf prov:Agent ,
+                                   schema:Person ;
+                   ontouml:name "Use case human actor"@en ;
+                   rdfs:comment "A human actor that participates in a use case."@en ;
+                   rdfs:label "Use Case Human Actor"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseSoftwareActor
+:UseCaseSoftwareActor rdf:type owl:Class ;
+                      rdfs:subClassOf prov:Agent ,
+                                      prov:SoftwareAgent ,
+                                      schema:SoftwareApplication ;
+                      ontouml:name "Use case software actor"@en ;
+                      rdfs:comment "A software actor that participates in a use case."@en ;
+                      rdfs:label "Use Case Software Actor"@en .
 
 ###  http://ontobdc.org/ontology/domain/code.ttl#ActionInvocationRelation
 :ActionInvocationRelation rdf:type owl:Class ;
