@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storage Container: blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg: #09101d;
+      --bg-soft: #111b2d;
+      --surface: rgba(14, 22, 38, 0.88);
+      --surface-strong: #172338;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #e5eefc;
+      --text-soft: #97a7bf;
+      --accent: #67e8f9;
+      --accent-strong: #38bdf8;
+      --danger: #fb7185;
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: auto;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(103, 232, 249, 0.12), transparent 22%),
+        linear-gradient(180deg, #08101c 0%, #060b14 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.96), transparent);
+    }
+
+    .view-shell {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .view-topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.8fr);
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .view-hero-card,
+    .view-hero-meta,
+    .view-panel {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .view-hero-card {
+      padding: 28px;
+    }
+
+    .view-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(103, 232, 249, 0.12);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .view-eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .view-topbar h1 {
+      max-width: 10ch;
+      margin: 20px 0 12px;
+      font-size: clamp(2.8rem, 5vw, 4.9rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+    }
+
+    .view-topbar p {
+      max-width: 70ch;
+      margin: 0 0 18px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .view-hero-meta {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+    }
+
+    .view-badge {
+      display: block;
+      padding: 16px 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .view-badge-label {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .view-badge-value {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .view-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+
+    .view-column {
+      display: grid;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .view-panel {
+      overflow: hidden;
+    }
+
+    .view-panel-head {
+      padding: 20px 22px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .view-panel-title {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .view-panel-copy {
+      margin: 8px 0 0;
+      color: var(--text-soft);
+      line-height: 1.6;
+      font-size: 0.93rem;
+    }
+
+    .view-panel-body {
+      padding: 18px;
+    }
+
+    .file-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .file-list-item {
+      display: grid;
+      gap: 6px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .file-list-item strong {
+      display: block;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .file-list-item span {
+      word-break: break-word;
+    }
+
+    .file-list-empty {
+      padding: 18px;
+      border: 1px dashed rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tree-shell {
+      display: grid;
+      gap: 12px;
+    }
+
+    .tree-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tree-group[data-level="0"] {
+      gap: 12px;
+    }
+
+    .tree-node {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tree-node .tree-group {
+      display: none;
+    }
+
+    .tree-node.tree-node-branch-open > .tree-group {
+      display: grid;
+    }
+
+    .tree-group[data-level="1"],
+    .tree-group[data-level="2"],
+    .tree-group[data-level="3"],
+    .tree-group[data-level="4"] {
+      margin-left: 18px;
+      padding-left: 14px;
+      border-left: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .tree-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      cursor: pointer;
+      transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+      user-select: none;
+    }
+
+    .tree-node-directory > .tree-row {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.18);
+    }
+
+    .tree-row:hover,
+    .tree-row:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(103, 232, 249, 0.28);
+      outline: none;
+    }
+
+    .tree-node.tree-node-open > .tree-row {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .tree-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+      height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--accent);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tree-icon-glyph {
+      display: none;
+      line-height: 1;
+      font-size: 0.95rem;
+    }
+
+    .tree-icon-file,
+    .tree-node-file .tree-icon-file,
+    .tree-node-directory .tree-icon-directory-closed {
+      display: inline-block;
+    }
+
+    .tree-node-directory.tree-node-branch-open .tree-icon-directory-closed {
+      display: none;
+    }
+
+    .tree-node-directory.tree-node-branch-open .tree-icon-directory-open {
+      display: inline-block;
+    }
+
+    .tree-copy {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .tree-copy strong {
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .tree-copy span {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      word-break: break-word;
+    }
+
+    .tree-node .tree-copy span {
+      display: none;
+    }
+
+    .tree-node.tree-node-open .tree-copy span {
+      display: block;
+    }
+
+    .view-placeholder {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      border: 1px dashed rgba(148, 163, 184, 0.18);
+      border-radius: 22px;
+      color: var(--text-soft);
+      background: #050b15;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1280px) {
+      .view-topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .view-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .view-shell {
+        padding: 16px;
+      }
+
+      .view-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="view-shell">
+    <header class="view-topbar">
+      <div class="view-hero-card">
+        <div class="view-eyebrow">Digital Briefcase</div>
+        <h1>Storage Container: blog</h1>
+        <p>Interface visual do container.</p>
+      </div>
+      <div class="view-hero-meta">
+          <span class="view-badge">
+            <span class="view-badge-label">Indicador</span>
+            <span class="view-badge-value">Container: urn:ontobdc:storage/local/docs/content/blog</span>
+          </span>
+          <span class="view-badge">
+            <span class="view-badge-label">Indicador</span>
+            <span class="view-badge-value">Arquivos: 8</span>
+          </span>
+      </div>
+    </header>
+
+    <main class="view-grid">
+      <section class="view-column">
+<article class="view-panel">
+  <div class="view-panel-head">
+    <h2 class="view-panel-title">Arquivos do Container</h2>
+    <p class="view-panel-copy">
+      Arvore de diretorios e arquivos visiveis encontrados no container.
+    </p>
+  </div>
+  <div class="view-panel-body">
+      <div class="tree-shell">
+        <div class="tree-group" data-level="0">
+          <div class="tree-node tree-node-directory" data-kind="directory">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-directory-closed">▸</span>
+                  <span class="tree-icon-glyph tree-icon-directory-open">▾</span>
+              </span>
+              <div class="tree-copy">
+                <strong>post</strong>
+                <span>post</span>
+              </div>
+            </div>
+              <div class="tree-group" data-level="1">
+          <div class="tree-node tree-node-directory" data-kind="directory">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-directory-closed">▸</span>
+                  <span class="tree-icon-glyph tree-icon-directory-open">▾</span>
+              </span>
+              <div class="tree-copy">
+                <strong>linkset</strong>
+                <span>post/linkset</span>
+              </div>
+            </div>
+              <div class="tree-group" data-level="2">
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>datapackage.json</strong>
+                <span>post/linkset/datapackage.json</span>
+                  <span>.json · 186 B</span>
+              </div>
+            </div>
+          </div>
+      </div>
+          </div>
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>dataset.ttl</strong>
+                <span>post/dataset.ttl</span>
+                  <span>.ttl · 1.4 KB</span>
+              </div>
+            </div>
+          </div>
+      </div>
+          </div>
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>blog_reader.py</strong>
+                <span>blog_reader.py</span>
+                  <span>.py · 2.1 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>container.ttl</strong>
+                <span>container.ttl</span>
+                  <span>.ttl · 1.0 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>contrato.pdf</strong>
+                <span>contrato.pdf</span>
+                  <span>.pdf · 86.4 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>index.html</strong>
+                <span>index.html</span>
+                  <span>.html · 14.1 KB</span>
+              </div>
+            </div>
+          </div>
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>main.obdc</strong>
+                <span>main.obdc</span>
+                  <span>.obdc · 459 B</span>
+              </div>
+            </div>
+          </div>
+          <div class="tree-node tree-node-file" data-kind="file">
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-file">◫</span>
+              </span>
+              <div class="tree-copy">
+                <strong>ro-crate-metadata.json</strong>
+                <span>ro-crate-metadata.json</span>
+                  <span>.json · 1.2 KB</span>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+  </div>
+</article>      </section>
+
+      <section class="view-column">
+          
+      </section>
+
+      <section class="view-column">
+          
+      </section>
+
+      <section class="view-column">
+          
+      </section>
+    </main>
+  </div>
+  <script>
+    (function () {
+      const treeRows = document.querySelectorAll(".tree-row");
+      const clickDelayInMs = 220;
+
+      function setNodeOpenState(node, isOpen) {
+        node.classList.toggle("tree-node-open", isOpen);
+        const treeRow = node.querySelector(":scope > .tree-row");
+        if (treeRow) {
+          treeRow.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        }
+      }
+
+      function toggleNodeOpen(node) {
+        const isOpen = node.classList.contains("tree-node-open");
+        setNodeOpenState(node, !isOpen);
+      }
+
+      function toggleNodeBranch(node) {
+        if (node.dataset.kind !== "directory") {
+          return;
+        }
+
+        node.classList.toggle("tree-node-branch-open");
+        setNodeOpenState(node, true);
+      }
+
+      treeRows.forEach(function (treeRow) {
+        let clickTimer = null;
+
+        treeRow.addEventListener("click", function () {
+          const treeNode = treeRow.closest(".tree-node");
+          if (!treeNode) {
+            return;
+          }
+
+          clickTimer = window.setTimeout(function () {
+            toggleNodeOpen(treeNode);
+            clickTimer = null;
+          }, clickDelayInMs);
+        });
+
+        treeRow.addEventListener("dblclick", function () {
+          const treeNode = treeRow.closest(".tree-node");
+          if (!treeNode) {
+            return;
+          }
+
+          if (clickTimer !== null) {
+            window.clearTimeout(clickTimer);
+            clickTimer = null;
+          }
+
+          if (treeNode.dataset.kind === "directory") {
+            toggleNodeBranch(treeNode);
+          }
+        });
+
+        treeRow.addEventListener("keydown", function (event) {
+          const treeNode = treeRow.closest(".tree-node");
+          if (!treeNode) {
+            return;
+          }
+
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggleNodeOpen(treeNode);
+          }
+
+          if (event.key === "ArrowRight" && treeNode.dataset.kind === "directory") {
+            event.preventDefault();
+            treeNode.classList.add("tree-node-branch-open");
+            setNodeOpenState(treeNode, true);
+          }
+
+          if (event.key === "ArrowLeft" && treeNode.dataset.kind === "directory") {
+            event.preventDefault();
+            treeNode.classList.remove("tree-node-branch-open");
+          }
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
