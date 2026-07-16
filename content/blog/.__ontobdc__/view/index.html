@@ -102,8 +102,23 @@
       background: currentColor;
     }
 
+    .view-eyebrow-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 10px;
+      margin-left: 4px;
+      border-left: 1px solid rgba(103, 232, 249, 0.24);
+      color: rgba(229, 238, 252, 0.68);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
     .view-topbar h1 {
-      max-width: 10ch;
+      width: 100%;
       margin: 20px 0 12px;
       font-size: clamp(2.8rem, 5vw, 4.9rem);
       line-height: 0.92;
@@ -338,11 +353,11 @@
       word-break: break-word;
     }
 
-    .tree-node .tree-copy span {
+    .tree-node > .tree-row .tree-copy span {
       display: none;
     }
 
-    .tree-node.tree-node-open .tree-copy span {
+    .tree-node.tree-node-open > .tree-row .tree-copy span {
       display: block;
     }
 
@@ -384,15 +399,14 @@
   <div class="view-shell">
     <header class="view-topbar">
       <div class="view-hero-card">
-        <div class="view-eyebrow">Digital Briefcase</div>
+        <div class="view-eyebrow">
+          Digital Briefcase
+            <span class="view-eyebrow-meta">urn:ontobdc:storage/local/docs/content/blog</span>
+        </div>
         <h1>Storage Container: blog</h1>
         <p>Interface visual do container.</p>
       </div>
       <div class="view-hero-meta">
-          <span class="view-badge">
-            <span class="view-badge-label">Indicador</span>
-            <span class="view-badge-value">Container: urn:ontobdc:storage/local/docs/content/blog</span>
-          </span>
           <span class="view-badge">
             <span class="view-badge-label">Indicador</span>
             <span class="view-badge-value">Arquivos: 8</span>
@@ -590,6 +604,14 @@
             return;
           }
 
+          if (treeNode.dataset.kind === "directory") {
+            clickTimer = window.setTimeout(function () {
+              toggleNodeBranch(treeNode);
+              clickTimer = null;
+            }, clickDelayInMs);
+            return;
+          }
+
           clickTimer = window.setTimeout(function () {
             toggleNodeOpen(treeNode);
             clickTimer = null;
@@ -608,7 +630,7 @@
           }
 
           if (treeNode.dataset.kind === "directory") {
-            toggleNodeBranch(treeNode);
+            toggleNodeOpen(treeNode);
           }
         });
 
@@ -620,13 +642,17 @@
 
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
+            if (treeNode.dataset.kind === "directory") {
+              toggleNodeBranch(treeNode);
+              return;
+            }
+
             toggleNodeOpen(treeNode);
           }
 
           if (event.key === "ArrowRight" && treeNode.dataset.kind === "directory") {
             event.preventDefault();
             treeNode.classList.add("tree-node-branch-open");
-            setNodeOpenState(treeNode, true);
           }
 
           if (event.key === "ArrowLeft" && treeNode.dataset.kind === "directory") {
