@@ -288,6 +288,17 @@
       border-color: rgba(56, 189, 248, 0.18);
     }
 
+    .tree-node-directory[data-node-type="dataset"] > .tree-row {
+      background: rgba(103, 232, 249, 0.14);
+      border-color: rgba(103, 232, 249, 0.34);
+      box-shadow: inset 0 0 0 1px rgba(103, 232, 249, 0.08);
+    }
+
+    .tree-node-directory[data-node-type="conceptual"] > .tree-row {
+      background: rgba(255, 255, 255, 0.045);
+      border-style: dashed;
+    }
+
     .tree-row:hover,
     .tree-row:focus-visible {
       transform: translateY(-1px);
@@ -323,16 +334,35 @@
     }
 
     .tree-icon-file,
-    .tree-node-file .tree-icon-file,
-    .tree-node-directory .tree-icon-directory-closed {
+    .tree-node-file > .tree-row .tree-icon-file,
+    .tree-node-directory > .tree-row .tree-icon-directory-closed {
       display: inline-block;
     }
 
-    .tree-node-directory.tree-node-branch-open .tree-icon-directory-closed {
+    .tree-node-file[data-node-type="entity"] > .tree-row .tree-icon-file,
+    .tree-node-directory[data-node-type="dataset"] > .tree-row .tree-icon-directory-closed,
+    .tree-node-directory[data-node-type="dataset"] > .tree-row .tree-icon-directory-open {
       display: none;
     }
 
-    .tree-node-directory.tree-node-branch-open .tree-icon-directory-open {
+    .tree-node-file[data-node-type="entity"] > .tree-row .tree-icon-entity,
+    .tree-node-directory[data-node-type="dataset"] > .tree-row .tree-icon-dataset-closed {
+      display: inline-block;
+    }
+
+    .tree-node-directory.tree-node-branch-open > .tree-row .tree-icon-directory-closed {
+      display: none;
+    }
+
+    .tree-node-directory.tree-node-branch-open > .tree-row .tree-icon-directory-open {
+      display: inline-block;
+    }
+
+    .tree-node-directory[data-node-type="dataset"].tree-node-branch-open > .tree-row .tree-icon-dataset-closed {
+      display: none;
+    }
+
+    .tree-node-directory[data-node-type="dataset"].tree-node-branch-open > .tree-row .tree-icon-dataset-open {
       display: inline-block;
     }
 
@@ -404,12 +434,12 @@
             <span class="view-eyebrow-meta">urn:ontobdc:storage/local/docs/content/blog</span>
         </div>
         <h1>Storage Container: blog</h1>
-        <p>Interface visual do container.</p>
+        <p>Local storage container at Storage Container: blog</p>
       </div>
       <div class="view-hero-meta">
           <span class="view-badge">
             <span class="view-badge-label">Indicador</span>
-            <span class="view-badge-value">Arquivos: 8</span>
+            <span class="view-badge-value">Arquivos: 4</span>
           </span>
       </div>
     </header>
@@ -426,11 +456,15 @@
   <div class="view-panel-body">
       <div class="tree-shell">
         <div class="tree-group" data-level="0">
-          <div class="tree-node tree-node-directory" data-kind="directory">
+          <div
+            class="tree-node tree-node-directory"
+            data-kind="directory"
+            data-node-type="dataset"
+          >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
-                  <span class="tree-icon-glyph tree-icon-directory-closed">▸</span>
-                  <span class="tree-icon-glyph tree-icon-directory-open">▾</span>
+                  <span class="tree-icon-glyph tree-icon-dataset-closed">◈</span>
+                  <span class="tree-icon-glyph tree-icon-dataset-open">◆</span>
               </span>
               <div class="tree-copy">
                 <strong>post</strong>
@@ -438,7 +472,45 @@
               </div>
             </div>
               <div class="tree-group" data-level="1">
-          <div class="tree-node tree-node-directory" data-kind="directory">
+          <div
+            class="tree-node tree-node-directory"
+            data-kind="directory"
+            data-node-type="conceptual"
+          >
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-directory-closed">▸</span>
+                  <span class="tree-icon-glyph tree-icon-directory-open">▾</span>
+              </span>
+              <div class="tree-copy">
+                <strong>Entidades</strong>
+                <span>post/Entidades</span>
+              </div>
+            </div>
+              <div class="tree-group" data-level="2">
+          <div
+            class="tree-node tree-node-file"
+            data-kind="file"
+            data-node-type="entity"
+          >
+            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
+              <span class="tree-icon">
+                  <span class="tree-icon-glyph tree-icon-entity">◉</span>
+              </span>
+              <div class="tree-copy">
+                <strong>contrato.pdf</strong>
+                <span>file:/Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/contrato.pdf</span>
+                  <span>Entidade</span>
+              </div>
+            </div>
+          </div>
+      </div>
+          </div>
+          <div
+            class="tree-node tree-node-directory"
+            data-kind="directory"
+            data-node-type="directory"
+          >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
                   <span class="tree-icon-glyph tree-icon-directory-closed">▸</span>
@@ -450,7 +522,11 @@
               </div>
             </div>
               <div class="tree-group" data-level="2">
-          <div class="tree-node tree-node-file" data-kind="file">
+          <div
+            class="tree-node tree-node-file"
+            data-kind="file"
+            data-node-type="file"
+          >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
                   <span class="tree-icon-glyph tree-icon-file">◫</span>
@@ -458,13 +534,17 @@
               <div class="tree-copy">
                 <strong>datapackage.json</strong>
                 <span>post/linkset/datapackage.json</span>
-                  <span>.json · 186 B</span>
+                  <span>.json</span>
               </div>
             </div>
           </div>
       </div>
           </div>
-          <div class="tree-node tree-node-file" data-kind="file">
+          <div
+            class="tree-node tree-node-file"
+            data-kind="file"
+            data-node-type="file"
+          >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
                   <span class="tree-icon-glyph tree-icon-file">◫</span>
@@ -472,13 +552,17 @@
               <div class="tree-copy">
                 <strong>dataset.ttl</strong>
                 <span>post/dataset.ttl</span>
-                  <span>.ttl · 1.4 KB</span>
+                  <span>.ttl</span>
               </div>
             </div>
           </div>
       </div>
           </div>
-          <div class="tree-node tree-node-file" data-kind="file">
+          <div
+            class="tree-node tree-node-file"
+            data-kind="file"
+            data-node-type="file"
+          >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
                   <span class="tree-icon-glyph tree-icon-file">◫</span>
@@ -486,23 +570,15 @@
               <div class="tree-copy">
                 <strong>blog_reader.py</strong>
                 <span>blog_reader.py</span>
-                  <span>.py · 2.1 KB</span>
+                  <span>.py</span>
               </div>
             </div>
           </div>
-          <div class="tree-node tree-node-file" data-kind="file">
-            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
-              <span class="tree-icon">
-                  <span class="tree-icon-glyph tree-icon-file">◫</span>
-              </span>
-              <div class="tree-copy">
-                <strong>container.ttl</strong>
-                <span>container.ttl</span>
-                  <span>.ttl · 1.0 KB</span>
-              </div>
-            </div>
-          </div>
-          <div class="tree-node tree-node-file" data-kind="file">
+          <div
+            class="tree-node tree-node-file"
+            data-kind="file"
+            data-node-type="file"
+          >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
                   <span class="tree-icon-glyph tree-icon-file">◫</span>
@@ -510,43 +586,7 @@
               <div class="tree-copy">
                 <strong>contrato.pdf</strong>
                 <span>contrato.pdf</span>
-                  <span>.pdf · 86.4 KB</span>
-              </div>
-            </div>
-          </div>
-          <div class="tree-node tree-node-file" data-kind="file">
-            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
-              <span class="tree-icon">
-                  <span class="tree-icon-glyph tree-icon-file">◫</span>
-              </span>
-              <div class="tree-copy">
-                <strong>index.html</strong>
-                <span>index.html</span>
-                  <span>.html · 14.1 KB</span>
-              </div>
-            </div>
-          </div>
-          <div class="tree-node tree-node-file" data-kind="file">
-            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
-              <span class="tree-icon">
-                  <span class="tree-icon-glyph tree-icon-file">◫</span>
-              </span>
-              <div class="tree-copy">
-                <strong>main.obdc</strong>
-                <span>main.obdc</span>
-                  <span>.obdc · 459 B</span>
-              </div>
-            </div>
-          </div>
-          <div class="tree-node tree-node-file" data-kind="file">
-            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
-              <span class="tree-icon">
-                  <span class="tree-icon-glyph tree-icon-file">◫</span>
-              </span>
-              <div class="tree-copy">
-                <strong>ro-crate-metadata.json</strong>
-                <span>ro-crate-metadata.json</span>
-                  <span>.json · 1.2 KB</span>
+                  <span>.pdf</span>
               </div>
             </div>
           </div>

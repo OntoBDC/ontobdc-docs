@@ -3,6 +3,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/dataset.ttl> a owl:Ontology .
 

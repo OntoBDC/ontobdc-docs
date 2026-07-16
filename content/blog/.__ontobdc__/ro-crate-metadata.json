@@ -45,6 +45,10 @@
         {
             "@id": "../post/linkset/datapackage.json",
             "@type": "File"
+        },
+        {
+            "@id": "../contrato.pdf",
+            "@type": "File"
         }
     ]
 }
