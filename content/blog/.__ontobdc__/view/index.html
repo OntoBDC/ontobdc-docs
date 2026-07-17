@@ -29,6 +29,10 @@
       box-sizing: border-box;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -522,6 +526,8 @@
             data-node-name="post"
             data-node-path="post"
             data-node-description=""
+            data-node-stage-title=""
+            data-node-stage-description=""
             data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
@@ -542,6 +548,8 @@
             data-node-name="Entidades"
             data-node-path="post/Entidades"
             data-node-description=""
+            data-node-stage-title="Entidades"
+            data-node-stage-description=""
             data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
@@ -562,6 +570,8 @@
             data-node-name="contract"
             data-node-path="http://ontobdc.org/ontology/domain/document/type-vectors.ttl#contract"
             data-node-description="Tipo documental"
+            data-node-stage-title="contract"
+            data-node-stage-description=""
             data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
@@ -586,6 +596,8 @@
             data-node-name="blog_reader.py"
             data-node-path="blog_reader.py"
             data-node-description=".py"
+            data-node-stage-title=""
+            data-node-stage-description=""
             data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
@@ -606,6 +618,8 @@
             data-node-name="contrato.pdf"
             data-node-path="contrato.pdf"
             data-node-description=".pdf"
+            data-node-stage-title="contrato.pdf"
+            data-node-stage-description=""
             data-node-preview-path="content/pdf_contrato_pdf.html"
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
@@ -627,8 +641,8 @@
       <section class="view-column view-column-double">
           <article class="view-panel view-file-stage">
             <div class="view-panel-head">
-              <h2 class="view-panel-title">Visualização</h2>
-              <p class="view-panel-copy">Escolha um arquivo ou entidade para visualizar.</p>
+              <h2 class="view-panel-title" data-view-stage-panel-title>Visualização</h2>
+              <p class="view-panel-copy" data-view-stage-panel-copy>Escolha um arquivo ou entidade para visualizar.</p>
             </div>
             <div class="view-panel-body view-file-stage-body">
               <div class="view-file-stage-stack">
@@ -656,10 +670,14 @@
     (function () {
       const treeRows = document.querySelectorAll(".tree-row");
       const clickDelayInMs = 220;
+      const stagePanelTitle = document.querySelector("[data-view-stage-panel-title]");
+      const stagePanelCopy = document.querySelector("[data-view-stage-panel-copy]");
       const stageEmpty = document.querySelector("[data-view-stage-empty]");
       const stageEmptyTitle = document.querySelector("[data-view-stage-empty-title]");
       const stageEmptyCopy = document.querySelector("[data-view-stage-empty-copy]");
       const stageFrame = document.querySelector("[data-view-stage-frame]");
+      const defaultPanelTitle = stagePanelTitle ? stagePanelTitle.textContent : "";
+      const defaultPanelCopy = stagePanelCopy ? stagePanelCopy.textContent : "";
       const defaultEmptyTitle = stageEmptyTitle ? stageEmptyTitle.textContent : "";
       const defaultEmptyCopy = stageEmptyCopy ? stageEmptyCopy.textContent : "";
 
@@ -672,6 +690,14 @@
       }
 
       function updateStage(treeNode, title, note, previewPath) {
+        if (stagePanelTitle) {
+          stagePanelTitle.textContent = title || defaultPanelTitle;
+        }
+        if (stagePanelCopy) {
+          stagePanelCopy.textContent = note || "";
+          stagePanelCopy.hidden = !note;
+        }
+
         if (!stageFrame) {
           return;
         }
@@ -747,6 +773,13 @@
             return;
           }
 
+          const stageTitle = String(treeNode.dataset.nodeStageTitle || "").trim();
+          const stageDescription = String(treeNode.dataset.nodeStageDescription || "").trim();
+          const fallbackTitle = treeNode.dataset.kind === "directory"
+            ? String(treeNode.dataset.nodeName || "").trim()
+            : defaultPanelTitle;
+          const resolvedTitle = stageTitle || fallbackTitle || defaultPanelTitle;
+
           if (clickTimer !== null) {
             window.clearTimeout(clickTimer);
             clickTimer = null;
@@ -756,8 +789,8 @@
             toggleNodeOpen(treeNode);
             updateStage(
               treeNode,
-              String(treeNode.dataset.nodeName || "").trim(),
-              "Diretorio selecionado para inspecao.",
+              resolvedTitle,
+              stageDescription,
               "",
             );
             return;
@@ -767,14 +800,14 @@
           if (previewPath === "") {
             updateStage(
               treeNode,
-              String(treeNode.dataset.nodeName || "").trim(),
-              "Nao existe visualizador para este conteudo.",
+              resolvedTitle,
+              stageDescription,
               "",
             );
             return;
           }
 
-          updateStage(treeNode, "", "", previewPath);
+          updateStage(treeNode, resolvedTitle, stageDescription, previewPath);
         });
 
         treeRow.addEventListener("keydown", function (event) {
