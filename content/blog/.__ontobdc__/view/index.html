@@ -463,6 +463,91 @@
       background: #050b15;
     }
 
+    .view-instance-panel-body {
+      display: grid;
+      gap: 16px;
+    }
+
+    .view-instance-empty {
+      display: grid;
+      gap: 8px;
+      padding: 18px;
+      border: 1px dashed rgba(148, 163, 184, 0.18);
+      border-radius: 24px;
+      color: var(--text-soft);
+      background: rgba(5, 11, 21, 0.86);
+    }
+
+    .view-instance-empty strong {
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .view-instance-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .view-instance-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .view-instance-evaluate {
+      appearance: none;
+      border: 1px solid rgba(103, 232, 249, 0.28);
+      border-radius: 999px;
+      background: rgba(103, 232, 249, 0.12);
+      color: var(--text);
+      padding: 10px 18px;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+    }
+
+    .view-instance-section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .view-instance-section strong {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+    }
+
+    .view-instance-properties {
+      display: grid;
+      gap: 10px;
+    }
+
+    .view-instance-property {
+      display: grid;
+      gap: 6px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .view-instance-property strong {
+      color: var(--text-soft);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .view-instance-property span {
+      color: var(--text);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
     @media (max-width: 1280px) {
       .view-topbar {
         grid-template-columns: 1fr;
@@ -501,8 +586,8 @@
       </div>
       <div class="view-hero-meta">
           <span class="view-badge">
-            <span class="view-badge-label">Indicador</span>
-            <span class="view-badge-value">Arquivos: 3</span>
+            <span class="view-badge-label">Arquivos</span>
+            <span class="view-badge-value">3</span>
           </span>
       </div>
     </header>
@@ -639,7 +724,23 @@
       </section>
 
       <section class="view-column">
-          
+          <article class="view-panel">
+            <div class="view-panel-head">
+              <h2 class="view-panel-title" data-view-instance-panel-title>Detalhes</h2>
+              <p class="view-panel-copy" data-view-instance-panel-copy>Selecione um arquivo para ver detalhes.</p>
+            </div>
+            <div class="view-panel-body view-instance-panel-body">
+              <div class="view-instance-actions">
+                <button class="view-instance-evaluate" type="button" data-view-instance-evaluate>Evaluate</button>
+              </div>
+              <div class="view-instance-stack" data-view-instance-stack hidden>
+                <section class="view-instance-section">
+                  <strong>Campos</strong>
+                  <div class="view-instance-properties" data-view-instance-properties></div>
+                </section>
+              </div>
+            </div>
+          </article>
       </section>
     </main>
   </div>
@@ -653,10 +754,21 @@
       const stageEmptyTitle = document.querySelector("[data-view-stage-empty-title]");
       const stageEmptyCopy = document.querySelector("[data-view-stage-empty-copy]");
       const stageFrame = document.querySelector("[data-view-stage-frame]");
+      const instancePanelTitle = document.querySelector("[data-view-instance-panel-title]");
+      const instancePanelCopy = document.querySelector("[data-view-instance-panel-copy]");
+      const instanceEmpty = document.querySelector("[data-view-instance-empty]");
+      const instanceEmptyTitle = document.querySelector("[data-view-instance-empty-title]");
+      const instanceEmptyCopy = document.querySelector("[data-view-instance-empty-copy]");
+      const instanceStack = document.querySelector("[data-view-instance-stack]");
+      const instanceProperties = document.querySelector("[data-view-instance-properties]");
       const defaultPanelTitle = stagePanelTitle ? stagePanelTitle.textContent : "";
       const defaultPanelCopy = stagePanelCopy ? stagePanelCopy.textContent : "";
       const defaultEmptyTitle = stageEmptyTitle ? stageEmptyTitle.textContent : "";
       const defaultEmptyCopy = stageEmptyCopy ? stageEmptyCopy.textContent : "";
+      const defaultInstancePanelTitle = instancePanelTitle ? instancePanelTitle.textContent : "";
+      const defaultInstancePanelCopy = instancePanelCopy ? instancePanelCopy.textContent : "";
+      const defaultInstanceEmptyTitle = instanceEmptyTitle ? instanceEmptyTitle.textContent : "";
+      const defaultInstanceEmptyCopy = instanceEmptyCopy ? instanceEmptyCopy.textContent : "";
       const unavailablePreviewTitle = "Visualização indisponível";
       const unavailablePreviewCopy = "Este item não possui conteúdo de visualização gerado.";
 
@@ -668,7 +780,72 @@
         }
       }
 
+      function clearInstanceDetails() {
+        if (instancePanelTitle) {
+          instancePanelTitle.textContent = defaultInstancePanelTitle;
+        }
+        if (instancePanelCopy) {
+          instancePanelCopy.textContent = defaultInstancePanelCopy;
+          instancePanelCopy.hidden = false;
+        }
+        if (instanceEmpty) {
+          instanceEmpty.hidden = false;
+        }
+        if (instanceEmptyTitle) {
+          instanceEmptyTitle.textContent = defaultInstanceEmptyTitle;
+        }
+        if (instanceEmptyCopy) {
+          instanceEmptyCopy.textContent = defaultInstanceEmptyCopy;
+        }
+        if (instanceStack) {
+          instanceStack.hidden = true;
+        }
+        if (instanceProperties) {
+          instanceProperties.replaceChildren();
+        }
+      }
+
+      function updateInstanceDetails(payload) {
+        if (instancePanelTitle) {
+          instancePanelTitle.textContent = String(payload.title || "").trim() || defaultInstancePanelTitle;
+        }
+        if (instancePanelCopy) {
+          instancePanelCopy.textContent = "Propriedades da seleção.";
+          instancePanelCopy.hidden = false;
+        }
+        if (instanceEmpty) {
+          instanceEmpty.hidden = true;
+        }
+        if (instanceStack) {
+          instanceStack.hidden = false;
+        }
+        if (!instanceProperties) {
+          return;
+        }
+
+        instanceProperties.replaceChildren();
+        const fields = Array.isArray(payload.fields) ? payload.fields : [];
+        if (instanceStack) {
+          instanceStack.hidden = fields.length === 0;
+        }
+        fields.forEach(function (field) {
+          const propertyCard = document.createElement("article");
+          propertyCard.className = "view-instance-property";
+
+          const propertyTitle = document.createElement("strong");
+          propertyTitle.textContent = String(field.predicate || "").trim();
+
+          const propertyValue = document.createElement("span");
+          propertyValue.textContent = String(field.value || "").trim();
+
+          propertyCard.appendChild(propertyTitle);
+          propertyCard.appendChild(propertyValue);
+          instanceProperties.appendChild(propertyCard);
+        });
+      }
+
       function updateStage(treeNode, title, note, previewPath) {
+        clearInstanceDetails();
         if (stagePanelTitle) {
           stagePanelTitle.textContent = title || defaultPanelTitle;
         }
@@ -820,6 +997,22 @@
             treeNode.classList.remove("tree-node-branch-open");
           }
         });
+      });
+
+      window.addEventListener("message", function (event) {
+        const message = event.data;
+        if (!message || typeof message !== "object") {
+          return;
+        }
+
+        if (message.type === "ontobdc:view-entity-instance") {
+          updateInstanceDetails(message.payload || {});
+          return;
+        }
+
+        if (message.type === "ontobdc:view-entity-instance-clear") {
+          clearInstanceDetails();
+        }
       });
     }());
   </script>

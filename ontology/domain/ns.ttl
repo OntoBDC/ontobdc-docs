@@ -279,3 +279,14 @@ err:Error rdf:type owl:Class .
                rdfs:subClassOf prov:Entity ;
                ontouml:name "Data entity"@en ;
                rdfs:comment "An individual data entity or resource."@en .
+
+:DataEntityFacade rdf:type owl:Class ;
+               rdfs:subClassOf schema:CreativeWork ;
+               ontouml:name "Data entity details view"@en ;
+               rdfs:comment "A view of the details of a data entity."@en .
+
+:hasDataEntityFacade rdf:type owl:ObjectProperty ;
+               rdfs:domain :DataEntity ;
+               rdfs:range :DataEntityFacade ;
+               ontouml:name "Has data entity facade"@en ;
+               rdfs:comment "Relates a data entity to its facade."@en .

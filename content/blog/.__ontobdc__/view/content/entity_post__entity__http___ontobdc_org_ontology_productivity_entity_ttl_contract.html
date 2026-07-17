@@ -100,6 +100,22 @@
       padding: 18px;
     }
 
+    .entity-preview-empty {
+      padding: 18px 20px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .entity-preview-frame {
+      width: 100%;
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(5, 11, 21, 0.9);
+    }
+
     .entity-subject {
       display: grid;
       gap: 6px;
@@ -138,54 +154,89 @@
 <body>
   <section class="entity-view">
       <div class="entity-view-list">
-          <details class="entity-accordion">
+          <details
+            class="entity-accordion"
+            data-entity-instance
+            data-instance-title="contrato.pdf"
+            data-instance-preview-path="../../../post/payload/documents/contrato.pdf"
+            data-instance-fields='[]'
+          >
             <summary>
               <span class="entity-accordion-title">contrato.pdf</span>
             </summary>
             <div class="entity-accordion-body">
-              <div class="entity-subject">
-                <strong>Instance</strong>
-                <code>file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/.__ontobdc__/nid.ttl#de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3</code>
-              </div>
-
-                <div class="entity-properties">
-                  <strong>Properties</strong>
-                    <div class="entity-property">
-                      <strong>type</strong>
-                      <span class="entity-property-value">http://ontobdc.org/ontology/domain/ns.ttl#DataEntity</span>
-                    </div>
-                    <div class="entity-property">
-                      <strong>type</strong>
-                      <span class="entity-property-value">http://standards.iso.org/iso/21597/-1/ed-1/en/Container#InternalDocument</span>
-                    </div>
-                    <div class="entity-property">
-                      <strong>type</strong>
-                      <span class="entity-property-value">http://www.w3.org/2002/07/owl#NamedIndividual</span>
-                    </div>
-                    <div class="entity-property">
-                      <strong>type</strong>
-                      <span class="entity-property-value">http://www.w3.org/ns/prov#Entity</span>
-                    </div>
-                    <div class="entity-property">
-                      <strong>atLocation</strong>
-                      <span class="entity-property-value">file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/payload/documents/contrato.pdf</span>
-                    </div>
-                    <div class="entity-property">
-                      <strong>wasDerivedFrom</strong>
-                      <span class="entity-property-value">urn:ontobdc:storage/dataset/docs/content/blog/post/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3</span>
-                    </div>
-                    <div class="entity-property">
-                      <strong>identifier</strong>
-                      <span class="entity-property-value">de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3</span>
-                    </div>
-                    <div class="entity-property">
-                      <strong>name</strong>
-                      <span class="entity-property-value">contrato.pdf</span>
-                    </div>
-                </div>
+                <iframe
+                  class="entity-preview-frame"
+                  data-entity-preview-frame
+                  title="contrato.pdf"
+                  loading="lazy"
+                ></iframe>
             </div>
           </details>
       </div>
   </section>
+  <script>
+    (function () {
+      const accordions = Array.from(document.querySelectorAll("[data-entity-instance]"));
+
+      function notifyParent(details) {
+        const rawFields = String(details.dataset.instanceFields || "[]");
+        let fields = [];
+        try {
+          fields = JSON.parse(rawFields);
+        } catch (error) {
+          fields = [];
+        }
+
+        window.parent.postMessage(
+          {
+            type: "ontobdc:view-entity-instance",
+            payload: {
+              title: String(details.dataset.instanceTitle || "").trim(),
+              fields: Array.isArray(fields) ? fields : [],
+            },
+          },
+          "*"
+        );
+      }
+
+      function clearParent() {
+        window.parent.postMessage(
+          {
+            type: "ontobdc:view-entity-instance-clear",
+          },
+          "*"
+        );
+      }
+
+      accordions.forEach(function (details) {
+        details.addEventListener("toggle", function () {
+          if (details.open) {
+            accordions.forEach(function (otherDetails) {
+              if (otherDetails !== details) {
+                otherDetails.open = false;
+              }
+            });
+
+            const previewFrame = details.querySelector("[data-entity-preview-frame]");
+            const previewPath = String(details.dataset.instancePreviewPath || "").trim();
+            if (previewFrame && previewPath !== "" && !previewFrame.getAttribute("src")) {
+              previewFrame.setAttribute("src", previewPath);
+            }
+
+            notifyParent(details);
+            return;
+          }
+
+          const hasOpenAccordion = accordions.some(function (accordion) {
+            return accordion.open;
+          });
+          if (!hasOpenAccordion) {
+            clearParent();
+          }
+        });
+      });
+    }());
+  </script>
 </body>
 </html>
