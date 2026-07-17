@@ -20,7 +20,6 @@
         ct:InternalDocument ;
     ct:creationDate "2026-05-21T00:00:00"^^xsd:dateTime ;
     prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/payload/documents/contrato.pdf> ;
-    schema:additionalType <http://ontobdc.org/ontology/domain/document/type-vectors.ttl#contract> ;
+    obdc:isEntityOf <http://ontobdc.org/ontology/productivity/entity.ttl#Contract> ;
     schema:identifier "de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3" ;
     schema:name "contrato.pdf" .
-
