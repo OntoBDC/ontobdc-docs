@@ -731,7 +731,7 @@
             </div>
             <div class="view-panel-body view-instance-panel-body">
               <div class="view-instance-actions">
-                <button class="view-instance-evaluate" type="button" data-view-instance-evaluate>Evaluate</button>
+                <button class="view-instance-evaluate" type="button" data-view-instance-evaluate hidden>Evaluate</button>
               </div>
               <div class="view-instance-stack" data-view-instance-stack hidden>
                 <section class="view-instance-section">
@@ -756,9 +756,7 @@
       const stageFrame = document.querySelector("[data-view-stage-frame]");
       const instancePanelTitle = document.querySelector("[data-view-instance-panel-title]");
       const instancePanelCopy = document.querySelector("[data-view-instance-panel-copy]");
-      const instanceEmpty = document.querySelector("[data-view-instance-empty]");
-      const instanceEmptyTitle = document.querySelector("[data-view-instance-empty-title]");
-      const instanceEmptyCopy = document.querySelector("[data-view-instance-empty-copy]");
+      const instanceEvaluateButton = document.querySelector("[data-view-instance-evaluate]");
       const instanceStack = document.querySelector("[data-view-instance-stack]");
       const instanceProperties = document.querySelector("[data-view-instance-properties]");
       const defaultPanelTitle = stagePanelTitle ? stagePanelTitle.textContent : "";
@@ -767,8 +765,6 @@
       const defaultEmptyCopy = stageEmptyCopy ? stageEmptyCopy.textContent : "";
       const defaultInstancePanelTitle = instancePanelTitle ? instancePanelTitle.textContent : "";
       const defaultInstancePanelCopy = instancePanelCopy ? instancePanelCopy.textContent : "";
-      const defaultInstanceEmptyTitle = instanceEmptyTitle ? instanceEmptyTitle.textContent : "";
-      const defaultInstanceEmptyCopy = instanceEmptyCopy ? instanceEmptyCopy.textContent : "";
       const unavailablePreviewTitle = "Visualização indisponível";
       const unavailablePreviewCopy = "Este item não possui conteúdo de visualização gerado.";
 
@@ -788,14 +784,8 @@
           instancePanelCopy.textContent = defaultInstancePanelCopy;
           instancePanelCopy.hidden = false;
         }
-        if (instanceEmpty) {
-          instanceEmpty.hidden = false;
-        }
-        if (instanceEmptyTitle) {
-          instanceEmptyTitle.textContent = defaultInstanceEmptyTitle;
-        }
-        if (instanceEmptyCopy) {
-          instanceEmptyCopy.textContent = defaultInstanceEmptyCopy;
+        if (instanceEvaluateButton) {
+          instanceEvaluateButton.hidden = true;
         }
         if (instanceStack) {
           instanceStack.hidden = true;
@@ -813,8 +803,8 @@
           instancePanelCopy.textContent = "Propriedades da seleção.";
           instancePanelCopy.hidden = false;
         }
-        if (instanceEmpty) {
-          instanceEmpty.hidden = true;
+        if (instanceEvaluateButton) {
+          instanceEvaluateButton.hidden = false;
         }
         if (instanceStack) {
           instanceStack.hidden = false;

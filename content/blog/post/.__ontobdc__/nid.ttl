@@ -6,11 +6,10 @@
 
 <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/.__ontobdc__/nid.ttl> a owl:Ontology .
 
-<file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/.__ontobdc__/nid.ttl#de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> a obdc:DataEntity,
+<file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/.__ontobdc__/nid.ttl#de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> a <http://ontobdc.org/ontology/productivity/entity.ttl#Contract>,
         ct:InternalDocument,
         owl:NamedIndividual ;
     prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/payload/documents/contrato.pdf> ;
     prov:wasDerivedFrom <urn:ontobdc:storage/dataset/docs/content/blog/post/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> ;
     schema:identifier "de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3" ;
     schema:name "contrato.pdf" .
-
