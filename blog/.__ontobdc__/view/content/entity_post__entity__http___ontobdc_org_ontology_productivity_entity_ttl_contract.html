@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050b15;
+      --surface: rgba(17, 27, 45, 0.92);
+      --surface-strong: rgba(23, 35, 56, 0.96);
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #e5eefc;
+      --text-soft: #97a7bf;
+      --accent: #67e8f9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Manrope", sans-serif;
+    }
+
+    body {
+      padding: 18px;
+    }
+
+    .entity-view {
+      display: grid;
+      gap: 16px;
+    }
+
+    .entity-view-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .entity-view-empty {
+      padding: 18px 20px;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .entity-accordion {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .entity-accordion summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 18px;
+      background: transparent;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .entity-accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .entity-accordion summary::after {
+      content: "▸";
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+
+    .entity-accordion[open] summary {
+      background: var(--surface-strong);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .entity-accordion[open] summary::after {
+      content: "▾";
+    }
+
+    .entity-accordion-title {
+      min-height: 1.2rem;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .entity-accordion-body {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .entity-preview-empty {
+      padding: 18px 20px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .entity-preview-frame {
+      width: 100%;
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(5, 11, 21, 0.9);
+    }
+
+    .entity-subject {
+      display: grid;
+      gap: 6px;
+    }
+
+    .entity-subject strong,
+    .entity-properties strong {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+    }
+
+    .entity-subject code,
+    .entity-property-value {
+      word-break: break-word;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.84rem;
+    }
+
+    .entity-properties {
+      display: grid;
+      gap: 10px;
+    }
+
+    .entity-property {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+  </style>
+</head>
+<body>
+  <section class="entity-view">
+      <div class="entity-view-list">
+          <details
+            class="entity-accordion"
+            data-entity-instance
+            data-instance-title="contrato.pdf"
+            data-instance-preview-path="../../../post/payload/documents/contrato.pdf"
+            data-instance-fields='[]'
+          >
+            <summary>
+              <span class="entity-accordion-title">contrato.pdf</span>
+            </summary>
+            <div class="entity-accordion-body">
+                <iframe
+                  class="entity-preview-frame"
+                  data-entity-preview-frame
+                  title="contrato.pdf"
+                  loading="lazy"
+                ></iframe>
+            </div>
+          </details>
+      </div>
+  </section>
+  <script>
+    (function () {
+      const accordions = Array.from(document.querySelectorAll("[data-entity-instance]"));
+
+      function notifyParent(details) {
+        const rawFields = String(details.dataset.instanceFields || "[]");
+        let fields = [];
+        try {
+          fields = JSON.parse(rawFields);
+        } catch (error) {
+          fields = [];
+        }
+
+        window.parent.postMessage(
+          {
+            type: "ontobdc:view-entity-instance",
+            payload: {
+              title: String(details.dataset.instanceTitle || "").trim(),
+              fields: Array.isArray(fields) ? fields : [],
+            },
+          },
+          "*"
+        );
+      }
+
+      function clearParent() {
+        window.parent.postMessage(
+          {
+            type: "ontobdc:view-entity-instance-clear",
+          },
+          "*"
+        );
+      }
+
+      accordions.forEach(function (details) {
+        details.addEventListener("toggle", function () {
+          if (details.open) {
+            accordions.forEach(function (otherDetails) {
+              if (otherDetails !== details) {
+                otherDetails.open = false;
+              }
+            });
+
+            const previewFrame = details.querySelector("[data-entity-preview-frame]");
+            const previewPath = String(details.dataset.instancePreviewPath || "").trim();
+            if (previewFrame && previewPath !== "" && !previewFrame.getAttribute("src")) {
+              previewFrame.setAttribute("src", previewPath);
+            }
+
+            notifyParent(details);
+            return;
+          }
+
+          const hasOpenAccordion = accordions.some(function (accordion) {
+            return accordion.open;
+          });
+          if (!hasOpenAccordion) {
+            clearParent();
+          }
+        });
+      });
+    }());
+  </script>
+</body>
+</html>

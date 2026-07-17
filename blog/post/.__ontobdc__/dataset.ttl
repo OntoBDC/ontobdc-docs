@@ -1,0 +1,25 @@
+@prefix ct: <http://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/.__ontobdc__/dataset.ttl> a owl:Ontology .
+
+<urn:ontobdc:storage/dataset/docs/content/blog/post> a obdc:EntityDataset ;
+    obdc:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
+    obdc:hasDataEntity <urn:ontobdc:storage/dataset/docs/content/blog/post/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> ;
+    dcterms:description "Storage dataset located at file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post" ;
+    dcterms:title "Storage Dataset: post" ;
+    ct:creationDate "2026-05-21T00:00:00"^^xsd:dateTime ;
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post> .
+
+<urn:ontobdc:storage/dataset/docs/content/blog/post/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> a obdc:DataEntity,
+        ct:InternalDocument ;
+    ct:creationDate "2026-05-21T00:00:00"^^xsd:dateTime ;
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/payload/documents/contrato.pdf> ;
+    obdc:isEntityOf <http://ontobdc.org/ontology/productivity/entity.ttl#Contract> ;
+    schema:identifier "de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3" ;
+    schema:name "contrato.pdf" .

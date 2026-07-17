@@ -1,10 +1,16 @@
 @prefix ct: <http://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:ontobdc:storage/dataset/docs/content/blog/post> obdc:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
+<file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/.__ontobdc__/container.ttl> a owl:Ontology .
+
+<urn:ontobdc:storage/dataset/docs/content/blog/post> a obdc:EntityDataset ;
+    obdc:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
+    dcterms:description "Storage dataset located at file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post" ;
+    dcterms:title "Storage Dataset: post" ;
     prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post> .
 
 <urn:ontobdc:storage/local/docs/content/blog> a obdc:DataContainer ;
@@ -14,3 +20,4 @@
     ct:creationDate "2026-06-21T06:12:42.304579+00:00"^^xsd:dateTime ;
     ct:description "Local storage container at Storage Container: blog"@en ;
     prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog> .
+
