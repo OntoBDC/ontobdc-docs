@@ -416,7 +416,7 @@
     .view-file-stage-body {
       min-height: 560px;
       display: grid;
-      align-items: center;
+      align-items: stretch;
     }
 
     .view-file-stage-empty {
@@ -435,9 +435,28 @@
     }
 
     .view-file-stage-empty span {
+      display: block;
       max-width: 56ch;
       color: var(--text-soft);
       line-height: 1.7;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .view-file-stage-stack {
+      display: grid;
+      gap: 18px;
+      width: 100%;
+      align-self: stretch;
+    }
+
+    .view-file-stage-frame {
+      width: 100%;
+      min-height: 440px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 24px;
+      background: #050b15;
     }
 
     @media (max-width: 1280px) {
@@ -488,9 +507,9 @@
       <section class="view-column">
 <article class="view-panel">
   <div class="view-panel-head">
-    <h2 class="view-panel-title">Arquivos do Container</h2>
+    <h2 class="view-panel-title">Conteúdo</h2>
     <p class="view-panel-copy">
-      Arvore de diretorios e arquivos visiveis encontrados no container.
+      Arquivos e entidades do container.
     </p>
   </div>
   <div class="view-panel-body">
@@ -500,6 +519,10 @@
             class="tree-node tree-node-directory"
             data-kind="directory"
             data-node-type="dataset"
+            data-node-name="post"
+            data-node-path="post"
+            data-node-description=""
+            data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
@@ -516,6 +539,10 @@
             class="tree-node tree-node-directory"
             data-kind="directory"
             data-node-type="conceptual"
+            data-node-name="Entidades"
+            data-node-path="post/Entidades"
+            data-node-description=""
+            data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
@@ -532,6 +559,10 @@
             class="tree-node tree-node-file"
             data-kind="file"
             data-node-type="entity"
+            data-node-name="contract"
+            data-node-path="http://ontobdc.org/ontology/domain/document/type-vectors.ttl#contract"
+            data-node-description="Tipo documental"
+            data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
@@ -552,6 +583,10 @@
             class="tree-node tree-node-file"
             data-kind="file"
             data-node-type="file"
+            data-node-name="blog_reader.py"
+            data-node-path="blog_reader.py"
+            data-node-description=".py"
+            data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
@@ -568,6 +603,10 @@
             class="tree-node tree-node-file"
             data-kind="file"
             data-node-type="file"
+            data-node-name="contrato.pdf"
+            data-node-path="contrato.pdf"
+            data-node-description=".pdf"
+            data-node-preview-path="content/pdf_contrato_pdf.html"
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
               <span class="tree-icon">
@@ -588,13 +627,21 @@
       <section class="view-column view-column-double">
           <article class="view-panel view-file-stage">
             <div class="view-panel-head">
-              <h2 class="view-panel-title">Arquivo Selecionado</h2>
-              <p class="view-panel-copy">Area principal reservada para abrir e visualizar o arquivo escolhido na arvore.</p>
+              <h2 class="view-panel-title">Visualização</h2>
+              <p class="view-panel-copy">Escolha um arquivo ou entidade para visualizar.</p>
             </div>
             <div class="view-panel-body view-file-stage-body">
-              <div class="view-file-stage-empty">
-                <strong>Selecione um arquivo na arvore</strong>
-                <span>As colunas centrais agora formam uma unica area de abertura. O preview real entra na proxima etapa.</span>
+              <div class="view-file-stage-stack">
+                <div class="view-file-stage-empty" data-view-stage-empty>
+                  <strong data-view-stage-empty-title>Selecione um conteúdo para exibir</strong>
+                  <span data-view-stage-empty-copy>Dê um duplo clique para visualizar o conteúdo.</span>
+                </div>
+                <iframe
+                  class="view-file-stage-frame"
+                  data-view-stage-frame
+                  title="Pré-visualização do conteúdo"
+                  hidden
+                ></iframe>
               </div>
             </div>
           </article>
@@ -609,6 +656,12 @@
     (function () {
       const treeRows = document.querySelectorAll(".tree-row");
       const clickDelayInMs = 220;
+      const stageEmpty = document.querySelector("[data-view-stage-empty]");
+      const stageEmptyTitle = document.querySelector("[data-view-stage-empty-title]");
+      const stageEmptyCopy = document.querySelector("[data-view-stage-empty-copy]");
+      const stageFrame = document.querySelector("[data-view-stage-frame]");
+      const defaultEmptyTitle = stageEmptyTitle ? stageEmptyTitle.textContent : "";
+      const defaultEmptyCopy = stageEmptyCopy ? stageEmptyCopy.textContent : "";
 
       function setNodeOpenState(node, isOpen) {
         node.classList.toggle("tree-node-open", isOpen);
@@ -616,6 +669,39 @@
         if (treeRow) {
           treeRow.setAttribute("aria-expanded", isOpen ? "true" : "false");
         }
+      }
+
+      function updateStage(treeNode, title, note, previewPath) {
+        if (!stageFrame) {
+          return;
+        }
+
+        if (!previewPath) {
+          if (stageEmpty) {
+            stageEmpty.hidden = false;
+          }
+          if (stageEmptyTitle) {
+            stageEmptyTitle.textContent = title || defaultEmptyTitle;
+          }
+          if (stageEmptyCopy) {
+            stageEmptyCopy.textContent = note || defaultEmptyCopy;
+          }
+          stageFrame.hidden = true;
+          stageFrame.removeAttribute("src");
+          return;
+        }
+
+        if (stageEmpty) {
+          stageEmpty.hidden = true;
+        }
+        if (stageEmptyTitle) {
+          stageEmptyTitle.textContent = defaultEmptyTitle;
+        }
+        if (stageEmptyCopy) {
+          stageEmptyCopy.textContent = defaultEmptyCopy;
+        }
+        stageFrame.hidden = false;
+        stageFrame.setAttribute("src", previewPath);
       }
 
       function toggleNodeOpen(node) {
@@ -668,7 +754,27 @@
 
           if (treeNode.dataset.kind === "directory") {
             toggleNodeOpen(treeNode);
+            updateStage(
+              treeNode,
+              String(treeNode.dataset.nodeName || "").trim(),
+              "Diretorio selecionado para inspecao.",
+              "",
+            );
+            return;
           }
+
+          const previewPath = String(treeNode.dataset.nodePreviewPath || "").trim();
+          if (previewPath === "") {
+            updateStage(
+              treeNode,
+              String(treeNode.dataset.nodeName || "").trim(),
+              "Nao existe visualizador para este conteudo.",
+              "",
+            );
+            return;
+          }
+
+          updateStage(treeNode, "", "", previewPath);
         });
 
         treeRow.addEventListener("keydown", function (event) {
