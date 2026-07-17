@@ -8,6 +8,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ontouml: <https://w3id.org/ontouml#> .
 @base <http://ontobdc.org/ontology/domain/code.ttl#> .
 
@@ -84,6 +85,41 @@ ontouml:targetEnd rdf:type owl:AnnotationProperty .
                 rdfs:comment "Links an OntoBDC application instance to its CLI start action."@en ;
                 rdfs:label "has start action"@en .
 
+###  http://ontobdc.org/ontology/domain/code.ttl#hasMainFlow
+:hasMainFlow rdf:type owl:ObjectProperty ;
+             rdfs:domain :UseCase ;
+             rdfs:range :UseCaseMainFlow ;
+             rdfs:comment "Links a use case to its main flow."@en ;
+             rdfs:label "has main flow"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#hasPrimaryActor
+:hasPrimaryActor rdf:type owl:ObjectProperty ;
+                 rdfs:domain :UseCase ;
+                 rdfs:range prov:Agent ;
+                 rdfs:comment "Links a use case to its primary actor."@en ;
+                 rdfs:label "has primary actor"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#hasSecondaryFlow
+:hasSecondaryFlow rdf:type owl:ObjectProperty ;
+                  rdfs:domain :UseCase ;
+                  rdfs:range :UseCaseSecondaryFlow ;
+                  rdfs:comment "Links a use case to one of its secondary flows."@en ;
+                  rdfs:label "has secondary flow"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#hasStep
+:hasStep rdf:type owl:ObjectProperty ;
+         rdfs:domain :UseCaseFlow ;
+         rdfs:range :UseCaseStep ;
+         rdfs:comment "Links a use case flow to one of its steps."@en ;
+         rdfs:label "has step"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#hasSupportingActor
+:hasSupportingActor rdf:type owl:ObjectProperty ;
+                    rdfs:domain :UseCase ;
+                    rdfs:range prov:Agent ;
+                    rdfs:comment "Links a use case to a supporting actor."@en ;
+                    rdfs:label "has supporting actor"@en .
+
 
 ###  http://ontobdc.org/ontology/domain/code.ttl#isPartOf
 :isPartOf rdf:type owl:ObjectProperty ;
@@ -103,6 +139,13 @@ ontouml:targetEnd rdf:type owl:AnnotationProperty .
                    rdfs:range :SystemActionParameter ;
                    rdfs:comment "Links a system action to the ordered list of parameters it expects."@en ;
                    rdfs:label "requires parameter"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#nextStep
+:nextStep rdf:type owl:ObjectProperty ;
+          rdfs:domain :UseCaseStep ;
+          rdfs:range :UseCaseStep ;
+          rdfs:comment "Links a use case step to the next step in the flow."@en ;
+          rdfs:label "next step"@en .
 
 
 ###  https://schema.org/hasPart
@@ -138,6 +181,62 @@ sdo:hasPart rdf:type owl:ObjectProperty .
 #################################################################
 #    Classes
 #################################################################
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCase
+:UseCase rdf:type owl:Class ;
+         rdfs:subClassOf schema:CreativeWork ,
+                         prov:Plan ,
+                         skos:Concept ;
+         ontouml:name "Use case"@en ;
+         rdfs:comment "A system use case specification, represented as a plan and a creative work, organized as a concept."@en ;
+         rdfs:label "Use Case"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseFlow
+:UseCaseFlow rdf:type owl:Class ;
+             rdfs:subClassOf schema:CreativeWork ,
+                             skos:Concept ;
+             ontouml:name "Use case flow"@en ;
+             rdfs:comment "A structured flow that organizes the steps of a use case."@en ;
+             rdfs:label "Use Case Flow"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseHumanActor
+:UseCaseHumanActor rdf:type owl:Class ;
+                   rdfs:subClassOf prov:Agent ,
+                                   schema:Person ;
+                   ontouml:name "Use case human actor"@en ;
+                   rdfs:comment "A human actor that participates in a use case."@en ;
+                   rdfs:label "Use Case Human Actor"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseMainFlow
+:UseCaseMainFlow rdf:type owl:Class ;
+                 rdfs:subClassOf :UseCaseFlow ;
+                 ontouml:name "Use case main flow"@en ;
+                 rdfs:comment "The primary flow of steps that describes the standard successful execution of a use case."@en ;
+                 rdfs:label "Use Case Main Flow"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseSecondaryFlow
+:UseCaseSecondaryFlow rdf:type owl:Class ;
+                      rdfs:subClassOf :UseCaseFlow ;
+                      ontouml:name "Use case secondary flow"@en ;
+                      rdfs:comment "An alternative or complementary flow of steps associated with a use case."@en ;
+                      rdfs:label "Use Case Secondary Flow"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseSoftwareActor
+:UseCaseSoftwareActor rdf:type owl:Class ;
+                      rdfs:subClassOf prov:Agent ,
+                                      prov:SoftwareAgent ,
+                                      schema:SoftwareApplication ;
+                      ontouml:name "Use case software actor"@en ;
+                      rdfs:comment "A software actor that participates in a use case."@en ;
+                      rdfs:label "Use Case Software Actor"@en .
+
+###  http://ontobdc.org/ontology/domain/code.ttl#UseCaseStep
+:UseCaseStep rdf:type owl:Class ;
+             rdfs:subClassOf schema:HowToStep ,
+                             skos:Concept ;
+             ontouml:name "Use case step"@en ;
+             rdfs:comment "A single ordered step that belongs to a use case flow."@en ;
+             rdfs:label "Use Case Step"@en .
 
 ###  http://ontobdc.org/ontology/domain/code.ttl#ActionInvocationRelation
 :ActionInvocationRelation rdf:type owl:Class ;
@@ -392,6 +491,10 @@ schema:Action rdf:type owl:Class .
 
 ###  https://schema.org/CheckAction
 schema:CheckAction rdf:type owl:Class .
+
+
+###  https://schema.org/HowToStep
+schema:HowToStep rdf:type owl:Class .
 
 
 ###  https://schema.org/Parameter
