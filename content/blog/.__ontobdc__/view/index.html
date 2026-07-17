@@ -138,16 +138,20 @@
 
     .view-hero-meta {
       display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
       padding: 24px;
     }
 
     .view-badge {
-      display: block;
+      display: grid;
+      align-content: space-between;
       padding: 16px 18px;
       border-radius: 22px;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.03);
+      aspect-ratio: 1 / 1;
+      min-height: 132px;
     }
 
     .view-badge-label {
@@ -585,10 +589,30 @@
         <p>Local storage container at Storage Container: blog</p>
       </div>
       <div class="view-hero-meta">
-          <span class="view-badge">
-            <span class="view-badge-label">Arquivos</span>
-            <span class="view-badge-value">3</span>
-          </span>
+        <span class="view-badge">
+          <span class="view-badge-label">Arquivos</span>
+          <span class="view-badge-value">-</span>
+        </span>
+        <span class="view-badge">
+          <span class="view-badge-label">Entidades</span>
+          <span class="view-badge-value">-</span>
+        </span>
+        <span class="view-badge">
+          <span class="view-badge-label">Ultima Atualizacao</span>
+          <span class="view-badge-value">-</span>
+        </span>
+        <span class="view-badge">
+          <span class="view-badge-label">Alertas</span>
+          <span class="view-badge-value">-</span>
+        </span>
+        <span class="view-badge">
+          <span class="view-badge-label">Erros</span>
+          <span class="view-badge-value">-</span>
+        </span>
+        <span class="view-badge">
+          <span class="view-badge-label">Notificacoes</span>
+          <span class="view-badge-value">-</span>
+        </span>
       </div>
     </header>
 
