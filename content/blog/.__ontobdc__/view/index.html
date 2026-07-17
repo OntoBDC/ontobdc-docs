@@ -502,7 +502,7 @@
       <div class="view-hero-meta">
           <span class="view-badge">
             <span class="view-badge-label">Indicador</span>
-            <span class="view-badge-value">Arquivos: 4</span>
+            <span class="view-badge-value">Arquivos: 3</span>
           </span>
       </div>
     </header>
@@ -526,8 +526,8 @@
             data-node-name="post"
             data-node-path="post"
             data-node-description=""
-            data-node-stage-title=""
-            data-node-stage-description=""
+            data-node-stage-title="Storage Dataset: post"
+            data-node-stage-description="Storage dataset located at file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post"
             data-node-preview-path=""
           >
             <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
@@ -611,28 +611,6 @@
               </div>
             </div>
           </div>
-          <div
-            class="tree-node tree-node-file"
-            data-kind="file"
-            data-node-type="file"
-            data-node-name="contrato.pdf"
-            data-node-path="contrato.pdf"
-            data-node-description=".pdf"
-            data-node-stage-title="contrato.pdf"
-            data-node-stage-description=""
-            data-node-preview-path="content/pdf_contrato_pdf.html"
-          >
-            <div class="tree-row" tabindex="0" role="button" aria-expanded="false">
-              <span class="tree-icon">
-                  <span class="tree-icon-glyph tree-icon-file">◫</span>
-              </span>
-              <div class="tree-copy">
-                <strong>contrato.pdf</strong>
-                <span>contrato.pdf</span>
-                  <span>.pdf</span>
-              </div>
-            </div>
-          </div>
       </div>
       </div>
   </div>
@@ -648,7 +626,7 @@
               <div class="view-file-stage-stack">
                 <div class="view-file-stage-empty" data-view-stage-empty>
                   <strong data-view-stage-empty-title>Selecione um conteúdo para exibir</strong>
-                  <span data-view-stage-empty-copy>Dê um duplo clique para visualizar o conteúdo.</span>
+                  <span data-view-stage-empty-copy>Selecione um item na árvore para continuar.</span>
                 </div>
                 <iframe
                   class="view-file-stage-frame"
@@ -680,6 +658,8 @@
       const defaultPanelCopy = stagePanelCopy ? stagePanelCopy.textContent : "";
       const defaultEmptyTitle = stageEmptyTitle ? stageEmptyTitle.textContent : "";
       const defaultEmptyCopy = stageEmptyCopy ? stageEmptyCopy.textContent : "";
+      const unavailablePreviewTitle = "Visualização indisponível";
+      const unavailablePreviewCopy = "Este item não possui conteúdo de visualização gerado.";
 
       function setNodeOpenState(node, isOpen) {
         node.classList.toggle("tree-node-open", isOpen);
@@ -728,6 +708,16 @@
         }
         stageFrame.hidden = false;
         stageFrame.setAttribute("src", previewPath);
+      }
+
+      function updateUnavailableStage() {
+        updateStage(null, defaultPanelTitle, defaultPanelCopy, "");
+        if (stageEmptyTitle) {
+          stageEmptyTitle.textContent = unavailablePreviewTitle;
+        }
+        if (stageEmptyCopy) {
+          stageEmptyCopy.textContent = unavailablePreviewCopy;
+        }
       }
 
       function toggleNodeOpen(node) {
@@ -798,12 +788,7 @@
 
           const previewPath = String(treeNode.dataset.nodePreviewPath || "").trim();
           if (previewPath === "") {
-            updateStage(
-              treeNode,
-              resolvedTitle,
-              stageDescription,
-              "",
-            );
+            updateUnavailableStage();
             return;
           }
 

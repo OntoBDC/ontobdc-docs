@@ -1,54 +1,50 @@
 {
-    "@context": "https://w3id.org/ro/crate/1.1/context",
-    "@graph": [
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "datePublished": "2026-06-21T06:12:42+00:00",
+      "hasPart": [
         {
-            "@id": "./",
-            "@type": "Dataset",
-            "datePublished": "2026-06-21T06:12:42+00:00",
-            "hasPart": [
-                {
-                    "@id": "../index.html"
-                },
-                {
-                    "@id": "../blog_reader.py"
-                },
-                {
-                    "@id": "../post/dataset.ttl"
-                },
-                {
-                    "@id": "../post/linkset/datapackage.json"
-                }
-            ]
+          "@id": "../index.html"
         },
         {
-            "@id": "ro-crate-metadata.json",
-            "@type": "CreativeWork",
-            "about": {
-                "@id": "./"
-            },
-            "conformsTo": {
-                "@id": "https://w3id.org/ro/crate/1.1"
-            }
+          "@id": "../blog_reader.py"
         },
         {
-            "@id": "../index.html",
-            "@type": "File"
+          "@id": "../post/dataset.ttl"
         },
         {
-            "@id": "../blog_reader.py",
-            "@type": "File"
-        },
-        {
-            "@id": "../post/dataset.ttl",
-            "@type": "File"
-        },
-        {
-            "@id": "../post/linkset/datapackage.json",
-            "@type": "File"
-        },
-        {
-            "@id": "../contrato.pdf",
-            "@type": "File"
+          "@id": "../post/linkset/datapackage.json"
         }
-    ]
+      ]
+    },
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      }
+    },
+    {
+      "@id": "../index.html",
+      "@type": "File"
+    },
+    {
+      "@id": "../blog_reader.py",
+      "@type": "File"
+    },
+    {
+      "@id": "../post/linkset/datapackage.json",
+      "@type": "File"
+    },
+    {
+      "@id": "../post/payload/documents/contrato.pdf",
+      "@type": "File"
+    }
+  ]
 }
