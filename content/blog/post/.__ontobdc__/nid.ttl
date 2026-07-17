@@ -1,0 +1,15 @@
+@prefix ct: <http://standards.iso.org/iso/21597/-1/ed-1/en/Container#> .
+@prefix obdc: <http://ontobdc.org/ontology/domain/ns.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
+
+<file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/.__ontobdc__/nid.ttl> a owl:Ontology .
+
+<file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/.__ontobdc__/nid.ttl#de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> a <http://ontobdc.org/ontology/productivity/entity.ttl#Contract>,
+        ct:InternalDocument,
+        owl:NamedIndividual ;
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post/payload/documents/contrato.pdf> ;
+    prov:wasDerivedFrom <urn:ontobdc:storage/dataset/docs/content/blog/post/de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3> ;
+    schema:identifier "de0e7951de71770465cbbaf6e3ae8d4db926dfb31612f03cf82673b59d5bebc3" ;
+    schema:name "contrato.pdf" .

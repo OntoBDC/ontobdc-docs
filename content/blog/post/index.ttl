@@ -1,0 +1,10 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://ontobdc.org/ontology/domain/ns.ttl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<urn:ontobdc:storage/dataset/docs/content/blog/post> a ns1:EntityDataset ;
+    ns1:belongsToDataContainer <urn:ontobdc:storage/local/docs/content/blog> ;
+    dcterms:description "Storage dataset located at file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post" ;
+    dcterms:title "Storage Dataset: post" ;
+    prov:atLocation <file:///Users/eliasmpjunior/infobim/deploy/ontobdc-stack/docs/content/blog/post> .
+
